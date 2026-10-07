@@ -1,0 +1,21 @@
+{
+  "runtime_resource_files": 173,
+  "missing_active_references": {},
+  "missing_test_references": {},
+  "protected_resources_present": 15,
+  "deleted_manifest_files": 230,
+  "total_bytes": 290730988,
+  "source_bytes": 166539020,
+  "folder_bytes": {
+    "(root)": 52782,
+    "tmp": 7262,
+    "tests": 234062,
+    "shaders": 3218,
+    "scripts": 532412,
+    "scenes": 238115,
+    "reports": 79538,
+    "output": 0,
+    "assets": 165478431,
+    ".godot": 124105168
+  }
+}

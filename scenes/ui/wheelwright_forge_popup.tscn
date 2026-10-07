@@ -1,0 +1,439 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/wheelwright_forge_popup.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/mateo_workshop_backdrop_v2.png" id="2_workshop"]
+[ext_resource type="Script" path="res://scripts/ui/forge_workbench_display.gd" id="3_display"]
+[ext_resource type="Script" path="res://scripts/ui/forge_hammer.gd" id="4_hammer"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.035, 0.029, 0.022, 0.99)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.55, 0.36, 0.16, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="Style_work_area"]
+bg_color = Color(0.075, 0.055, 0.035, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48, 0.31, 0.14, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_info"]
+bg_color = Color(0.07, 0.08, 0.055, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.39, 0.46, 0.23, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_meter_bg"]
+bg_color = Color(0.04, 0.035, 0.028, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.39, 0.29, 0.16, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_meter_fill"]
+bg_color = Color(0.42, 0.68, 0.31, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="Style_track"]
+bg_color = Color(0.09, 0.065, 0.04, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.36, 0.25, 0.13, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="WheelwrightForgePopup" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_script")
+
+[node name="ForgeOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.006, 0.008, 0.006, 0.92)
+
+[node name="Panel" type="PanelContainer" parent="ForgeOverlay"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = -311.0
+offset_right = 548.0
+offset_bottom = 311.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Content" type="Control" parent="ForgeOverlay/Panel"]
+custom_minimum_size = Vector2(1088, 614)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="ForgeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 13.0
+offset_right = 600.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.96, 0.76, 0.34, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 27
+text = "La fragua de Mateo"
+
+[node name="StepRail" type="HBoxContainer" parent="ForgeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 18.0
+offset_right = 992.0
+offset_bottom = 45.0
+theme_override_constants/separation = 5
+
+[node name="StepHeat" type="Label" parent="ForgeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 26)
+layout_mode = 2
+text = "1 Calor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepRivet" type="Label" parent="ForgeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 26)
+layout_mode = 2
+text = "2 Remaches"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepCool" type="Label" parent="ForgeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 26)
+layout_mode = 2
+text = "3 Enfriar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepTest" type="Label" parent="ForgeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 26)
+layout_mode = 2
+text = "4 Giro"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+z_index = 30
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 12.0
+offset_right = 1060.0
+offset_bottom = 52.0
+focus_mode = 0
+text = "X"
+tooltip_text = "Cerrar"
+
+[node name="StageLabel" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 62.0
+offset_right = 1057.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0.91, 0.86, 0.7, 1)
+theme_override_font_sizes/font_size = 21
+text = "1. Calentar el hierro recuperado"
+
+[node name="InstructionLabel" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 96.0
+offset_right = 1057.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.78, 0.76, 0.66, 1)
+theme_override_font_sizes/font_size = 15
+text = "Mantén el fuelle para avivar el carbón y recuperar el calor del hierro."
+autowrap_mode = 2
+
+[node name="WorkArea" type="Panel" parent="ForgeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 139.0
+offset_right = 803.0
+offset_bottom = 585.0
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_work_area")
+
+[node name="WorkshopTexture" type="TextureRect" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 773.0
+offset_bottom = 325.0
+mouse_filter = 2
+texture = ExtResource("2_workshop")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="WorkbenchDisplay" type="Control" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 773.0
+offset_bottom = 325.0
+script = ExtResource("3_display")
+
+[node name="ForgeSparks" type="CPUParticles2D" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+z_index = 5
+position = Vector2(265, 241)
+emitting = false
+amount = 12
+one_shot = true
+explosiveness = 0.85
+
+[node name="GearSparks" type="CPUParticles2D" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+z_index = 5
+emitting = false
+amount = 18
+one_shot = true
+explosiveness = 0.85
+
+[node name="Hammer" type="Control" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+z_index = 6
+visible = false
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 86.0
+mouse_filter = 2
+script = ExtResource("4_hammer")
+
+[node name="ToolControls" type="HBoxContainer" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 31.0
+offset_top = 350.0
+offset_right = 744.0
+offset_bottom = 407.0
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="BellowsButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea/ToolControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 52)
+layout_mode = 2
+text = "Accionar fuelle · F"
+
+[node name="StrikeButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea/ToolControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(195, 52)
+layout_mode = 2
+text = "Golpear · Espacio"
+
+[node name="RotateButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea/ToolControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(262, 52)
+layout_mode = 2
+text = "Acercar refuerzo"
+
+[node name="VentButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 178.0
+offset_top = 350.0
+offset_right = 597.0
+offset_bottom = 407.0
+text = "Mantener para ventilar · Espacio"
+
+[node name="ProofButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 178.0
+offset_top = 350.0
+offset_right = 597.0
+offset_bottom = 407.0
+text = "Girar la rueda · mantener Espacio"
+
+[node name="ContinueButton" type="Button" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 178.0
+offset_top = 350.0
+offset_right = 597.0
+offset_bottom = 407.0
+text = "Recoger rueda y continuar"
+
+[node name="KeyHint" type="Label" parent="ForgeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 20.0
+offset_top = 414.0
+offset_right = 755.0
+offset_bottom = 440.0
+theme_override_colors/font_color = Color(0.76, 0.71, 0.59, 1)
+theme_override_font_sizes/font_size = 12
+text = "Mantén ESPACIO para accionar el fuelle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoPanel" type="Panel" parent="ForgeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 821.0
+offset_top = 139.0
+offset_right = 1061.0
+offset_bottom = 585.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_info")
+
+[node name="InfoTitle" type="Label" parent="ForgeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 160.0
+offset_right = 1042.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0.78, 0.67, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "HERRERÍA Y RUEDAS"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 205.0
+offset_right = 1042.0
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.96, 0.77, 0.36, 1)
+theme_override_font_sizes/font_size = 17
+text = "Recupera el hierro de tus herramientas"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StatusLabel" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 264.0
+offset_right = 1042.0
+offset_bottom = 329.0
+theme_override_colors/font_color = Color(0.84, 0.82, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "Acciona el fuelle para avivar el carbón"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="QualityTitle" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 342.0
+offset_right = 1042.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0.76, 0.69, 0.51, 1)
+theme_override_font_sizes/font_size = 12
+text = "TEMPERATURA DEL HIERRO"
+horizontal_alignment = 1
+
+[node name="HeatBar" type="ProgressBar" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 844.0
+offset_top = 370.0
+offset_right = 1038.0
+offset_bottom = 393.0
+theme_override_styles/background = SubResource("Style_meter_bg")
+theme_override_styles/fill = SubResource("Style_meter_fill")
+show_percentage = false
+
+[node name="HeatSafeBand" type="ColorRect" parent="ForgeOverlay/Panel/Content/HeatBar"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 135.8
+offset_top = 18.0
+offset_right = 186.24
+offset_bottom = 22.0
+mouse_filter = 2
+color = Color(0.64, 0.83, 0.43, 1)
+
+[node name="HeatValue" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 397.0
+offset_right = 1042.0
+offset_bottom = 419.0
+theme_override_colors/font_color = Color(0.74, 0.8, 0.61, 1)
+theme_override_font_sizes/font_size = 13
+text = "20°C · FRÍO"
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="ForgeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 442.0
+offset_right = 1042.0
+offset_bottom = 558.0
+theme_override_colors/font_color = Color(0.66, 0.67, 0.56, 1)
+theme_override_font_sizes/font_size = 13
+text = "El hierro de las herramientas viejas se recupera para reforzar la rueda del molino."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BellowsAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -16.0
+
+[node name="HammerAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -15.0

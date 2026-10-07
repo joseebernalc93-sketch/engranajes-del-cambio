@@ -1,0 +1,1244 @@
+{
+  "total_bytes": 4696631029,
+  "folder_sizes": {
+    "(root)": {
+      "files": 13,
+      "bytes": 62960
+    },
+    "tmp": {
+      "files": 7327,
+      "bytes": 2432151734
+    },
+    "tests": {
+      "files": 137,
+      "bytes": 234088
+    },
+    "shaders": {
+      "files": 4,
+      "bytes": 3218
+    },
+    "scripts": {
+      "files": 140,
+      "bytes": 573486
+    },
+    "scratch": {
+      "files": 59,
+      "bytes": 21400861
+    },
+    "scenes": {
+      "files": 29,
+      "bytes": 238319
+    },
+    "output": {
+      "files": 140,
+      "bytes": 141639561
+    },
+    "build": {
+      "files": 3,
+      "bytes": 114134659
+    },
+    "assets": {
+      "files": 422,
+      "bytes": 347608657
+    },
+    ".godot": {
+      "files": 4632,
+      "bytes": 1638583486
+    }
+  },
+  "runtime_files": 318,
+  "runtime_bytes": 146640566,
+  "unreferenced_runtime": [
+    {
+      "path": "assets/characters/blacksmith.svg",
+      "bytes": 683,
+      "test_only": false
+    },
+    {
+      "path": "assets/characters/clerk.svg",
+      "bytes": 652,
+      "test_only": false
+    },
+    {
+      "path": "assets/characters/player.svg",
+      "bytes": 706,
+      "test_only": false
+    },
+    {
+      "path": "assets/characters/villager.svg",
+      "bytes": 629,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/campesino_sheet.png",
+      "bytes": 1231432,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/anvil.png",
+      "bytes": 14788,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/barrel.png",
+      "bytes": 20130,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/bench.png",
+      "bytes": 25959,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_house.png",
+      "bytes": 1673476,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_props.png",
+      "bytes": 1540700,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_props_v2.png",
+      "bytes": 1097182,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/dirt_tile.png",
+      "bytes": 7879,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/elena_cart_turnout_v1.png",
+      "bytes": 2790178,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/elena_migration_cart_v1.png",
+      "bytes": 1280459,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/fence_horizontal.png",
+      "bytes": 31227,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/fishing_boat.png",
+      "bytes": 1067625,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/flower_bush.png",
+      "bytes": 8169,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/fruit_trees_v2.png",
+      "bytes": 1708455,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/grass_tile.png",
+      "bytes": 10118,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/lake_dock_v1.png",
+      "bytes": 3257946,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/lamp.png",
+      "bytes": 16528,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/medieval_cobblestone.png",
+      "bytes": 3015846,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/mill_field_complete_v2.png",
+      "bytes": 3322114,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/mill_field_complete_v3.png",
+      "bytes": 3269973,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/private_property_sign.png",
+      "bytes": 1875302,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/rail_ballast_closeup_v1.png",
+      "bytes": 3586314,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/railway_dispatch_yard_v1.png",
+      "bytes": 3676235,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/railway_signal_components_v1.png",
+      "bytes": 1808936,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/residential_ground.png",
+      "bytes": 2940448,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v2.png",
+      "bytes": 3547660,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v3.png",
+      "bytes": 3615611,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v4.png",
+      "bytes": 3480221,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/sheep_pasture.png",
+      "bytes": 3282102,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/soil_tile.png",
+      "bytes": 7748,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/spinner_yard_v1.png",
+      "bytes": 2319297,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/spinner_yard_v2_backup.png",
+      "bytes": 3376982,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/station_industrial_v2.png",
+      "bytes": 1939007,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/station_interior_v1.png",
+      "bytes": 1970792,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/station_platform_dispatch_v4.png",
+      "bytes": 3333080,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/steam_textile_machine_sheet.png",
+      "bytes": 1218020,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/steam_train_components_v3.png",
+      "bytes": 2175009,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/steel_forge.png",
+      "bytes": 1015746,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/tree_brown.png",
+      "bytes": 13966,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/tree_large.png",
+      "bytes": 39938,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/tree_large_2.png",
+      "bytes": 37719,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/tree_pine.png",
+      "bytes": 20858,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/tree_round.png",
+      "bytes": 13953,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v1.png",
+      "bytes": 3198481,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v2.png",
+      "bytes": 3155871,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v3.png",
+      "bytes": 3129414,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_cobblestone_v2.png",
+      "bytes": 2434165,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_cobblestone_v3.png",
+      "bytes": 2747022,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_complete_v4.png",
+      "bytes": 4361815,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_complete_v5.png",
+      "bytes": 3280648,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_elena_courtyard_v5.png",
+      "bytes": 3111412,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_meadow_v2.png",
+      "bytes": 3099269,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_meadow_v3.png",
+      "bytes": 3672256,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_shrubs_v2.png",
+      "bytes": 1089701,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/village_trees.png",
+      "bytes": 1764767,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/wheat_field.png",
+      "bytes": 2697406,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/wheelwright_yard_v1.png",
+      "bytes": 3520126,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/wheelwright_yard_v2_backup.png",
+      "bytes": 3395093,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/environment/wood_island_v1.png",
+      "bytes": 3439495,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/herrero_sheet.png",
+      "bytes": 1343086,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/main_menu_bg.jpg",
+      "bytes": 1115060,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/main_menu_campo_ciudad_v2.png",
+      "bytes": 3056036,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/silas_sheet_v1.png",
+      "bytes": 1532274,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/enclosure_01_discovery.png",
+      "bytes": 2661171,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/enclosure_02_blocked.png",
+      "bytes": 2316823,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/enclosure_03_displaced.png",
+      "bytes": 2225951,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/enclosure_03_displaced_fixed.png",
+      "bytes": 2225951,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/enclosure_04_family.png",
+      "bytes": 2433835,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/story_new_1.jpg",
+      "bytes": 859488,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/story/story_new_2.jpg",
+      "bytes": 987685,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ticket_clerk_v1.png",
+      "bytes": 1300760,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/title_gears_bg.jpg",
+      "bytes": 935229,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/train_sheet.png",
+      "bytes": 2076453,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/train_wheel_v2.png",
+      "bytes": 1495022,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/bruno_carpentry_board_v1.png",
+      "bytes": 2317814,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/bruno_carpentry_workshop_v1.png",
+      "bytes": 2469980,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/dialogue_panel_industrial.png",
+      "bytes": 377985,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/elena_blankets_v3.png",
+      "bytes": 1636587,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_cart_parts_v2.png",
+      "bytes": 1333305,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_enclosure_gate_v2.png",
+      "bytes": 2274257,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_family_portrait_v3.png",
+      "bytes": 1829873,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_food_bundle_v3.png",
+      "bytes": 2219437,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_iron_pot_v3.png",
+      "bytes": 1836595,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_riverside_backdrop_v2.png",
+      "bytes": 3021257,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_seed_sack_v3.png",
+      "bytes": 1909075,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_toolbox_v3.png",
+      "bytes": 1819269,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/elena_wagon_body_v4.png",
+      "bytes": 1553957,
+      "test_only": true
+    },
+    {
+      "path": "assets/gba/ui/gear_item.svg",
+      "bytes": 944,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/hud_bar_gba.png",
+      "bytes": 704153,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/hud_status_industrial.png",
+      "bytes": 1068910,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/inventory_panel_gba.png",
+      "bytes": 2331635,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/inventory_panel_industrial_v2.png",
+      "bytes": 2750206,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/lumber_workpiece_sheet_v1.png",
+      "bytes": 1232028,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/migration_cart_story_sheet_v1.png",
+      "bytes": 2912843,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/mill_operation_sheet_v1.png",
+      "bytes": 2674965,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/mill_repair_mechanism_v1.png",
+      "bytes": 2326394,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/pause_panel_gba.png",
+      "bytes": 1689188,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/pause_panel_industrial.png",
+      "bytes": 1524258,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/pause_rail.svg",
+      "bytes": 702,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/pause_walnut_brass_board.svg",
+      "bytes": 11018,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/rope_puzzle_sheet_v1.png",
+      "bytes": 1735417,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui/ropewalk_workshop_v1.png",
+      "bytes": 2427292,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/ui_sheet.png",
+      "bytes": 2142006,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/village_objects.png",
+      "bytes": 2833801,
+      "test_only": false
+    },
+    {
+      "path": "assets/gba/village_tileset.png",
+      "bytes": 3143941,
+      "test_only": false
+    },
+    {
+      "path": "assets/items/ticket.svg",
+      "bytes": 378,
+      "test_only": false
+    },
+    {
+      "path": "assets/items/tools.svg",
+      "bytes": 437,
+      "test_only": false
+    },
+    {
+      "path": "assets/items/wheat.svg",
+      "bytes": 440,
+      "test_only": false
+    },
+    {
+      "path": "assets/shaders/forge_heat_glow.gdshader",
+      "bytes": 516,
+      "test_only": false
+    },
+    {
+      "path": "assets/world/sign.svg",
+      "bytes": 312,
+      "test_only": false
+    },
+    {
+      "path": "assets/world/train.svg",
+      "bytes": 884,
+      "test_only": false
+    },
+    {
+      "path": "scenes/ui/migration_cart_popup.tscn",
+      "bytes": 17508,
+      "test_only": true
+    },
+    {
+      "path": "scenes/ui/rail_dispatch_popup.tscn",
+      "bytes": 204,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/cart_balance_scale.gd",
+      "bytes": 2496,
+      "test_only": true
+    },
+    {
+      "path": "scripts/ui/elena_cargo_art.gd",
+      "bytes": 1598,
+      "test_only": true
+    },
+    {
+      "path": "scripts/ui/migration_cart_display.gd",
+      "bytes": 15379,
+      "test_only": true
+    },
+    {
+      "path": "scripts/ui/migration_cart_popup.gd",
+      "bytes": 24314,
+      "test_only": true
+    },
+    {
+      "path": "scripts/ui/rail_alignment_board.gd",
+      "bytes": 6074,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/rail_alignment_drawing.gd",
+      "bytes": 7333,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_host.gd",
+      "bytes": 1012,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_popup.gd",
+      "bytes": 15298,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_yard.gd",
+      "bytes": 3907,
+      "test_only": false
+    },
+    {
+      "path": "scripts/ui/rail_lever.gd",
+      "bytes": 2589,
+      "test_only": false
+    },
+    {
+      "path": "scripts/world/rail_operations.gd",
+      "bytes": 2022,
+      "test_only": false
+    },
+    {
+      "path": "scripts/world/railway_art.gd",
+      "bytes": 2681,
+      "test_only": false
+    }
+  ],
+  "unreferenced_runtime_bytes": 201564037,
+  "unreferenced_runtime_and_tests": [
+    {
+      "path": "assets/characters/blacksmith.svg",
+      "bytes": 683
+    },
+    {
+      "path": "assets/characters/clerk.svg",
+      "bytes": 652
+    },
+    {
+      "path": "assets/characters/player.svg",
+      "bytes": 706
+    },
+    {
+      "path": "assets/characters/villager.svg",
+      "bytes": 629
+    },
+    {
+      "path": "assets/gba/campesino_sheet.png",
+      "bytes": 1231432
+    },
+    {
+      "path": "assets/gba/environment/anvil.png",
+      "bytes": 14788
+    },
+    {
+      "path": "assets/gba/environment/barrel.png",
+      "bytes": 20130
+    },
+    {
+      "path": "assets/gba/environment/bench.png",
+      "bytes": 25959
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_house.png",
+      "bytes": 1673476
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_props.png",
+      "bytes": 1540700
+    },
+    {
+      "path": "assets/gba/environment/blacksmith_props_v2.png",
+      "bytes": 1097182
+    },
+    {
+      "path": "assets/gba/environment/dirt_tile.png",
+      "bytes": 7879
+    },
+    {
+      "path": "assets/gba/environment/elena_cart_turnout_v1.png",
+      "bytes": 2790178
+    },
+    {
+      "path": "assets/gba/environment/elena_migration_cart_v1.png",
+      "bytes": 1280459
+    },
+    {
+      "path": "assets/gba/environment/fence_horizontal.png",
+      "bytes": 31227
+    },
+    {
+      "path": "assets/gba/environment/fishing_boat.png",
+      "bytes": 1067625
+    },
+    {
+      "path": "assets/gba/environment/flower_bush.png",
+      "bytes": 8169
+    },
+    {
+      "path": "assets/gba/environment/fruit_trees_v2.png",
+      "bytes": 1708455
+    },
+    {
+      "path": "assets/gba/environment/grass_tile.png",
+      "bytes": 10118
+    },
+    {
+      "path": "assets/gba/environment/lake_dock_v1.png",
+      "bytes": 3257946
+    },
+    {
+      "path": "assets/gba/environment/lamp.png",
+      "bytes": 16528
+    },
+    {
+      "path": "assets/gba/environment/medieval_cobblestone.png",
+      "bytes": 3015846
+    },
+    {
+      "path": "assets/gba/environment/mill_field_complete_v2.png",
+      "bytes": 3322114
+    },
+    {
+      "path": "assets/gba/environment/mill_field_complete_v3.png",
+      "bytes": 3269973
+    },
+    {
+      "path": "assets/gba/environment/private_property_sign.png",
+      "bytes": 1875302
+    },
+    {
+      "path": "assets/gba/environment/rail_ballast_closeup_v1.png",
+      "bytes": 3586314
+    },
+    {
+      "path": "assets/gba/environment/railway_dispatch_yard_v1.png",
+      "bytes": 3676235
+    },
+    {
+      "path": "assets/gba/environment/railway_signal_components_v1.png",
+      "bytes": 1808936
+    },
+    {
+      "path": "assets/gba/environment/residential_ground.png",
+      "bytes": 2940448
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v2.png",
+      "bytes": 3547660
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v3.png",
+      "bytes": 3615611
+    },
+    {
+      "path": "assets/gba/environment/sheep_estate_v4.png",
+      "bytes": 3480221
+    },
+    {
+      "path": "assets/gba/environment/sheep_pasture.png",
+      "bytes": 3282102
+    },
+    {
+      "path": "assets/gba/environment/soil_tile.png",
+      "bytes": 7748
+    },
+    {
+      "path": "assets/gba/environment/spinner_yard_v1.png",
+      "bytes": 2319297
+    },
+    {
+      "path": "assets/gba/environment/spinner_yard_v2_backup.png",
+      "bytes": 3376982
+    },
+    {
+      "path": "assets/gba/environment/station_industrial_v2.png",
+      "bytes": 1939007
+    },
+    {
+      "path": "assets/gba/environment/station_interior_v1.png",
+      "bytes": 1970792
+    },
+    {
+      "path": "assets/gba/environment/station_platform_dispatch_v4.png",
+      "bytes": 3333080
+    },
+    {
+      "path": "assets/gba/environment/steam_textile_machine_sheet.png",
+      "bytes": 1218020
+    },
+    {
+      "path": "assets/gba/environment/steam_train_components_v3.png",
+      "bytes": 2175009
+    },
+    {
+      "path": "assets/gba/environment/steel_forge.png",
+      "bytes": 1015746
+    },
+    {
+      "path": "assets/gba/environment/tree_brown.png",
+      "bytes": 13966
+    },
+    {
+      "path": "assets/gba/environment/tree_large.png",
+      "bytes": 39938
+    },
+    {
+      "path": "assets/gba/environment/tree_large_2.png",
+      "bytes": 37719
+    },
+    {
+      "path": "assets/gba/environment/tree_pine.png",
+      "bytes": 20858
+    },
+    {
+      "path": "assets/gba/environment/tree_round.png",
+      "bytes": 13953
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v1.png",
+      "bytes": 3198481
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v2.png",
+      "bytes": 3155871
+    },
+    {
+      "path": "assets/gba/environment/village_bakery_v3.png",
+      "bytes": 3129414
+    },
+    {
+      "path": "assets/gba/environment/village_cobblestone_v2.png",
+      "bytes": 2434165
+    },
+    {
+      "path": "assets/gba/environment/village_cobblestone_v3.png",
+      "bytes": 2747022
+    },
+    {
+      "path": "assets/gba/environment/village_complete_v4.png",
+      "bytes": 4361815
+    },
+    {
+      "path": "assets/gba/environment/village_complete_v5.png",
+      "bytes": 3280648
+    },
+    {
+      "path": "assets/gba/environment/village_elena_courtyard_v5.png",
+      "bytes": 3111412
+    },
+    {
+      "path": "assets/gba/environment/village_meadow_v2.png",
+      "bytes": 3099269
+    },
+    {
+      "path": "assets/gba/environment/village_meadow_v3.png",
+      "bytes": 3672256
+    },
+    {
+      "path": "assets/gba/environment/village_shrubs_v2.png",
+      "bytes": 1089701
+    },
+    {
+      "path": "assets/gba/environment/village_trees.png",
+      "bytes": 1764767
+    },
+    {
+      "path": "assets/gba/environment/wheat_field.png",
+      "bytes": 2697406
+    },
+    {
+      "path": "assets/gba/environment/wheelwright_yard_v1.png",
+      "bytes": 3520126
+    },
+    {
+      "path": "assets/gba/environment/wheelwright_yard_v2_backup.png",
+      "bytes": 3395093
+    },
+    {
+      "path": "assets/gba/environment/wood_island_v1.png",
+      "bytes": 3439495
+    },
+    {
+      "path": "assets/gba/herrero_sheet.png",
+      "bytes": 1343086
+    },
+    {
+      "path": "assets/gba/main_menu_bg.jpg",
+      "bytes": 1115060
+    },
+    {
+      "path": "assets/gba/main_menu_campo_ciudad_v2.png",
+      "bytes": 3056036
+    },
+    {
+      "path": "assets/gba/silas_sheet_v1.png",
+      "bytes": 1532274
+    },
+    {
+      "path": "assets/gba/story/enclosure_01_discovery.png",
+      "bytes": 2661171
+    },
+    {
+      "path": "assets/gba/story/enclosure_02_blocked.png",
+      "bytes": 2316823
+    },
+    {
+      "path": "assets/gba/story/enclosure_03_displaced.png",
+      "bytes": 2225951
+    },
+    {
+      "path": "assets/gba/story/enclosure_03_displaced_fixed.png",
+      "bytes": 2225951
+    },
+    {
+      "path": "assets/gba/story/enclosure_04_family.png",
+      "bytes": 2433835
+    },
+    {
+      "path": "assets/gba/story/story_new_1.jpg",
+      "bytes": 859488
+    },
+    {
+      "path": "assets/gba/story/story_new_2.jpg",
+      "bytes": 987685
+    },
+    {
+      "path": "assets/gba/ticket_clerk_v1.png",
+      "bytes": 1300760
+    },
+    {
+      "path": "assets/gba/title_gears_bg.jpg",
+      "bytes": 935229
+    },
+    {
+      "path": "assets/gba/train_sheet.png",
+      "bytes": 2076453
+    },
+    {
+      "path": "assets/gba/train_wheel_v2.png",
+      "bytes": 1495022
+    },
+    {
+      "path": "assets/gba/ui/bruno_carpentry_board_v1.png",
+      "bytes": 2317814
+    },
+    {
+      "path": "assets/gba/ui/bruno_carpentry_workshop_v1.png",
+      "bytes": 2469980
+    },
+    {
+      "path": "assets/gba/ui/dialogue_panel_industrial.png",
+      "bytes": 377985
+    },
+    {
+      "path": "assets/gba/ui/gear_item.svg",
+      "bytes": 944
+    },
+    {
+      "path": "assets/gba/ui/hud_bar_gba.png",
+      "bytes": 704153
+    },
+    {
+      "path": "assets/gba/ui/hud_status_industrial.png",
+      "bytes": 1068910
+    },
+    {
+      "path": "assets/gba/ui/inventory_panel_gba.png",
+      "bytes": 2331635
+    },
+    {
+      "path": "assets/gba/ui/inventory_panel_industrial_v2.png",
+      "bytes": 2750206
+    },
+    {
+      "path": "assets/gba/ui/lumber_workpiece_sheet_v1.png",
+      "bytes": 1232028
+    },
+    {
+      "path": "assets/gba/ui/migration_cart_story_sheet_v1.png",
+      "bytes": 2912843
+    },
+    {
+      "path": "assets/gba/ui/mill_operation_sheet_v1.png",
+      "bytes": 2674965
+    },
+    {
+      "path": "assets/gba/ui/mill_repair_mechanism_v1.png",
+      "bytes": 2326394
+    },
+    {
+      "path": "assets/gba/ui/pause_panel_gba.png",
+      "bytes": 1689188
+    },
+    {
+      "path": "assets/gba/ui/pause_panel_industrial.png",
+      "bytes": 1524258
+    },
+    {
+      "path": "assets/gba/ui/pause_rail.svg",
+      "bytes": 702
+    },
+    {
+      "path": "assets/gba/ui/pause_walnut_brass_board.svg",
+      "bytes": 11018
+    },
+    {
+      "path": "assets/gba/ui/rope_puzzle_sheet_v1.png",
+      "bytes": 1735417
+    },
+    {
+      "path": "assets/gba/ui/ropewalk_workshop_v1.png",
+      "bytes": 2427292
+    },
+    {
+      "path": "assets/gba/ui_sheet.png",
+      "bytes": 2142006
+    },
+    {
+      "path": "assets/gba/village_objects.png",
+      "bytes": 2833801
+    },
+    {
+      "path": "assets/gba/village_tileset.png",
+      "bytes": 3143941
+    },
+    {
+      "path": "assets/items/ticket.svg",
+      "bytes": 378
+    },
+    {
+      "path": "assets/items/tools.svg",
+      "bytes": 437
+    },
+    {
+      "path": "assets/items/wheat.svg",
+      "bytes": 440
+    },
+    {
+      "path": "assets/shaders/forge_heat_glow.gdshader",
+      "bytes": 516
+    },
+    {
+      "path": "assets/world/sign.svg",
+      "bytes": 312
+    },
+    {
+      "path": "assets/world/train.svg",
+      "bytes": 884
+    },
+    {
+      "path": "scenes/ui/rail_dispatch_popup.tscn",
+      "bytes": 204
+    },
+    {
+      "path": "scripts/ui/rail_alignment_board.gd",
+      "bytes": 6074
+    },
+    {
+      "path": "scripts/ui/rail_alignment_drawing.gd",
+      "bytes": 7333
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_host.gd",
+      "bytes": 1012
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_popup.gd",
+      "bytes": 15298
+    },
+    {
+      "path": "scripts/ui/rail_dispatch_yard.gd",
+      "bytes": 3907
+    },
+    {
+      "path": "scripts/ui/rail_lever.gd",
+      "bytes": 2589
+    },
+    {
+      "path": "scripts/world/rail_operations.gd",
+      "bytes": 2022
+    },
+    {
+      "path": "scripts/world/railway_art.gd",
+      "bytes": 2681
+    }
+  ],
+  "unreferenced_runtime_and_tests_bytes": 182069130,
+  "test_only": [
+    "scripts/ui/cart_balance_scale.gd",
+    "scripts/ui/elena_cargo_art.gd",
+    "scripts/ui/migration_cart_display.gd",
+    "scripts/ui/migration_cart_popup.gd",
+    "scenes/ui/migration_cart_popup.tscn",
+    "assets/gba/ui/elena_blankets_v3.png",
+    "assets/gba/ui/elena_cart_parts_v2.png",
+    "assets/gba/ui/elena_enclosure_gate_v2.png",
+    "assets/gba/ui/elena_family_portrait_v3.png",
+    "assets/gba/ui/elena_food_bundle_v3.png",
+    "assets/gba/ui/elena_iron_pot_v3.png",
+    "assets/gba/ui/elena_riverside_backdrop_v2.png",
+    "assets/gba/ui/elena_seed_sack_v3.png",
+    "assets/gba/ui/elena_toolbox_v3.png",
+    "assets/gba/ui/elena_wagon_body_v4.png"
+  ],
+  "archived_puzzle_candidates": [
+    "scripts/world/railway_art.gd",
+    "scripts/ui/rail_dispatch_host.gd",
+    "scripts/ui/rail_dispatch_popup.gd",
+    "scripts/ui/rail_dispatch_yard.gd",
+    "scenes/ui/rail_dispatch_popup.tscn",
+    "assets/gba/ui/migration_cart_story_sheet_v1.png",
+    "assets/gba/environment/elena_migration_cart_v1.png",
+    "assets/gba/environment/railway_dispatch_yard_v1.png"
+  ],
+  "runtime_dynamic_paths": {},
+  "runtime_missing_paths": {},
+  "orphan_imports": [
+    "player_check.png.import"
+  ],
+  "orphan_uids": [
+    "tests/_capture_forge_ui.gd.uid"
+  ],
+  "duplicate_assets": [
+    [
+      "assets/gba/story/enclosure_03_displaced.png",
+      "assets/gba/story/enclosure_03_displaced_fixed.png"
+    ]
+  ],
+  "junctions_skipped": [
+    "tmp/rope_validation_project/.godot",
+    "tmp/rope_validation_project/assets",
+    "tmp/rope_validation_project/scenes",
+    "tmp/rope_validation_project/scripts",
+    "tmp/rope_validation_project/shaders",
+    "tmp/rope_validation_project/tests",
+    "tmp/repair_validation_project/.godot",
+    "tmp/repair_validation_project/assets",
+    "tmp/repair_validation_project/scenes",
+    "tmp/repair_validation_project/scripts",
+    "tmp/repair_validation_project/shaders",
+    "tmp/repair_validation_project/tests",
+    "tmp/mill_validation_project/.godot",
+    "tmp/mill_validation_project/assets",
+    "tmp/mill_validation_project/scenes",
+    "tmp/mill_validation_project/scripts",
+    "tmp/mill_validation_project/shaders",
+    "tmp/mill_validation_project/tests",
+    "tmp/lumber_validation_project/.godot",
+    "tmp/lumber_validation_project/assets",
+    "tmp/lumber_validation_project/scenes",
+    "tmp/lumber_validation_project/scripts",
+    "tmp/lumber_validation_project/shaders",
+    "tmp/lumber_validation_project/tests",
+    "tmp/inventory_validation_project/.godot",
+    "tmp/inventory_validation_project/assets",
+    "tmp/inventory_validation_project/scenes",
+    "tmp/inventory_validation_project/scripts",
+    "tmp/inventory_validation_project/shaders",
+    "tmp/inventory_validation_project/tests",
+    "tmp/forge_validation_project/.godot",
+    "tmp/forge_validation_project/assets",
+    "tmp/forge_validation_project/scenes",
+    "tmp/forge_validation_project/scripts",
+    "tmp/forge_validation_project/shaders",
+    "tmp/forge_validation_project/tests",
+    "tmp/cart_validation_project/.godot",
+    "tmp/cart_validation_project/assets",
+    "tmp/cart_validation_project/output",
+    "tmp/cart_validation_project/scenes",
+    "tmp/cart_validation_project/scripts",
+    "tmp/cart_validation_project/shaders",
+    "tmp/cart_validation_project/tests"
+  ]
+}

@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/coach_travel.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="ProgressTrack"]
+bg_color = Color(0.17, 0.24, 0.24, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+
+[sub_resource type="StyleBoxFlat" id="ProgressFill"]
+bg_color = Color(0.78, 0.59, 0.32, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_left = 3
+corner_radius_bottom_right = 3
+
+[sub_resource type="StyleBoxFlat" id="SkipStyle"]
+bg_color = Color(0.12, 0.19, 0.20, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.45, 0.40, 0.28, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+content_margin_left = 16.0
+content_margin_top = 9.0
+content_margin_right = 16.0
+content_margin_bottom = 9.0
+
+[node name="CoachTravel" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Root" type="Control" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Header" type="ColorRect" parent="CanvasLayer/Root"]
+layout_mode = 1
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0.025, 0.07, 0.085, 0.92)
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/Root/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="JourneyLabel" type="Label" parent="CanvasLayer/Root/Header/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.91, 0.88, 0.76, 1)
+theme_override_font_sizes/font_size = 19
+text = "En diligencia hacia la estación del tren"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Footer" type="ColorRect" parent="CanvasLayer/Root"]
+layout_mode = 1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -94.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0.025, 0.07, 0.085, 0.95)
+
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/Root/Footer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 12
+
+[node name="Row" type="HBoxContainer" parent="CanvasLayer/Root/Footer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Details" type="VBoxContainer" parent="CanvasLayer/Root/Footer/Margin/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="RouteLabel" type="Label" parent="CanvasLayer/Root/Footer/Margin/Row/Details"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.79, 0.63, 0.39, 1)
+theme_override_font_sizes/font_size = 12
+text = "ESTACIÓN DE CARRETAS  →  ESTACIÓN DEL TREN"
+
+[node name="StatusLabel" type="Label" parent="CanvasLayer/Root/Footer/Margin/Row/Details"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.93, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Preparando la diligencia"
+text_overrun_behavior = 3
+
+[node name="Progress" type="ProgressBar" parent="CanvasLayer/Root/Footer/Margin/Row/Details"]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("ProgressTrack")
+theme_override_styles/fill = SubResource("ProgressFill")
+max_value = 1.0
+show_percentage = false
+
+[node name="SkipButton" type="Button" parent="CanvasLayer/Root/Footer/Margin/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.84, 0.86, 0.80, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("SkipStyle")
+text = "Continuar · Espacio"
+
+[node name="Fade" type="ColorRect" parent="CanvasLayer/Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.01, 0.02, 0.025, 1)
+
+[node name="VoyageCamera" type="Camera2D" parent="."]
+position = Vector2(576, 445)

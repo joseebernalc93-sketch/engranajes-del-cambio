@@ -1,0 +1,178 @@
+[gd_scene load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/mill_field.gd" id="2_mill"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="5_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="6_touch"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="7_interactable"]
+[ext_resource type="Texture2D" path="res://assets/gba/environment/wheat_pickups.png" id="8_wheat"]
+
+[sub_resource type="RectangleShape2D" id="Shape_top"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_side"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_bottom"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_river"]
+size = Vector2(1152, 72)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(44, 126)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_top"]
+size = Vector2(450, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_side"]
+size = Vector2(16, 270)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_bottom"]
+size = Vector2(204, 16)
+
+[sub_resource type="RectangleShape2D" id="Shape_left_top"]
+size = Vector2(20, 410)
+
+[sub_resource type="RectangleShape2D" id="Shape_left_bottom"]
+size = Vector2(20, 110)
+
+[sub_resource type="RectangleShape2D" id="Shape_north_exit"]
+size = Vector2(120, 44)
+
+[node name="MillField" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="MillFieldBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_mill")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(1070, 470)
+
+[node name="BrokenMillInfo" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(965, 390)
+interaction_id = "broken_mill"
+prompt = "Examinar molino averiado"
+interaction_radius = 92.0
+interaction_offset = Vector2(0, -68)
+
+[node name="Wheat1" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(165, 145)
+interaction_id = "wheat_1"
+prompt = "Cosechar trigo"
+texture = ExtResource("8_wheat")
+sprite_scale = Vector2(0.12, 0.12)
+texture_region = Rect2(0, 0, 512, 1024)
+consumed_on_use = true
+
+[node name="Wheat2" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(290, 225)
+interaction_id = "wheat_2"
+prompt = "Cosechar trigo"
+texture = ExtResource("8_wheat")
+sprite_scale = Vector2(0.12, 0.12)
+texture_region = Rect2(512, 0, 512, 1024)
+consumed_on_use = true
+
+[node name="Wheat3" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(445, 145)
+interaction_id = "wheat_3"
+prompt = "Cosechar trigo"
+texture = ExtResource("8_wheat")
+sprite_scale = Vector2(0.12, 0.12)
+texture_region = Rect2(1024, 0, 512, 1024)
+consumed_on_use = true
+
+[node name="VillageExit" type="Area2D" parent="World"]
+position = Vector2(1130, 470)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+confirm_action = "go_village_from_mill"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/VillageExit"]
+shape = SubResource("Shape_exit")
+
+[node name="WheelwrightExit" type="Area2D" parent="World"]
+position = Vector2(780, 22)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+confirm_action = "go_wheelwright_yard"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WheelwrightExit"]
+shape = SubResource("Shape_north_exit")
+
+[node name="SpinnerExit" type="Area2D" parent="World"]
+position = Vector2(20, 470)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+confirm_action = "go_spinner_yard"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SpinnerExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_top")
+
+[node name="LeftTop" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 195)
+shape = SubResource("Shape_left_top")
+
+[node name="LeftBottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 595)
+shape = SubResource("Shape_left_bottom")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_side")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 658)
+shape = SubResource("Shape_bottom")
+
+[node name="River" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 612)
+shape = SubResource("Shape_river")
+
+[node name="FieldFence" type="StaticBody2D" parent="World"]
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/FieldFence"]
+position = Vector2(275, 76)
+shape = SubResource("Shape_fence_top")
+
+[node name="Left" type="CollisionShape2D" parent="World/FieldFence"]
+position = Vector2(48, 212)
+shape = SubResource("Shape_fence_side")
+
+[node name="Right" type="CollisionShape2D" parent="World/FieldFence"]
+position = Vector2(498, 212)
+shape = SubResource("Shape_fence_side")
+
+[node name="BottomLeft" type="CollisionShape2D" parent="World/FieldFence"]
+position = Vector2(152, 343)
+shape = SubResource("Shape_fence_bottom")
+
+[node name="BottomRight" type="CollisionShape2D" parent="World/FieldFence"]
+position = Vector2(400, 343)
+shape = SubResource("Shape_fence_bottom")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("6_touch")]

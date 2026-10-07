@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Generated work, previews and exported installers.
+/tmp/
+/scratch/
+/output/
+/build/
+*.log
+__pycache__/

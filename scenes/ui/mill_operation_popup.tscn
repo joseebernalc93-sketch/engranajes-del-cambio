@@ -1,0 +1,529 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/mill_operation_popup.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/mill_workbench_display.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/ui/mill_speed_gauge.gd" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="panel"]
+bg_color = Color(0.04, 0.036, 0.027, 0.99)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.60, 0.39, 0.16, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_left = 6
+corner_radius_bottom_right = 6
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="well"]
+bg_color = Color(0.066, 0.078, 0.05, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40, 0.45, 0.22, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_left = 4
+corner_radius_bottom_right = 4
+
+[node name="MillOperationPopup" type="CanvasLayer"]
+layer = 21
+script = ExtResource("1")
+
+[node name="MillOperationOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.006, 0.009, 0.008, 0.88)
+
+[node name="Panel" type="PanelContainer" parent="MillOperationOverlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -307.0
+offset_right = 544.0
+offset_bottom = 307.0
+theme_override_styles/panel = SubResource("panel")
+
+[node name="Content" type="Control" parent="MillOperationOverlay/Panel"]
+custom_minimum_size = Vector2(1080, 606)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 15.0
+offset_right = 490.0
+offset_bottom = 55.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.79, 0.36, 1)
+theme_override_font_sizes/font_size = 27
+text = "Preparar costal de harina"
+autowrap_mode = 2
+
+
+[node name="StepRail" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 507.0
+offset_top = 24.0
+offset_right = 974.0
+offset_bottom = 49.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.8, 0.69, 0.44, 1)
+theme_override_font_sizes/font_size = 14
+text = "› Caudal   Molienda   Frenar   Costal"
+autowrap_mode = 2
+horizontal_alignment = 2
+
+[node name="CloseButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 996.0
+offset_top = 14.0
+offset_right = 1054.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 15
+text = "X"
+
+
+[node name="StageLabel" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 65.0
+offset_right = 1052.0
+offset_bottom = 97.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.89, 0.74, 1)
+theme_override_font_sizes/font_size = 21
+text = "1. Estabilizar el molino"
+autowrap_mode = 2
+
+
+[node name="InstructionLabel" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 104.0
+offset_right = 1052.0
+offset_bottom = 135.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 15
+text = "Abre gradualmente la compuerta."
+autowrap_mode = 2
+
+
+[node name="IllustrationWell" type="Panel" parent="MillOperationOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 144.0
+offset_right = 799.0
+offset_bottom = 469.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("well")
+
+[node name="WorkbenchDisplay" type="Control" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 26.0
+offset_top = 146.0
+offset_right = 797.0
+offset_bottom = 467.0
+mouse_filter = 0
+clip_contents = true
+script = ExtResource("2")
+
+[node name="Sidebar" type="Panel" parent="MillOperationOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 817.0
+offset_top = 144.0
+offset_right = 1054.0
+offset_bottom = 589.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("well")
+
+[node name="ControlCaption" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 832.0
+offset_top = 158.0
+offset_right = 1038.0
+offset_bottom = 187.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.87, 0.70, 0.36, 1)
+theme_override_font_sizes/font_size = 14
+text = "REGULAR EL CAUDAL"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="FlowValue" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 832.0
+offset_top = 193.0
+offset_right = 1038.0
+offset_bottom = 217.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.71, 0.84, 0.85, 1)
+theme_override_font_sizes/font_size = 16
+text = "0% · 0.0 L/s"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="GateSlider" type="HSlider" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 835.0
+offset_top = 222.0
+offset_right = 1035.0
+offset_bottom = 250.0
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+
+[node name="CloseGateButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 833.0
+offset_top = 256.0
+offset_right = 931.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 14
+text = "− Cerrar"
+
+
+[node name="OpenGateButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 941.0
+offset_top = 256.0
+offset_right = 1038.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 14
+text = "+ Abrir"
+
+
+[node name="SpeedGauge" type="Control" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 839.0
+offset_top = 296.0
+offset_right = 1032.0
+offset_bottom = 376.0
+mouse_filter = 2
+script = ExtResource("3")
+
+[node name="RpmValue" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 834.0
+offset_top = 365.0
+offset_right = 1035.0
+offset_bottom = 390.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.41, 1)
+theme_override_font_sizes/font_size = 18
+text = "0 rpm"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="LoadValue" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 834.0
+offset_top = 397.0
+offset_right = 1035.0
+offset_bottom = 418.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 12
+text = "Piedras sin carga"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="StabilityBar" type="ProgressBar" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 834.0
+offset_top = 425.0
+offset_right = 1035.0
+offset_bottom = 437.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="BatchOne" type="PanelContainer" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 831.0
+offset_top = 449.0
+offset_right = 896.0
+offset_bottom = 503.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("well")
+
+[node name="Inner" type="Control" parent="MillOperationOverlay/Panel/Content/BatchOne"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BatchOneIcon" type="TextureRect" parent="MillOperationOverlay/Panel/Content/BatchOne/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 24.0
+offset_bottom = 29.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BatchOneStatus" type="Label" parent="MillOperationOverlay/Panel/Content/BatchOne/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 6.0
+offset_right = 61.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 10
+text = "Espera"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="BatchOneBar" type="ProgressBar" parent="MillOperationOverlay/Panel/Content/BatchOne/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 56.0
+offset_bottom = 43.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="BatchTwo" type="PanelContainer" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 902.0
+offset_top = 449.0
+offset_right = 967.0
+offset_bottom = 503.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("well")
+
+[node name="Inner" type="Control" parent="MillOperationOverlay/Panel/Content/BatchTwo"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BatchTwoIcon" type="TextureRect" parent="MillOperationOverlay/Panel/Content/BatchTwo/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 24.0
+offset_bottom = 29.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BatchTwoStatus" type="Label" parent="MillOperationOverlay/Panel/Content/BatchTwo/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 6.0
+offset_right = 61.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 10
+text = "Espera"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="BatchTwoBar" type="ProgressBar" parent="MillOperationOverlay/Panel/Content/BatchTwo/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 56.0
+offset_bottom = 43.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="BatchThree" type="PanelContainer" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 973.0
+offset_top = 449.0
+offset_right = 1038.0
+offset_bottom = 503.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("well")
+
+[node name="Inner" type="Control" parent="MillOperationOverlay/Panel/Content/BatchThree"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="BatchThreeIcon" type="TextureRect" parent="MillOperationOverlay/Panel/Content/BatchThree/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 24.0
+offset_bottom = 29.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BatchThreeStatus" type="Label" parent="MillOperationOverlay/Panel/Content/BatchThree/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 24.0
+offset_top = 6.0
+offset_right = 61.0
+offset_bottom = 27.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 10
+text = "Espera"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="BatchThreeBar" type="ProgressBar" parent="MillOperationOverlay/Panel/Content/BatchThree/Inner"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = 35.0
+offset_right = 56.0
+offset_bottom = 43.0
+mouse_filter = 2
+show_percentage = false
+
+[node name="HistoricalHint" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 833.0
+offset_top = 512.0
+offset_right = 1038.0
+offset_bottom = 577.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.83, 0.8, 0.69, 1)
+theme_override_font_sizes/font_size = 11
+text = "El agua mueve la rueda."
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LoadButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 26.0
+offset_top = 485.0
+offset_right = 305.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 15
+text = "Cargar tanda 1 de 3"
+
+
+[node name="RecoveryButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 26.0
+offset_top = 485.0
+offset_right = 305.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 15
+text = "Liberar mecanismo"
+visible = false
+
+[node name="BrakeButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 319.0
+offset_top = 485.0
+offset_right = 524.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 14
+text = "Detener el caudal"
+
+
+[node name="TieButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 539.0
+offset_top = 485.0
+offset_right = 797.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 14
+text = "Mantener para atar costal"
+visible = false
+
+[node name="ResultButton" type="Button" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 539.0
+offset_top = 485.0
+offset_right = 797.0
+offset_bottom = 530.0
+theme_override_font_sizes/font_size = 15
+text = "Volver al molino"
+visible = false
+
+[node name="KeyHint" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 26.0
+offset_top = 547.0
+offset_right = 797.0
+offset_bottom = 592.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.73, 0.70, 0.59, 1)
+theme_override_font_sizes/font_size = 12
+text = "← → / A D regulan el agua · ESPACIO carga el trigo"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 34.0
+offset_top = 442.0
+offset_right = 790.0
+offset_bottom = 465.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.83, 0.50, 1)
+theme_override_font_sizes/font_size = 11
+text = "CAUDAL → RUEDA → ENGRANAJES → PIEDRAS → HARINA"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaterMist" type="CPUParticles2D" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+position = Vector2(254, 392)
+emitting = false
+amount = 16
+lifetime = 0.7
+randomness = 0.5
+
+[node name="GrainDust" type="CPUParticles2D" parent="MillOperationOverlay/Panel/Content"]
+unique_name_in_owner = true
+position = Vector2(714, 391)
+emitting = false
+amount = 16
+lifetime = 0.7
+randomness = 0.5

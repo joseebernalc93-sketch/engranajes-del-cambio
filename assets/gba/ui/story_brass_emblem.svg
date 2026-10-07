@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="32" viewBox="0 0 120 32"><defs>
+<linearGradient id="wood" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#392414"/><stop offset=".28" stop-color="#20150f"/><stop offset=".74" stop-color="#170f0b"/><stop offset="1" stop-color="#302013"/></linearGradient>
+<linearGradient id="brass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0b5"/><stop offset=".16" stop-color="#d8ab58"/><stop offset=".43" stop-color="#946127"/><stop offset=".63" stop-color="#f2ca78"/><stop offset="1" stop-color="#6c421b"/></linearGradient>
+<linearGradient id="inner" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9e743b"/><stop offset=".45" stop-color="#50331b"/><stop offset="1" stop-color="#c39750"/></linearGradient>
+<radialGradient id="bolt"><stop stop-color="#ffe6a0"/><stop offset=".45" stop-color="#bc8b43"/><stop offset=".75" stop-color="#725026"/><stop offset="1" stop-color="#d4aa5c"/></radialGradient>
+</defs>
+<g fill="none" stroke-linecap="round">
+<path d="M4 20 H25 C35 20 34 7 42 9 Q49 12 44 15 Q39 17 39 12 M9 17 H22 Q30 17 31 12 M27 21 Q40 23 47 17" stroke="#120b06" stroke-width="4"/>
+<path d="M4 19 H25 C35 19 34 6 42 8 Q49 11 44 14 Q39 16 39 11 M9 16 H22 Q30 16 31 11 M27 20 Q40 22 47 16" stroke="url(#brass)" stroke-width="1.8"/>
+<path d="M116 20 H95 C85 20 86 7 78 9 Q71 12 76 15 Q81 17 81 12 M111 17 H98 Q90 17 89 12 M93 21 Q80 23 73 17" stroke="#120b06" stroke-width="4"/>
+<path d="M116 19 H95 C85 19 86 6 78 8 Q71 11 76 14 Q81 16 81 11 M111 16 H98 Q90 16 89 11 M93 20 Q80 22 73 16" stroke="url(#brass)" stroke-width="1.8"/>
+</g><circle cx="60" cy="16" r="14.1" fill="#24170d" stroke="url(#brass)" stroke-width="1.4"/>
+<path d="M60.000,4.000 L61.566,4.103 L62.536,6.534 L63.750,6.946 L66.000,5.608 L67.305,6.480 L66.930,9.070 L67.775,10.034 L70.392,10.000 L71.087,11.408 L69.466,13.464 L69.716,14.721 L72.000,16.000 L71.897,17.566 L69.466,18.536 L69.054,19.750 L70.392,22.000 L69.520,23.305 L66.930,22.930 L65.966,23.775 L66.000,26.392 L64.592,27.087 L62.536,25.466 L61.279,25.716 L60.000,28.000 L58.434,27.897 L57.464,25.466 L56.250,25.054 L54.000,26.392 L52.695,25.520 L53.070,22.930 L52.225,21.966 L49.608,22.000 L48.913,20.592 L50.534,18.536 L50.284,17.279 L48.000,16.000 L48.103,14.434 L50.534,13.464 L50.946,12.250 L49.608,10.000 L50.480,8.695 L53.070,9.070 L54.034,8.225 L54.000,5.608 L55.408,4.913 L57.464,6.534 L58.721,6.284 Z" fill="url(#brass)" stroke="#4c3117" stroke-width=".65"/>
+<circle cx="60" cy="16" r="7.7" fill="#352317" stroke="#f0c77b" stroke-width=".8"/>
+<path d="M60 8.5 V13 M53.5 20 L57.5 17.5 M66.5 20 L62.5 17.5" stroke="url(#brass)" stroke-width="2"/>
+<circle cx="60" cy="16" r="2.4" fill="url(#bolt)" stroke="#1a1109" stroke-width=".8"/></svg>

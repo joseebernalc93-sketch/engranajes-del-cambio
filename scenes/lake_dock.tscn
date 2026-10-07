@@ -1,0 +1,150 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/lake_dock.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="5_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="7_touch"]
+[ext_resource type="Texture2D" path="res://assets/gba/environment/wood_sign.png" id="8_sign"]
+
+[sub_resource type="RectangleShape2D" id="Shape_horizontal"]
+size = Vector2(1192, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_vertical"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_right_top"]
+size = Vector2(20, 410)
+
+[sub_resource type="RectangleShape2D" id="Shape_right_bottom"]
+size = Vector2(20, 140)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(44, 126)
+
+[sub_resource type="RectangleShape2D" id="Shape_warehouse"]
+size = Vector2(335, 200)
+
+[sub_resource type="RectangleShape2D" id="Shape_loading_shelter"]
+size = Vector2(245, 160)
+
+[sub_resource type="RectangleShape2D" id="Shape_crane"]
+size = Vector2(142, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_cart"]
+size = Vector2(105, 36)
+
+[sub_resource type="RectangleShape2D" id="Shape_sacks"]
+size = Vector2(95, 38)
+
+[sub_resource type="RectangleShape2D" id="Shape_deep_water"]
+size = Vector2(1192, 100)
+
+[sub_resource type="CircleShape2D" id="Shape_bollard"]
+radius = 11.0
+
+[node name="LakeDock" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="HarborBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_backdrop")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(1070, 470)
+
+[node name="BoatToWoodIsland" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(695, 545)
+interaction_id = "boat_to_wood_island"
+prompt = "Navegar a la isla de Bruno"
+interaction_radius = 92.0
+
+[node name="LakeDockInfo" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(730, 362)
+interaction_id = "lake_dock_info"
+prompt = "Leer el cartel del embarcadero"
+texture = ExtResource("8_sign")
+sprite_scale = Vector2(0.62, 0.62)
+sprite_offset = Vector2(0, -16)
+blocks_movement = true
+blocking_size = Vector2(24, 12)
+blocking_offset = Vector2(0, -6)
+interaction_radius = 48.0
+
+[node name="SpinnerExit" type="Area2D" parent="World"]
+position = Vector2(1130, 470)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+confirm_action = "go_spinner_from_dock"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SpinnerExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="RightTop" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 205)
+shape = SubResource("Shape_right_top")
+
+[node name="RightBottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 580)
+shape = SubResource("Shape_right_bottom")
+
+[node name="Warehouse" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(304, 127)
+shape = SubResource("Shape_warehouse")
+
+[node name="LoadingShelter" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(703, 143)
+shape = SubResource("Shape_loading_shelter")
+
+[node name="ManualCrane" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(829, 255)
+shape = SubResource("Shape_crane")
+
+[node name="Handcart" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(205, 257)
+shape = SubResource("Shape_cart")
+
+[node name="SacksAndCrates" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(297, 326)
+shape = SubResource("Shape_sacks")
+
+[node name="WaterWest" type="CollisionPolygon2D" parent="World/Bounds"]
+polygon = PackedVector2Array(-20, 660, -20, 440, 160, 448, 340, 420, 528, 423, 528, 490, 350, 490, 350, 570, 350, 660)
+
+[node name="WaterEast" type="CollisionPolygon2D" parent="World/Bounds"]
+polygon = PackedVector2Array(1172, 660, 1172, 530, 960, 513, 830, 473, 640, 422, 640, 490, 800, 490, 800, 570, 800, 660)
+
+[node name="DeepWater" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 610)
+shape = SubResource("Shape_deep_water")
+
+[node name="DockCargoWest" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(510, 485)
+shape = SubResource("Shape_bollard")
+
+[node name="DockCargoEast" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(653, 491)
+shape = SubResource("Shape_bollard")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("7_touch")]

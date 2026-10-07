@@ -1,0 +1,147 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/wheelwright_yard.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="Texture2D" path="res://assets/gba/mateo_sheet_v1.png" id="5_mateo"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="6_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="7_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="8_touch"]
+[ext_resource type="PackedScene" path="res://scenes/ui/wheelwright_forge_popup.tscn" id="9_forge"]
+
+[sub_resource type="RectangleShape2D" id="Shape_horizontal"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_vertical"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(120, 44)
+
+[sub_resource type="RectangleShape2D" id="Shape_house"]
+size = Vector2(350, 305)
+
+[sub_resource type="RectangleShape2D" id="Shape_large_wagon"]
+size = Vector2(190, 112)
+
+[sub_resource type="RectangleShape2D" id="Shape_cart"]
+size = Vector2(175, 95)
+
+[sub_resource type="RectangleShape2D" id="Shape_plows"]
+size = Vector2(165, 92)
+
+[sub_resource type="RectangleShape2D" id="Shape_chassis"]
+size = Vector2(130, 78)
+
+[sub_resource type="RectangleShape2D" id="Shape_workbench"]
+size = Vector2(150, 62)
+
+[sub_resource type="RectangleShape2D" id="Shape_north_block"]
+size = Vector2(190, 530)
+
+[sub_resource type="RectangleShape2D" id="Shape_west_lawn"]
+size = Vector2(320, 130)
+
+[sub_resource type="RectangleShape2D" id="Shape_east_lawn"]
+size = Vector2(140, 130)
+
+[node name="WheelwrightYard" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="WheelwrightBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_backdrop")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(720, 580)
+
+[node name="Mateo" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(960, 470)
+interaction_id = "wheelwright"
+prompt = "Hablar con Mateo"
+texture = ExtResource("5_mateo")
+sprite_scale = Vector2(0.16, 0.16)
+sprite_offset = Vector2(0, -35)
+texture_region = Rect2(296, 0, 295, 442)
+blocks_movement = true
+blocking_size = Vector2(22, 18)
+blocking_offset = Vector2(0, -9)
+interaction_radius = 68.0
+interaction_offset = Vector2(0, 30)
+
+[node name="MillFieldExit" type="Area2D" parent="World"]
+position = Vector2(720, 626)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("6_exit")
+confirm_action = "go_mill_field_from_wheelwright"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MillFieldExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 658)
+shape = SubResource("Shape_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="MateoHouse" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(958, 230)
+shape = SubResource("Shape_house")
+
+[node name="CoveredWagon" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(178, 247)
+shape = SubResource("Shape_large_wagon")
+
+[node name="OpenCart" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(397, 255)
+shape = SubResource("Shape_cart")
+
+[node name="Plows" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(126, 378)
+shape = SubResource("Shape_plows")
+
+[node name="UnfinishedChassis" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(414, 397)
+shape = SubResource("Shape_chassis")
+
+[node name="YardWorkbench" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(492, 332)
+shape = SubResource("Shape_workbench")
+
+[node name="NorthShrubWall" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(685, 255)
+shape = SubResource("Shape_north_block")
+
+[node name="WestLawn" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(155, 585)
+shape = SubResource("Shape_west_lawn")
+
+[node name="EastLawn" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1090, 585)
+shape = SubResource("Shape_east_lawn")
+
+[node name="HUD" parent="." instance=ExtResource("7_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("8_touch")]
+
+[node name="WheelwrightForgePopup" parent="." instance=ExtResource("9_forge")]

@@ -1,0 +1,120 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/world/station_platform.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="6"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="7"]
+[ext_resource type="Script" path="res://scripts/world/train_departure.gd" id="8"]
+[ext_resource type="Script" path="res://scripts/world/steam_train.gd" id="9"]
+[ext_resource type="Texture2D" path="res://assets/gba/train_industrial_v2.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/gba/environment/station_industrial_single_rail_v3.png" id="12"]
+
+[sub_resource type="RectangleShape2D" id="Building"]
+size = Vector2(1152, 340)
+[sub_resource type="RectangleShape2D" id="Railbed"]
+size = Vector2(1152, 188)
+[sub_resource type="RectangleShape2D" id="Side"]
+size = Vector2(20, 648)
+[sub_resource type="RectangleShape2D" id="FurnitureLeft"]
+size = Vector2(290, 55)
+[sub_resource type="RectangleShape2D" id="FurnitureRight"]
+size = Vector2(430, 60)
+[sub_resource type="RectangleShape2D" id="Door"]
+size = Vector2(96, 48)
+[sub_resource type="RectangleShape2D" id="Exit"]
+size = Vector2(36, 126)
+
+[node name="StationPlatform" type="Node2D"]
+script = ExtResource("1")
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+[node name="StationBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2")
+[node name="Player" parent="World" instance=ExtResource("3")]
+position = Vector2(640, 410)
+[node name="Train" parent="World" instance=ExtResource("4")]
+position = Vector2(680, 462)
+interaction_id = "train"
+prompt = "Subir al tren"
+texture = ExtResource("10")
+sprite_scale = Vector2(0.44, 0.44)
+interaction_radius = 90.0
+interaction_offset = Vector2(0, -72)
+[node name="SteamTrain" type="Node2D" parent="World/Train"]
+script = ExtResource("9")
+[node name="WaitingHallExit" type="Area2D" parent="World"]
+position = Vector2(27, 407)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7")
+title = "Sala de espera"
+question = "¿Deseas regresar a la sala de espera?"
+confirm_action = "go_station_interior"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/WaitingHallExit"]
+shape = SubResource("Exit")
+[node name="StationEntrance" type="Area2D" parent="World"]
+position = Vector2(640, 350)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7")
+title = "Sala de espera"
+question = "¿Deseas regresar a la taquilla?"
+confirm_action = "go_station_interior"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StationEntrance"]
+shape = SubResource("Door")
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+[node name="StationBuilding" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 170)
+shape = SubResource("Building")
+[node name="Railbed" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 554)
+shape = SubResource("Railbed")
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Side")
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Side")
+[node name="FurnitureLeft" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(260, 370)
+shape = SubResource("FurnitureLeft")
+[node name="FurnitureRight" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(915, 370)
+shape = SubResource("FurnitureRight")
+[node name="TrackForeground" type="Node2D" parent="World"]
+z_index = 10
+[node name="CoalAndCrate" type="Polygon2D" parent="World/TrackForeground"]
+texture_filter = 1
+texture = ExtResource("12")
+polygon = PackedVector2Array(0, 498, 18, 495, 39, 503, 58, 518, 100, 510, 104, 648, 0, 648)
+uv = PackedVector2Array(0, 498, 18, 495, 39, 503, 58, 518, 100, 510, 104, 648, 0, 648)
+[node name="IronPost" type="Polygon2D" parent="World/TrackForeground"]
+texture_filter = 1
+texture = ExtResource("12")
+polygon = PackedVector2Array(100, 486, 113, 486, 113, 581, 100, 581)
+uv = PackedVector2Array(100, 486, 113, 486, 113, 581, 100, 581)
+[node name="FenceRail" type="Polygon2D" parent="World/TrackForeground"]
+texture_filter = 1
+texture = ExtResource("12")
+polygon = PackedVector2Array(108, 531, 220, 531, 220, 543, 108, 543)
+uv = PackedVector2Array(108, 531, 220, 531, 220, 543, 108, 543)
+[node name="FencePost" type="Polygon2D" parent="World/TrackForeground"]
+texture_filter = 1
+texture = ExtResource("12")
+polygon = PackedVector2Array(210, 515, 222, 515, 222, 584, 210, 584)
+uv = PackedVector2Array(210, 515, 222, 515, 222, 584, 210, 584)
+[node name="BarrelAndSacks" type="Polygon2D" parent="World/TrackForeground"]
+texture_filter = 1
+texture = ExtResource("12")
+polygon = PackedVector2Array(65, 565, 76, 552, 96, 546, 114, 557, 128, 549, 149, 553, 160, 565, 174, 550, 190, 562, 205, 582, 205, 648, 62, 648)
+uv = PackedVector2Array(65, 565, 76, 552, 96, 546, 114, 557, 128, 549, 149, 553, 160, 565, 174, 550, 190, 562, 205, 582, 205, 648, 62, 648)
+[node name="TrainDepartureController" type="Node" parent="."]
+script = ExtResource("8")
+[node name="HUD" parent="." instance=ExtResource("5")]
+[node name="TouchControls" parent="." instance=ExtResource("6")]

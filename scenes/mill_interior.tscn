@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/mill_interior.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="6_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="7_touch"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mill_repair_popup.tscn" id="8_repair"]
+[ext_resource type="PackedScene" path="res://scenes/ui/mill_operation_popup.tscn" id="9_operation"]
+
+[sub_resource type="RectangleShape2D" id="Shape_horizontal"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_vertical"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_machinery"]
+size = Vector2(870, 205)
+
+[sub_resource type="RectangleShape2D" id="Shape_front_wall"]
+size = Vector2(490, 120)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(150, 28)
+
+[node name="MillInterior" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="InteriorBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_backdrop")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(576, 470)
+scale = Vector2(1.1, 1.1)
+
+[node name="MillMechanism" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(590, 350)
+interaction_id = "mill_mechanism"
+prompt = "Reparar mecanismo"
+interaction_radius = 105.0
+interaction_offset = Vector2(0, -78)
+
+[node name="MillExit" type="Area2D" parent="World"]
+position = Vector2(576, 548)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("6_exit")
+confirm_action = "go_mill_field_from_interior"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MillExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 658)
+shape = SubResource("Shape_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="RearMachinery" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 116)
+shape = SubResource("Shape_machinery")
+
+[node name="FrontWallLeft" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(245, 590)
+shape = SubResource("Shape_front_wall")
+
+[node name="FrontWallRight" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(907, 590)
+shape = SubResource("Shape_front_wall")
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("7_touch")]
+
+[node name="MillRepairPopup" parent="." instance=ExtResource("8_repair")]
+
+[node name="MillOperationPopup" parent="." instance=ExtResource("9_operation")]

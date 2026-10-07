@@ -1,0 +1,733 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/rope_puzzle_popup.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/ropewalk_backdrop_v2.png" id="2_workshop"]
+[ext_resource type="Script" path="res://scripts/ui/rope_machine_display.gd" id="3_machine"]
+[ext_resource type="Script" path="res://scripts/ui/rope_tension_meter.gd" id="4_meter"]
+[ext_resource type="Script" path="res://scripts/ui/rope_craft_display.gd" id="5_craft"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.035, 0.029, 0.022, 0.99)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.55, 0.36, 0.16, 1)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="Style_work_area"]
+bg_color = Color(0.075, 0.055, 0.035, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48, 0.31, 0.14, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_info"]
+bg_color = Color(0.07, 0.08, 0.055, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.39, 0.46, 0.23, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_meter_bg"]
+bg_color = Color(0.04, 0.035, 0.028, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.39, 0.29, 0.16, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="Style_meter_fill"]
+bg_color = Color(0.42, 0.68, 0.31, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="RopePuzzlePopup" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_script")
+
+[node name="RopeOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.006, 0.008, 0.006, 0.92)
+
+[node name="Panel" type="PanelContainer" parent="RopeOverlay"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -548.0
+offset_top = -311.0
+offset_right = 548.0
+offset_bottom = 311.0
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Content" type="Control" parent="RopeOverlay/Panel"]
+custom_minimum_size = Vector2(1088, 614)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="RopeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 13.0
+offset_right = 650.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.96, 0.76, 0.34, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 27
+text = "La cuerda bajo tensión"
+
+[node name="StepRail" type="HBoxContainer" parent="RopeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 554.0
+offset_top = 18.0
+offset_right = 985.0
+offset_bottom = 45.0
+theme_override_constants/separation = 6
+theme_override_font_sizes/font_size = 13
+
+[node name="StepPrepare" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "1 Fibras"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepComb" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "2 Peinar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepStrands" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "3 Cabos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepTension" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "4 Torsión"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepFinish" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "5 Ligadura"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StepProof" type="Label" parent="RopeOverlay/Panel/Content/StepRail"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 26)
+layout_mode = 2
+text = "6 Carga"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpportunitiesLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 358.0
+offset_top = 19.0
+offset_right = 541.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0.96, 0.77, 0.36, 1)
+theme_override_font_sizes/font_size = 13
+text = "Oportunidades: 15 / 15"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+z_index = 30
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 12.0
+offset_right = 1060.0
+offset_bottom = 52.0
+focus_mode = 0
+text = "X"
+tooltip_text = "Cerrar"
+
+[node name="StageLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 62.0
+offset_right = 1057.0
+offset_bottom = 93.0
+theme_override_colors/font_color = Color(0.91, 0.86, 0.7, 1)
+theme_override_font_sizes/font_size = 21
+text = "1. Seleccionar y limpiar el cáñamo"
+
+[node name="InstructionLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 96.0
+offset_right = 1057.0
+offset_bottom = 128.0
+theme_override_colors/font_color = Color(0.78, 0.76, 0.66, 1)
+theme_override_font_sizes/font_size = 15
+text = "Conserva las fibras largas de cáñamo y descarta aquello que debilitaría la cuerda."
+autowrap_mode = 2
+
+[node name="WorkArea" type="Panel" parent="RopeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 139.0
+offset_right = 803.0
+offset_bottom = 585.0
+clip_contents = true
+theme_override_styles/panel = SubResource("Style_work_area")
+
+[node name="MachineTexture" type="TextureRect" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 773.0
+offset_bottom = 325.0
+mouse_filter = 2
+texture = ExtResource("2_workshop")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MachineShade" type="ColorRect" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 773.0
+offset_bottom = 325.0
+mouse_filter = 2
+color = Color(0.03, 0.02, 0.01, 0.18)
+
+[node name="MachineDisplay" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 773.0
+offset_bottom = 325.0
+script = ExtResource("3_machine")
+
+[node name="CraftDisplay" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 165.0
+offset_top = 211.0
+offset_right = 605.0
+offset_bottom = 305.0
+mouse_default_cursor_shape = 6
+script = ExtResource("5_craft")
+
+[node name="RopeProgressBar" type="ProgressBar" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 150.0
+offset_top = 307.0
+offset_right = 625.0
+offset_bottom = 316.0
+mouse_filter = 2
+theme_override_styles/background = SubResource("Style_meter_bg")
+theme_override_styles/fill = SubResource("Style_meter_fill")
+show_percentage = false
+
+[node name="PreparationContainer" type="GridContainer" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 35.0
+offset_top = 333.0
+offset_right = 740.0
+offset_bottom = 431.0
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 7
+columns = 3
+
+[node name="HempLong" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "🌿 Cáñamo largo"
+
+[node name="DryStraw" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "Paja quebradiza"
+
+[node name="HempFlexible" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "🌿 Cáñamo flexible"
+
+[node name="KnottedFiber" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "Fibras anudadas"
+
+[node name="HempClean" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "🌿 Cáñamo limpio"
+
+[node name="WetWaste" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/PreparationContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(225, 43)
+layout_mode = 2
+focus_mode = 0
+text = "Restos húmedos"
+
+[node name="CombContainer" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = 333.0
+offset_right = 740.0
+offset_bottom = 431.0
+
+[node name="Bundles" type="HBoxContainer" parent="RopeOverlay/Panel/Content/WorkArea/CombContainer"]
+layout_mode = 0
+offset_right = 705.0
+offset_bottom = 37.0
+theme_override_constants/separation = 9
+
+[node name="BundleOne" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/CombContainer/Bundles"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Manojo 1 · 0/2"
+
+[node name="BundleTwo" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/CombContainer/Bundles"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Manojo 2 · 0/2"
+
+[node name="BundleThree" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/CombContainer/Bundles"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Manojo 3 · 0/2"
+
+[node name="CombButton" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/CombContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 177.0
+offset_top = 48.0
+offset_right = 528.0
+offset_bottom = 94.0
+text = "Pasar el rastrillo · ESPACIO"
+
+[node name="FeedControls" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 328.0
+offset_right = 705.0
+offset_bottom = 373.0
+
+[node name="FeedLabel" type="Label" parent="RopeOverlay/Panel/Content/WorkArea/FeedControls"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 633.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 12
+text = "GROSOR DE REFERENCIA: 60"
+
+[node name="FeedSlider" type="HSlider" parent="RopeOverlay/Panel/Content/WorkArea/FeedControls"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 22.0
+offset_right = 633.0
+offset_bottom = 45.0
+step = 1.0
+value = 35.0
+tick_count = 11
+
+[node name="FeedSafeBand" type="ColorRect" parent="RopeOverlay/Panel/Content/WorkArea/FeedControls"]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 0
+offset_left = 343.0
+offset_top = 24.0
+offset_right = 407.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.43, 0.68, 0.33, 0.9)
+
+[node name="StrandContainer" type="HBoxContainer" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 380.0
+offset_right = 705.0
+offset_bottom = 433.0
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="HookTop" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/StrandContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(195, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Montar cabo superior"
+
+[node name="HookMiddle" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/StrandContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(195, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Montar cabo central"
+
+[node name="HookBottom" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/StrandContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(195, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Montar cabo inferior"
+
+[node name="TensionContainer" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = 327.0
+offset_right = 740.0
+offset_bottom = 431.0
+
+[node name="CarriageLabel" type="Label" parent="RopeOverlay/Panel/Content/WorkArea/TensionContainer"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 438.0
+offset_bottom = 26.0
+theme_override_colors/font_color = Color(0.9, 0.82, 0.63, 1)
+theme_override_font_sizes/font_size = 14
+text = "CARRO TENSOR     ← acercar  /  alejar →"
+
+[node name="CarriageSlider" type="HSlider" parent="RopeOverlay/Panel/Content/WorkArea/TensionContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 445.0
+offset_bottom = 60.0
+focus_mode = 1
+step = 0.0
+value = 28.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="CarriageSafeBand" type="ColorRect" parent="RopeOverlay/Panel/Content/WorkArea/TensionContainer/CarriageSlider"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 150.0
+offset_top = 1.0
+offset_right = 260.0
+offset_bottom = 6.0
+mouse_filter = 2
+show_behind_parent = true
+color = Color(0.43, 0.68, 0.33, 0.8)
+
+[node name="SafeZoneLabel" type="Label" parent="RopeOverlay/Panel/Content/WorkArea/TensionContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 66.0
+offset_right = 445.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0.46, 0.78, 0.39, 1)
+theme_override_font_sizes/font_size = 13
+text = "Acerca el carro a la zona verde y mantén la manivela"
+horizontal_alignment = 1
+
+[node name="CrankButton" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/TensionContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 474.0
+offset_top = 8.0
+offset_right = 695.0
+offset_bottom = 79.0
+focus_mode = 1
+theme_override_font_sizes/font_size = 17
+text = "GIRAR MANIVELA\nMantén ESPACIO"
+tooltip_text = "Mantén Espacio y mueve el carro con las flechas o el ratón. También puedes mantener pulsada la rueda o este botón."
+
+[node name="FinishContainer" type="HBoxContainer" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 45.0
+offset_top = 350.0
+offset_right = 730.0
+offset_bottom = 408.0
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="LooseKnot" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/FinishContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Nudo simple"
+
+[node name="SeizingKnot" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/FinishContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Ligadura de remate"
+
+[node name="CutLoose" type="Button" parent="RopeOverlay/Panel/Content/WorkArea/FinishContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(210, 52)
+layout_mode = 2
+focus_mode = 0
+text = "Cortar sin asegurar"
+
+[node name="BindingButton" type="Button" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 200.0
+offset_top = 350.0
+offset_right = 575.0
+offset_bottom = 408.0
+text = "Ajustar vuelta de ligadura · ESPACIO"
+
+[node name="ProofControls" type="Control" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = 331.0
+offset_right = 450.0
+offset_bottom = 431.0
+
+[node name="BrakeLabel" type="Label" parent="RopeOverlay/Panel/Content/WorkArea/ProofControls"]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 415.0
+offset_bottom = 25.0
+theme_override_font_sizes/font_size = 14
+text = "FRENO DE CARGA     ← aflojar / tensar →"
+
+[node name="ProofBrakeSlider" type="HSlider" parent="RopeOverlay/Panel/Content/WorkArea/ProofControls"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 35.0
+offset_right = 415.0
+offset_bottom = 63.0
+step = 0.0
+value = 30.0
+tick_count = 11
+
+[node name="BrakeHint" type="Label" parent="RopeOverlay/Panel/Content/WorkArea/ProofControls"]
+layout_mode = 0
+offset_top = 68.0
+offset_right = 415.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 12
+text = "Más freno = menos tensión · corrige con calma"
+
+[node name="FiberDust" type="CPUParticles2D" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+z_index = 8
+position = Vector2(385, 250)
+emitting = false
+amount = 24
+one_shot = true
+explosiveness = 0.85
+
+[node name="ProofButton" type="Button" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 475.0
+offset_top = 344.0
+offset_right = 735.0
+offset_bottom = 415.0
+text = "LEVANTAR EL SACO DE PRUEBA\nMantén ESPACIO o este botón"
+theme_override_font_sizes/font_size = 14
+tooltip_text = "La prueba se conserva al soltar. Mantén de nuevo para continuar."
+
+[node name="ContinueButton" type="Button" parent="RopeOverlay/Panel/Content/WorkArea"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 217.0
+offset_top = 348.0
+offset_right = 558.0
+offset_bottom = 407.0
+text = "¡Lista! Volver al taller"
+
+[node name="InfoPanel" type="Panel" parent="RopeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 821.0
+offset_top = 139.0
+offset_right = 1061.0
+offset_bottom = 585.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_info")
+
+[node name="InfoTitle" type="Label" parent="RopeOverlay/Panel/Content"]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 160.0
+offset_right = 1042.0
+offset_bottom = 190.0
+theme_override_colors/font_color = Color(0.78, 0.67, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "CORDERÍA ARTESANAL"
+horizontal_alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 205.0
+offset_right = 1042.0
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.96, 0.77, 0.36, 1)
+theme_override_font_sizes/font_size = 17
+text = "0 de 3 manojos útiles"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="StatusLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 264.0
+offset_right = 1042.0
+offset_bottom = 329.0
+theme_override_colors/font_color = Color(0.84, 0.82, 0.72, 1)
+theme_override_font_sizes/font_size = 14
+text = "Examina los materiales"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TensionTitle" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 342.0
+offset_right = 1042.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0.76, 0.69, 0.51, 1)
+theme_override_font_sizes/font_size = 12
+text = "TENSIÓN DE LA CUERDA"
+horizontal_alignment = 1
+
+[node name="TensionBar" type="ProgressBar" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 844.0
+offset_top = 370.0
+offset_right = 1038.0
+offset_bottom = 393.0
+theme_override_styles/background = SubResource("Style_meter_bg")
+theme_override_styles/fill = SubResource("Style_meter_fill")
+show_percentage = false
+
+[node name="TensionValue" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 397.0
+offset_right = 1042.0
+offset_bottom = 419.0
+theme_override_colors/font_color = Color(0.74, 0.8, 0.61, 1)
+theme_override_font_sizes/font_size = 13
+text = "Sin tensión"
+horizontal_alignment = 1
+
+[node name="TensionMeter" type="Control" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 844.0
+offset_top = 362.0
+offset_right = 1038.0
+offset_bottom = 418.0
+script = ExtResource("4_meter")
+
+[node name="HintLabel" type="Label" parent="RopeOverlay/Panel/Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 840.0
+offset_top = 442.0
+offset_right = 1042.0
+offset_bottom = 558.0
+theme_override_colors/font_color = Color(0.66, 0.67, 0.56, 1)
+theme_override_font_sizes/font_size = 13
+text = "El cáñamo largo y flexible soporta mejor la torsión que la paja seca."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ActionAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -3.0
+
+[node name="MechanismAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = -4.0

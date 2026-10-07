@@ -1,0 +1,449 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/gba/main_menu_campo_ciudad_clean_v3.png" id="2_bg"]
+
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_walnut_brass_button.svg" id="3_wood_button"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_walnut_brass_panel.svg" id="4_wood_panel"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_brass_emblem.svg" id="5_emblem"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/main_menu_button_walnut_brass_v1.png" id="6_menu_button"]
+
+[sub_resource type="StyleBoxTexture" id="Style_button_normal"]
+content_margin_left = 28.0
+content_margin_top = 0.0
+content_margin_right = 28.0
+content_margin_bottom = 0.0
+texture = ExtResource("6_menu_button")
+
+[sub_resource type="StyleBoxTexture" id="Style_button_hover"]
+content_margin_left = 28.0
+content_margin_top = 0.0
+content_margin_right = 28.0
+content_margin_bottom = 0.0
+texture = ExtResource("6_menu_button")
+modulate_color = Color(1.08, 1.04, 0.96, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_button_pressed"]
+content_margin_left = 28.0
+content_margin_top = 2.0
+content_margin_right = 28.0
+content_margin_bottom = -2.0
+texture = ExtResource("6_menu_button")
+modulate_color = Color(0.87, 0.81, 0.70, 1)
+
+[sub_resource type="SystemFont" id="Font_menu_serif"]
+font_names = PackedStringArray("Georgia", "Times New Roman")
+
+[sub_resource type="ButtonGroup" id="Group_difficulty"]
+
+[sub_resource type="StyleBoxTexture" id="Style_wood_normal"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_wood_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.84, 0.80, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_wood_hover"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_wood_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(1.14, 1.08, 0.94, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_wood_pressed"]
+content_margin_left = 22.0
+content_margin_top = 9.0
+content_margin_right = 22.0
+content_margin_bottom = 7.0
+texture = ExtResource("3_wood_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(1.10, 1.02, 0.79, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_wood_panel"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("4_wood_panel")
+texture_margin_left = 30.0
+texture_margin_top = 27.0
+texture_margin_right = 30.0
+texture_margin_bottom = 27.0
+modulate_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="Style_wood_focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.85, 0.53, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="ArtLayout" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+ratio = 1.7777778
+stretch_mode = 2
+
+[node name="Artwork" type="Control" parent="ArtLayout"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="ArtLayout/Artwork"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="StartButton" type="Button" parent="ArtLayout/Artwork"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.382
+anchor_top = 0.791
+anchor_right = 0.618
+anchor_bottom = 0.953
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Comenzar"
+mouse_default_cursor_shape = 2
+focus_mode = 2
+focus_neighbor_top = NodePath("../ContinueGameButton")
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.055, 0.02, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("Style_button_normal")
+theme_override_styles/hover = SubResource("Style_button_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_hover")
+text = "Comenzar"
+
+[node name="ContinueGameButton" type="Button" parent="ArtLayout/Artwork"]
+unique_name_in_owner = true
+layout_mode = 1
+anchor_left = 0.382
+anchor_top = 0.613
+anchor_right = 0.618
+anchor_bottom = 0.775
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Continuar"
+mouse_default_cursor_shape = 2
+focus_mode = 2
+focus_neighbor_bottom = NodePath("../StartButton")
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.055, 0.02, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("Style_button_normal")
+theme_override_styles/hover = SubResource("Style_button_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_hover")
+text = "Continuar"
+
+[node name="DifficultyButton" type="Button" parent="ArtLayout/Artwork"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.382
+anchor_top = 0.791
+anchor_right = 0.618
+anchor_bottom = 0.953
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+focus_neighbor_bottom = NodePath("../StartButton")
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.055, 0.02, 0.9)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("Style_button_normal")
+theme_override_styles/hover = SubResource("Style_button_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_hover")
+text = "Elegir dificultad"
+
+[node name="DifficultyOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.018, 0.012, 0.008, 0.60)
+
+[node name="Center" type="CenterContainer" parent="DifficultyOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="DifficultyOverlay/Center"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_wood_panel")
+
+[node name="Margin" type="MarginContainer" parent="DifficultyOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="DifficultyOverlay/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="DifficultyOverlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.64, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 24
+text = "Dificultad"
+horizontal_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="DifficultyOverlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EasyButton" type="Button" parent="DifficultyOverlay/Center/Panel/Margin/VBox/Options"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("Group_difficulty")
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("Style_wood_normal")
+theme_override_styles/hover = SubResource("Style_wood_hover")
+theme_override_styles/pressed = SubResource("Style_wood_pressed")
+theme_override_styles/focus = SubResource("Style_wood_focus")
+text = "Fácil"
+
+[node name="HardButton" type="Button" parent="DifficultyOverlay/Center/Panel/Margin/VBox/Options"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("Group_difficulty")
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("Style_wood_normal")
+theme_override_styles/hover = SubResource("Style_wood_hover")
+theme_override_styles/pressed = SubResource("Style_wood_pressed")
+theme_override_styles/focus = SubResource("Style_wood_focus")
+text = "Difícil"
+
+[node name="DifficultyDescription" type="Label" parent="DifficultyOverlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.93, 0.81, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_constants/line_spacing = 3
+text = "Pon a prueba tu precisión y habilidad para superar los desafíos. Ideal si buscas un reto mayor."
+autowrap_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="DifficultyOverlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="DifficultyCloseButton" type="Button" parent="DifficultyOverlay/Center/Panel/Margin/VBox/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("Style_wood_normal")
+theme_override_styles/hover = SubResource("Style_wood_hover")
+theme_override_styles/pressed = SubResource("Style_wood_pressed")
+theme_override_styles/focus = SubResource("Style_wood_focus")
+text = "Listo"
+
+[node name="BrassDetails" type="Control" parent="DifficultyOverlay/Center/Panel"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopGear" type="TextureRect" parent="DifficultyOverlay/Center/Panel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = -11.0
+offset_right = 54.0
+offset_bottom = 18.0
+mouse_filter = 2
+texture = ExtResource("5_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LowerSeal" type="TextureRect" parent="DifficultyOverlay/Center/Panel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -18.0
+offset_right = 30.0
+offset_bottom = -2.0
+mouse_filter = 2
+texture = ExtResource("5_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RestartConfirmOverlay" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.018, 0.012, 0.008, 0.72)
+
+[node name="Center" type="CenterContainer" parent="RestartConfirmOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="PanelContainer" parent="RestartConfirmOverlay/Center"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("Style_wood_panel")
+
+[node name="Margin" type="MarginContainer" parent="RestartConfirmOverlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="RestartConfirmOverlay/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="RestartConfirmOverlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(1, 0.88, 0.64, 1)
+text = "¿Comenzar una nueva historia?"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="RestartConfirmOverlay/Center/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(380, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+text = "Se reiniciará el juego desde el inicio y perderás tu partida guardada. Para conservarla, elige Cancelar."
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="RestartConfirmOverlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="CancelRestartButton" type="Button" parent="RestartConfirmOverlay/Center/Panel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Style_wood_normal")
+theme_override_styles/hover = SubResource("Style_wood_hover")
+theme_override_styles/pressed = SubResource("Style_wood_pressed")
+theme_override_styles/focus = SubResource("Style_wood_focus")
+text = "Cancelar"
+
+[node name="ConfirmRestartButton" type="Button" parent="RestartConfirmOverlay/Center/Panel/Margin/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.91, 0.68, 1)
+theme_override_fonts/font = SubResource("Font_menu_serif")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("Style_wood_normal")
+theme_override_styles/hover = SubResource("Style_wood_hover")
+theme_override_styles/pressed = SubResource("Style_wood_pressed")
+theme_override_styles/focus = SubResource("Style_wood_focus")
+text = "Comenzar de nuevo"

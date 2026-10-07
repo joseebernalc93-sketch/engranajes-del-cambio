@@ -1,0 +1,122 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/wood_island.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="Texture2D" path="res://assets/gba/bruno_lumberjack_sheet_v1.png" id="5_bruno"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="7_touch"]
+[ext_resource type="PackedScene" path="res://scenes/ui/lumber_puzzle_popup.tscn" id="8_lumber"]
+
+[sub_resource type="RectangleShape2D" id="Shape_horizontal"]
+size = Vector2(1152, 28)
+
+[sub_resource type="RectangleShape2D" id="Shape_vertical"]
+size = Vector2(110, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_water"]
+size = Vector2(1152, 82)
+
+[sub_resource type="RectangleShape2D" id="Shape_water_side"]
+size = Vector2(530, 160)
+
+[sub_resource type="RectangleShape2D" id="Shape_water_corner"]
+size = Vector2(250, 300)
+
+[sub_resource type="RectangleShape2D" id="Shape_house"]
+size = Vector2(315, 185)
+
+[sub_resource type="RectangleShape2D" id="Shape_logs"]
+size = Vector2(190, 80)
+
+[sub_resource type="RectangleShape2D" id="Shape_bench"]
+size = Vector2(150, 76)
+
+[sub_resource type="RectangleShape2D" id="Shape_saw"]
+size = Vector2(190, 66)
+
+[sub_resource type="RectangleShape2D" id="Shape_woodpile"]
+size = Vector2(150, 78)
+
+[node name="WoodIsland" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="IslandBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_backdrop")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(576, 535)
+
+[node name="Bruno" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(830, 240)
+interaction_id = "lumberjack"
+prompt = "Hablar con Bruno"
+texture = ExtResource("5_bruno")
+sprite_scale = Vector2(0.16, 0.16)
+sprite_offset = Vector2(0, -35)
+texture_region = Rect2(296, 0, 295, 442)
+blocks_movement = true
+blocking_size = Vector2(22, 18)
+blocking_offset = Vector2(0, -9)
+interaction_radius = 70.0
+interaction_offset = Vector2(0, 30)
+
+[node name="BoatToLakeDock" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(576, 568)
+interaction_id = "boat_to_lake_dock"
+prompt = "Regresar al embarcadero del lago"
+interaction_radius = 70.0
+interaction_offset = Vector2(0, 18)
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 8)
+shape = SubResource("Shape_horizontal")
+
+[node name="BottomWater" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 620)
+shape = SubResource("Shape_water")
+
+[node name="WaterPolygonLeft" type="CollisionPolygon2D" parent="World/Bounds"]
+polygon = PackedVector2Array(-20, 660, -20, 350, 150, 480, 350, 540, 530, 560, 530, 660)
+
+[node name="WaterPolygonRight" type="CollisionPolygon2D" parent="World/Bounds"]
+polygon = PackedVector2Array(1172, 660, 1172, 350, 1000, 480, 800, 540, 622, 560, 622, 660)
+
+[node name="LeftForest" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(38, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="RightForest" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1114, 324)
+shape = SubResource("Shape_vertical")
+
+[node name="LumberjackHouse" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(902, 137)
+shape = SubResource("Shape_house")
+
+[node name="NorthLogs" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(460, 157)
+shape = SubResource("Shape_logs")
+
+[node name="Workbench" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(380, 310)
+shape = SubResource("Shape_bench")
+
+[node name="CrosscutSaw" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(540, 234)
+shape = SubResource("Shape_saw")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("7_touch")]
+
+[node name="LumberPuzzlePopup" parent="." instance=ExtResource("8_lumber")]

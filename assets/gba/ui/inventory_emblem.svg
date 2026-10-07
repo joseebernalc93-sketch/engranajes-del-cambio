@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+  <defs>
+    <linearGradient id="copper" x1="15" y1="9" x2="38" y2="46" gradientUnits="userSpaceOnUse"><stop stop-color="#efc899"/><stop offset=".45" stop-color="#b47c51"/><stop offset="1" stop-color="#754932"/></linearGradient>
+    <linearGradient id="iron" x1="28" y1="3" x2="28" y2="53" gradientUnits="userSpaceOnUse"><stop stop-color="#344144"/><stop offset="1" stop-color="#121c20"/></linearGradient>
+  </defs>
+  <circle cx="28" cy="28" r="25" fill="url(#iron)" stroke="#8c6448"/>
+  <circle cx="28" cy="28" r="23" stroke="#54605c" stroke-width=".6"/>
+  <path d="M23 9h10l1 5 4 2 5-2 5 8-4 4v4l4 4-5 8-5-2-4 2-1 5H23l-1-5-4-2-5 2-5-8 4-4v-4l-4-4 5-8 5 2 4-2Z" fill="url(#copper)" stroke="#e2b488" stroke-width=".7"/>
+  <circle cx="28" cy="28" r="12.5" fill="#182328" stroke="#dbab7b"/>
+  <path d="M19.5 35V25l5 3v-5l5 4V19h4v16Z" stroke="#efc99a" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M22 31v2m4-2v2m5-2v2" stroke="#efc99a" stroke-width="1.5"/>
+  <path d="M31 16.5c-2-1 1-2 0-3" stroke="#aaa58e" stroke-width="1" stroke-linecap="round"/>
+</svg>

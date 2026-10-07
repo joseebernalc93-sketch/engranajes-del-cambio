@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/station_interior.gd" id="2_interior"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Texture2D" path="res://assets/gba/agente_estacion_sheet.png" id="6_clerk"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="7_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="8_touch"]
+
+[sub_resource type="RectangleShape2D" id="Shape_top"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_side"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_wall"]
+size = Vector2(1152, 250)
+
+[sub_resource type="RectangleShape2D" id="Shape_benches"]
+size = Vector2(370, 195)
+
+[sub_resource type="RectangleShape2D" id="Shape_counter"]
+size = Vector2(340, 260)
+
+[sub_resource type="RectangleShape2D" id="Shape_luggage"]
+size = Vector2(175, 118)
+
+[sub_resource type="RectangleShape2D" id="Shape_foreground"]
+size = Vector2(220, 140)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(160, 26)
+
+[node name="StationInterior" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="InteriorBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_interior")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(576, 560)
+scale = Vector2(1.2, 1.2)
+
+[node name="TicketClerk" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(930, 345)
+interaction_id = "ticket_office"
+prompt = "Comprar boleto"
+texture = ExtResource("6_clerk")
+sprite_scale = Vector2(0.18, 0.18)
+sprite_offset = Vector2(0, -132)
+texture_region = Rect2(341, 0, 342, 280)
+interaction_radius = 48.0
+interaction_offset = Vector2(0, -25)
+
+[node name="PlatformAccess" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(576, 305)
+interaction_id = "station_platform"
+prompt = "Pasar al andén"
+interaction_radius = 45.0
+
+[node name="PlatformExit" type="Area2D" parent="World"]
+position = Vector2(576, 635)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7_exit")
+confirm_action = "go_station_exterior"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/PlatformExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_top")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 658)
+shape = SubResource("Shape_top")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_side")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_side")
+
+[node name="RearWall" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 125)
+shape = SubResource("Shape_wall")
+
+[node name="WaitingBenches" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(190, 340)
+shape = SubResource("Shape_benches")
+
+[node name="TicketCounter" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(930, 185)
+shape = SubResource("Shape_counter")
+
+[node name="RightLuggage" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1064, 495)
+shape = SubResource("Shape_luggage")
+
+[node name="ForegroundLeft" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(110, 505)
+shape = SubResource("Shape_foreground")
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("8_touch")]

@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://c4pite5w5ik50"]
+
+[ext_resource type="Script" uid="uid://c68if54ras3hb" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://c3r8q1i1meqj7" path="res://scripts/world/village.gd" id="2_village"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="Texture2D" uid="uid://doplgu880th8k" path="res://assets/gba/elena_sheet.png" id="7_villager"]
+[ext_resource type="Texture2D" path="res://assets/gba/tomas_baker_idle_v1.png" id="8_baker"]
+[ext_resource type="Texture2D" uid="uid://wjt6vkot2l7l" path="res://assets/gba/environment/wood_sign.png" id="10_sign"]
+[ext_resource type="Script" uid="uid://ctl2h755bks5a" path="res://scripts/world/map_exit.gd" id="12_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="13_touch"]
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(36, 120)
+
+[sub_resource type="RectangleShape2D" id="Shape_mill_exit"]
+size = Vector2(44, 126)
+
+[sub_resource type="RectangleShape2D" id="Shape_farm_exit"]
+size = Vector2(96, 34)
+
+[sub_resource type="RectangleShape2D" id="Shape_top"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_side"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_house"]
+size = Vector2(175, 180)
+
+[sub_resource type="RectangleShape2D" id="Shape_workshop"]
+size = Vector2(240, 200)
+
+[sub_resource type="RectangleShape2D" id="Shape_stream"]
+size = Vector2(1152, 80)
+
+[node name="Game" type="Node2D" unique_id=941214236]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="." unique_id=1736608449]
+y_sort_enabled = true
+
+[node name="VillageBackdrop" type="Node2D" parent="World" unique_id=920571838]
+show_behind_parent = true
+script = ExtResource("2_village")
+
+[node name="Player" parent="World" unique_id=585571058 instance=ExtResource("3_player")]
+position = Vector2(150, 470)
+
+[node name="Villager" parent="World" unique_id=1329308398 instance=ExtResource("4_interactable")]
+position = Vector2(530, 346)
+interaction_id = "villager"
+prompt = "Hablar con Elena"
+texture = ExtResource("7_villager")
+sprite_scale = Vector2(0.16, 0.16)
+sprite_offset = Vector2(0, -35)
+texture_region = Rect2(296, 0, 295, 442)
+blocks_movement = true
+blocking_size = Vector2(22, 18)
+blocking_offset = Vector2(0, -9)
+
+[node name="Baker" parent="World" unique_id=1573450049 instance=ExtResource("4_interactable")]
+position = Vector2(910, 281)
+interaction_id = "baker"
+prompt = "Hablar con Tomás, panadero"
+texture = ExtResource("8_baker")
+sprite_scale = Vector2(0.073, 0.073)
+sprite_offset = Vector2(0, -39)
+blocks_movement = true
+blocking_size = Vector2(22, 18)
+blocking_offset = Vector2(0, -9)
+interaction_radius = 65.0
+interaction_offset = Vector2(0, 35)
+
+[node name="EnclosureSign" parent="World" unique_id=32346613 instance=ExtResource("4_interactable")]
+position = Vector2(462, 410)
+interaction_id = "enclosure"
+prompt = "Examinar estación de carretas"
+texture = ExtResource("10_sign")
+sprite_scale = Vector2(0.62, 0.62)
+sprite_offset = Vector2(0, -29)
+
+[node name="StationExit" type="Area2D" parent="World" unique_id=655100467]
+position = Vector2(1125, 484)
+collision_layer = 0
+script = ExtResource("12_exit")
+title = "Camino a la estación de carretas"
+question = "¿Deseas continuar hasta la estación de carretas de pasajeros?"
+confirm_label = "Si"
+confirm_action = "go_station"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/StationExit" unique_id=990806472]
+shape = SubResource("Shape_exit")
+
+[node name="MillFieldExit" type="Area2D" parent="World"]
+position = Vector2(22, 470)
+collision_layer = 0
+script = ExtResource("12_exit")
+confirm_action = "go_mill_field"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MillFieldExit"]
+shape = SubResource("Shape_mill_exit")
+
+[node name="SheepFarmExit" type="Area2D" parent="World" unique_id=683488870]
+position = Vector2(816, 17)
+collision_layer = 0
+script = ExtResource("12_exit")
+confirm_action = "go_sheep_farm"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/SheepFarmExit" unique_id=225705775]
+shape = SubResource("Shape_farm_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World" unique_id=64051783]
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds" unique_id=1974970382]
+position = Vector2(576, -10)
+shape = SubResource("Shape_top")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds" unique_id=1914794396]
+position = Vector2(576, 658)
+shape = SubResource("Shape_top")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds" unique_id=1923922078]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_side")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds" unique_id=588813172]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_side")
+
+[node name="HouseA" type="CollisionShape2D" parent="World/Bounds" unique_id=1978022835]
+position = Vector2(677.5, 158)
+shape = SubResource("Shape_house")
+
+[node name="BakeryBuilding" type="CollisionShape2D" parent="World/Bounds" unique_id=721334412]
+position = Vector2(1015, 155)
+shape = SubResource("Shape_workshop")
+
+[node name="Stream" type="CollisionShape2D" parent="World/Bounds" unique_id=307378660]
+position = Vector2(576, 606)
+shape = SubResource("Shape_stream")
+
+[node name="HUD" parent="." unique_id=1630185085 instance=ExtResource("5_hud")]
+
+[node name="TouchControls" parent="." unique_id=1643309745 instance=ExtResource("13_touch")]
+

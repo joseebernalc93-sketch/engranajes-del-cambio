@@ -1,0 +1,431 @@
+[gd_scene load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/enclosure_story.gd" id="1_story"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_walnut_brass_panel.svg" id="2_panel"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_walnut_brass_button.svg" id="3_button"]
+[ext_resource type="Texture2D" path="res://assets/gba/ui/story_brass_emblem.svg" id="4_emblem"]
+
+[sub_resource type="SystemFont" id="Font_story_title"]
+font_names = PackedStringArray("Georgia", "Times New Roman")
+
+[sub_resource type="StyleBoxTexture" id="Style_story_panel"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("2_panel")
+texture_margin_left = 30.0
+texture_margin_top = 27.0
+texture_margin_right = 30.0
+texture_margin_bottom = 27.0
+modulate_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_chapter"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("2_panel")
+texture_margin_left = 30.0
+texture_margin_top = 27.0
+texture_margin_right = 30.0
+texture_margin_bottom = 27.0
+modulate_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_button_normal"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.78, 0.75, 0.68, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_button_hover"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(1.08, 1.04, 0.94, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_button_pressed"]
+content_margin_left = 22.0
+content_margin_top = 9.0
+content_margin_right = 22.0
+content_margin_bottom = 7.0
+texture = ExtResource("3_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(0.70, 0.64, 0.52, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_primary_normal"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxTexture" id="Style_primary_hover"]
+content_margin_left = 22.0
+content_margin_top = 8.0
+content_margin_right = 22.0
+content_margin_bottom = 8.0
+texture = ExtResource("3_button")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 20.0
+modulate_color = Color(1.16, 1.10, 0.96, 1)
+
+[sub_resource type="StyleBoxFlat" id="Style_button_focus"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.85, 0.53, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_left = 12
+corner_radius_bottom_right = 12
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="Style_page_counter"]
+content_margin_left = 11.0
+content_margin_top = 4.0
+content_margin_right = 11.0
+content_margin_bottom = 4.0
+bg_color = Color(0.055, 0.035, 0.023, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.34, 0.17, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_left = 5
+corner_radius_bottom_right = 5
+
+[node name="EnclosureStory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_story")
+
+[node name="StoryImage" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.012, 0.018, 0.02, 0.04)
+
+[node name="ChapterPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 22.0
+offset_right = 300.0
+offset_bottom = 96.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_chapter")
+
+[node name="Margin" type="MarginContainer" parent="ChapterPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 16
+
+[node name="VBox" type="VBoxContainer" parent="ChapterPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="ChapterTag" type="Label" parent="ChapterPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.72, 0.46, 1)
+theme_override_font_sizes/font_size = 12
+text = "FASE 1 · EL CERCAMIENTO"
+
+[node name="ChapterTitle" type="Label" parent="ChapterPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.64, 1)
+theme_override_fonts/font = SubResource("Font_story_title")
+theme_override_font_sizes/font_size = 22
+text = "El precio de la lana"
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -264.0
+offset_top = 22.0
+offset_right = -28.0
+offset_bottom = 68.0
+grow_horizontal = 0
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.66, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("Style_button_normal")
+theme_override_styles/hover = SubResource("Style_button_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_focus")
+text = "Volver al juego · Esc"
+
+[node name="StoryPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -158.0
+offset_right = -28.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("Style_story_panel")
+
+[node name="Margin" type="MarginContainer" parent="StoryPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 17
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 17
+
+[node name="VBox" type="VBoxContainer" parent="StoryPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="BoxContainer" parent="StoryPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Metadata" type="HBoxContainer" parent="StoryPanel/Margin/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="StoryHeading" type="Label" parent="StoryPanel/Margin/VBox/Header/Metadata"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.98, 0.83, 0.55, 1)
+theme_override_fonts/font = SubResource("Font_story_title")
+theme_override_font_sizes/font_size = 24
+text = "La nueva riqueza"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PageCounter" type="Label" parent="StoryPanel/Margin/VBox/Header/Metadata"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94, 0.80, 0.56, 1)
+theme_override_styles/normal = SubResource("Style_page_counter")
+theme_override_font_sizes/font_size = 15
+text = "1 / 4"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Actions" type="BoxContainer" parent="StoryPanel/Margin/VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="PrevButton" type="Button" parent="StoryPanel/Margin/VBox/Header/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.66, 1)
+theme_override_fonts/font = SubResource("Font_story_title")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_button_normal")
+theme_override_styles/hover = SubResource("Style_button_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_focus")
+text = "<  Atrás"
+
+[node name="NextButton" type="Button" parent="StoryPanel/Margin/VBox/Header/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0.94, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.9, 0.66, 1)
+theme_override_fonts/font = SubResource("Font_story_title")
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = SubResource("Style_primary_normal")
+theme_override_styles/hover = SubResource("Style_primary_hover")
+theme_override_styles/pressed = SubResource("Style_button_pressed")
+theme_override_styles/focus = SubResource("Style_button_focus")
+text = "Siguiente  >"
+
+[node name="StoryText" type="Label" parent="StoryPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.97, 0.95, 0.86, 1)
+theme_override_constants/line_spacing = 4
+theme_override_font_sizes/font_size = 18
+text = "Las ovejas llenan los antiguos pastos comunales. Junto a la mansión, una máquina procesa su lana: la tierra empieza a producir riqueza de una manera diferente."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BrassDetails" type="Control" parent="ChapterPanel"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopGear" type="TextureRect" parent="ChapterPanel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_top = -9.0
+offset_right = 44.0
+offset_bottom = 15.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LowerSeal" type="TextureRect" parent="ChapterPanel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -18.0
+offset_right = 30.0
+offset_bottom = -2.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BrassDetails" type="Control" parent="StoryPanel"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopGear" type="TextureRect" parent="StoryPanel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.0
+offset_top = -11.0
+offset_right = 54.0
+offset_bottom = 18.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LowerSeal" type="TextureRect" parent="StoryPanel/BrassDetails"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_top = -18.0
+offset_right = 30.0
+offset_bottom = -2.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopGear" type="TextureRect" parent="StoryPanel/Margin/VBox/Header/Actions/PrevButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 11.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopGear" type="TextureRect" parent="StoryPanel/Margin/VBox/Header/Actions/NextButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 11.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TopGear" type="TextureRect" parent="CloseButton"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = -4.0
+offset_right = 28.0
+offset_bottom = 11.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_emblem")
+expand_mode = 1
+stretch_mode = 5

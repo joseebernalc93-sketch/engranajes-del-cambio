@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/passenger_coach.gd" id="1"]
+
+[node name="PassengerCoach" type="Node2D"]
+scale = Vector2(0.82, 0.82)
+script = ExtResource("1")

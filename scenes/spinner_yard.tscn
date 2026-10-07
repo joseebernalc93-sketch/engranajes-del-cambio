@@ -1,0 +1,140 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/spinner_yard.gd" id="2_backdrop"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_interactable"]
+[ext_resource type="Texture2D" path="res://assets/gba/silas_idle_v2.png" id="5_silas"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="6_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="7_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="8_touch"]
+[ext_resource type="PackedScene" path="res://scenes/ui/rope_puzzle_popup.tscn" id="9_rope"]
+
+[sub_resource type="RectangleShape2D" id="Shape_horizontal"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_right_top"]
+size = Vector2(20, 410)
+
+[sub_resource type="RectangleShape2D" id="Shape_right_bottom"]
+size = Vector2(20, 140)
+
+[sub_resource type="RectangleShape2D" id="Shape_river"]
+size = Vector2(1152, 68)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(44, 126)
+
+[sub_resource type="RectangleShape2D" id="Shape_cottage"]
+size = Vector2(300, 280)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence"]
+size = Vector2(570, 24)
+
+[sub_resource type="RectangleShape2D" id="Shape_racks"]
+size = Vector2(140, 120)
+
+[sub_resource type="RectangleShape2D" id="Shape_benches"]
+size = Vector2(280, 220)
+
+[node name="SpinnerYard" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="SpinnerBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_backdrop")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(1070, 470)
+
+[node name="Silas" parent="World" instance=ExtResource("4_interactable")]
+position = Vector2(318, 424)
+interaction_id = "spinner"
+prompt = "Hablar con Silas"
+texture = ExtResource("5_silas")
+sprite_scale = Vector2(0.075, 0.075)
+sprite_offset = Vector2(0, -38)
+blocks_movement = true
+blocking_size = Vector2(22, 18)
+blocking_offset = Vector2(0, -9)
+interaction_radius = 68.0
+interaction_offset = Vector2(0, 30)
+
+[node name="MillFieldExit" type="Area2D" parent="World"]
+position = Vector2(1130, 470)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("6_exit")
+confirm_action = "go_mill_from_spinner"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/MillFieldExit"]
+shape = SubResource("Shape_exit")
+
+[node name="LakeDockExit" type="Area2D" parent="World"]
+position = Vector2(22, 470)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("6_exit")
+confirm_action = "go_lake_dock"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/LakeDockExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 658)
+shape = SubResource("Shape_horizontal")
+
+[node name="LeftTop" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 205)
+shape = SubResource("Shape_right_top")
+
+[node name="LeftBottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 580)
+shape = SubResource("Shape_right_bottom")
+
+[node name="RightTop" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 205)
+shape = SubResource("Shape_right_top")
+
+[node name="RightBottom" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 580)
+shape = SubResource("Shape_right_bottom")
+
+[node name="River" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, 614)
+shape = SubResource("Shape_river")
+
+[node name="SilasCottage" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(385, 195)
+shape = SubResource("Shape_cottage")
+
+[node name="YardFence" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(815, 412)
+shape = SubResource("Shape_fence")
+
+[node name="DryingRacks" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(600, 210)
+shape = SubResource("Shape_racks")
+
+[node name="RopemakingBenches" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(880, 270)
+shape = SubResource("Shape_benches")
+
+[node name="HUD" parent="." instance=ExtResource("7_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("8_touch")]
+
+[node name="RopePuzzlePopup" parent="." instance=ExtResource("9_rope")]

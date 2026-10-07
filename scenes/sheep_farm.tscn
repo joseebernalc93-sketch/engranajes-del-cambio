@@ -1,0 +1,166 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Script" path="res://scripts/world/sheep_farm.gd" id="2_farm"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/world/map_exit.gd" id="5_exit"]
+[ext_resource type="PackedScene" path="res://scenes/ui/touch_controls.tscn" id="6_touch"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="7_interactable"]
+
+[sub_resource type="RectangleShape2D" id="Shape_top"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_side"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="Shape_bottom"]
+size = Vector2(496, 20)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_horizontal"]
+size = Vector2(225, 18)
+
+[sub_resource type="RectangleShape2D" id="Shape_fence_vertical"]
+size = Vector2(18, 154)
+
+[sub_resource type="RectangleShape2D" id="Shape_manor"]
+size = Vector2(240, 190)
+
+[sub_resource type="RectangleShape2D" id="Shape_factory"]
+size = Vector2(345, 225)
+
+[sub_resource type="RectangleShape2D" id="Shape_factory_wall"]
+size = Vector2(330, 18)
+
+[sub_resource type="RectangleShape2D" id="Shape_tree_trunk"]
+size = Vector2(42, 26)
+
+[sub_resource type="RectangleShape2D" id="Shape_iron_fence"]
+size = Vector2(486, 28)
+
+[sub_resource type="RectangleShape2D" id="Shape_exit"]
+size = Vector2(142, 28)
+
+[node name="SheepFarm" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="SheepFarmBackdrop" type="Node2D" parent="World"]
+show_behind_parent = true
+script = ExtResource("2_farm")
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+position = Vector2(576, 585)
+
+[node name="IndustrialGate" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(576, 452)
+interaction_id = "industrial_gate"
+prompt = "Examinar puerta cerrada"
+blocks_movement = true
+blocking_size = Vector2(198, 36)
+blocking_offset = Vector2(0, 0)
+
+[node name="SteamTextileMachineInfo" parent="World" instance=ExtResource("7_interactable")]
+position = Vector2(638, 494)
+interaction_id = "steam_textile_machine"
+prompt = "Observar el taller de lana"
+interaction_radius = 35.0
+
+[node name="VillageExit" type="Area2D" parent="World"]
+position = Vector2(576, 634)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("5_exit")
+confirm_action = "go_village_from_farm"
+automatic = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/VillageExit"]
+shape = SubResource("Shape_exit")
+
+[node name="Bounds" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(576, -10)
+shape = SubResource("Shape_top")
+
+[node name="Left" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(-10, 324)
+shape = SubResource("Shape_side")
+
+[node name="Right" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(1162, 324)
+shape = SubResource("Shape_side")
+
+[node name="BottomLeft" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(248, 658)
+shape = SubResource("Shape_bottom")
+
+[node name="BottomRight" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(904, 658)
+shape = SubResource("Shape_bottom")
+
+[node name="Manor" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(290, 110)
+shape = SubResource("Shape_manor")
+
+[node name="Factory" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(935, 144)
+shape = SubResource("Shape_factory")
+
+[node name="FactoryYardWall" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(935, 338)
+shape = SubResource("Shape_factory_wall")
+
+[node name="CentralTree" type="CollisionShape2D" parent="World/Bounds"]
+position = Vector2(273, 280)
+shape = SubResource("Shape_tree_trunk")
+
+[node name="IndustrialPerimeter" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="LeftFence" type="CollisionShape2D" parent="World/IndustrialPerimeter"]
+position = Vector2(243, 452)
+shape = SubResource("Shape_iron_fence")
+
+[node name="RightFence" type="CollisionShape2D" parent="World/IndustrialPerimeter"]
+position = Vector2(909, 452)
+shape = SubResource("Shape_iron_fence")
+
+[node name="WalkablePathLimits" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="LeftGrass" type="CollisionPolygon2D" parent="World/WalkablePathLimits"]
+polygon = PackedVector2Array(0, 452, 500, 452, 490, 648, 0, 648)
+
+[node name="RightGrass" type="CollisionPolygon2D" parent="World/WalkablePathLimits"]
+polygon = PackedVector2Array(652, 452, 1152, 452, 1152, 648, 665, 648)
+
+[node name="ClosedFence" type="StaticBody2D" parent="World"]
+collision_layer = 1
+collision_mask = 0
+
+[node name="Top" type="CollisionShape2D" parent="World/ClosedFence"]
+position = Vector2(605.5, 137)
+shape = SubResource("Shape_fence_horizontal")
+
+[node name="Bottom" type="CollisionShape2D" parent="World/ClosedFence"]
+position = Vector2(605.5, 291)
+shape = SubResource("Shape_fence_horizontal")
+
+[node name="Left" type="CollisionShape2D" parent="World/ClosedFence"]
+position = Vector2(493, 214)
+shape = SubResource("Shape_fence_vertical")
+
+[node name="Right" type="CollisionShape2D" parent="World/ClosedFence"]
+position = Vector2(718, 214)
+shape = SubResource("Shape_fence_vertical")
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+
+[node name="TouchControls" parent="." instance=ExtResource("6_touch")]
