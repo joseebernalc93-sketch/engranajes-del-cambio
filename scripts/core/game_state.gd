@@ -2,18 +2,20 @@ extends Node
 
 const SAVE_PATH := "user://engranajes_save.json"
 const REPORT_PATH := "user://registro_fase_1.json"
-const SAVE_VERSION := 14
+const SAVE_VERSION := 18
 const FORGE_OPPORTUNITIES := 10
 const EASY_FORGE_OPPORTUNITIES := 15
 const DIFFICULTY_EASY := "facil"
 const DIFFICULTY_HARD := "dificil"
 const RAIL_ROUTE := preload("res://scripts/core/rail_route.gd")
 const REQUIRED_WHEAT := 3
-const FLOUR_SALE_VALUE := 13
+const FLOUR_SALE_VALUE := 100
 const TRAIN_TICKET_PRICE := 10
 const COACH_FARE := 3
 const PHASE_INTRO_SCENE := "res://scenes/ui/enclosure_story.tscn"
-const PHASE_TWO_SCENE := "res://scenes/ui/phase_two_construction.tscn"
+const PHASE_TWO_SCENE := "res://scenes/london_arrival.tscn"
+const PHASE_TWO_FACTORY := "res://scenes/phase2_hub.tscn"
+const PHASE_TWO_INTRO := "res://scenes/story/phase2_intro.tscn"
 const PHASE_START_SPAWN := Vector2(576, 585)
 const MILL_PART_FLAGS := {
 	"rueda_dentada": "mill_gear_installed",
@@ -27,12 +29,14 @@ var metrics: Dictionary = {}
 var phase_started_at := 0
 var phase_complete := false
 var phase_summary: Dictionary = {}
+var phase_two: Dictionary = {}
 var pending_spawn := Vector2.ZERO
 var pending_travel_scene := ""
 var pending_coach_destination := ""
 var difficulty := DIFFICULTY_HARD
 var run_started := false
 var checkpoint: Dictionary = {}
+var chapter_checkpoints: Dictionary = {}
 var restoring_session := false
 var capturing_session := false
 var autosave_elapsed := 0.0
@@ -106,7 +110,7 @@ func fail_rope_attempt() -> int:
 
 
 func show_rope_encouragement() -> void:
-	EventBus.show_dialogue("Silas, hilandero", "La cuerda aún necesita trabajo. Sigue intentándolo, no te rindas. ¡Ánimo! Cuando estés listo, preparamos nuevos manojos y lo probamos otra vez.", [{"label": "Intentar de nuevo", "action": "restart_rope_round"}, {"label": "Volver después", "action": "close"}])
+	EventBus.show_dialogue("Silas, hilandero", "Sigue intentándolo, el cáñamo requiere paciencia. No te rindas, ¡ánimo! Cuando estés listo, preparamos nuevos manojos y lo probamos otra vez.", [{"label": "Intentar de nuevo", "action": "restart_rope_round"}, {"label": "Volver después", "action": "close"}])
 
 
 func restart_rope_round() -> void:
@@ -114,6 +118,7 @@ func restart_rope_round() -> void:
 		return
 	flags["rope_attempts_spent"] = 0
 	flags["rope_progress"] = {}
+	flags["rope_recorded_turns"] = 0
 	save_progress()
 	EventBus.rope_puzzle_requested.emit()
 
@@ -129,8 +134,10 @@ func set_difficulty(value: String) -> void:
 
 
 func reset_progress(reload_scene := true) -> void:
+	phase_two = {}
 	run_started = false
 	checkpoint = {}
+	chapter_checkpoints = {}
 	restoring_session = false
 	coins = 0
 	inventory = {"herramientas": 1}
@@ -159,6 +166,7 @@ func reset_progress(reload_scene := true) -> void:
 		"rope_puzzle_completed": false,
 		"rope_attempts_spent": 0,
 		"rope_progress": {},
+		"rope_recorded_turns": 0,
 		"mill_gear_installed": false,
 		"mill_rope_installed": false,
 		"mill_plank_installed": false,
@@ -233,6 +241,9 @@ func reset_progress(reload_scene := true) -> void:
 
 
 func restart_phase() -> void:
+	if phase_complete:
+		revisit_phase_one()
+		return
 	reset_progress(false)
 	run_started = true
 	checkpoint = {"scene": PHASE_INTRO_SCENE, "story_index": 0}
@@ -240,6 +251,48 @@ func restart_phase() -> void:
 	save_progress()
 	pending_spawn = PHASE_START_SPAWN
 	call_deferred("_open_phase_intro")
+
+
+func is_phase_two_unlocked() -> bool:
+	return phase_complete or bool(phase_two.get("active", false)) or bool(phase_two.get("intro_seen", false))
+
+
+func revisit_phase_one() -> void:
+	if not phase_complete: return
+	save_progress()
+	# This is a return to the completed countryside, not a new playthrough.
+	_select_chapter_checkpoint({"scene": "res://scenes/sheep_farm.tscn", "position": [PHASE_START_SPAWN.x, PHASE_START_SPAWN.y], "facing": "down"})
+
+
+func restart_phase_two() -> void:
+	if not is_phase_two_unlocked(): return
+	save_progress()
+	# Replay the arrival while retaining completed work and the shared budget.
+	phase_two.erase("arrival")
+	if not phase_two.is_empty(): phase_two["intro_seen"] = false
+	_select_chapter_checkpoint({"scene": PHASE_TWO_INTRO, "story_index": 0})
+
+
+func _remember_chapter_checkpoint(saved: Dictionary) -> void:
+	var scene_path := str(saved.get("scene", ""))
+	if scene_path.is_empty() or scene_path == "res://scenes/ui/main_menu.tscn": return
+	var chapter := "2" if scene_path in [PHASE_TWO_SCENE, PHASE_TWO_FACTORY, PHASE_TWO_INTRO] else "1"
+	chapter_checkpoints[chapter] = saved.duplicate(true)
+
+
+func _select_chapter_checkpoint(saved: Dictionary) -> void:
+	var current_scene := get_tree().current_scene
+	if is_instance_valid(current_scene):
+		current_scene.set_process(false)
+		current_scene.set_physics_process(false)
+	pending_spawn = Vector2.ZERO
+	pending_travel_scene = ""
+	pending_coach_destination = ""
+	checkpoint = saved.duplicate(true)
+	_remember_chapter_checkpoint(checkpoint)
+	restoring_session = true
+	save_progress()
+	call_deferred("_open_checkpoint_scene")
 
 
 func _open_phase_intro() -> void:
@@ -271,7 +324,7 @@ func has_item(item_id: String, amount := 1) -> bool:
 
 func get_objective() -> String:
 	if phase_complete:
-		return "Fase completada: el viaje hacia la ciudad comienza."
+		return "Fase 1 completada. Explora el pueblo o vuelve a Londres desde el cuaderno."
 	if not flags.get("villager_spoken", false):
 		return "Habla con Elena en la aldea para preparar el viaje."
 	if int(metrics.get("wheat_harvested", 0)) < REQUIRED_WHEAT:
@@ -287,7 +340,7 @@ func get_objective() -> String:
 	if not flags.get("flour_milled", false):
 		return "Muele los tres puñados de trigo y fabrica un costal de harina."
 	if not flags.get("flour_sold", false):
-		return "Vende el costal de harina a Tomás, el panadero, por 13 monedas."
+		return "Vende el costal de harina a Tomás, el panadero, por 100 monedas."
 	if not flags.get("coach_station_reached", false):
 		return "Ve a la estación de carretas, paga 3 monedas al cochero y viaja hasta la estación del tren."
 	if not flags.get("ticket_bought", false):
@@ -365,7 +418,7 @@ func _talk_to_villager() -> void:
 func _talk_to_baker() -> void:
 	metrics.dialogues_opened += 1
 	if flags.get("flour_sold", false):
-		var farewell := "El boleto ya está pagado. Que el viaje te acerque a una nueva oportunidad." if flags.ticket_bought else "La harina ya está en la tahona. Con las 13 monedas de la harina puedes pagar la diligencia y el boleto del tren."
+		var farewell := "El boleto ya está pagado. Que el viaje te acerque a una nueva oportunidad." if flags.ticket_bought else "La harina ya está en la tahona. Con las 100 monedas de la harina puedes pagar la diligencia y el boleto del tren."
 		EventBus.show_dialogue("Tomás, panadero", farewell)
 		return
 	if not flags.villager_spoken:
@@ -375,14 +428,14 @@ func _talk_to_baker() -> void:
 		EventBus.show_dialogue("Tomás, panadero", "El horno está listo, pero falta harina. Cosecha el trigo del sembrío junto al molino y llévalo a moler.")
 		return
 	if not has_item("costal_harina"):
-		var flour_hint := "No puedo amasar pan con el grano entero. Si lo mueles en el viejo molino, podré comprarte el costal de harina por 13 monedas para tu viaje."
+		var flour_hint := "No puedo amasar pan con el grano entero. Si lo mueles en el viejo molino, podré comprarte el costal de harina por 100 monedas para tu viaje."
 		if not has_item("trigo", REQUIRED_WHEAT):
 			flour_hint = "Solo falta el costal de harina terminado. Vuelve cuando hayas procesado la cosecha en el molino."
 		EventBus.show_dialogue("Tomás, panadero", flour_hint)
 		return
 	EventBus.show_dialogue(
 		"Tomás, panadero",
-		"La harina tiene una molienda uniforme: servirá para el pan de toda la aldea. Puedo pagarte 13 monedas por el costal: 3 para la diligencia y 10 para el boleto hacia la ciudad.",
+		"La harina tiene una molienda uniforme: servirá para el pan de toda la aldea. Te pagaré 100 monedas por el costal. La diligencia cuesta 3 y el tren a Londres, 10: llegarás a la ciudad con 87 monedas para tus siguientes viajes.",
 		[
 			{"label": "Vender harina", "action": "sell_flour"},
 			{"label": "Todavía no", "action": "close"},
@@ -397,7 +450,7 @@ func _talk_to_coachman(returning: bool) -> void:
 	elif flags.get("coach_fare_paid", false):
 		EventBus.show_dialogue("Ramón, cochero", "Ya pagaste el pasaje. Sube a la diligencia: te dejaré frente a la entrada principal de la estación del tren.", [{"label": "Subir a la carreta", "action": "take_passenger_coach"}, {"label": "Todavía no", "action": "close"}])
 	elif coins < COACH_FARE:
-		EventBus.show_dialogue("Ramón, cochero", "El viaje hasta la estación del tren cuesta 3 monedas. No tienes suficiente todavía. Vende un costal de harina a Tomás: te pagará 13 monedas, suficientes para la diligencia y el boleto del tren.")
+		EventBus.show_dialogue("Ramón, cochero", "El viaje hasta la estación del tren cuesta 3 monedas. No tienes suficiente todavía. Vende un costal de harina a Tomás: te pagará 100 monedas, suficientes para la diligencia y el boleto del tren.")
 	else:
 		EventBus.show_dialogue("Ramón, cochero", "La diligencia de pasajeros sale hacia la estación del tren. El pasaje cuesta 3 monedas e incluye el regreso si lo necesitas. Te dejaré junto a la entrada principal.", [{"label": "Pagar 3 monedas y viajar", "action": "take_passenger_coach"}, {"label": "Todavía no", "action": "close"}])
 
@@ -445,7 +498,7 @@ func _talk_to_ticket_office() -> void:
 	if coins < TRAIN_TICKET_PRICE:
 		metrics.failed_purchases += 1
 		record_event("Intentó comprar el boleto sin monedas suficientes.")
-		EventBus.show_dialogue("Agente de estación", "El boleto cuesta 10 monedas. El panadero Tomás paga 13 monedas por un costal de harina: alcanza para la diligencia y este boleto.")
+		EventBus.show_dialogue("Agente de estación", "El boleto cuesta 10 monedas. El panadero Tomás paga 100 monedas por un costal de harina: alcanza para la diligencia y este boleto.")
 		return
 	EventBus.show_dialogue(
 		"Agente de estación",
@@ -499,6 +552,7 @@ func complete_train_departure() -> void:
 	if phase_complete:
 		return
 	phase_complete = true
+	consume_train_ticket()
 	record_event("Abordó el tren hacia la ciudad industrial.")
 	var report := build_report()
 	phase_summary = report.duplicate(true)
@@ -506,6 +560,12 @@ func complete_train_departure() -> void:
 	EventBus.objective_changed.emit(get_objective())
 	EventBus.phase_completed.emit(report)
 	save_progress()
+
+
+func consume_train_ticket() -> void:
+	if not inventory.has("boleto"): return
+	inventory.erase("boleto")
+	EventBus.inventory_changed.emit()
 
 
 func _inspect_enclosure() -> void:
@@ -899,7 +959,7 @@ func complete_lumber_puzzle() -> bool:
 	flags["lumber_progress"] = {}
 	add_item("tabla")
 	record_event("Ayudó a Bruno a seleccionar, medir, fijar, aserrar, cepillar y probar una tabla estructural.")
-	EventBus.show_toast("Tabla resistente recibida")
+	EventBus.show_toast("Tabla de soporte de la bancada recibida")
 	_emit_progress()
 	save_progress()
 	return true
@@ -924,7 +984,7 @@ func complete_rope_puzzle() -> bool:
 	flags["rope_progress"] = {}
 	add_item("cuerda")
 	record_event("Ayudó a Silas a seleccionar y peinar el cáñamo, igualar tres cabos, controlar la torsión, asegurar la ligadura y probar tres cargas.")
-	EventBus.show_toast("Cuerda resistente recibida")
+	EventBus.show_toast("Soga de transmisión resistente recibida")
 	_emit_progress()
 	save_progress()
 	return true
@@ -975,9 +1035,9 @@ func _sell_flour() -> void:
 	remove_item("costal_harina")
 	coins += FLOUR_SALE_VALUE
 	flags["flour_sold"] = true
-	record_event("Vendió un costal de harina al panadero Tomás por 13 monedas.")
+	record_event("Vendió un costal de harina al panadero Tomás por 100 monedas.")
 	EventBus.coins_changed.emit(coins)
-	EventBus.show_toast("Costal vendido: +13 monedas")
+	EventBus.show_toast("Costal vendido: +100 monedas")
 	_emit_progress()
 
 
@@ -1063,10 +1123,12 @@ func save_progress() -> void:
 		var current := SESSION_MEMORY.capture(get_tree().current_scene)
 		if not current.is_empty():
 			checkpoint = current
+		_remember_chapter_checkpoint(checkpoint)
 	var data := {
 		"save_version": SAVE_VERSION,
 		"run_started": run_started,
 		"checkpoint": checkpoint,
+		"chapter_checkpoints": chapter_checkpoints,
 		"difficulty": difficulty,
 		"coins": coins,
 		"inventory": inventory,
@@ -1075,6 +1137,7 @@ func save_progress() -> void:
 		"phase_started_at": phase_started_at,
 		"phase_complete": phase_complete,
 		"phase_summary": phase_summary,
+		"phase_two": phase_two,
 	}
 	# Write the complete checkpoint before replacing the previous save.
 	var temporary := SAVE_PATH + ".tmp"
@@ -1101,6 +1164,7 @@ func load_progress() -> bool:
 	if not data is Dictionary:
 		return false
 	checkpoint = data.get("checkpoint", {}) if data.get("checkpoint", {}) is Dictionary else {}
+	chapter_checkpoints = data.get("chapter_checkpoints", {}) if data.get("chapter_checkpoints", {}) is Dictionary else {}
 	run_started = bool(data.get("run_started", _has_legacy_run(data)))
 	if run_started and checkpoint.is_empty():
 		# Saves from earlier builds have no coordinates; retain their achievements.
@@ -1116,6 +1180,16 @@ func load_progress() -> bool:
 	phase_started_at = int(data.get("phase_started_at", Time.get_unix_time_from_system()))
 	phase_complete = bool(data.get("phase_complete", false))
 	phase_summary = data.get("phase_summary", {}) if data.get("phase_summary", {}) is Dictionary else {}
+	phase_two = data.get("phase_two", {}) if data.get("phase_two", {}) is Dictionary else {}
+	if str(checkpoint.get("scene", "")) == "res://scenes/ui/phase_two_construction.tscn":
+		checkpoint = {"scene": PHASE_TWO_INTRO, "story_index": 0}
+	# Preserve all workshop checkpoints while routing earlier chapter-two saves
+	# through the new explorable arrival. The factory remains available to tools.
+	if str(checkpoint.get("scene", "")) == PHASE_TWO_FACTORY:
+		checkpoint = {"scene": PHASE_TWO_SCENE}
+	if str(chapter_checkpoints.get("2", {}).get("scene", "")) == PHASE_TWO_FACTORY:
+		chapter_checkpoints["2"] = {"scene": PHASE_TWO_SCENE}
+	_remember_chapter_checkpoint(checkpoint)
 	if phase_complete and phase_summary.is_empty():
 		phase_summary = build_report()
 		# Older saves retain the original departure time when it was recorded.
@@ -1153,8 +1227,20 @@ func load_progress() -> bool:
 			_migrate_without_elena_puzzle()
 		if save_version < 13:
 			_migrate_without_rail_puzzle()
+		if save_version < 18:
+			_migrate_london_economy()
 		save_progress()
 	return true
+
+
+func _migrate_london_economy() -> void:
+	# Versioned, one-time adjustment; never reset the purse or replay the sale.
+	if flags.get("flour_sold", false) or phase_complete:
+		coins += FLOUR_SALE_VALUE - 13
+		flags["flour_sold"] = true
+		if not phase_summary.is_empty(): phase_summary["monedas_harina"] = FLOUR_SALE_VALUE
+		if phase_complete and not phase_summary.is_empty(): _write_report(phase_summary)
+	if phase_complete: consume_train_ticket()
 
 
 func _migrate_rail_turnouts() -> void:
@@ -1248,20 +1334,21 @@ func continue_saved_game() -> bool:
 
 
 func open_phase_two() -> void:
-	if not phase_complete: return
+	if not is_phase_two_unlocked(): return
 	if phase_summary.is_empty(): phase_summary = build_report()
-	pending_spawn = Vector2.ZERO
-	checkpoint = {"scene": PHASE_TWO_SCENE, "journal_open": false, "journal_page": 2}
-	restoring_session = true
 	save_progress()
-	call_deferred("_open_phase_two_scene")
+	var destination: Dictionary = chapter_checkpoints.get("2", {}).duplicate(true)
+	if destination.is_empty():
+		destination = {"scene": PHASE_TWO_SCENE if bool(phase_two.get("intro_seen", false)) else PHASE_TWO_INTRO, "story_index": 0, "journal_page": 2}
+	destination["journal_open"] = false
+	_select_chapter_checkpoint(destination)
 
 
-func _open_phase_two_scene() -> void:
-	var error := get_tree().change_scene_to_file(PHASE_TWO_SCENE)
+func _open_checkpoint_scene() -> void:
+	var error := get_tree().change_scene_to_file(str(checkpoint.get("scene", PHASE_TWO_INTRO)))
 	if error != OK:
 		restoring_session = false
-		push_error("No se pudo abrir la siguiente fase: " + error_string(error))
+		push_error("No se pudo abrir la fase seleccionada: " + error_string(error))
 
 
 func restore_scene_session(scene: Variant) -> void:
@@ -1308,7 +1395,7 @@ func get_puzzle_progress() -> Array[Dictionary]:
 
 func get_phase_guidance() -> String:
 	if phase_complete:
-		return "El campo queda atrás. Tu viaje hacia la ciudad industrial acaba de comenzar."
+		return "Los cuatro puzzles ya están completados. Puedes visitar la aldea libremente; la Fase 2 sigue desbloqueada en el cuaderno y el menú principal."
 	if not flags.get("villager_spoken", false):
 		return "El cercamiento ha cambiado la aldea. Escucha a Elena y descubre por qué las familias necesitan partir."
 	var finished := int(flags.get("wheelwright_forge_completed", false)) + int(flags.get("rope_puzzle_completed", false)) + int(flags.get("lumber_puzzle_completed", false))
@@ -1323,7 +1410,7 @@ func get_phase_guidance() -> String:
 	if not flags.get("flour_milled", false):
 		return "El molino funciona. Regula el agua y procesa el trigo para completar este puzzle."
 	if not flags.get("flour_sold", false):
-		return "Vende la harina a Tomás por 13 monedas: 3 para la diligencia y 10 para el tren."
+		return "Vende la harina a Tomás por 100 monedas: 3 para la diligencia y 10 para el tren."
 	if not flags.get("coach_station_reached", false):
 		return "La harina ha financiado tu viaje. Busca a Ramón en la estación de carretas."
 	if not flags.get("ticket_bought", false):
@@ -1337,7 +1424,7 @@ func _migrate_without_elena_puzzle() -> void:
 		coins += COACH_FARE
 		flags["coach_allowance_received"] = true
 		metrics["events"] = metrics.get("events", [])
-		record_event("Ajustó el pago de la harina a 13 monedas para cubrir la diligencia y el tren.")
+		record_event("Ajustó el antiguo pago de la harina a 13 monedas para cubrir la diligencia y el tren.")
 	var active: Dictionary = checkpoint.get("popup", {})
 	if str(active.get("name", "")) == "MigrationCartPopup":
 		checkpoint.erase("popup")

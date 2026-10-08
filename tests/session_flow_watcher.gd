@@ -116,8 +116,9 @@ func _write_session() -> void:
 	yard.get_node("World/Player").facing = "left"
 	var rope = yard.get_node("RopePuzzlePopup")
 	rope.open()
-	rope._material_buttons()[0].pressed.emit()
-	rope._material_buttons()[1].pressed.emit()
+	rope.model.comb_passes[0] = 1
+	rope.model.begin_card(Vector2(180, 227), 1)
+	rope.model.move_card(Vector2(300, 380))
 	_check(rope.awaiting_retry and GameState.get_rope_attempts_left() == 14, "Fixture must save one completed bundle and one charged error")
 	GameState.save_progress()
 	_check(str(GameState.checkpoint.get("popup", {}).get("name", "")) == "RopePuzzlePopup", "The save must include the active workshop")
@@ -145,7 +146,7 @@ func _read_session() -> void:
 	var rope = yard.get_node("RopePuzzlePopup")
 	_check(yard.scene_file_path == "res://scenes/spinner_yard.tscn" and player.position == Vector2(492, 474) and player.facing == "left", "Relaunch must restore map, exact position and facing")
 	_check(GameState.coins == 7 and int(GameState.inventory.get("trigo", 0)) == 2, "Relaunch must restore coins and inventory")
-	_check(rope.overlay.visible and rope.stage == rope.STAGE_PREPARE and rope.cleaned_fibers == 1 and GameState.get_rope_attempts_left() == 14, "Relaunch must restore the active rope stage, partial work and spent opportunity")
+	_check(rope.overlay.visible and rope.stage == rope.STAGE_PREPARE and rope.model.comb_passes[0] == 1 and GameState.get_rope_attempts_left() == 14, "Relaunch must restore the active rope stage, partial work and spent opportunity")
 	_check(rope.awaiting_retry and rope.retry_notice.visible and not player.controls_enabled, "Relaunch must recover the error notice without charging again")
 	rope.retry_notice.continued.emit()
 	_check(not rope.awaiting_retry and GameState.get_rope_attempts_left() == 14, "Continue phase after relaunch must not charge another opportunity")
@@ -168,15 +169,17 @@ func _read_session() -> void:
 	var island = await _switch("res://scenes/wood_island.tscn")
 	var lumber = island.get_node("LumberPuzzlePopup")
 	lumber.open()
-	lumber.straight_grain.pressed.emit()
-	await get_tree().create_timer(0.7).timeout
-	lumber.marked_lines = 1
-	lumber.length_slider.set_value_no_signal(160)
-	lumber.angle_slider.set_value_no_signal(90)
-	lumber._update_measure_progress()
+	for x in range(0, 341):
+		lumber.model.template_x = x
+		if lumber.model.template_safe(): break
+	lumber.model.confirm()
+	lumber.model.marked_lines = 1
+	lumber.model.length_cm = 160
+	lumber.model.square_angle = 90
+	lumber._save_work()
 	island = await _roundtrip()
 	lumber = island.get_node("LumberPuzzlePopup")
-	_check(lumber.overlay.visible and lumber.stage == lumber.STAGE_MEASURE and lumber.marked_lines == 1 and is_equal_approx(lumber.length_slider.value, 160), "Lumber must recover its measurement stage, mark and adjustment")
+	_check(lumber.overlay.visible and lumber.stage == lumber.STAGE_MEASURE and lumber.model.marked_lines == 1 and is_equal_approx(lumber.model.length_cm, 160), "Lumber must recover its measurement stage, mark and adjustment")
 	lumber.close()
 	GameState.flags.tools_given_to_mateo = true
 	var forge_yard = await _switch("res://scenes/wheelwright_yard.tscn")

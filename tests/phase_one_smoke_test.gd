@@ -265,7 +265,7 @@ func _ready() -> void:
 	assert(GameState.has_item("costal_harina"))
 	assert(not GameState.has_item("trigo"))
 	EventBus.dialogue_action_selected.emit("sell_flour")
-	assert(GameState.coins == 13)
+	assert(GameState.coins == 100)
 	assert(not GameState.has_item("herramientas"))
 	assert(not GameState.has_item("costal_harina"))
 	assert(GameState.get_objective().contains("carretas"))
@@ -274,7 +274,7 @@ func _ready() -> void:
 	assert(GameState.get_objective().contains("boleto"))
 
 	EventBus.dialogue_action_selected.emit("buy_ticket")
-	assert(GameState.coins == 0)
+	assert(GameState.coins == 87)
 	assert(GameState.has_item("boleto"))
 	assert(GameState.get_objective().contains("tren"))
 

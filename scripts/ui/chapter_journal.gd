@@ -12,6 +12,9 @@ const FLOUR := preload("res://assets/items/flour_sack_v1.png")
 const GEAR := preload("res://assets/gba/ui/mill_gear_piece_v1.png")
 const INK := Color("#382515")
 const GREEN := Color("#345938")
+const Factory := preload("res://scripts/core/phase2_campaign.gd")
+const Journey := preload("res://scripts/world/london_journey.gd")
+const FACTORY_ART := preload("res://assets/phase2/tools_pixel_v1.png")
 const SPREAD_SIZE := Vector2(1000, 606)
 var serif := SystemFont.new()
 var artwork: TextureRect
@@ -31,6 +34,17 @@ var continue_button: Button
 var current_page := 1
 var navigation_enabled := false
 var turn_tween: Tween
+var factory_objective: Label
+var factory_balance: Label
+var factory_statuses: Array[Label] = []
+var journey_mode: bool = false
+var journey_page: Control
+var factory_nodes: Array[Node] = []
+var journey_objective: Label
+var journey_difficulty: Label
+var journey_balance: Label
+var journey_statuses: Array[Label] = []
+var journey_continue: Button
 
 func build(existing_continue: Button = null, existing_restart: Button = null) -> void:
 	name = "ChapterJournal"
@@ -65,10 +79,12 @@ func build(existing_continue: Button = null, existing_restart: Button = null) ->
 	continue_button = existing_continue if existing_continue != null else Button.new()
 	var restart := existing_restart if existing_restart != null else Button.new()
 	_place_button(continue_button, summary, "Seguir explorando", Rect2(530, 518, 226, 42), true)
-	_place_button(restart, summary, "Reiniciar fase", Rect2(764, 518, 142, 42), false)
+	_place_button(restart, summary, "Volver a fase 1", Rect2(764, 518, 142, 42), false)
 	if existing_continue == null: continue_button.pressed.connect(func(): continued.emit())
 	if existing_restart == null: restart.pressed.connect(func(): restart_requested.emit())
 	_build_future()
+	factory_nodes = future.get_children()
+	_build_journey()
 	previous_button = Button.new()
 	next_button = Button.new()
 	_place_button(previous_button, self, "‹  Fase anterior", Rect2(93, 540, 174, 30), false)
@@ -81,19 +97,68 @@ func build(existing_continue: Button = null, existing_restart: Button = null) ->
 
 func _build_future() -> void:
 	future = _page("PhaseTwoPage")
-	_label(future, "FASE 2", Rect2(91, 195, 377, 30), 23)
-	_label(future, "Un nuevo capítulo", Rect2(91, 230, 377, 40), 29)
-	future_difficulty = _label(future, "", Rect2(146, 280, 266, 28), 16, GREEN)
-	_label(future, "Tu viaje desde el campo ha terminado. La siguiente etapa de la historia se está preparando.", Rect2(107, 320, 345, 80), 18)
-	var reminder := _label(future, "Tu recorrido de la fase 1 permanece guardado en la página anterior.", Rect2(108, 415, 282, 58), 14)
-	reminder.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.94)))
-	_label(future, "────  PRÓXIMAMENTE  ────", Rect2(530, 197, 376, 28), 19)
-	_image(future, GEAR, Rect2(650, 238, 137, 137))
-	_label(future, "EN CONSTRUCCIÓN", Rect2(548, 385, 340, 33), 23, GREEN)
-	_label(future, "Nuevos lugares e historias\nse están preparando para tu llegada.", Rect2(547, 424, 340, 57), 17)
+	_label(future, "FASE 2 · TECNOLOGÍA Y MECANIZACIÓN", Rect2(83, 194, 388, 25), 14)
+	_label(future, "El corazón de hierro", Rect2(83, 222, 388, 40), 29)
+	future_difficulty = _label(future, "", Rect2(112, 267, 330, 28), 16, GREEN)
+	_label(future, "────  OBJETIVO ACTUAL  ────", Rect2(91, 306, 377, 26), 18)
+	factory_objective = _label(future, "", Rect2(105, 342, 346, 88), 19)
+	factory_balance = _label(future, "", Rect2(109, 443, 340, 87), 15)
+	factory_balance.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.94)))
+	_label(future, "────  CARBÓN · HIERRO · VAPOR  ────", Rect2(522, 170, 390, 28), 16)
+	for index in 4:
+		var pos := Vector2(532 + (index % 2) * 191, 211 + (index / 2) * 133)
+		var card := Panel.new()
+		card.position = pos
+		card.size = Vector2(181, 125)
+		card.add_theme_stylebox_override("panel", _plate(Color(0.94, 0.85, 0.67, 0.85)))
+		future.add_child(card)
+		_label(card, ["Mina", "Fundición", "Motor de Watt", "Telares"][index], Rect2(2, 3, 177, 23), 17)
+		var illustration := AtlasTexture.new()
+		illustration.atlas = FACTORY_ART
+		var cell := Vector2(FACTORY_ART.get_width() / 4.0, FACTORY_ART.get_height() / 3.0)
+		var frame: int = [0, 6, 9, 10][index]
+		illustration.region = Rect2(Vector2(frame % 4, frame / 4) * cell, cell)
+		if frame == 6: illustration.region = Rect2(cell.x * 2.16, cell.y * 1.06, cell.x * 0.74, cell.y * 0.93)
+		_image(card, illustration, Rect2(38, 29, 105, 65))
+		factory_statuses.append(_label(card, "Pendiente", Rect2(5, 98, 171, 22), 14))
 	var close := Button.new()
-	_place_button(close, future, "Cerrar cuaderno", Rect2(556, 513, 322, 43), true)
+	_place_button(close, future, "Volver a la fábrica", Rect2(546, 498, 347, 43), true)
 	close.pressed.connect(func(): continued.emit())
+
+func _build_journey() -> void:
+	journey_page = Control.new()
+	journey_page.size = SPREAD_SIZE
+	journey_page.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	future.add_child(journey_page)
+	_label(journey_page, "FASE 2 · EL CORAZÓN DE HIERRO", Rect2(83, 194, 388, 25), 15)
+	_label(journey_page, "Llegada a Londres", Rect2(83, 224, 388, 40), 29)
+	journey_difficulty = _label(journey_page, "", Rect2(112, 270, 330, 28), 16, GREEN)
+	_label(journey_page, "────  OBJETIVO ACTUAL  ────", Rect2(91, 309, 377, 26), 18)
+	journey_objective = _label(journey_page, "", Rect2(105, 345, 346, 89), 19)
+	journey_objective.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.96)))
+	journey_balance = _label(journey_page, "", Rect2(109, 449, 340, 80), 15)
+	journey_balance.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.96)))
+	_label(journey_page, "────  TU LLEGADA A LA CIUDAD  ────", Rect2(522, 170, 390, 28), 15)
+	var textures: Array[Texture2D] = [preload("res://assets/phase2/london_platform_pixel_v1.png"), preload("res://assets/phase2/london_staff_pixel_v2.png"), preload("res://assets/phase2/london_ticket_hall_pixel_v1.png"), preload("res://assets/phase2/london_street_pixel_v1.png")]
+	for index in 4:
+		var card := Panel.new()
+		card.position = Vector2(532 + (index % 2) * 191, 211 + (index / 2) * 133)
+		card.size = Vector2(181, 125)
+		card.add_theme_stylebox_override("panel", _plate(Color(0.94, 0.85, 0.67, 0.85)))
+		journey_page.add_child(card)
+		_label(card, ["Llegar en tren", "Conocer al guía", "La boletería", "Salir a Londres"][index], Rect2(2, 3, 177, 23), 16)
+		var illustration: Texture2D = textures[index]
+		if index == 1:
+			var atlas := AtlasTexture.new()
+			atlas.atlas = illustration
+			atlas.region = Rect2(0, 0, illustration.get_width() / 2.0, illustration.get_height())
+			illustration = atlas
+		_image(card, illustration, Rect2(11, 29, 159, 65))
+		journey_statuses.append(_label(card, "Por descubrir", Rect2(5, 98, 171, 22), 14))
+	var resume := Button.new()
+	journey_continue = resume
+	_place_button(resume, journey_page, "Continuar la aventura", Rect2(546, 498, 347, 43), true)
+	resume.pressed.connect(func(): continued.emit())
 
 func refresh(report: Dictionary) -> void:
 	wheat_label.text = "Cosechaste %d de trigo" % int(report.get("trigo_recolectado", 0))
@@ -112,6 +177,24 @@ func refresh(report: Dictionary) -> void:
 	stats.text = "%d / 4 puzzles   ·   %02d:%02d   ·   %s" % [completed, seconds / 60, seconds % 60, difficulty]
 	accounts.text = "%d ganadas · %d carreta · %d boleto" % [int(report.get("monedas_harina", 0)), int(report.get("monedas_carretas", 0)), int(report.get("monedas_boleto", 0))]
 	future_difficulty.text = "Dificultad: " + difficulty
+	Factory.ensure()
+	factory_objective.text = Factory.objective()
+	var factory_metrics: Dictionary = GameState.phase_two.metrics
+	factory_balance.text = "%d / 4 talleres · %d / %d oportunidades\nTiempo de trabajo: %02d:%02d\nFardos: %d / 10 · Paradas: %d" % [GameState.phase_two.completed.size(), Factory.remaining(), Factory.total(), int(float(factory_metrics.active_seconds)) / 60, int(float(factory_metrics.active_seconds)) % 60, int(factory_metrics.bales), int(factory_metrics.emergency_stops)]
+	for index in 4:
+		factory_statuses[index].text = "✓ Completado" if Factory.done(Factory.IDS[index]) else ("○ Disponible" if Factory.unlocked(Factory.IDS[index]) else "○ Pendiente")
+		factory_statuses[index].add_theme_color_override("font_color", GREEN if Factory.done(Factory.IDS[index]) else INK)
+	for node in factory_nodes: node.visible = not journey_mode
+	journey_page.visible = journey_mode
+	if journey_mode:
+		journey_difficulty.text = "Dificultad: " + difficulty
+		journey_objective.text = Journey.objective()
+		var state := Journey.ensure()
+		journey_balance.text = "Saldo: %d monedas · Coche: 10 monedas\nConversaciones: %d · Exploración libre" % [GameState.coins, state.talked.size()]
+		var steps := Journey.steps()
+		for index in 4:
+			journey_statuses[index].text = "✓ Descubierto" if steps[index] else "○ Por descubrir"
+			journey_statuses[index].add_theme_color_override("font_color", GREEN if steps[index] else INK)
 
 func enable_navigation() -> void:
 	navigation_enabled = true

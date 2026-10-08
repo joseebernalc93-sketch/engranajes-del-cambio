@@ -7,10 +7,10 @@ static func capture(scene: Node) -> Dictionary:
 	if not is_instance_valid(scene) or scene.scene_file_path.is_empty() or scene.scene_file_path == "res://scenes/ui/main_menu.tscn":
 		return {}
 	var saved := {"scene": scene.scene_file_path}
-	if scene.scene_file_path == GameState.PHASE_TWO_SCENE:
+	if scene.scene_file_path in [GameState.PHASE_TWO_SCENE, GameState.PHASE_TWO_FACTORY]:
 		saved.merge(scene.get_session_state())
 		return saved
-	if scene.scene_file_path == GameState.PHASE_INTRO_SCENE:
+	if scene.scene_file_path in [GameState.PHASE_INTRO_SCENE, GameState.PHASE_TWO_INTRO]:
 		saved["story_index"] = scene.current_index
 		return saved
 	if scene.has_method("_apply_timeline"):
@@ -35,11 +35,13 @@ static func capture(scene: Node) -> Dictionary:
 			continue
 		if popup.has_method("_save_work"): popup._save_work()
 		if popup.has_method("_save_checkpoint"): popup._save_checkpoint()
+		if popup_name in ["LumberPuzzlePopup", "RopePuzzlePopup"]:
+			# Workshops have explicit versioned checkpoints; renderer/input are transient.
+			saved["popup"] = {"name": popup_name, "state": {"workshop_version": 3}}
+			break
 		var state := _properties(popup)
 		if popup.has_method("_sync_workbench"):
 			state["display"] = _properties(popup.workbench)
-		if popup_name == "RopePuzzlePopup":
-			state["display"] = _properties(popup.machine_display)
 		if popup_name in ["MillRepairPopup", "MillOperationPopup"]:
 			state["display"] = _properties(popup.workbench)
 		if popup.get("awaiting_retry") == true:
@@ -49,7 +51,7 @@ static func capture(scene: Node) -> Dictionary:
 	return saved
 
 static func restore(scene: Node, saved: Dictionary) -> void:
-	if scene.scene_file_path == GameState.PHASE_TWO_SCENE:
+	if scene.scene_file_path in [GameState.PHASE_TWO_SCENE, GameState.PHASE_TWO_FACTORY]:
 		scene.restore_session_state(saved)
 		return
 	if saved.has("travel_elapsed") and scene.has_method("_apply_timeline"):
@@ -82,10 +84,17 @@ static func restore(scene: Node, saved: Dictionary) -> void:
 		return
 	var popup_name := str(active.name)
 	var popup := scene.get_node_or_null(NodePath(popup_name))
+	if popup_name == "RopePuzzlePopup" and active.get("state", {}).has("retry_reason"):
+		# Previous sessions kept the error cause in the UI checkpoint instead of rope_progress.
+		GameState.flags["rope_progress"]["retry_reason"] = str(active.state.retry_reason)
 	if popup:
 		popup.open()
 		if not popup.overlay.visible: return
 	if not is_instance_valid(popup):
+		return
+	if popup_name in ["LumberPuzzlePopup", "RopePuzzlePopup"]:
+		popup.player_was_enabled = true
+		popup.restore_notice()
 		return
 	var state: Dictionary = active.get("state", {}).duplicate(true)
 	if popup_name in ["RopePuzzlePopup", "LumberPuzzlePopup", "WheelwrightForgePopup"]:
@@ -96,17 +105,11 @@ static func restore(scene: Node, saved: Dictionary) -> void:
 	# Closing a resumed popup must restore movement, regardless of the old modal.
 	popup.player_was_enabled = true
 	if state.has("display"):
-		var display: Node = popup.machine_display if popup_name == "RopePuzzlePopup" else popup.workbench
+		var display: Node = popup.workbench
 		_apply_properties(display, state.display)
 	match popup_name:
 		"WheelwrightForgePopup":
 			popup._show_stage()
-			popup._sync_workbench()
-		"RopePuzzlePopup":
-			popup._sync_machine()
-			popup._set_step_rail()
-		"LumberPuzzlePopup":
-			popup._update_adjustments()
 			popup._sync_workbench()
 		"MillOperationPopup":
 			popup.gate_slider.set_value_no_signal(popup.gate_opening)

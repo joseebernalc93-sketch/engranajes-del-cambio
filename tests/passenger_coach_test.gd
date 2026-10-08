@@ -41,21 +41,21 @@ func _ready() -> void:
 	GameState.flags.flour_sold = false
 	GameState.add_item("costal_harina")
 	EventBus.dialogue_action_selected.emit("sell_flour")
-	_check(GameState.coins == 13, "The baker must fund both the carriage and the train")
+	_check(GameState.coins == 100, "The baker must fund both the carriage and the train")
 	EventBus.dialogue_action_selected.emit("sell_flour")
-	_check(GameState.coins == 13, "The flour sale must be paid only once")
+	_check(GameState.coins == 100, "The flour sale must be paid only once")
 	depot.get_node("World/Ramon").interact()
 	_check(dialogue.options[0].action == "take_passenger_coach", "Ramón must offer the paid carriage trip")
 	depot.get_node("HUD")._select_dialogue_action("close")
-	_check(GameState.coins == 13 and not GameState.flags.coach_fare_paid, "Cancelling must not charge the fare")
+	_check(GameState.coins == 100 and not GameState.flags.coach_fare_paid, "Cancelling must not charge the fare")
 	await _walk_to(player, Vector2(510, 455))
 	depot.get_node("HUD").toast.visible = false
 	await _capture("passenger_depot")
 	depot.get_node("World/Ramon").interact()
 	depot.get_node("HUD")._select_dialogue_action("take_passenger_coach")
 	var voyage := await _wait_map("res://scenes/coach_travel.tscn")
-	_check(GameState.coins == 10 and GameState.flags.coach_fare_paid and GameState.metrics.coach_fares_paid == 3, "Booking must charge exactly 3 coins and reserve 10 for the train")
-	_check(not GameState.book_passenger_coach("res://scenes/station.tscn") and GameState.coins == 10, "Repeated booking callbacks must not charge twice")
+	_check(GameState.coins == 97 and GameState.flags.coach_fare_paid and GameState.metrics.coach_fares_paid == 3, "Booking must charge exactly 3 coins and reserve 10 for the train")
+	_check(not GameState.book_passenger_coach("res://scenes/station.tscn") and GameState.coins == 97, "Repeated booking callbacks must not charge twice")
 	await _preview_voyage(voyage)
 	var exterior := await _wait_map("res://scenes/station.tscn")
 	player = _player(exterior)
@@ -80,7 +80,7 @@ func _ready() -> void:
 	_check(player.nearest_interactable == hall.get_node("World/TicketClerk"), "The preserved ticket office must be reachable")
 	hall.get_node("World/TicketClerk").interact()
 	hall.get_node("HUD")._select_dialogue_action("buy_ticket")
-	_check(GameState.coins == 0 and GameState.has_item("boleto"), "The remaining 10 coins must buy the train ticket")
+	_check(GameState.coins == 87 and GameState.has_item("boleto"), "The remaining 10 coins must buy the train ticket")
 	await _walk_to(player, Vector2(600, 355))
 	await _walk_to(player, Vector2(576, 325))
 	await _settle()
@@ -103,9 +103,9 @@ func _ready() -> void:
 	await _preview_voyage(voyage)
 	depot = await _wait_map("res://scenes/carriage_depot.tscn")
 	player = _player(depot)
-	_check(player.position == Vector2(550, 465) and player.controls_enabled and GameState.coins == 0, "The included return must be free and spawn safely by the coachman")
+	_check(player.position == Vector2(550, 465) and player.controls_enabled and GameState.coins == 87, "The included return must be free and spawn safely by the coachman")
 	_check(GameState.metrics.passenger_coach_trips == 2 and GameState.metrics.coach_fares_paid == 3, "A return must not duplicate the fare")
-	_check(GameState.load_progress() and GameState.flags.coach_fare_paid and GameState.coins == 0, "The paid coach fare and remaining balance must survive save/load")
+	_check(GameState.load_progress() and GameState.flags.coach_fare_paid and GameState.coins == 87, "The paid coach fare and remaining balance must survive save/load")
 	await _walk_to(player, Vector2(450, 480))
 	await _walk_to(player, Vector2(90, 480))
 	for _tick in range(20):
@@ -118,7 +118,7 @@ func _ready() -> void:
 	await _test_legacy_save()
 	_restore_files()
 	if failures.is_empty():
-		print("PASSENGER COACH TEST OK: village/depot route, insufficient funds, cancellation, one 3-coin fare, 13-coin flour payment, animated departure/road/arrival/disembarking, real train exterior/interior/platform, affordable train ticket, included return, save/load and legacy migration")
+		print("PASSENGER COACH TEST OK: village/depot route, insufficient funds, cancellation, one 3-coin fare, 100-coin flour payment, animated departure/road/arrival/disembarking, real train exterior/interior/platform, affordable train ticket, included return, save/load and legacy migration")
 	get_tree().quit(0 if failures.is_empty() else 1)
 
 
@@ -181,16 +181,16 @@ func _test_legacy_save() -> void:
 	var file := FileAccess.open(GameState.SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(legacy))
 	file.close()
-	_check(GameState.load_progress() and GameState.coins == 13, "An old ten-coin flour sale must receive the missing coach fare")
+	_check(GameState.load_progress() and GameState.coins == 100, "An old ten-coin flour sale must receive the missing coach fare")
 	_check(GameState.flags.cart_mission_completed and GameState.flags.mill_repaired and GameState.flags.mill_plank_installed, "The save migration must preserve existing puzzle completion and installed pieces")
-	_check(GameState.load_progress() and GameState.coins == 13, "Loading a migrated save again must not duplicate the allowance")
+	_check(GameState.load_progress() and GameState.coins == 100, "Loading a migrated save again must not duplicate the allowance")
 	legacy.flags.ticket_bought = true
 	legacy.coins = 0
 	legacy.inventory = {"boleto": 1}
 	file = FileAccess.open(GameState.SAVE_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(legacy))
 	file.close()
-	_check(GameState.load_progress() and GameState.flags.coach_fare_paid and GameState.flags.coach_station_reached and GameState.coins == 0, "Old saves with a train ticket must remain able to finish without paying a new fare")
+	_check(GameState.load_progress() and GameState.flags.coach_fare_paid and GameState.flags.coach_station_reached and GameState.coins == 87, "Old saves with a train ticket must remain able to finish without paying a new fare")
 
 
 func _complete_prior_work() -> void:

@@ -1,0 +1,55 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "name": "intro_01",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Steam train stopping inside a monumental soot-blackened brick railway station, young country worker wearing straw hat and suspenders stepping onto platform, vast smoky city chimneys beyond glass roof. Narrative wide cinematic composition."
+    },
+    {
+      "name": "intro_02",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Entrance to red brick textile factory beside canal, workers arriving through gate, stern foreman in dark waistcoat holding pocket watch, country worker with straw hat in foreground. Narrative wide composition."
+    },
+    {
+      "name": "intro_03",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Silent historical steam engine hall, massive cast iron beam engine with broken connecting rod, empty coal bunker, motionless overhead leather belts, foreman explaining problem to young worker, slanting dusty window light."
+    },
+    {
+      "name": "intro_04",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Young country worker with straw hat facing an industrial campus by canal, coherent progression of coal mine, glowing forge, beam engine house and textile mill, optimistic golden light through smoke, challenging new beginning."
+    },
+    {
+      "name": "hub",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Top-down three-quarter 2D RPG industrial campus beside canal. Four distinct accessible brick workshops across upper half: mine headframe far left, orange-lit foundry left center, tall beam engine house right center, textile weaving mill far right. Spacious EMPTY cobblestone walkway lower half for player movement. Canal along bottom with moored narrowboat. Readable doorways. No people."
+    },
+    {
+      "name": "mine",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Underground coal mine tunnel workbench stage. Timber pit props, dark glossy coal seams on back wall, iron rails floor, ventilation gate on left, wooden vertical hoist frame right. Central work area EMPTY for interactive lamp rocks and sieve overlays. No people."
+    },
+    {
+      "name": "forge",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Nineteenth century reverberatory puddling foundry. Left brick separate combustion firebox orange glow and coal bunker, center low arched brick reverberatory furnace, right massive steam forging hammer and anvil, quenching trough on foreground. Leave center foreground work area empty for animated tools. No people."
+    },
+    {
+      "name": "engine",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Nineteenth century Watt double-acting beam engine hall. Tall brick windows, massive overhead horizontal rocking beam, iron flywheel at right, cylinder housing left and separate condenser vessel lower left. Empty open central bench space for interactive parts. Copper pipes and rivets. No people."
+    },
+    {
+      "name": "textile",
+      "prompt": "Use case: historical-scene. Production background for educational 2D pixel art game Engranajes del Cambio, nineteenth-century British industrial revolution. Premium detailed hand-crafted pixel art, crisp visible pixels, restrained warm brass ochre and soot charcoal palette, atmospheric warm lighting, landscape 16:9. NO text, NO letters, NO UI, NO modern technology. Nineteenth century textile weaving hall, four distinct mechanical wooden Cartwright looms side by side in foreground, overhead continuous iron line shaft and brass pulleys along top, leather belts routes clear, steam boiler at far left background, cotton bobbins, red brick tall windows. No people."
+    },
+    {
+      "name": "tools",
+      "prompt": "Use case: stylized-concept. Production sprite atlas for premium 19th century industrial revolution educational pixel art game. Transparent background true alpha. A precise 4 columns by 3 rows grid, twelve isolated objects each centered strictly within its own equal-size cell with generous margins; no shadows crossing cells, no labels, no text, no outlines of cells. Row1 left to right: ornate brass Davy safety lamp, wooden handled iron pickaxe, shiny black coal chunk, wooden ventilation shutter. Row2: long steel puddling rabble rod, heavy blacksmith tongs holding incandescent yellow iron bloom, forged iron connecting rod, brass piston with vertical rod. Row3: copper elbow pipe with flange, centrifugal governor assembly with two brass balls, wooden cotton weaving shuttle with white thread, bound finished beige cotton cloth bale. Rich detailed crisp hand placed pixel art, brass highlights, dark metal outlines, warm wood grain, consistent three-quarter perspective, no vector flat shapes, no modern technology."
+    },
+    {
+      "name": "mechanisms",
+      "prompt": "Use case: stylized-concept. Transparent pixel art sprite atlas for a professional 19th century industrial revolution 2D educational game. Exactly 4 columns by 2 rows, eight isolated tools, each entirely contained in its own equal-size cell with 10% transparent margin. No labels, no text, no modern materials. Top row left to right: wooden leather blacksmith hand bellows; oak horizontal drum hand winch with iron crank handle and rope; rectangular wooden wire-mesh coal sorting sieve; tall iron steam forging hammer on heavy anvil. Bottom row left to right: black steel external spring caliper with two curved legs; glowing irregular raw iron bloom; brass eccentric crank and three linked iron parallel-motion arms; rolled flat brown leather transmission belt. Crisp detailed premium pixel art, aged brass, riveted steel, warm wood, consistent three-quarter perspective. Genuine alpha transparency background."
+    },
+    {
+      "name": "textile_setup",
+      "intent": "edit",
+      "target": "assets/phase2/textile_pixel_v1.png",
+      "prompt": "Edit target: existing textile mill background. Preserve exactly the same composition, architecture, camera, windows, four loom locations, pixel art style, lighting and dimensions. Remove ONLY the long vertical/diagonal leather drive belts running from the upper line shaft to all four looms. Keep pulleys, overhead iron shaft and looms intact; fill the narrow removed belt areas with the brick/window/background behind them. This is the unconnected setup state for a game where belts are added interactively. No new text, no UI, no other changes."
+    }
+  ]
+}

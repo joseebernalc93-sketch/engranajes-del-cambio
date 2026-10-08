@@ -1,345 +1,402 @@
 extends Node
-## Exercise the six phases through native controls in both difficulty profiles.
-var backups := {}
-var popup: Node
-var hud: Node
-var capture := false
-var green_windows := {}
+## Public controls, fixed simulation steps, versioned saves and both difficulty profiles.
+const State = preload("res://scripts/ui/lumber_work_state.gd")
+var backups: Dictionary = {}
+var popup: CanvasLayer
+var hud: CanvasLayer
+var capture: bool = false
+var prefix: String = ""
+var checks: int = 0
+var failed: bool = false
 
 func _ready() -> void:
+	assert(str(ProjectSettings.get_setting("application/config/name")).contains("Validation"), "Run in the isolated validation project, never with player saves.")
 	for path in [GameState.SAVE_PATH, GameState.REPORT_PATH]:
 		backups[path] = FileAccess.get_file_as_bytes(path) if FileAccess.file_exists(path) else null
 	capture = capture or "--capture-lumber" in OS.get_cmdline_user_args()
-	var island = preload("res://scenes/wood_island.tscn").instantiate()
+	if "--read-bruno" in OS.get_cmdline_user_args():
+		_read_checkpoint()
+		return
+	var island := preload("res://scenes/wood_island.tscn").instantiate()
 	add_child(island)
 	await get_tree().process_frame
-	assert(island.get_node_or_null("World/Bruno"))
-	assert(island.get_node_or_null("World/BoatToLakeDock"))
 	popup = island.get_node("LumberPuzzlePopup")
 	hud = island.get_node("HUD")
-	# Deterministic tool stepping; real timers still drive guarded phase transitions.
-	popup.set_process(false)
-	for mode in [GameState.DIFFICULTY_HARD, GameState.DIFFICULTY_EASY]:
+	popup.set_physics_process(false)
+	_solvable_boards()
+	_frame_rates()
+	for mode in [GameState.DIFFICULTY_EASY, GameState.DIFFICULTY_HARD]:
 		await _round(mode)
-		await _exhaustion(mode)
-	await _cancelled_transition()
-	# A difficulty change retains spent attempts rather than granting a fresh pool.
+		_exhaustion(mode)
+	await _small_window()
+	_migrate_checkpoint()
 	GameState.reset_progress(false)
 	GameState.set_difficulty(GameState.DIFFICULTY_EASY)
-	GameState.flags["lumber_attempts_spent"] = 9
+	GameState.flags.lumber_attempts_spent = 9
 	GameState.set_difficulty(GameState.DIFFICULTY_HARD)
-	assert(GameState.get_lumber_attempts_left() == 1)
-	GameState.set_difficulty(GameState.DIFFICULTY_EASY)
-	assert(GameState.get_lumber_attempts_left() == 6)
-	for path in backups:
-		if backups[path] != null:
-			FileAccess.open(path, FileAccess.WRITE).store_buffer(backups[path])
-		elif FileAccess.file_exists(path):
-			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
-	print("LUMBER SIX PHASES OK: both profiles, native tools, persistence, budgets, recovery, unique reward and mill installation")
+	_check(GameState.get_lumber_attempts_left() == 1, "Difficulty changes retain spent opportunities")
+	if "--write-bruno" in OS.get_cmdline_user_args():
+		_write_checkpoint()
+		return
+	_restore_files()
+	if failed:
+		get_tree().quit(1)
+		return
+	print("LUMBER SIX PHASES OK: ", checks, " checks; easy/hard, touch/keyboard, geometry, friction, pause, checkpoint, exhaustion, unique reward and installation")
 	get_tree().quit()
 
+func _solvable_boards() -> void:
+	for seed_value in range(1, 101):
+		var state := State.new()
+		state.initialize(true, seed_value)
+		var valid := false
+		for x in range(341):
+			state.template_x = x
+			if state.template_safe():
+				valid = true
+				break
+		_check(valid, "Every generated board has a usable span")
 
 func _round(mode: String) -> void:
 	GameState.reset_progress(false)
 	GameState.set_difficulty(mode)
-	var budget := 15 if mode == GameState.DIFFICULTY_EASY else 10
-	var prefix := "facil" if budget == 15 else "dificil"
-	var dialogue := {}
-	EventBus.dialogue_requested.connect(func(payload: Dictionary): dialogue.merge(payload), CONNECT_ONE_SHOT)
-	GameState.interact("lumberjack")
-	assert(dialogue.get("speaker", "").contains("Bruno"))
-	hud._select_dialogue_action("open_lumber_puzzle")
-	assert(popup.overlay.visible and popup.stage == popup.STAGE_INSPECT)
-	assert(not get_tree().get_first_node_in_group("player").controls_enabled)
-	assert(GameState.get_lumber_attempts_left() == budget)
-	assert(popup.workshop_texture.texture.resource_path.ends_with("bruno_workshop_backdrop_v2.png"))
-	await _shot(prefix + "_01_veta")
-	_click_workbench(Vector2(290, 90))
-	await _shot(prefix + "_08_error_veta")
-	assert(popup.workbench.inspected[1] and popup.stage == popup.STAGE_INSPECT)
-	assert(GameState.get_lumber_attempts_left() == budget - 1)
-	_continue_after_error()
-	popup.straight_grain.pressed.emit()
-	await get_tree().create_timer(0.8).timeout
-	assert(popup.stage == popup.STAGE_MEASURE)
-	# Confirming an incorrect measurement costs one; clicking another chalk target does not.
-	popup.marking_meter.value = 0.5
-	popup.mark_button.pressed.emit()
-	await _shot(prefix + "_09_error_medicion")
-	assert(GameState.get_lumber_attempts_left() == budget - 2)
-	_continue_after_error()
-	popup.length_slider.value = 160
-	popup.angle_slider.value = 90
-	_click_workbench(Vector2(550, 78))
-	assert(GameState.get_lumber_attempts_left() == budget - 2)
-	_continue_after_error()
-	popup.marking_meter.value = 0.5
-	_click_workbench(Vector2(90, 78))
-	assert(popup.marked_lines == 1)
-	popup.close()
-	assert(GameState.load_progress())
 	popup.open()
-	assert(popup.stage == popup.STAGE_MEASURE and popup.marked_lines == 1)
-	assert(popup.length_slider.value == 160 and popup.angle_slider.value == 90)
-	assert(GameState.get_lumber_attempts_left() == budget - 2)
-	_continue_after_error()
-	# Measure the real moving needle's first safe interval: Easy takes > 3x as long.
-	popup.work_clock = 0
-	var ticks := 0
-	while popup.marking_meter.value <= popup.marking_meter.high and ticks < 500:
-		popup._process(0.01)
-		ticks += 1
-	assert(ticks > (70 if budget == 15 else 5))
-	green_windows[mode] = ticks
-	if budget == 15:
-		assert(ticks > int(green_windows[GameState.DIFFICULTY_HARD]) * 3)
-	await _shot(prefix + "_02_medicion")
-	popup.marking_meter.value = 1
-	popup.mark_button.pressed.emit()
-	assert(popup.marked_lines == 1 and GameState.get_lumber_attempts_left() == budget - 3)
-	_continue_after_error()
-	popup.marking_meter.value = 0.5
-	_key(KEY_SPACE, true)
-	_key(KEY_SPACE, false)
-	assert(popup.marked_lines == 2)
-	popup.marking_meter.value = 0.5
-	_click_workbench(Vector2(550, 78))
-	await get_tree().create_timer(0.8).timeout
-	assert(popup.stage == popup.STAGE_SECURE)
-	popup.stability_test.pressed.emit()
-	assert(GameState.get_lumber_attempts_left() == budget - 4)
-	_continue_after_error()
-	for point in popup.workbench.FIX_POINTS:
-		_click_workbench(point)
-	assert(popup.setup_parts == 3)
-	popup.clamp_slider.value = 60
-	await _shot(prefix + "_03_fijacion")
-	popup.stability_test.pressed.emit()
-	await get_tree().create_timer(0.8).timeout
-	assert(popup.stage == popup.STAGE_SAW)
-	popup._complete_saw_stroke(false)
-	assert(GameState.get_lumber_attempts_left() == budget - 5 and popup.saw_successes == 0)
-	_continue_after_error()
-	var grip_y: float = popup.saw_sprite.position.y - popup.saw_drag_area.position.y
-	popup._begin_saw_stroke(Vector2(308, grip_y))
-	popup._move_saw(Vector2(393, grip_y))
-	popup._move_saw(Vector2(478, grip_y))
-	assert(popup.saw_successes == 1)
-	# Focus loss cancels only an unfinished gesture without charging an attempt.
-	popup._begin_saw_stroke(Vector2(666, 60))
-	popup._move_saw(Vector2(630, 60))
-	popup._notification(NOTIFICATION_APPLICATION_FOCUS_OUT)
-	assert(not popup.dragging_saw and popup.saw_successes == 1)
-	assert(GameState.get_lumber_attempts_left() == budget - 5)
-	_continue_after_error()
-	popup.close()
-	popup.open()
-	assert(popup.stage == popup.STAGE_SAW and popup.saw_successes == 1)
-	assert(is_equal_approx(popup.cut_groove.size.y, 16))
-	await _shot(prefix + "_04_serrar")
-	for cut in range(1, 5):
-		var key := KEY_RIGHT if popup.saw_expected_edge == 1 else KEY_LEFT
-		_key(key, true)
-		for tick in 55:
-			popup._process(0.04)
-		_key(key, false)
-		assert(popup.saw_successes == cut + 1)
-	await get_tree().create_timer(1.2).timeout
-	assert(popup.stage == popup.STAGE_PLANE)
-	popup._complete_planing_pass(false)
-	assert(GameState.get_lumber_attempts_left() == budget - 6)
-	_continue_after_error()
-	popup.depth_slider.value = 50
-	# Touch reversals are rejected without discarding completed lanes.
-	var touch := InputEventScreenTouch.new()
-	touch.pressed = true
-	touch.position = Vector2(48, 26)
-	popup._on_plane_drag_input(touch)
-	var drag := InputEventScreenDrag.new()
-	for x in [200, 140, 472]:
-		drag.position = Vector2(x, 26)
-		popup._on_plane_drag_input(drag)
-	assert(popup.planing_passes == 0 and GameState.get_lumber_attempts_left() == budget - 7)
-	_continue_after_error()
-	# Pointer-held accessible control and Space both drive the real plane tool.
-	popup._hold_plane()
-	for tick in 85:
-		popup._process(0.04)
-	popup._release_plane()
-	assert(popup.planing_passes == 1 and popup.planed_strips[0].size.x == 490)
-	popup.close()
-	popup.open()
-	assert(popup.stage == popup.STAGE_PLANE and popup.planing_passes == 1)
-	assert(popup.depth_slider.value == 50 and popup.planed_strips[0].size.x == 490)
-	await _shot(prefix + "_05_cepillar")
-	for lane in range(1, 4):
-		_key(KEY_SPACE, true)
-		for tick in 85:
-			popup._process(0.04)
-		_key(KEY_SPACE, false)
-		assert(popup.planing_passes == lane + 1)
-	await get_tree().create_timer(0.8).timeout
-	assert(popup.stage == popup.STAGE_TEST)
-	popup.sack_three.pressed.emit()
-	assert(popup.load_sacks == 0)
-	var sack_drag := {"kind": "lumber_sack", "index": 0, "session": popup.session_id}
-	assert(not popup.workbench._can_drop_data(Vector2(50, 50), sack_drag))
-	sack_drag.session -= 1
-	assert(not popup.workbench._can_drop_data(Vector2(210, 95), sack_drag))
-	sack_drag.session = popup.session_id
-	assert(popup.workbench._can_drop_data(Vector2(210, 95), sack_drag))
-	popup.workbench._drop_data(Vector2(210, 95), sack_drag)
-	assert(popup.load_sacks == 1 and popup.action_locked)
-	popup.brace_slider.value = 0
-	for tick in 110:
-		popup._process(0.05)
-	assert(popup.verified_loads == 0 and popup.load_sacks == 0)
-	assert(GameState.get_lumber_attempts_left() == budget - 8)
-	_continue_after_error()
-	for index in 3:
-		popup.brace_slider.value = [42, 58, 72][index]
-		[popup.sack_one, popup.sack_two, popup.sack_three][index].pressed.emit()
-		popup._complete_lumber_puzzle()
-		assert(not GameState.has_item("tabla"))
+	var budget := GameState.get_lumber_opportunities()
+	prefix = "facil" if budget == 15 else "dificil"
+	_check(popup.stage == State.Stage.INSPECT and budget in [10, 15], "Correct opening profile")
+	_check(_count_sliders(popup) == 0, "No generic sliders remain in the puzzle")
+	# A confirmed structural defect costs once; merely moving over it costs nothing.
+	popup.model.template_x = clampf(float(popup.model.defects[0].x) - 120, 0, 340)
+	_check(not popup.model.template_safe(), "Defect intersects template")
+	popup._confirm()
+	await _shot("01_revision")
+	_review(State.Stage.INSPECT, budget - 1)
+	var chosen := _clean_span()
+	popup.workbench.set_tool("template")
+	_touch(Vector2(100, 215), true)
+	_drag(Vector2(100 + chosen - popup.model.template_x, 215))
+	_touch(Vector2(100 + chosen, 215), false)
+	_check(popup.model.template_safe(), "Touch moves template to valid span")
+	popup.workbench.set_tool("lens")
+	_mouse(Vector2(230, 215), true)
+	var motion := InputEventMouseMotion.new()
+	motion.position = Vector2(380, 220) * popup.workbench.size / Vector2(800, 420)
+	popup.workbench._gui_input(motion)
+	_mouse(Vector2(380, 220), false)
+	_check(popup.model.lens_position == Vector2(380, 220), "Lens follows mouse; tools also support touch")
+	await _shot("02_inspeccion")
+	popup._confirm()
+	_check(popup.stage == State.Stage.MEASURE, "Inspection advances")
+	# Drag the actual stop and rotating square; there is no numerical menu.
+	popup.workbench.set_tool("rule")
+	_touch(Vector2(444, 147), true)
+	_drag(Vector2(568, 147))
+	_touch(Vector2(568, 147), false)
+	popup.workbench.set_tool("square")
+	_touch(Vector2(568, 105), true)
+	_drag(Vector2(568, 104))
+	_touch(Vector2(568, 104), false)
+	_check(is_equal_approx(popup.model.length_cm, 160) and is_equal_approx(popup.model.square_angle, 90), "Diegetic measuring tools")
+	popup.workbench.set_tool("scribe")
+	_touch(Vector2(98, 184), true)
+	_step(0.1)
+	_drag(Vector2(118, 216))
+	_touch(Vector2(118, 216), false)
+	_review(State.Stage.MEASURE, budget - 2)
+	popup.workbench.set_tool("scribe")
+	_key_stroke(1.6)
+	_check(popup.model.marked_lines == 1, "First incision preserved")
+	_checkpoint()
+	_check(popup.stage == State.Stage.MEASURE and popup.model.marked_lines == 1, "Incision and measuring tools recover")
+	await _shot("03_trazado")
+	popup.workbench.set_tool("scribe")
+	_key_stroke(1.6)
+	_check(popup.stage == State.Stage.SECURE, "Both incisions complete")
+	popup._confirm()
+	_review(State.Stage.SECURE, budget - 3)
+	popup.workbench.set_tool("wedge0")
+	_touch(Vector2(150, 360), true)
+	_drag(Vector2(150, 282))
+	_touch(Vector2(150, 282), false)
+	_check(popup.model.wedge_inserted[0], "Wood wedge is dragged into its slot before hammering")
+	for wedge in 3:
+		popup.workbench.set_tool("wedge%d" % wedge)
+		for hit in (3 if popup.model.wedge_inserted[wedge] else 4):
+			_step(0.3)
+			_key(KEY_SPACE, true)
+			_key(KEY_SPACE, false)
+	_check(popup.model.wedge_hits == [3, 3, 3], "Three wedges seated through rhythmic keyboard input")
+	popup.workbench.set_tool("vice")
+	# A clockwise arc increases jaw pressure; arrows finish the adjustment.
+	var previous: float = popup.model.pressure
+	_touch(Vector2(752, 295), true)
+	_drag(Vector2(718, 329))
+	_touch(Vector2(718, 329), false)
+	_check(popup.model.pressure > previous, "Clockwise crank increases pressure")
+	popup.model.pressure = 0.60
+	await _shot("04_fijacion")
+	popup._confirm()
+	_check(popup.stage == State.Stage.SAW, "Rigid board advances")
+	# Rapid stroke binding and partial cancellation are independent of the render FPS.
+	popup.workbench.set_tool("saw")
+	_touch(Vector2(466, 202), true)
+	_step(0.1)
+	_drag(Vector2(636, 202))
+	_touch(Vector2(636, 202), false)
+	_review(State.Stage.SAW, budget - 4)
+	for index in 5:
+		popup.workbench.set_tool("saw")
+		_key_stroke(1.65 if budget == 15 else 1.15)
+		_check(popup.model.cuts == index + 1, "Uniform alternating saw stroke")
 		if index == 1:
-			await get_tree().create_timer(0.7).timeout
-			popup._process(0.1)
-			await _shot(prefix + "_06_carga")
-		for tick in 90:
-			# Adjust the support to compensate for the actual oscillating load.
-			popup.brace_slider.value = [42, 58, 72][index] - sin((popup.work_clock + 0.05 * GameState.get_forge_indicator_speed()) * 2.4) * 7
-			popup._process(0.05)
-		assert(popup.verified_loads == index + 1)
-		if index == 0:
-			popup.close()
-			popup.open()
-			assert(popup.stage == popup.STAGE_TEST and popup.verified_loads == 1)
-			assert(popup.sack_one.disabled and not popup.sack_two.disabled)
-			popup.brace_slider.value = 0
-			popup.sack_two.pressed.emit()
-			for tick in 110:
-				popup._process(0.05)
-			assert(popup.verified_loads == 1 and popup.load_sacks == 1)
-			assert(popup.sack_one.disabled and not popup.sack_two.disabled)
-			assert(GameState.get_lumber_attempts_left() == budget - 9)
-			_continue_after_error()
-	await get_tree().create_timer(0.9).timeout
-	assert(popup.stage == popup.STAGE_COMPLETE)
-	assert(GameState.has_item("tabla") and GameState.flags.get("lumber_puzzle_completed", false))
-	assert(int(GameState.metrics.get("saw_successes", 0)) == 5)
-	assert(int(GameState.metrics.get("planing_passes", 0)) == 4)
-	assert(int(GameState.metrics.get("lumber_load_sacks", 0)) == 3)
-	assert(GameState.build_report().oportunidades_carpinteria == budget - 9)
-	assert(GameState.get_rope_attempts_left() == budget and int(GameState.flags.forge_attempts_left) == budget)
-	await _shot(prefix + "_07_terminada")
-	assert(not GameState.complete_lumber_puzzle())
-	assert(GameState.install_mill_part("tabla"))
-	assert(not GameState.has_item("tabla") and GameState.flags.get("mill_plank_installed", false))
+			_checkpoint()
+			await _shot("05_serrado")
+	_check(popup.stage == State.Stage.PLANE, "Five strokes separate offcut")
+	_check(popup.workbench.offcut_released, "Offcut is released to 2D physics")
+	popup.model.blade_depth = 0.95
+	popup.workbench.set_tool("plane")
+	_touch(Vector2(72, 196), true)
+	_step(0.1)
+	_drag(Vector2(100, 196))
+	_touch(Vector2(100, 196), false)
+	_review(State.Stage.PLANE, budget - 5)
+	popup.model.blade_depth = 0.10
+	popup.workbench.set_tool("plane")
+	_key_stroke(3)
+	_check(popup.model.passes == 0 and GameState.get_lumber_attempts_left() == budget - 5, "Retracted blade slips without damage or penalty")
+	popup.model.blade_depth = 0.5
+	for lane in 4:
+		popup.workbench.set_tool("plane")
+		_key_stroke(2.85 if budget == 15 else 1.95)
+		_check(popup.model.passes == lane + 1, "Each band planes once")
+		if lane == 1:
+			_checkpoint()
+			await _shot("06_cepillado")
+	_check(popup.stage == State.Stage.LOAD, "Four bands complete")
+	popup.model.counterforce = 0
+	popup.model.place_sack()
+	_step(5.0)
+	_review(State.Stage.LOAD, budget - 6)
+	_check(popup.model.verified_loads == 0 and not popup.model.load_active, "Failed sack can be retried")
+	for index in 3:
+		popup.model.counterforce = State.LOAD_TARGETS[index]
+		popup.workbench.set_tool("sack")
+		_touch(Vector2(338, 110), true)
+		_drag(Vector2(320, 190))
+		_touch(Vector2(320, 190), false)
+		_check(popup.model.load_active, "Sack drops on the central support")
+		if index == 1:
+			_step(0.2)
+			var saved_clock: float = popup.model.clock
+			popup._notification(NOTIFICATION_APPLICATION_FOCUS_OUT)
+			_step(8)
+			_check(popup.model.clock == saved_clock, "Focus loss freezes all work without penalty")
+			popup._notification(NOTIFICATION_APPLICATION_FOCUS_IN)
+			_checkpoint()
+			_check(popup.model.load_active and popup.model.verified_loads == 1, "Active load and validated sack survive closing")
+			await _shot("07_flexion")
+		_balance_load(2.0)
+		_check(popup.model.verified_loads == index + 1, "Load held within elastic tolerance")
+	_check(popup.stage == State.Stage.COMPLETE and GameState.has_item("tabla"), "Six stages award the board")
+	_check(GameState.metrics.saw_successes == 5 and GameState.metrics.planing_passes == 4 and GameState.metrics.lumber_load_sacks == 3, "Recorded work matches actual operations")
+	_check(not GameState.complete_lumber_puzzle(), "Reward cannot be duplicated")
+	await _shot("08_terminada")
+	_check(GameState.install_mill_part("tabla"), "Board installs in the mill")
+	_check(not GameState.has_item("tabla") and GameState.flags.mill_plank_installed, "Installation consumes the board once")
 	popup.close()
-	assert(get_tree().get_first_node_in_group("player").controls_enabled)
 	print("LUMBER PROFILE OK: ", mode)
 
+func _review(expected_stage: int, remaining: int) -> void:
+	_check(popup.awaiting_retry and popup.retry_notice.visible, "Technical review opens")
+	_check(popup.stage == expected_stage and GameState.get_lumber_attempts_left() == remaining, "Only one opportunity consumed; stage retained")
+	var before: float = popup.model.clock
+	_step(30)
+	popup._register_mistake("duplicate")
+	_check(popup.model.clock == before and GameState.get_lumber_attempts_left() == remaining, "Review pauses simulation and guards duplicate penalties")
+	var board: Array = popup.model.defects.duplicate(true)
+	popup.close()
+	popup.open()
+	_check(popup.awaiting_retry and popup.model.defects == board, "Review and board layout persist")
+	_key(KEY_SPACE, true)
+	_key(KEY_SPACE, false)
+	_check(not popup.awaiting_retry and not popup.model.tool_active, "Continue dismisses notice without starting a tool")
 
 func _exhaustion(mode: String) -> void:
 	GameState.reset_progress(false)
 	GameState.set_difficulty(mode)
 	popup.open()
-	var budget := GameState.get_lumber_opportunities()
-	var dialogue := {}
-	EventBus.dialogue_requested.connect(func(payload: Dictionary): dialogue.merge(payload), CONNECT_ONE_SHOT)
-	for attempt in budget:
-		popup.radial_crack.pressed.emit()
-		assert(GameState.get_lumber_attempts_left() == budget - attempt - 1)
-		_continue_after_error()
-	assert(not popup.overlay.visible)
-	assert(dialogue.get("speaker", "").contains("Bruno"))
-	assert(str(dialogue).contains("no te rindas"))
+	for attempt in GameState.get_lumber_opportunities():
+		popup.model.template_x = clampf(float(popup.model.defects[0].x) - 120, 0, 340)
+		popup._confirm()
+		if popup.awaiting_retry: popup._continue_current_phase()
+	_check(not popup.overlay.visible and GameState.get_lumber_attempts_left() == 0, "Exhaustion exits the puzzle")
 	popup.open()
-	assert(not popup.overlay.visible)
+	_check(not popup.overlay.visible, "No attempt without a new round")
 	hud._select_dialogue_action("restart_lumber_round")
-	assert(popup.overlay.visible and popup.stage == popup.STAGE_INSPECT)
-	assert(GameState.get_lumber_attempts_left() == budget)
+	_check(popup.overlay.visible and popup.stage == State.Stage.INSPECT and GameState.get_lumber_attempts_left() == GameState.get_lumber_opportunities(), "Bruno permits a fresh round")
 	popup.close()
-	# Exhaust the last remaining attempt in a later phase, retaining finished work.
-	GameState.flags.lumber_attempts_spent = budget - 1
-	GameState.flags.lumber_progress = {"stage": popup.STAGE_PLANE, "selected": true, "marked_lines": 3, "fixations": [true, true, true], "secured": true, "cuts": 5, "passes": 2}
+	# Failure late in a phase preserves its completed bands, even at exhaustion.
+	GameState.flags.lumber_attempts_spent = GameState.get_lumber_opportunities() - 2
+	GameState.flags.lumber_progress = {"version": 2, "stage": 4, "cuts": 5, "passes": 2, "depth": 0.95}
 	popup.open()
-	assert(popup.stage == popup.STAGE_PLANE and popup.planing_passes == 2)
-	popup._complete_planing_pass(false)
-	assert(not popup.overlay.visible and GameState.get_lumber_attempts_left() == 0)
-	assert(GameState.flags.lumber_progress.passes == 2)
+	for attempt in 2:
+		popup.model.blade_depth = 0.95
+		popup.workbench.set_tool("plane")
+		var y: float = popup.model.lane_y()
+		_touch(Vector2(72, y), true)
+		_step(0.1)
+		_drag(Vector2(100, y))
+		_touch(Vector2(100, y), false)
+		if attempt == 0: _review(State.Stage.PLANE, 1)
+	_check(not popup.overlay.visible and GameState.flags.lumber_progress.passes == 2, "Late exhaustion preserves completed bands until a new round is chosen")
 	hud._select_dialogue_action("restart_lumber_round")
-	assert(popup.overlay.visible and popup.stage == popup.STAGE_INSPECT)
+	_check(popup.stage == State.Stage.INSPECT, "New round discards only the exhausted piece")
 	popup.close()
 
-
-func _cancelled_transition() -> void:
+func _migrate_checkpoint() -> void:
 	GameState.reset_progress(false)
+	GameState.flags.lumber_progress = {"stage": 4, "selected": true, "marked_lines": 3, "fixations": [true, true, true], "secured": true, "cuts": 5, "passes": 2, "length": 160, "angle": 90, "clamp": 60, "depth": 50, "brace": 42}
 	popup.open()
-	popup.straight_grain.pressed.emit()
-	popup.close()
-	popup.open()
-	await get_tree().create_timer(0.9).timeout
-	assert(popup.stage == popup.STAGE_MEASURE and not popup.action_locked)
-	# A callback from a closed session cannot award a board in a fresh round.
-	popup.stage = popup.STAGE_TEST
-	popup.load_sacks = 3
-	popup.verified_loads = 3
-	popup._schedule_transition(0.1, popup._complete_lumber_puzzle)
-	popup.close()
-	GameState.reset_progress(false)
-	popup.open()
-	await get_tree().create_timer(0.2).timeout
-	assert(popup.stage == popup.STAGE_INSPECT and not GameState.has_item("tabla"))
+	_check(popup.stage == State.Stage.PLANE and popup.model.passes == 2 and popup.model.depth_safe(), "Old checkpoint retains completed work and adjustments")
 	popup.close()
 
+func _checkpoint() -> void:
+	var before: Dictionary = popup.model.snapshot()
+	popup.close()
+	popup.open()
+	popup.set_physics_process(false)
+	_check(popup.model.snapshot() == before, "Explicit checkpoint round trip")
 
-func _click_workbench(point: Vector2) -> void:
-	var click := InputEventMouseButton.new()
-	click.button_index = MOUSE_BUTTON_LEFT
-	click.pressed = true
-	click.position = point
-	popup.workbench._gui_input(click)
+func _clean_span() -> float:
+	var original: float = popup.model.template_x
+	for x in range(341):
+		popup.model.template_x = x
+		if popup.model.template_safe():
+			popup.model.template_x = original
+			return x
+	assert(false, "Unsolvable board")
+	return 0
 
+func _step(seconds: float) -> void:
+	for tick in int(ceil(seconds * 60)):
+		popup.step_workshop(1.0 / 60.0)
+
+func _balance_load(seconds: float) -> void:
+	popup.workbench.set_tool("lever")
+	_touch(popup.workbench.lever_grip(popup.model.counterforce), true)
+	for tick in int(ceil(seconds * 60)):
+		if not popup.model.load_active: break
+		var clock: float = popup.model.clock
+		var speed := 0.8 if popup.model.easy else 2.4
+		var amplitude := 0.018 if popup.model.easy else 0.045
+		var target: float = State.LOAD_TARGETS[popup.model.verified_loads] + sin((clock + 1.0 / 60) * speed) * amplitude
+		_drag(popup.workbench.lever_grip(target))
+		_step(1.0 / 60)
+	_touch(popup.workbench.lever_grip(popup.model.counterforce), false)
+
+func _key_stroke(seconds: float) -> void:
+	var arrow: int = KEY_RIGHT if popup.model.cuts % 2 == 0 else KEY_LEFT
+	var saw: bool = popup.stage == State.Stage.SAW
+	if saw: _key(arrow, true)
+	_key(KEY_SPACE, true)
+	_step(seconds)
+	_key(KEY_SPACE, false)
+	if saw: _key(arrow, false)
 
 func _key(code: int, pressed: bool) -> void:
 	var event := InputEventKey.new()
-	event.keycode = code
 	event.physical_keycode = code
+	event.keycode = code
 	event.pressed = pressed
 	popup._input(event)
 
+func _mouse(point: Vector2, pressed: bool) -> void:
+	var event := InputEventMouseButton.new()
+	event.button_index = MOUSE_BUTTON_LEFT
+	event.position = point * popup.workbench.size / Vector2(800, 420)
+	event.pressed = pressed
+	popup.workbench._gui_input(event)
+
+func _frame_rates() -> void:
+	for hz in [30, 60, 120]:
+		var state := State.new()
+		state.initialize(false, 5)
+		state.stage = State.Stage.SAW
+		state.begin_tool(Vector2(466, 202))
+		for sample in hz:
+			state.tick(1.0 / hz)
+			state.move_tool(Vector2(466 + 170.0 * (sample + 1) / hz, 202))
+		_check(state.cuts == 1 and not state.paused, "Saw friction is consistent at 30/60/120 simulation steps")
+
+func _small_window() -> void:
+	GameState.reset_progress(false)
+	popup.open()
+	var previous := get_window().size
+	get_window().size = Vector2i(640, 360)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	popup._fit_panel()
+	var origin: Vector2 = popup.panel.get_global_transform() * Vector2.ZERO
+	var end: Vector2 = popup.panel.get_global_transform() * popup.panel.size
+	_check(origin.x >= 0 and origin.y >= 0 and end.x <= popup.overlay.size.x and end.y <= popup.overlay.size.y, "Workshop fits a small window")
+	await _shot("09_ventana_pequena")
+	get_window().size = previous
+	await get_tree().process_frame
+	popup.close()
+
+func _touch(point: Vector2, pressed: bool) -> void:
+	var event := InputEventScreenTouch.new()
+	event.index = 0
+	event.position = point * popup.workbench.size / Vector2(800, 420)
+	event.pressed = pressed
+	popup.workbench._gui_input(event)
+
+func _drag(point: Vector2) -> void:
+	var event := InputEventScreenDrag.new()
+	event.index = 0
+	event.position = point * popup.workbench.size / Vector2(800, 420)
+	popup.workbench._gui_input(event)
+
+func _count_sliders(node: Node) -> int:
+	var count := 1 if node is Slider else 0
+	for child in node.get_children(): count += _count_sliders(child)
+	return count
+
+func _check(condition: bool, description: String) -> void:
+	checks += 1
+	if not condition:
+		failed = true
+		push_error("BRUNO CHECK FAILED: " + description)
 
 func _shot(name: String) -> void:
-	if not capture:
-		return
-	var directory := "res://output/ui/lumber_six_phases"
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(directory))
+	if not capture: return
+	popup.workbench.refresh()
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await RenderingServer.frame_post_draw
-	if popup.awaiting_retry:
-		assert(popup.retry_notice.card.size.y < 400)
-		assert(popup.retry_notice.card.position.y > 0)
-	assert(get_viewport().get_texture().get_image().save_png(ProjectSettings.globalize_path(directory + "/" + name + ".png")) == OK)
+	var folder := ProjectSettings.globalize_path("res://output/ui/bruno_artesanal")
+	DirAccess.make_dir_recursive_absolute(folder)
+	get_viewport().get_texture().get_image().save_png(folder + "/" + prefix + "_" + name + ".png")
 
-func _continue_after_error() -> void:
-	if not popup.awaiting_retry:
-		return
-	assert(popup.retry_notice.visible and popup.action_locked)
-	assert(popup.retry_notice.heading.text.contains("Bruno"))
-	assert(not popup.retry_notice.reason_label.text.is_empty())
-	var remaining := GameState.get_lumber_attempts_left()
-	var old_stage: int = popup.stage
-	var old_clock: float = popup.work_clock
-	assert(popup.retry_notice.continue_button.text.ends_with("%d / %d" % [remaining, GameState.get_lumber_opportunities()]))
-	popup._process(30)
-	popup._register_mistake()
-	assert(GameState.get_lumber_attempts_left() == remaining and popup.stage == old_stage)
-	assert(popup.work_clock == old_clock)
-	# Space dismisses only the notice; it does not also start a tool stroke.
-	_key(KEY_SPACE, true)
-	_key(KEY_SPACE, false)
-	assert(not popup.awaiting_retry and not popup.retry_notice.visible and not popup.action_locked)
-	assert(not popup.dragging_saw and not popup.dragging_plane)
+func _write_checkpoint() -> void:
+	GameState.reset_progress(false)
+	GameState.flags.lumber_progress = {"version": 2, "stage": 5, "loads": 1, "load_active": true, "stable_seconds": 0.4, "deflection": 0.2, "brace": 0.56, "cuts": 5, "passes": 4, "marked_lines": 2, "wedge_hits": [3, 3, 3], "seed": 31}
+	popup.open()
+	popup._save_work()
+	print("BRUNO CHECKPOINT WRITTEN")
+	get_tree().quit()
+
+func _read_checkpoint() -> void:
+	var saved: Dictionary = GameState.flags.get("lumber_progress", {})
+	_check(saved.get("version") == 2 and saved.get("loads") == 1 and saved.get("load_active") == true, "Independent process recovers active load")
+	var state := State.new()
+	state.initialize(GameState.is_easy_difficulty(), 1)
+	state.restore(saved)
+	_check(state.verified_loads == 1 and state.load_active and is_equal_approx(state.stable_seconds, 0.4), "Elastic trial checkpoint matches")
+	print("BRUNO CHECKPOINT READ OK")
+	get_tree().quit()
+
+func _restore_files() -> void:
+	for path in backups:
+		if backups[path] != null: FileAccess.open(path, FileAccess.WRITE).store_buffer(backups[path])
+		elif FileAccess.file_exists(path): DirAccess.remove_absolute(ProjectSettings.globalize_path(path))

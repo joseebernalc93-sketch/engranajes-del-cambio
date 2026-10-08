@@ -8,7 +8,7 @@ Prototipo educativo en Godot 4.7 sobre la Revolución Industrial para estudiante
 2. Abre Godot 4.7.2 y selecciona **Importar** para abrir `project.godot`.
 3. Espera a que Godot importe los recursos y pulsa **F5** para iniciar el juego.
 
-La fase 1 está disponible. La fase 2 muestra una pantalla de construcción. El juego permite elegir dificultad y guarda el progreso localmente en la carpeta de datos de usuario de Godot. Las partidas, la caché, las capturas temporales y los instaladores generados no se incluyen en el repositorio.
+Están disponibles la Fase 1 (el éxodo rural) y la Fase 2 (tecnología y mecanización). El juego permite elegir dificultad y guarda el progreso localmente en la carpeta de datos de usuario de Godot. Las partidas, la caché, las capturas temporales y los instaladores generados no se incluyen en el repositorio.
 
 ## Prototipo actual
 
@@ -20,7 +20,7 @@ La primera fase permite experimentar el éxodo rural mediante acciones de juego:
 2. Conversar con una campesina desplazada.
 3. Reutilizar las herramientas agrícolas para forjar una rueda y conseguir las piezas del molino.
 4. Reparar y operar el molino hidráulico, regulando el agua para transformar el trigo en harina.
-5. Vender el costal de harina por 13 monedas para pagar ambos pasajes.
+5. Vender el costal de harina por 100 monedas para pagar ambos pasajes.
 6. Viajar en la diligencia de Ramón hasta la estación del tren.
 7. Comprar un boleto y abordar el tren hacia la ciudad industrial.
 
@@ -42,13 +42,13 @@ El viaje en bote parte del nuevo embarcadero, cruza el lago y atraca en la isla 
 
 ## Diligencia de pasajeros y estación del tren
 
-La salida derecha de la aldea conduce a una nueva estación de carretas con posada, establos, cobertizo de carga y dos diligencias con caballos. Ramón cobra **3 monedas** por el trayecto hasta la estación del tren; el pasaje incluye el regreso. Cancelar no descuenta monedas y el cobro se guarda una sola vez. El panadero paga 13 monedas por la harina: 3 para la diligencia y 10 para el tren. Elena conserva su diálogo histórico y su caballo en la aldea, sin puzzle propio. Las partidas anteriores mantienen sus puzzles completados y reciben el ajuste de transporte si lo necesitan.
+La salida derecha de la aldea conduce a una nueva estación de carretas con posada, establos, cobertizo de carga y dos diligencias con caballos. Ramón cobra **3 monedas** por el trayecto hasta la estación del tren; el pasaje incluye el regreso. Cancelar no descuenta monedas y el cobro se guarda una sola vez. El panadero paga 100 monedas por la harina: 3 para la diligencia y 10 para el tren. Elena conserva su diálogo histórico y su caballo en la aldea, sin puzzle propio. Las partidas anteriores mantienen sus puzzles completados y reciben el ajuste de transporte si lo necesitan.
 
 La travesía de 15,6 segundos muestra al personaje subiendo, la salida del patio, el camino entre los campos, la llegada a la estación y el descenso a pie. La cámara sigue la diligencia; el caballo camina, las ruedas giran según la distancia y la carrocería tiene suspensión y polvo. **E**, **Espacio**, **Esc** o **Continuar** adelantan el viaje. La llegada deja al jugador en la escena real con los controles restaurados.
 
 `scenes/station.tscn` contiene la fachada exterior y la entrada principal, con explanada, bancos y equipaje. La puerta lleva a la taquilla; con el boleto comprado se accede al andén de `scenes/station_platform.tscn`. Los viajes en diligencia y las monedas de pasaje aparecen en el registro docente. Los cinco recursos de la diligencia y sus prompts se documentan en `assets/gba/environment/passenger_coach_route_v1_notes.md`.
 
-`tests/passenger_coach_test.tscn` comprueba el acceso caminando, las colisiones, saldo insuficiente, cancelación, cobro único, venta de harina por 13 monedas, los cinco momentos de ida y regreso, las ruedas y las cuatro poses del caballo, llegada, taquilla, boleto, andén, partida real del tren, guardado y migración. Ejecuta con `--headless --path tmp/cart_validation_project res://tests/passenger_coach_test.tscn`. Para capturas, omite `--headless` y añade `-- --capture-ui`. `tests/_capture_coach_voyage.tscn` permite grabar con `--write-movie` y `--fixed-fps 30`; añade `-- --return` para el regreso. Los puzzles existentes conservan sus archivos.
+`tests/passenger_coach_test.tscn` comprueba el acceso caminando, las colisiones, saldo insuficiente, cancelación, cobro único, venta de harina por 100 monedas, los cinco momentos de ida y regreso, las ruedas y las cuatro poses del caballo, llegada, taquilla, boleto, andén, partida real del tren, guardado y migración. Ejecuta con `--headless --path tmp/cart_validation_project res://tests/passenger_coach_test.tscn`. Para capturas, omite `--headless` y añade `-- --capture-ui`. `tests/_capture_coach_voyage.tscn` permite grabar con `--write-movie` y `--fixed-fps 30`; añade `-- --return` para el regreso. Los puzzles existentes conservan sus archivos.
 
 ## Tren sin puzzle de vías
 
@@ -75,36 +75,58 @@ Abre el panel con **I**, **Tab** o el botón de la barra. Dentro del panel, **Ta
 
 ## Cordelería de Silas
 
-El puzzle «La cuerda bajo tensión» tiene seis etapas: seleccionar fibras, peinar tres manojos, igualar y montar los cabos, controlar la torsión, ajustar tres vueltas de ligadura y probar tres cargas progresivas con un freno. Conserva la rueda, la manivela, el carro y sus ruedas animadas. Fácil comparte 15 oportunidades entre las seis etapas, mueve los indicadores de precisión a un cuarto del ritmo de Difícil y deja cuatro segundos para corregir sobrecargas. Difícil comparte 10 oportunidades y usa el ritmo exigente de la fragua, con un segundo para corregir la tensión.
+El puzzle «La cuerda bajo tensión» es una pista de cordelería con herramientas manipulables, agujas de latón, fibras con shaders y partículas vegetales. Fácil comparte 15 oportunidades, ralentiza cuatro veces las oscilaciones y deja cuatro segundos para corregir tensión y carga; Difícil comparte 10, con un segundo para corregir. Se han sustituido los deslizadores y barras genéricas.
 
-- Peinado: selecciona el manojo con **1–3** o sus botones. Haz dos pasadas por manojo con **Espacio** en verde, o arrastra el rastrillo y suéltalo en la zona indicada.
-- Montaje: regula el grosor de referencia con el deslizador y pulsa los ganchos iluminados o sus botones. La franja verde admite más margen en Fácil. También puedes navegar con Tab y confirmar con Enter.
-- Torsión: mantén **Espacio** (o pulsa y mantén la rueda o el botón de manivela). Ajusta el carro con **← → / A D**, arrastrándolo o con el deslizador.
-- Mantén la tensión entre **45 y 70** en el indicador verde. La carga aumenta ligeramente mientras se tuerce la cuerda; una sobrecarga sostenida activa el freno de Silas sin borrar el progreso.
-- Ligadura: elige el remate correcto y ajusta tres vueltas con **Espacio**, el botón o arrastrando el hilo. Cada vuelta correcta permanece asegurada si fallas otra.
-- Carga: mantén **Espacio** o el botón de prueba para levantar el saco. Regula el freno con **← → / A D** o su deslizador mientras aumenta el peso. Las comprobaciones superadas se conservan si sueltas o fallas. La rueda principal permanece bloqueada durante esta prueba.
+- **Peinado:** arrastra el rastrillo de izquierda a derecha o mantén **Espacio**, con dos pasadas por manojo. Los tirones y las inclinaciones excesivas traban las púas; cada pasada limpia se guarda.
+- **Cabos:** mueve la mordaza del calibre o usa **← → / A D** para repartir la fibra entre porciones sin crear ni perder material. Engancha con arrastre, clic en el gancho o **Espacio**. Tolerancia de grosor: ±12% en Fácil y ±4% en Difícil.
+- **Torsión:** gira la rueda en sentido horario y acompaña el acortamiento arrastrando el carro. Con teclado, **Espacio** mueve la rueda y **← → / A D** el carro. La inercia permite cambiar de herramienta con un puntero; dos dedos pueden manejar rueda y carro a la vez.
+- **Compactación:** mantén **Espacio** y regula el freno con **← → / A D**, o alterna rueda y manivela de freno con el puntero. La aguja debe permanecer entre **45 y 70** durante **3 segundos continuos**.
+- **Ligadura:** traza tres círculos horarios o mantén **Espacio** para cada vuelta; suelta entre vueltas. Un error elimina solo la vuelta incompleta. Después, tira del hilo hacia abajo o pulsa **Espacio** para trabar el lazo.
+- **Carga:** arrastra cada saco al cabrestante, pulsa **Izar saco** o **Espacio**. El control pasa automáticamente al freno: **← → / A D** o arrastre de su empuñadura. Tres ensayos de **1,2 segundos en verde** validan la soga; se conservan las cargas aprobadas.
 - Cada error consume una oportunidad sin volver a la primera etapa. Silas muestra «Revisemos el trabajo» con la explicación, el saldo y el botón **Continuar esta fase**. El aviso pausa las herramientas y los indicadores; se continúa con clic, Enter o Espacio. Cerrar y volver conserva el avance y los errores. Al agotarlas, Silas ofrece empezar una nueva ronda; cambiar de dificultad conserva las oportunidades ya gastadas.
-- Esc cierra el puzzle. Soltar el control o cambiar de ventana detiene la manivela. El panel se adapta al tamaño de la ventana.
+- **Tab / Enter** navegan y activan herramientas y botones; **Esc** cierra. Perder el foco pausa también el resorte y los temporizadores. El panel se adapta a ventanas pequeñas.
 
-Los recursos por capas están en `assets/gba/ui/ropewalk_*_v2.png`; el rastrillo y los controles de ligadura se dibujan en Godot. La escena `tests/rope_puzzle_test.tscn` verifica los seis pasos en ambas dificultades, controles directos, margen de precisión, recuperación parcial, guardado, agotamiento y nueva ronda, entrega única e instalación en el molino. Se ejecuta con `--path tmp/cart_validation_project res://tests/rope_puzzle_test.tscn`; añadir `-- --capture-rope` sin `--headless` genera capturas en `output/ui/rope_six_phases`.
+El guardado del taller usa `rope_progress.version = 3`, con migración de los seis pasos anteriores y sus ganchos, vueltas y cargas. La recompensa única conserva el ID `cuerda` y se llama **Soga de transmisión resistente**; sigue instalándose en el molino. La simulación guiada usa tensión geométrica, curvas de caída y un resorte amortiguado, con parámetros pedagógicos. Los recursos reutilizados son `assets/gba/ui/ropewalk_*_v2.png`.
+
+Los rastrillos, cabos y sogas utilizan sprites de pixel art con transparencia y filtrado nearest. El carro apoya sus ruedas sobre el riel del fondo y el rollo terminado deja libre el encabezado. Si falla un ensayo, se descarga solo ese saco y se elimina el impulso residual del resorte; **Izar saco** permite repetir sin perder las cargas aprobadas. También se reparan guardados anteriores detenidos en una sobrecarga. Recursos y prompts: [silas_pixel_art_v1_notes.md](assets/gba/ui/silas_pixel_art_v1_notes.md).
+
+La primera etapa muestra una mesa de peinado con manojos de cáñamo; de la segunda a la quinta se utiliza el taller de la máquina. El ensayo final muestra un pórtico de poleas y el costal suspendido. Ambas palancas tienen pedestal, eje y mango de pixel art; se arrastran alrededor de su articulación. El remate utiliza una guía de latón grabada y vueltas de hilo ilustradas. Recursos y prompts: [silas_stage_scenery_v2_notes.md](assets/gba/ui/silas_stage_scenery_v2_notes.md).
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tests/prepare_validation.ps1 -GodotExecutable godot
+godot --headless --path tmp/cart_validation_project res://tests/rope_puzzle_test.tscn
+```
+
+La prueba verifica las seis fases en ambas dificultades, controles táctiles simultáneos y teclado, errores, guardado, agotamiento, migración, recompensa e instalación única. Sin `--headless`, añade `-- --capture-rope` para obtener las imágenes en `output/ui/silas_artesanal`. La guía técnica está en [ropewalk_artesanal_v4_notes.md](assets/gba/ui/ropewalk_artesanal_v4_notes.md).
 
 ## Carpintería de Bruno
 
-El puzzle «La tabla que sostiene el molino» tiene seis fases: elegir la veta, medir y marcar, fijar, serrar, cepillar y probar tres cargas. El taller permanece fijo mientras las cuñas entran, la escuadra gira, la sierra profundiza el corte y el sobrante cae. Cada pasada del cepillo deja una franja lisa con virutas; los sacos hacen flexionar la tabla entre sus apoyos.
+El taller ahora usa herramientas diegéticas manipulables, sin deslizadores ni medidores genéricos. Conserva las seis fases, las oportunidades, el guardado y la entrega única de la tabla.
 
-Fácil ofrece **15 oportunidades** para todo el puzzle, el indicador de marcado avanza a un cuarto del ritmo de Difícil, las herramientas con teclado a la mitad y las zonas seguras son más amplias. Difícil ofrece **10 oportunidades**, el ritmo normal y ajustes más precisos. Cada fallo descuenta una oportunidad y permite continuar en la fase actual. Las marcas, fijaciones, cortes, franjas y cargas aprobadas se guardan al cerrar y cargar la partida. Al agotar el total, el taller se cierra y Bruno anima al jugador; «Intentar de nuevo» prepara otra pieza con el total correspondiente a la dificultad elegida. Sus oportunidades son independientes de las de Mateo y Silas.
+### Seis operaciones
 
-Ante un fallo, Bruno muestra **Revisemos el trabajo**, con la causa, las oportunidades restantes y **Continuar esta fase**. El recuadro de madera y latón se ajusta al texto, bloquea los controles del taller y detiene herramientas e indicadores hasta continuar con el botón, Enter o Espacio. Esc permite cerrar y conservar el trabajo. El aviso no añade errores mientras está abierto; el último fallo sigue cerrando el puzzle para mostrar el diálogo de ánimo.
+1. **Veta:** distribución de nudos, poros y fisuras por semilla, con un tramo limpio garantizado. La plantilla se mueve directamente; confirmar una zona defectuosa consume una oportunidad. La lupa magnifica la escena mediante una copia del fondo y una lente cálida.
+2. **Trazado:** regla de latón con tope a 160 cm, escuadra a 90° y dos incisiones. La primera referencia se conserva si falla la segunda. Tolerancia angular de 3,5° en Fácil y 1,5° en Difícil, con un pequeño margen para el ruido del dispositivo.
+3. **Fijación:** tres cuñas arrastrables; encajarlas precede a tres golpes por cuña. La mordaza se ajusta girando su manivela. La prueba de rigidez valida todas las fijaciones y la presión. El golpe produce una vibración de 0,1 segundos.
+4. **Serrado:** cinco recorridos alternos completos. El tirón, la inversión brusca o salir de la guía encallan la hoja; una pasada demasiado lenta no avanza y puede repetirse sin penalización. El shader profundiza la incisión. El sobrante se desprende como `RigidBody2D`, rebota sobre un banco con colisión y reproduce un impacto al aterrizar.
+5. **Cepillado:** rueda de profundidad, cuatro franjas y pasadas a favor de veta. Una cuchilla retraída resbala sin penalización; una excesiva se clava y abre la revisión. El acabado se transforma por franja mediante shader y se emiten virutas curvadas.
+6. **Flexión:** tres cargas progresivas, palanca manual y comparador cuadriculado. La respuesta elástica amortiguada mueve tanto la madera subdividida como la aguja. Se exige mantener la zona verde durante 1,2 segundos por saco.
 
-- Inspección: pulsa las marcas sobre la madera o usa los botones. La selección de un defecto consume una oportunidad; pasar el cursor para examinarlo no consume ninguna.
-- Medición: ajusta la regla a 160 cm y la escuadra a 90°. Marca los tres puntos en orden con el ratón, **Espacio** o el botón cuando el indicador esté en verde. Los ajustes y las marcas terminadas se conservan.
-- Fijación: coloca tres fijaciones, regula la presión de la abrazadera en verde y confirma la estabilidad. Tab, flechas y Enter permiten manejar los controles.
-- Sierra: arrastra el mango iluminado alternando los dos sentidos, o mantén **← → / A D** en el sentido indicado. Hay cinco recorridos; soltar antes de terminar permite repetir el recorrido.
-- Cepillo: ajusta la profundidad de la cuchilla en verde; arrastra de izquierda a derecha con presión uniforme, mantén **Espacio** o el botón **Cepillar**. Suelta y vuelve a pulsar para cada una de las cuatro franjas.
-- Carga: arrastra el saco desde su botón al lugar marcado, pulsa la marca o usa **Colocar**. Ajusta el apoyo para sostener la aguja en verde durante 1,2 segundos por carga. Cada saco cambia la referencia; tienes más tiempo para corregir en Fácil. Si falla, se retira solo el saco que estaba a prueba. La tabla se entrega una única vez, tras las tres comprobaciones.
-- Esc cierra el taller. Soltar fuera de la herramienta o cambiar de ventana libera el agarre. Las transiciones pendientes se cancelan al cerrar y el panel se adapta a ventanas pequeñas.
+La flexión y la fricción son modelos educativos controlados, no cálculos para dimensionar una estructura real. No se fuerza la física libre sobre herramientas de precisión. La gravedad, el rebote y la rotación del sobrante sí usan cuerpos 2D.
 
-Los recursos están en `assets/gba/ui/bruno_workshop_backdrop_v2.png` y `bruno_workpieces_v2.png`; las instrucciones de generación se documentan en `bruno_workbench_v2_notes.md`, y los cambios de interacción en `bruno_six_phases_v3_notes.md`. `tests/lumber_puzzle_test.tscn` verifica los seis pasos en ambas dificultades, controles de ratón, táctiles y teclado, avisos de error y pausa sin penalizaciones adicionales, persistencia, agotamiento y reinicio, carga progresiva, recompensa única e instalación en el molino. Ejecuta las pruebas con un nombre de proyecto separado para proteger los datos del jugador; la carpeta local `tmp/cart_validation_project` sirve para ese fin. Añade `-- --capture-lumber` con renderizado para guardar las fases y los avisos en `output/ui/lumber_six_phases`.
+### Dificultad y revisión
+
+Fácil conserva 15 oportunidades compartidas, guías más amplias, herramientas de teclado más lentas y 4 segundos para corregir la carga. Difícil conserva 10 oportunidades, mayor exigencia de cadencia y 1,2 segundos para corregir la carga. El aviso de Bruno suspende simulación, agarres, audio, partículas y cuerpos físicos. Continuar conserva lo validado; llegar a cero cierra el taller y ofrece otra ronda. Perder el foco o soltar una herramienta cancela únicamente el gesto sin terminar y no consume oportunidades.
+
+
+La [guía del banco artesanal](assets/gba/ui/bruno_artesanal_v4_notes.md) documenta los controles, la arquitectura, los shaders y las pruebas. Para preparar el proyecto aislado y verificar ambas dificultades:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File tests/prepare_validation.ps1 -GodotExecutable godot
+godot --headless --path tmp/cart_validation_project res://tests/lumber_puzzle_test.tscn
+```
+
+Con renderizado, añade `-- --capture-lumber` para guardar capturas en `output/ui/bruno_artesanal`.
 
 ## Fragua de Mateo: seis etapas y dificultad seleccionable
 
@@ -152,7 +174,7 @@ Al soltar fuera de la herramienta, cambiar de ventana o cerrar el panel se liber
 
 ## Elena en la aldea
 
-El puzzle del carro se ha retirado. Elena conserva sus diálogos sobre el cercamiento; el caballo, la carreta y sus colisiones permanecen en el mismo lugar incluso al cargar partidas antiguas. Ya no se requiere ayudar con el carro para comprar el boleto o subir al tren. La harina se vende por 13 monedas y paga ambos pasajes. Los recursos antiguos de la carreta quedan como material de archivo, sin acceso desde el juego.
+El puzzle del carro se ha retirado. Elena conserva sus diálogos sobre el cercamiento; el caballo, la carreta y sus colisiones permanecen en el mismo lugar incluso al cargar partidas antiguas. Ya no se requiere ayudar con el carro para comprar el boleto o subir al tren. La harina se vende por 100 monedas y paga ambos pasajes. Los recursos antiguos de la carreta quedan como material de archivo, sin acceso desde el juego.
 
 ## Registro docente
 
@@ -196,14 +218,46 @@ El segundo proceso restaura los datos originales del proyecto de validación. Pa
 
 El menú es el **Cuaderno del viajero**: un libro abierto de cuero, pergamino y herrajes de latón. La página izquierda muestra la fase, la dificultad, el objetivo actual y la guía. La página derecha reúne cuatro fichas ilustradas en tinta: Herrero, Hilandero, Leñador y Molino, seguidas de los tres botones. El texto y los estados son controles nativos y se actualizan con la partida. El contador se actualiza de 0/4 a 4/4. El molino cuenta como completado al terminar la molienda, después de repararlo; Elena no figura como puzzle. La leyenda sigue el progreso y los tres botones mantienen continuar, revisar la historia y reiniciar la fase.
 
-El guardado versión 14 conserva dificultad, posición, avances y el resumen final del capítulo. Si una partida anterior recibió solo 10 monedas por la harina y no cobró la antigua ayuda de Elena, recibe 3 monedas una sola vez. Los guardados dentro del puzzle retirado vuelven al mismo lugar de la aldea con movimiento disponible.
+El guardado versión 17 conserva dificultad, posición, avances, resumen de la Fase 1 y un punto independiente para cada fase desbloqueada. Si una partida anterior recibió solo 10 monedas por la harina y no cobró la antigua ayuda de Elena, recibe 3 monedas una sola vez. Los guardados dentro del puzzle retirado vuelven al mismo lugar de la aldea con movimiento disponible.
 
-`tests/five_puzzles_pause_test.tscn` verifica el caballo persistente, la ausencia del puzzle, el pago único de 13 monedas, el viaje y el boleto sin Elena, cuatro tarjetas dinámicas, ambas dificultades, tamaño del menú, los botones y la migración sin duplicar monedas. Ejecuta con `--headless --path tmp/cart_validation_project res://tests/five_puzzles_pause_test.tscn`. Omite `--headless` y añade `-- --capture-ui` para generar vistas en `output/ui/pause_traveler_journal/`.
+Al completar la Fase 1, **Volver a fase 1** regresa al criadero conservando los cuatro puzzles, inventario, dinero, dificultad y resumen. La pausa del campo permite **Continuar fase 2 · Londres** y regresar al menú principal. **Continuar** en el título recupera siempre la última sesión visitada; cambiar de fase conserva por separado la ubicación y los descubrimientos de Londres. **Fases desbloqueadas** en el título permite volver al campo, continuar Londres o **Reiniciar fase 2**. Este último requiere confirmación y vuelve a su relato y llegada del tren, manteniendo la Fase 1 completada. Solo **Comenzar de nuevo** borra la partida completa; reiniciar una Fase 1 todavía incompleta conserva su funcionamiento anterior.
+
+`tests/chapter_navigation_test.tscn` verifica este flujo en Fácil y Difícil, con controles reales del cuaderno y del menú, y otro proceso verifica la persistencia y la migración de partidas versión 16:
+
+```powershell
+Godot --headless --path tmp/cart_validation_project res://tests/chapter_navigation_test.tscn
+Godot --headless --path tmp/cart_validation_project res://tests/chapter_navigation_test.tscn -- --read-navigation
+```
+
+El segundo comando se ejecuta después de que termine correctamente el primero y restaura los archivos de validación respaldados. Para generar capturas añade `-- --capture-ui` al primero y omite `--headless`.
+
+`tests/five_puzzles_pause_test.tscn` verifica el caballo persistente, la ausencia del puzzle, el pago único de 100 monedas, el viaje y el boleto sin Elena, cuatro tarjetas dinámicas, ambas dificultades, tamaño del menú, los botones y la migración sin duplicar monedas. Ejecuta con `--headless --path tmp/cart_validation_project res://tests/five_puzzles_pause_test.tscn`. Omite `--headless` y añade `-- --capture-ui` para generar vistas en `output/ui/pause_traveler_journal/`.
 
 ## Cierre de la fase 1 y cuaderno de capítulos
 
 La salida del tren abre la última página del **Cuaderno del viajero**, con cuatro fichas de oficios, logros de la cosecha y del molino, cuentas del viaje, tiempo, dificultad y reflexión histórica. Los datos del informe se fijan al terminar la fase.
 
-**Seguir explorando** abre la pantalla **Fase 2 en construcción**. **Esc** abre y cierra el cuaderno, comenzando por la nueva página de la fase 2. **Fase anterior / Fase siguiente**, o las flechas izquierda/derecha, permiten revisar el resumen de la fase 1 y volver a la fase 2. El guardado recuerda esta pantalla, la página elegida y si el libro estaba abierto. **Volver al inicio** conserva la partida; **Reiniciar fase** comienza de nuevo la historia de la fase 1 con la dificultad elegida.
+**Seguir explorando** abre cuatro viñetas de viaje y después la llegada animada del tren a Londres. El personaje baja al andén, pregunta al guía Henry por la salida, atraviesa el vestíbulo de boleterías y sale a una calle explorable. Las partidas antiguas del complejo industrial se redirigen a esta aventura y conservan todos los trabajos de los talleres. **Esc** abre y cierra el cuaderno. **Fase anterior / Fase siguiente**, o izquierda/derecha, permiten consultar el resumen de la Fase 1 y los descubrimientos de la llegada. El guardado recuerda mapa, posición, conversación, instante de la animación y página abierta. **Menú principal** conserva la partida; **Reiniciar fase 2** requiere confirmar y vuelve al relato y a la llegada del tren, conservando el capítulo anterior y los trabajos reservados.
 
 `tests/chapter_journal_flow_test.tscn` prueba el flujo con la salida real del tren y una segunda ejecución del motor. Ejecuta primero la escena en el proyecto aislado y después repite con `-- --read-chapter`; para generar capturas, ejecuta la primera con renderizado y `-- --capture-ui`. Los recursos y prompts de generación se documentan en `assets/gba/ui/chapter_journal_v1_notes.md`; las capturas están en `output/ui/chapter_journal/`.
+
+## Fase 2: el corazón de hierro
+
+La entrada jugable es una aventura de exploración por **andenes → boletería → calle de Londres**, con tres fondos nuevos en pixel art y personajes propios de la ciudad. Se camina con Flechas/WASD o clic/toque; E/Espacio permite conversar. Las puertas conectan las zonas en ambos sentidos y el guía orienta al jugador antes de abandonar los andenes. La dificultad se consulta en el cuaderno y explorar no consume oportunidades.
+
+Los cuatro talleres de **hulla → biela de hierro → motor de vapor → producción textil** quedan conservados fuera del recorrido actual, para integrarlos después dentro de la aventura. Sus escenas, recursos, checkpoints, presupuesto de 15/10 oportunidades y pruebas siguen disponibles para desarrollo.
+
+```powershell
+./tests/prepare_validation.ps1 -GodotExecutable godot
+godot --headless --path tmp/cart_validation_project res://tests/phase2_factory_test.tscn
+godot --headless --path tmp/cart_validation_project res://tests/london_arrival_test.tscn
+godot --headless --path tmp/cart_validation_project res://tests/london_arrival_test.tscn -- --read-london
+```
+
+La [llegada a Londres](reports/phase2/llegada_londres.md) documenta el recorrido actual, sus controles, recursos y pruebas. La [documentación de los talleres reservados](reports/phase2/implementacion.md) conserva sus reglas y arquitectura.
+
+La exploración de Londres muestra la misma barra de monedas e inventario de la Fase 1 y el aviso «E Hablar con…» únicamente al acercarse a alguien. Las conversaciones reutilizan el panel de la Fase 1. En los andenes solo están el protagonista y Henry; en la boletería, el protagonista y Arthur. Afuera, Edward tiene un puesto de periódicos en una esquina y Rose está junto al carruaje de la otra; ambos igualan la altura visible del protagonista. El cuaderno se abre con Esc y contiene los objetivos y la dificultad. No hay títulos, carteles de destinos ni nombres flotantes. Se cambia de zona caminando hasta los extremos; para volver a la estación desde la calle basta acercarse a su puerta. Las conversaciones se inician con E/Espacio o tocando al personaje; también se puede tocar el puesto para acercarse al vendedor. El inventario compartido se abre con I y conserva el glosario y la selección al continuar.
+
+Henry tiene bigote y uniforme burdeos; Arthur lleva gafas y uniforme verde oscuro. Sus sprites nuevos están en `assets/phase2/london_staff_pixel_v2.png`, con el prompt guardado en `london_staff_generation_v2.json`. La escala de los cuatro NPC se calcula desde los píxeles opacos del cuerpo y descarta los bordes casi transparentes del atlas; las proporciones individuales se conservan. Las pruebas de Londres comprueban la altura visible y los uniformes además del recorrido y la persistencia (142 controles de escritura y 15 de lectura).
+
+Al caminar hacia abajo desde la plaza de Londres se llega a la parada de coches. William ofrece un viaje animado de **40 segundos** al distrito industrial por **10 monedas**, con regreso incluido. El cuaderno y el inventario pausan el trayecto, que continúa desde el instante guardado sin cobrar de nuevo. Tomás paga ahora **100 monedas** por la harina: después de gastar 3 en el pueblo y 10 en el tren quedan **87**, y después del coche, **77**. El boleto se consume al viajar; los guardados anteriores reciben una sola vez la diferencia de la venta. Véanse [implementación, recursos y pruebas del coche](reports/phase2/coches_londres.md).

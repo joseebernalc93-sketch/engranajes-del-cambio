@@ -12,6 +12,8 @@ var objective: Label
 var guidance: Label
 var serif := SystemFont.new()
 var fit_generation := 0
+var phase_two_button: Button
+var return_button: Button
 
 func setup(hud: CanvasLayer) -> void:
 	serif.font_names = PackedStringArray(["Georgia", "Times New Roman"])
@@ -108,9 +110,27 @@ func setup(hud: CanvasLayer) -> void:
 		content.add_child(status)
 		cards[puzzle.id] = status
 	var actions: VBoxContainer = hud.get_node("%ResumeButton").get_parent()
+	return_button = hud.get_node("%PauseRestartButton")
+	var chapter_links := VBoxContainer.new()
+	chapter_links.name = "ChapterNavigation"
+	chapter_links.position = Vector2(113, 455)
+	chapter_links.size = Vector2(330, 75)
+	chapter_links.add_theme_constant_override("separation", 6)
+	spread.add_child(chapter_links)
+	phase_two_button = Button.new()
+	phase_two_button.text = "Continuar fase 2 · Londres"
+	phase_two_button.pressed.connect(GameState.open_phase_two)
+	chapter_links.add_child(phase_two_button)
+	var home := Button.new()
+	home.text = "Menú principal"
+	home.pressed.connect(func():
+		GameState.save_progress()
+		hud.get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
+	)
+	chapter_links.add_child(home)
 	actions.reparent(right_page)
 	actions.add_theme_constant_override("separation", 5)
-	for button in [hud.get_node("%ResumeButton"), hud.get_node("%PauseStoryButton"), hud.get_node("%PauseRestartButton")]:
+	for button in [hud.get_node("%ResumeButton"), hud.get_node("%PauseStoryButton"), return_button, phase_two_button, home]:
 		var primary: bool = button == hud.get_node("%ResumeButton")
 		button.custom_minimum_size = Vector2(332 if primary else 310, 45 if primary else 31)
 		button.add_theme_font_override("font", serif)
@@ -143,6 +163,8 @@ func _draw_button_ornaments(button: Button, primary: bool) -> void:
 		button.draw_circle(center + Vector2(-0.8, -0.8), 1, Color("#efce8b"))
 
 func refresh() -> void:
+	phase_two_button.visible = GameState.is_phase_two_unlocked()
+	return_button.text = "Volver al inicio de fase 1" if GameState.phase_complete else "Reiniciar fase"
 	var completed := 0
 	for puzzle in GameState.get_puzzle_progress():
 		var status: Label = cards[puzzle.id]

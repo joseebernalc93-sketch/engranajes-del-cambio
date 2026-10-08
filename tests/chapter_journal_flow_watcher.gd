@@ -1,4 +1,4 @@
-﻿extends Node
+extends Node
 
 const BACKUP := "user://chapter_journal_test_backup.json"
 var failures: Array[String] = []
@@ -13,7 +13,7 @@ func begin() -> void:
 
 func _write() -> void:
 	var backups := {}
-	for path in [GameState.SAVE_PATH, GameState.REPORT_PATH]:
+	for path in [GameState.SAVE_PATH, GameState.REPORT_PATH, Phase2Metrics.PATH]:
 		backups[path] = Marshalls.raw_to_base64(FileAccess.get_file_as_bytes(path)) if FileAccess.file_exists(path) else null
 	var backup := FileAccess.open(BACKUP, FileAccess.WRITE)
 	backup.store_string(JSON.stringify(backups))
@@ -36,7 +36,7 @@ func _write() -> void:
 	await get_tree().create_timer(6.0).timeout
 	_check(GameState.phase_complete and hud.completion_overlay.visible, "Real train departure must show the selected completion journal")
 	_check(hud.completion_journal.statuses.size() == 4 and hud.completion_journal.stats.text.contains("4 / 4") and hud.completion_journal.stats.text.contains("Fácil"), "Summary must show four completed puzzles and the selected difficulty")
-	_check(hud.completion_journal.accounts.text == "13 ganadas · 3 carreta · 10 boleto", "Summary must show the actual flour and travel economy")
+	_check(hud.completion_journal.accounts.text == "100 ganadas · 3 carreta · 10 boleto", "Summary must show the actual flour and travel economy")
 	_check(hud.completion_journal.artwork.size == Vector2(1000, 606), "Journal artwork must use the spread dimensions rather than its source image size")
 	for image in hud.completion_journal.summary.find_children("*", "TextureRect", true, false):
 		_check(image.size.x <= 155 and image.size.y <= 82, "Illustrations must remain inside their authored cards")
@@ -56,11 +56,20 @@ func _write() -> void:
 	GameState.save_progress()
 	_check(GameState.load_progress() and JSON.parse_string(JSON.stringify(GameState.build_report())) == JSON.parse_string(JSON.stringify(report)), "Save and reload must preserve the original report")
 	hud.get_node("%ContinueButton").pressed.emit()
+	var introduction := await _changed()
+	_check(introduction.scene_file_path == GameState.PHASE_TWO_INTRO, "Continue reaches four illustrated phase-two pages")
+	for page in 3:
+		await _shot("phase_two_intro_" + str(page + 1))
+		introduction._advance_story()
+		await _settle()
+	await _shot("phase_two_intro_4")
+	_check(introduction.next_button.text == "Empezar segunda fase", "Introduction offers the second chapter")
+	introduction._advance_story()
 	var phase_two := await _changed()
-	_check(phase_two.scene_file_path == GameState.PHASE_TWO_SCENE and not phase_two.has_node("World/Player"), "Continue must reach the construction screen, never the station")
-	_check(GameState.phase_complete and GameState.difficulty == "facil", "Entering the future chapter must retain completion and difficulty")
+	_check(phase_two.scene_file_path == GameState.PHASE_TWO_SCENE and phase_two.area == "platform", "Introduction reaches the London arrival platform")
+	_check(GameState.phase_complete and GameState.difficulty == "facil", "Entering the industrial chapter must retain completion and difficulty")
 	_check(not phase_two.journal_overlay.visible and phase_two.journal.current_page == 2, "The new screen must start with the journal closed and phase two selected")
-	await _shot("phase_two_construction")
+	await _shot("phase_two_arrival")
 	await _escape()
 	_check(phase_two.journal_overlay.visible and phase_two.journal.current_page == 2, "Escape must open the new chapter page")
 	await _shot("phase_two_journal")
@@ -70,7 +79,7 @@ func _write() -> void:
 	await _shot("phase_one_previous_page")
 	phase_two.journal.next_button.pressed.emit()
 	await _settle()
-	_check(phase_two.journal.current_page == 2, "Next page must return to the future chapter")
+	_check(phase_two.journal.current_page == 2, "Next page must return to the industrial chapter")
 	var left := InputEventKey.new()
 	left.keycode = KEY_LEFT
 	left.pressed = true
@@ -78,19 +87,19 @@ func _write() -> void:
 	await _settle()
 	_check(phase_two.journal.current_page == 1, "Keyboard left must turn to the previous chapter")
 	await _escape()
-	_check(not phase_two.journal_overlay.visible, "Escape must close the journal without leaving the construction screen")
+	_check(not phase_two.journal_overlay.visible, "Escape must close the journal without leaving the factory hub")
 	await _escape()
 	_check(phase_two.journal_overlay.visible and phase_two.journal.current_page == 1, "Reopening the journal must retain the chosen page")
 	var viewport := get_tree().root
 	viewport.size = Vector2i(800, 500)
 	await _settle()
-	_check(phase_two.journal.size.y * phase_two.journal.scale.y <= phase_two.journal_overlay.size.y - 23, "The new journal must fit a smaller window")
+	_check(phase_two.content.size.y * phase_two.content.scale.y <= viewport.get_visible_rect().size.y, "The new journal must fit a smaller window")
 	viewport.size = Vector2i(1152, 648)
 	await _settle()
 	GameState.save_progress()
-	_check(GameState.checkpoint.scene == GameState.PHASE_TWO_SCENE and GameState.checkpoint.journal_open and int(GameState.checkpoint.journal_page) == 1, "Saving must remember the construction screen and open previous page")
+	_check(GameState.checkpoint.scene == GameState.PHASE_TWO_SCENE and GameState.checkpoint.journal_open and int(GameState.checkpoint.journal_page) == 1, "Saving must remember the factory hub and open previous page")
 	# The second process resumes this exact checkpoint after engine shutdown.
-	print("CHAPTER JOURNAL WRITE OK: real departure, frozen report, construction screen, Escape, two chapter pages, keyboard, responsive layout and persisted checkpoint" if failures.is_empty() else "CHAPTER JOURNAL WRITE FAILED")
+	print("CHAPTER JOURNAL WRITE OK: real departure, frozen report, London arrival, Escape, two chapter pages, keyboard, responsive layout and persisted checkpoint" if failures.is_empty() else "CHAPTER JOURNAL WRITE FAILED")
 	get_tree().quit(0 if failures.is_empty() else 1)
 
 func _read() -> void:
@@ -100,22 +109,25 @@ func _read() -> void:
 	_check(menu.get_node("%ContinueGameButton").visible, "The title screen must offer Continue")
 	_check(GameState.continue_saved_game(), "The completed journey must remain resumable")
 	var phase_two := await _changed()
-	_check(phase_two.scene_file_path == GameState.PHASE_TWO_SCENE and phase_two.journal_overlay.visible and phase_two.journal.current_page == 1, "Continue must restore the exact construction screen and open chapter-one page")
+	_check(phase_two.scene_file_path == GameState.PHASE_TWO_SCENE and phase_two.journal_overlay.visible and phase_two.journal.current_page == 1, "Continue must restore the exact factory hub and open chapter-one page")
 	_check(GameState.build_report() == original and phase_two.journal.stats.text.contains("Fácil"), "Restoring must keep the frozen report and selected difficulty")
-	phase_two.close_journal()
+	phase_two._hide_journal()
 	phase_two._return_home()
 	await _changed()
 	_check(GameState.continue_saved_game(), "Returning to the title must keep the save")
 	phase_two = await _changed()
 	_check(not phase_two.journal_overlay.visible and phase_two.journal.current_page == 1, "Continue must also restore a closed journal")
-	phase_two.open_journal()
+	phase_two._show_journal()
 	phase_two.journal.turn_to(2)
 	_check(GameState.build_report() == original, "Chapter navigation must never modify the chapter-one report")
 	GameState.restart_phase()
-	var story := await _changed()
-	_check(story.scene_file_path == GameState.PHASE_INTRO_SCENE and not GameState.phase_complete and GameState.phase_summary.is_empty(), "Restart must open the first chapter story and clear its previous summary")
+	var countryside := await _changed()
+	_check(countryside.scene_file_path == "res://scenes/sheep_farm.tscn" and GameState.phase_complete and GameState.build_report() == original, "Returning to a completed phase must preserve its puzzles and frozen summary")
+	_check(GameState.is_phase_two_unlocked() and GameState.chapter_checkpoints.has("2"), "Returning to phase one must keep phase two unlocked and resumable")
 	_check(GameState.difficulty == "facil", "Restart must retain difficulty")
 	GameState.run_started = false
+	Phase2Metrics.set_process(false)
+	Phase2Metrics.flush()
 	if FileAccess.file_exists(BACKUP):
 		var backups: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(BACKUP))
 		for path in backups:

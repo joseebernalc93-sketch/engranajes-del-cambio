@@ -1,7 +1,10 @@
 extends CanvasLayer
 
+signal local_dialogue_action(action: String)
+
 const DIALOGUE_PANEL_BASE_HEIGHT := 104.0
 const INDUSTRIAL_SURFACE := preload("res://scripts/ui/industrial_surface.gd")
+@export var inventory_only := false
 
 @onready var objective_label: Label = %ObjectiveLabel
 @onready var coins_label: Label = %CoinsLabel
@@ -40,8 +43,9 @@ func _ready() -> void:
 		_style_pixel_button(node as Button)
 	for node in %PauseOverlay.find_children("*", "Button", true, false):
 		_style_industrial_button(node as Button)
-	pause_board.setup(self)
-	_setup_completion_journal()
+	if not inventory_only:
+		pause_board.setup(self)
+		_setup_completion_journal()
 	_style_hud_tab_button(%InventoryButton)
 	_style_inventory_close_button(%CloseInventoryButton)
 	_style_inventory_tab(%InventoryTab)
@@ -49,29 +53,34 @@ func _ready() -> void:
 	%InventoryTab.pressed.connect(_set_inventory_mode.bind("inventory"))
 	%GlossaryTab.pressed.connect(_set_inventory_mode.bind("glossary"))
 	get_viewport().size_changed.connect(_fit_inventory_panel)
-	get_viewport().size_changed.connect(_fit_pause_panel)
-	get_viewport().size_changed.connect(_fit_completion_panel)
+	if not inventory_only:
+		get_viewport().size_changed.connect(_fit_pause_panel)
+		get_viewport().size_changed.connect(_fit_completion_panel)
 	call_deferred("_fit_inventory_panel")
-	EventBus.objective_changed.connect(_set_objective)
+	if not inventory_only:
+		EventBus.objective_changed.connect(_set_objective)
+		EventBus.interaction_prompt_changed.connect(_set_prompt)
+		EventBus.dialogue_requested.connect(_show_dialogue)
+		EventBus.toast_requested.connect(_show_toast)
+		EventBus.phase_completed.connect(_show_completion)
 	EventBus.coins_changed.connect(_set_coins)
 	EventBus.inventory_changed.connect(_refresh_inventory)
-	EventBus.interaction_prompt_changed.connect(_set_prompt)
-	EventBus.dialogue_requested.connect(_show_dialogue)
-	EventBus.toast_requested.connect(_show_toast)
-	EventBus.phase_completed.connect(_show_completion)
 	%InventoryButton.pressed.connect(_toggle_inventory)
 	%CloseInventoryButton.pressed.connect(_close_inventory)
-	%ContinueButton.pressed.connect(_close_completion)
-	%RestartButton.pressed.connect(GameState.restart_phase)
-	%ResumeButton.pressed.connect(_close_pause)
-	%PauseStoryButton.pressed.connect(_show_story_overlay)
-	%PauseRestartButton.pressed.connect(GameState.restart_phase)
-	_set_objective(GameState.get_objective())
+	if not inventory_only:
+		%ContinueButton.pressed.connect(_close_completion)
+		%RestartButton.pressed.connect(GameState.restart_phase)
+		%ResumeButton.pressed.connect(_close_pause)
+		%PauseStoryButton.pressed.connect(_show_story_overlay)
+		%PauseRestartButton.pressed.connect(GameState.restart_phase)
+		_set_objective(GameState.get_objective())
 	_set_coins(GameState.coins)
 	_refresh_inventory()
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	# London owns navigation, Escape and I; this instance supplies the shared UI.
+	if inventory_only: return
 	if event.is_action_pressed("inventory"):
 		if not dialogue_panel.visible and not completion_overlay.visible and not pause_overlay.visible:
 			_toggle_inventory()
@@ -103,7 +112,14 @@ func _set_coins(value: int) -> void:
 
 
 func _set_prompt(text: String) -> void:
+	if not is_inside_tree(): return
 	prompt_label.text = text
+	var font := prompt_label.get_theme_font("font")
+	var text_width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, prompt_label.get_theme_font_size("font_size")).x + 28
+	var width := minf(get_viewport().get_visible_rect().size.x - 32, maxf(360, text_width))
+	prompt_panel.offset_left = -width * 0.5
+	prompt_panel.offset_right = width * 0.5
+	prompt_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	prompt_panel.visible = not text.is_empty() and not dialogue_panel.visible
 
 
@@ -112,6 +128,7 @@ func _show_dialogue(payload: Dictionary) -> void:
 	dialogue_speaker.text = str(payload.get("speaker", ""))
 	dialogue_text.text = str(payload.get("text", ""))
 	for child in dialogue_options.get_children():
+		dialogue_options.remove_child(child)
 		child.queue_free()
 	var options: Array = payload.get("options", [])
 	if options.is_empty():
@@ -147,7 +164,10 @@ func _fit_dialogue_panel(expected_text: String) -> void:
 func _select_dialogue_action(action: String) -> void:
 	dialogue_panel.visible = false
 	_set_player_controls(true)
-	EventBus.dialogue_action_selected.emit(action)
+	if inventory_only:
+		local_dialogue_action.emit(action)
+	else:
+		EventBus.dialogue_action_selected.emit(action)
 
 
 func _toggle_inventory() -> void:
@@ -216,8 +236,7 @@ func _refresh_inventory() -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.toggle_mode = true
 		button.tooltip_text = str(item.get("name", item_id))
-		var icon_path := str(item.get("icon", ""))
-		button.icon = load(icon_path) if not icon_path.is_empty() else null
+		button.icon = ContentDB.get_item_icon(item_id)
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
 		button.add_theme_constant_override("icon_max_width", 46)
@@ -275,8 +294,7 @@ func _show_item(item_id: String) -> void:
 	var item: Dictionary = ContentDB.get_item(item_id)
 	item_name.text = str(item.get("name", item_id))
 	item_description.text = str(item.get("description", ""))
-	var icon_path := str(item.get("icon", ""))
-	item_icon.texture = load(icon_path) if not icon_path.is_empty() else null
+	item_icon.texture = ContentDB.get_item_icon(item_id)
 	%EmptyPreview.visible = false
 	var amount := int(GameState.inventory.get(item_id, 0))
 	var quantity_text := "1 UNIDAD" if amount == 1 else "%d UNIDADES" % amount

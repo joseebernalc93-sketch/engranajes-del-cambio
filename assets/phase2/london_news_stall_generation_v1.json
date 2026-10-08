@@ -1,0 +1,7 @@
+{
+  "tool": "image_gen built-in",
+  "date": "2026-10-08",
+  "asset": "assets/phase2/london_news_stall_pixel_v1.png",
+  "transparent_background": true,
+  "prompt": "Use case: historical-scene. Asset type: transparent isolated pixel-art RPG scenery sprite for Engranajes del Cambio, London railway square circa 1850. Create ONE small handsome Victorian wooden newspaper seller's street stall, no people, no surrounding ground/background. Three-quarter elevated front view, camera ~35 degrees above ground, front facing lower-right. Dark walnut timber trestle counter with a neat sloping rack displaying folded cream newspapers with tiny dark illegible print marks; several bundles tied with string under counter; a modest faded burgundy cloth awning supported by two slim posts, brass corner brackets. This is a practical modest market stand, not a huge ornate kiosk. Warm golden-hour sunlight from upper-left; richly shaded readable crisp pixel clusters, handsome late-1990s top-down RPG game art matching an industrial brick London station. Full stall visible and centered with transparent padding, hard pixel edges, no blurry painterly outlines. Keep the base compact for placement beside a roughly 60-pixel-high game character; at final game scale stand will be about 150 pixels wide by 110 pixels tall. No text captions, no legible words, no logo, no UI, no people, no carriage, no shadows floating outside the sprite. Actual transparent RGBA background."
+}

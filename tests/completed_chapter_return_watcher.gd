@@ -23,7 +23,7 @@ func begin() -> void:
 	_check(FileAccess.file_exists(GameState.REPORT_PATH), "Finishing the chapter must retain its report")
 	hud._close_completion()
 	var next_chapter = await _changed()
-	_check(next_chapter.scene_file_path == GameState.PHASE_TWO_SCENE, "Continue must open chapter two's construction screen")
+	_check(next_chapter.scene_file_path == GameState.PHASE_TWO_INTRO, "Continue must open chapter two's illustrated introduction")
 	# Legacy completed saves can still be in the village or station.
 	var station = await _switch("res://scenes/station.tscn")
 	# Keep the old HUD alive but detached during the second awaited layout frame.

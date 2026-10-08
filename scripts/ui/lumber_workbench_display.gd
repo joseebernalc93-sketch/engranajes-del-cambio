@@ -1,354 +1,567 @@
+class_name LumberWorkbenchDisplay
 extends Control
-## Workshop illustration, moving workpiece and direct manipulation targets.
-
-signal section_selected(index: int)
-signal fixation_selected(index: int)
-signal sack_requested(index: int)
-signal mark_requested(index: int)
-
-const WOOD := preload("res://assets/gba/ui/bruno_workpieces_v2.png")
-const REGIONS := [Rect2(33, 160, 1472, 197), Rect2(37, 427, 1466, 201), Rect2(37, 700, 1466, 198)]
-const GOLD := Color("e8bd70")
-const GREEN := Color("bfdc95")
-const INK := Color("23170d")
-const FIX_POINTS := [Vector2(115, 178), Vector2(340, 176), Vector2(524, 163)]
-const SACK_X := [210.0, 335.0, 460.0]
-const SECTIONS := [Vector2(161, 137), Vector2(290, 137), Vector2(412, 137), Vector2(538, 137)]
-
-var stage := 0
-var active := false
-var session_id := 0
-var selected := false
-var inspected := [false, false, false, false]
-var hovered_section := -1
-var fixations := [false, false, false]
-var fix_progress := [0.0, 0.0, 0.0]
-var chalk := 0.0
-var saw_count := 0
-var saw_direction := 1
-var saw_position := Vector2.ZERO
-var plane_count := 0
-var lane_progress := [0.0, 0.0, 0.0, 0.0]
-var offcut := 0.0
-var load_count := 0
-var verified_loads := 0
-var load_locked := false
-var load_age := 10.0
-var bend := 0.0
-var stability_pulse := 0.0
-var time := 0.0
-var feedback := ""
-var feedback_color := GOLD
-var feedback_time := 0.0
-var font: Font
-var extra_mode := ""
-var marked_lines := 0
-var square_angle := 90.0
-var measured_length := 160.0
-var difficulty_pace := 1.0
-
+## One coordinate space for pointer, touch, keyboard, physical bodies and tool art.
+signal tool_selected(tool: String)
+signal gesture_finished
+signal offcut_landed
+const State = preload("res://scripts/ui/lumber_work_state.gd")
+const WOOD: Texture2D = preload("res://assets/gba/ui/bruno_workpieces_v2.png")
+const ROOM: Texture2D = preload("res://assets/gba/ui/bruno_workshop_backdrop_v2.png")
+const TOOLS: Texture2D = preload("res://assets/gba/ui/lumber_tools_sheet_v1.png")
+const SACK: Texture2D = preload("res://assets/items/flour_sack_v1.png")
+const LEVER_PARTS: Texture2D = preload("res://assets/gba/ui/silas_brake_parts_pixel_v2.png")
+const LEVER_BASE_REGION := Rect2(199, 337, 1010, 427)
+const LEVER_ARM_REGION := Rect2(1526, 26, 131, 743)
+const LEVER_PIVOT := Vector2(718, 300)
+const LEVER_SWING := 0.8
+const SURFACE: Shader = preload("res://shaders/wood_surface_smooth.gdshader")
+const CURVING: Shader = preload("res://shaders/wood_curving.gdshader")
+const BRASS := Color("d5ad67")
+const LIGHT := Color("f4dfac")
+const INK := Color("24180e")
+const GREEN := Color("a5c985")
+const RED := Color("df8b68")
+const DESIGN_SIZE := Vector2(800, 420)
+@export var keyboard_speed: float = 240.0
+@onready var world: Node2D = $World
+@onready var timber: Polygon2D = $World/Timber
+@onready var art: Node2D = $World/ToolIllustrations
+@onready var lens: ColorRect = $World/InspectorLens
+@onready var lens_backbuffer: BackBufferCopy = $World/LensBackBuffer
+@onready var incision: Line2D = $World/Incision
+@onready var offcut: RigidBody2D = $World/Offcut
+@onready var dust: GPUParticles2D = $World/Sawdust
+@onready var shavings: GPUParticles2D = $World/Shavings
+var model: LumberWorkState
+var active: bool = false
+var pointer_id: int = -2
+var pointer_tool: String = ""
+var pointer_start: Vector2 = Vector2.ZERO
+var pointer_last: Vector2 = Vector2.ZERO
+var pointer_angle: float = 0.0
+var pointer_offset: Vector2 = Vector2.ZERO
+var keyboard_direction: Vector2 = Vector2.ZERO
+var keyboard_space_held: bool = false
+var keyboard_release_required: bool = false
+var offcut_released: bool = false
+var surface_material: ShaderMaterial
+var bend_material: ShaderMaterial
+var dust_age: float = 1.0
+var shavings_age: float = 1.0
+var font: Font = ThemeDB.fallback_font
+var plate_styles: Dictionary = {}
 
 func _ready() -> void:
-	font = ThemeDB.fallback_font
-	clip_contents = true
-	mouse_filter = Control.MOUSE_FILTER_STOP
-	mouse_exited.connect(func(): hovered_section = -1)
+	resized.connect(_resize_canvas)
+	focus_mode = Control.FOCUS_ALL
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	_build_mesh()
+	_build_particles(dust, false)
+	_build_particles(shavings, true)
+	offcut.contact_monitor = true
+	offcut.max_contacts_reported = 4
+	offcut.body_entered.connect(func(_body: Node): offcut_landed.emit())
+	_resize_canvas()
 
+func bind(state: LumberWorkState) -> void:
+	model = state
+	offcut.freeze = true
+	offcut.position = Vector2(630, 228)
+	offcut.rotation = 0
+	offcut.linear_velocity = Vector2.ZERO
+	offcut.angular_velocity = 0
+	offcut_released = model.cuts >= 5
+	offcut.visible = false
+	cancel_gesture()
+	refresh()
 
-func reset_workbench() -> void:
-	stage = 0
-	selected = false
-	inspected = [false, false, false, false]
-	hovered_section = -1
-	fixations = [false, false, false]
-	fix_progress = [0.0, 0.0, 0.0]
-	chalk = 0.0
-	saw_count = 0
-	saw_direction = 1
-	plane_count = 0
-	lane_progress = [0.0, 0.0, 0.0, 0.0]
-	offcut = 0.0
-	load_count = 0
-	verified_loads = 0
-	load_locked = false
-	load_age = 10.0
-	bend = 0.0
-	stability_pulse = 0.0
-	feedback_time = 0.0
+func _resize_canvas() -> void:
+	if is_instance_valid(world): world.scale = size / DESIGN_SIZE
 	queue_redraw()
 
+func _build_mesh() -> void:
+	var points := PackedVector2Array()
+	var uv := PackedVector2Array()
+	var faces: Array[PackedInt32Array] = []
+	for index in 65:
+		var fraction := index / 64.0
+		points.append(Vector2(72 + fraction * 620, 184))
+		points.append(Vector2(72 + fraction * 620, 272))
+		uv.append(Vector2(fraction, 0) * WOOD.get_size())
+		uv.append(Vector2(fraction, 1) * WOOD.get_size())
+		if index < 64: faces.append(PackedInt32Array([index * 2, index * 2 + 2, index * 2 + 3, index * 2 + 1]))
+	timber.polygon = points
+	timber.texture = WOOD
+	timber.uv = uv
+	timber.polygons = faces
+	surface_material = ShaderMaterial.new()
+	surface_material.shader = SURFACE
+	surface_material.set_shader_parameter("wood_atlas", WOOD)
+	bend_material = ShaderMaterial.new()
+	bend_material.shader = CURVING
+	bend_material.set_shader_parameter("wood_atlas", WOOD)
+	timber.material = surface_material
+	var sprite := offcut.get_node("Wood") as Sprite2D
+	var atlas := AtlasTexture.new()
+	atlas.atlas = WOOD
+	atlas.region = Rect2(1210, 427, 293, 201)
+	sprite.texture = atlas
+	sprite.scale = Vector2(124, 88) / atlas.get_size()
 
-func show_feedback(message: String, color := GOLD) -> void:
-	feedback = message
-	feedback_color = color
-	feedback_time = 1.65
-	queue_redraw()
+func _build_particles(particles: GPUParticles2D, curled: bool) -> void:
+	var process := ParticleProcessMaterial.new()
+	process.direction = Vector3(-0.45, -1, 0)
+	process.spread = 35
+	process.initial_velocity_min = 35 if curled else 15
+	process.initial_velocity_max = 90 if curled else 65
+	process.gravity = Vector3(0, 170, 0)
+	process.scale_min = 0.5
+	process.scale_max = 1.1
+	process.angular_velocity_min = -150
+	process.angular_velocity_max = 180
+	process.color = Color("edca8b")
+	particles.process_material = process
+	particles.amount = 22 if curled else 36
+	particles.lifetime = 0.8
+	particles.visibility_rect = Rect2(-180, -180, 360, 430)
+	var image := Image.create(18 if curled else 5, 14 if curled else 3, false, Image.FORMAT_RGBA8)
+	image.fill(Color.TRANSPARENT)
+	if curled:
+		for step in 60:
+			var t := step / 59.0 * TAU * 1.4
+			var radius := 5.5 - step / 59.0 * 3.5
+			var point := Vector2(9 + cos(t) * radius, 7 + sin(t) * radius)
+			image.set_pixel(clampi(int(point.x), 0, 17), clampi(int(point.y), 0, 13), Color.WHITE)
+	else: image.fill(Color.WHITE)
+	particles.texture = ImageTexture.create_from_image(image)
+	particles.emitting = false
 
+func refresh() -> void:
+	if not model or not is_node_ready(): return
+	timber.material = bend_material if model.stage == State.Stage.LOAD else surface_material
+	var lanes := Vector4.ZERO
+	for index in 4:
+		var amount := 1.0 if index < model.passes else 0.0
+		if model.stage == State.Stage.PLANE and index == model.passes and model.tool_active and model.depth_safe(): amount = model.stroke_distance / 496.0
+		lanes[index] = amount
+	for material in [surface_material, bend_material]:
+		material.set_shader_parameter("lane_progress", lanes)
+		material.set_shader_parameter("cut_progress", model.cuts / 5.0)
+		material.set_shader_parameter("polished", model.passes == 4)
+		material.set_shader_parameter("inspection", model.stage == State.Stage.INSPECT)
+	bend_material.set_shader_parameter("deflection", model.deflection * 2.5)
+	lens.visible = active and model.stage == State.Stage.INSPECT and model.selected_tool == "lens"
+	lens.position = model.lens_position - Vector2(44, 44)
+	# Viewport copying keeps screen UV correct through resized/scaled modal canvases.
+	# It is disabled entirely outside the inspection lens.
+	lens_backbuffer.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT if lens.visible else BackBufferCopy.COPY_MODE_DISABLED
+	(lens.material as ShaderMaterial).set_shader_parameter("lens_screen_size", lens.size * world.scale * get_global_transform().get_scale() / get_viewport_rect().size)
+	incision.clear_points()
+	if model.stage == State.Stage.MEASURE and model.tool_active:
+		incision.add_point(model.stroke_start)
+		incision.add_point(model.tool_position)
+	offcut.freeze = not active or model.paused or not offcut_released
+	dust.speed_scale = 0.0 if not active or model.paused else 1.0
+	shavings.speed_scale = dust.speed_scale
+	if active and not model.paused and model.cuts >= 5 and not offcut_released:
+		offcut_released = true
+		offcut.show()
+		offcut.freeze = false
+		offcut.linear_velocity = Vector2(25, 5)
+		offcut.angular_velocity = 0.7
+	world.position = Vector2(sin(model.impact_age * 170) * 1.7, 0) if model.impact_age < 0.1 and active and not model.paused else Vector2.ZERO
+	art.queue_redraw()
 
-func _process(delta: float) -> void:
-	if not active or not is_visible_in_tree():
-		return
-	time += delta
-	feedback_time = maxf(0, feedback_time - delta)
-	stability_pulse = maxf(0, stability_pulse - delta * 1.7)
-	chalk = move_toward(chalk, 1.0 if stage >= 1 else marked_lines / 3.0, delta * 1.8)
-	for index in 3:
-		fix_progress[index] = move_toward(fix_progress[index], 1.0 if fixations[index] else 0.0, delta * 2.5)
-	if saw_count >= 5:
-		offcut = minf(1, offcut + delta * 1.2)
-	load_age += delta
-	var settled := load_count * 0.48
-	bend = settled + sin(load_age * 18.0 * difficulty_pace) * exp(-load_age * 4.0) * 5.5 if stage >= 4 else 0.0
-	queue_redraw()
+func emit_work(action: String, point: Vector2) -> void:
+	if DisplayServer.get_name() == "headless": return
+	if action in ["scribe", "saw"]:
+		dust.position = point
+		dust_age = 0
+	elif action == "plane":
+		shavings.position = point
+		shavings_age = 0
 
+func physics_step(delta: float) -> void:
+	if not model or not active or model.paused: return
+	dust_age += delta
+	shavings_age += delta
+	dust.emitting = dust_age < 0.08
+	shavings.emitting = shavings_age < 0.08
+	if keyboard_direction != Vector2.ZERO or keyboard_space_held: _keyboard_step(delta)
+	refresh()
+
+func set_tool(tool: String) -> void:
+	if not model or model.paused: return
+	cancel_gesture()
+	model.selected_tool = tool
+	tool_selected.emit(tool)
+	refresh()
+
+func handle_key(event: InputEventKey) -> bool:
+	var key := event.physical_keycode if event.physical_keycode else event.keycode
+	if key not in [KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_A, KEY_D, KEY_W, KEY_S, KEY_SPACE]: return false
+	if event.echo: return true
+	var value := 1.0 if event.pressed else 0.0
+	match key:
+		KEY_LEFT, KEY_A: keyboard_direction.x = -value if event.pressed or keyboard_direction.x < 0 else keyboard_direction.x
+		KEY_RIGHT, KEY_D: keyboard_direction.x = value if event.pressed or keyboard_direction.x > 0 else keyboard_direction.x
+		KEY_UP, KEY_W: keyboard_direction.y = -value if event.pressed or keyboard_direction.y < 0 else keyboard_direction.y
+		KEY_DOWN, KEY_S: keyboard_direction.y = value if event.pressed or keyboard_direction.y > 0 else keyboard_direction.y
+		KEY_SPACE:
+			keyboard_space_held = event.pressed
+			if not event.pressed:
+				keyboard_release_required = false
+				model.cancel_tool()
+				gesture_finished.emit()
+			elif model.selected_tool.begins_with("wedge"): model.hammer(int(model.selected_tool.right(1)))
+			elif model.stage == State.Stage.INSPECT and model.selected_tool == "template": model.confirm()
+			elif model.stage == State.Stage.LOAD and model.selected_tool == "sack": model.place_sack()
+	return true
+
+func _keyboard_step(delta: float) -> void:
+	var tool := model.selected_tool
+	var direction := keyboard_direction
+	if tool == "lens": model.lens_position = (model.lens_position + direction * delta * 150).clamp(Vector2(44, 44), Vector2(756, 376))
+	elif tool == "template": model.adjust(tool, direction.x * delta * 130)
+	elif tool == "rule": model.adjust(tool, direction.x * delta * (12 if model.easy else 22))
+	elif tool == "square": model.adjust(tool, direction.x * delta * (3 if model.easy else 6))
+	elif tool in ["vice", "depth", "lever"]: model.adjust(tool, direction.x * delta * (0.16 if model.easy else 0.24))
+	elif keyboard_space_held and not keyboard_release_required:
+		var start := Vector2.ZERO
+		match tool:
+			"scribe": start = Vector2(98 if model.marked_lines == 0 else State.CUT_X, 184)
+			"saw": start = Vector2(466 if model.cuts % 2 == 0 else 636, 202)
+			"plane": start = Vector2(72, model.lane_y())
+			_: return
+		if tool == "saw" and not model.easy and is_zero_approx(direction.x): return
+		if not model.tool_active: model.begin_tool(start)
+		if not model.tool_active: return
+		var target := model.tool_position
+		if tool == "scribe": target.y += delta * 65
+		elif tool == "saw":
+			var expected := 1.0 if model.cuts % 2 == 0 else -1.0
+			target.x += (direction.x if direction.x else expected) * delta * keyboard_speed * (2.0 / 3.0 if model.easy else 1.0)
+		else: target.x += delta * (190 if model.easy else 280)
+		model.move_tool(target)
+		if not model.tool_active: keyboard_release_required = true
+
+func cancel_gesture() -> void:
+	pointer_id = -2
+	pointer_tool = ""
+	pointer_offset = Vector2.ZERO
+	keyboard_direction = Vector2.ZERO
+	keyboard_space_held = false
+	keyboard_release_required = false
+	if model: model.cancel_tool()
+	if is_node_ready():
+		dust.emitting = false
+		shavings.emitting = false
 
 func _gui_input(event: InputEvent) -> void:
-	if not active:
-		return
-	if not (event is InputEventMouse or event is InputEventScreenTouch):
-		return
-	var point: Vector2 = event.position * Vector2(771, 323) / size
-	var clicked: bool = (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed) or (event is InputEventScreenTouch and event.pressed)
-	if extra_mode == "measure":
-		if clicked:
-			for index in 3:
-				if point.distance_to(Vector2(90 + index * 230, 78)) < 21:
-					mark_requested.emit(index)
-	elif stage == 0:
-		hovered_section = -1
-		for index in 4:
-			if Rect2(SECTIONS[index] - Vector2(49, 65), Vector2(98, 95)).has_point(point):
-				hovered_section = index
-				if clicked:
-					section_selected.emit(index)
-		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if hovered_section >= 0 else Control.CURSOR_ARROW
-	elif stage == 1 and clicked:
+	if not active or not model or model.paused: return
+	var point := Vector2.ZERO
+	var pressed := false
+	var released := false
+	var identity := -1
+	if event is InputEventMouseButton:
+		if event.button_index != MOUSE_BUTTON_LEFT: return
+		point = event.position * DESIGN_SIZE / size
+		pressed = event.pressed
+		released = not event.pressed
+	elif event is InputEventMouseMotion: point = event.position * DESIGN_SIZE / size
+	elif event is InputEventScreenTouch:
+		point = event.position * DESIGN_SIZE / size
+		pressed = event.pressed
+		released = not event.pressed
+		identity = event.index
+	elif event is InputEventScreenDrag:
+		point = event.position * DESIGN_SIZE / size
+		identity = event.index
+	else: return
+	if pressed and pointer_id == -2:
+		pointer_id = identity
+		pointer_start = point
+		pointer_last = point
+		_pointer_press(point)
+		grab_focus()
+	elif pointer_id == identity:
+		if released:
+			_pointer_release(point)
+			pointer_id = -2
+			pointer_tool = ""
+			gesture_finished.emit()
+		else: _pointer_move(point)
+	accept_event()
+
+func _pointer_press(point: Vector2) -> void:
+	var tool := model.selected_tool
+	if model.stage == State.Stage.SECURE:
+		if Rect2(605, 184, 86, 88).has_point(point):
+			model.confirm()
+			return
+		if model.selected_tool.begins_with("wedge"):
+			var wedge := int(model.selected_tool.right(1))
+			if Rect2(118 + wedge * 210, 135, 72, 105).has_point(point):
+				pointer_tool = model.selected_tool
+				return
 		for index in 3:
-			if point.distance_to(FIX_POINTS[index]) < 31:
-				fixation_selected.emit(index)
-	elif stage == 4 and clicked and not load_locked:
-		var target := _load_target(load_count)
-		if target.has_point(point):
-			sack_requested.emit(load_count)
+			if point.distance_to(Vector2(150 + index * 210, 282 if model.wedge_inserted[index] else 360)) < 38:
+				model.selected_tool = "wedge%d" % index
+				pointer_tool = model.selected_tool
+				tool_selected.emit(pointer_tool)
+				return
+		if point.distance_to(Vector2(718, 295)) < 58: tool = "vice"
+	elif model.stage == State.Stage.MEASURE:
+		if point.distance_to(Vector2(72 + model.length_cm / 200 * 620, 147)) < 28: tool = "rule"
+		elif point.distance_to(Vector2(568, 115)) < 28: tool = "square"
+	elif model.stage == State.Stage.PLANE and point.distance_to(Vector2(730, 206)) < 45: tool = "depth"
+	elif model.stage == State.Stage.LOAD:
+		if Rect2(300, 76, 85, 95).has_point(point) and not model.load_active: tool = "sack"
+		elif point.distance_to(LEVER_PIVOT) < 78: tool = "lever"
+	model.selected_tool = tool
+	pointer_tool = tool
+	tool_selected.emit(tool)
+	if tool in ["scribe", "saw", "plane"]:
+		var grip := Vector2.ZERO
+		var bounds := Rect2()
+		match tool:
+			"scribe":
+				grip = Vector2(98 if model.marked_lines == 0 else State.CUT_X, 184)
+				bounds = Rect2(grip - Vector2(20, 38), Vector2(55, 60))
+			"saw":
+				grip = Vector2(466 if model.cuts % 2 == 0 else 636, 202)
+				bounds = Rect2(grip - Vector2(125, 100), Vector2(250, 135))
+			"plane":
+				grip = Vector2(72, model.lane_y())
+				bounds = Rect2(grip - Vector2(40, 60), Vector2(120, 85))
+		if bounds.has_point(point):
+			pointer_offset = point - grip
+			model.begin_tool(grip)
+	if tool in ["vice", "depth"]:
+		var center := Vector2(718, 295) if tool == "vice" else Vector2(730, 206)
+		pointer_angle = (point - center).angle()
 
+func _pointer_move(point: Vector2) -> void:
+	match pointer_tool:
+		"template": model.adjust("template", point.x - pointer_last.x)
+		"lens": model.lens_position = point.clamp(Vector2(44, 44), Vector2(756, 376))
+		"rule": model.length_cm = clampf((point.x - 72) / 620 * 200, 100, 190)
+		"square": model.square_angle = clampf(90 + rad_to_deg((point - Vector2(568, 184)).angle() + PI / 2), 78, 102)
+		"vice", "depth":
+			var center := Vector2(718, 295) if pointer_tool == "vice" else Vector2(730, 206)
+			var angle := (point - center).angle()
+			model.adjust(pointer_tool, wrapf(angle - pointer_angle, -PI, PI) / TAU * 0.6)
+			pointer_angle = angle
+		"lever":
+			var offset := point - LEVER_PIVOT
+			model.counterforce = inverse_lerp(-LEVER_SWING, LEVER_SWING, clampf(atan2(offset.x, -offset.y), -LEVER_SWING, LEVER_SWING))
+		"scribe", "saw", "plane": model.move_tool(point - pointer_offset)
+	pointer_last = point
+	refresh()
 
-func _load_target(index: int) -> Rect2:
-	if index < 0 or index >= 3:
-		return Rect2()
-	return Rect2(SACK_X[index] - 39, 62, 78, 110)
+func _pointer_release(point: Vector2) -> void:
+	if pointer_tool.begins_with("wedge"):
+		var index := int(pointer_tool.right(1))
+		if not model.wedge_inserted[index]:
+			if point.distance_to(Vector2(150 + index * 210, 282)) < 40: model.insert_wedge(index)
+		elif point.y - pointer_start.y > 18 or point.distance_to(pointer_start) < 12: model.hammer(index)
+	elif pointer_tool == "sack" and Rect2(250, 145, 180, 130).has_point(point): model.place_sack()
+	model.cancel_tool()
+	refresh()
 
-
-func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
-	if not active or stage != 4 or load_locked or not data is Dictionary:
-		return false
-	if data.get("kind") != "lumber_sack" or data.get("session") != session_id:
-		return false
-	var point := at_position * Vector2(771, 323) / size
-	return data.get("index", -1) == load_count and _load_target(load_count).has_point(point)
-
-
-func _drop_data(at_position: Vector2, data: Variant) -> void:
-	if _can_drop_data(at_position, data):
-		sack_requested.emit(load_count)
-
-
-func deflection_at(x: float) -> float:
-	if x > 115 and x < 340:
-		return sin((x - 115) / 225.0 * PI) * bend
-	if x >= 340 and x < 535:
-		return sin((x - 340) / 195.0 * PI) * bend
-	return 0.0
-
+func release_from_viewport(point: Vector2, identity: int) -> bool:
+	if pointer_id != identity: return false
+	var local := get_global_transform_with_canvas().affine_inverse() * point
+	_pointer_release(local * DESIGN_SIZE / size)
+	pointer_id = -2
+	pointer_tool = ""
+	gesture_finished.emit()
+	return true
 
 func _draw() -> void:
-	if font == null:
-		return
-	draw_set_transform(Vector2.ZERO, 0, size / Vector2(771, 323))
-	_draw_wood()
-	_draw_fixings()
-	_draw_labels()
-	if extra_mode == "measure":
-		_draw_measuring()
-	elif stage == 0:
-		_draw_inspection()
-	elif stage == 1:
-		for index in 3:
-			if not fixations[index]:
-				_target(FIX_POINTS[index], str(index + 1))
-	elif stage == 2:
-		_draw_saw_guide()
-	elif stage == 3:
-		_draw_plane_guide()
-	elif stage == 4:
-		_draw_load_test()
-	elif stage == 5:
-		_plate(Rect2(152, 257, 467, 46), Color("192117f5"), Color("8ca665"))
-		draw_string(font, Vector2(180, 285), "✓ TABLA ESTRUCTURAL LISTA PARA EL MOLINO", HORIZONTAL_ALIGNMENT_LEFT, -1, 15, GREEN)
-	if stage < 4 and (saw_count > 0 or plane_count > 0):
-		for chip in saw_count * 6 + plane_count * 9:
-			var point := Vector2(210 + fposmod(chip * 53.7, 330), 226 + fposmod(chip * 23.3, 22))
-			if chip % 3 == 0 and plane_count > 0:
-				draw_arc(point, 2.0 + chip % 3, 0, PI * 1.6, 12, Color("c5a368"), 1.4)
-			else:
-				draw_line(point, point + Vector2(3, 1), Color("c39a55"), 1.5)
-	if feedback_time > 0:
-		var alpha := minf(1.0, feedback_time * 3)
-		var width := font.get_string_size(feedback, HORIZONTAL_ALIGNMENT_LEFT, -1, 13).x + 30
-		var rect := Rect2((771 - width) / 2, 211, width, 29)
-		_plate(rect, Color(0.07, 0.05, 0.02, alpha * 0.94), Color(feedback_color, alpha * 0.7))
-		draw_string(font, rect.position + Vector2(15, 20), feedback, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color(feedback_color, alpha))
+	draw_set_transform(Vector2.ZERO, 0, size / DESIGN_SIZE)
+	draw_texture_rect(ROOM, Rect2(Vector2.ZERO, DESIGN_SIZE), false, Color(0.66, 0.60, 0.49))
+	draw_style_box(_plate_style(Color("20170ddc"), Color("715438")), Rect2(22, 128, 756, 208))
+	for leg in [102, 602]:
+		draw_rect(Rect2(leg, 320, 22, 88), Color("51351e"))
+		draw_rect(Rect2(leg + 3, 320, 3, 88), Color("967044"))
+	draw_style_box(_plate_style(Color("5a3d25"), Color("bc9052")), Rect2(32, 308, 736, 26))
+	draw_string(font, Vector2(42, 32), "ISLA LACUSTRE  /  TALLER DE BRUNO", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, LIGHT)
+	draw_line(Vector2(42, 42), Vector2(758, 42), Color("a67c4866"))
 	draw_set_transform(Vector2.ZERO)
 
+func _plate_style(fill: Color, edge: Color) -> StyleBoxFlat:
+	var key := str(fill) + str(edge)
+	if plate_styles.has(key): return plate_styles[key] as StyleBoxFlat
+	var style := StyleBoxFlat.new()
+	style.bg_color = fill
+	style.border_color = edge
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(4)
+	plate_styles[key] = style
+	return style
 
-func _draw_wood() -> void:
-	var jiggle := sin(time * 28) * stability_pulse * 1.8
-	if stage < 3:
-		var source: Rect2 = REGIONS[0]
-		if offcut <= 0:
-			draw_texture_rect_region(WOOD, Rect2(60, 110 + jiggle, 540, 62), source)
-		else:
-			var fraction := 490.0 / 540.0
-			draw_texture_rect_region(WOOD, Rect2(60, 110, 490, 62), Rect2(source.position, source.size * Vector2(fraction, 1)))
-			draw_set_transform(Vector2(550 + offcut * 19, 110 + offcut * offcut * 92) * size / Vector2(771, 323), offcut * 0.48, size / Vector2(771, 323))
-			draw_texture_rect_region(WOOD, Rect2(0, 0, 50, 62), Rect2(source.position + Vector2(source.size.x * fraction, 0), source.size * Vector2(1 - fraction, 1)), Color(1, 1, 1, 1 - offcut * 0.6))
-			draw_set_transform(Vector2.ZERO, 0, size / Vector2(771, 323))
-		if chalk > 0:
-			for dash in int(24 * chalk):
-				var x := 90 + dash * 19.0
-				draw_line(Vector2(x, 121), Vector2(x + 11, 121), Color("f3e8c8"), 1.4)
-			draw_line(Vector2(550, 109), Vector2(550, 109 + chalk * 61), Color("f4e9c8"), 2)
-	else:
-		var source: Rect2 = REGIONS[2] if plane_count >= 4 else REGIONS[1]
-		# Strips of the actual timber bend between supports; the room stays still.
-		for slice in 70:
-			var x := 60 + slice * 7.0
-			draw_texture_rect_region(WOOD, Rect2(x, 112 + deflection_at(x), 7.1, 60), Rect2(source.position + Vector2(source.size.x * slice / 70, 0), Vector2(source.size.x / 70 + 0.2, source.size.y)))
-		if stage == 3 and plane_count < 4:
-			var smooth: Rect2 = REGIONS[2]
-			for lane in 4:
-				var amount: float = lane_progress[lane]
-				if amount > 0:
-					draw_texture_rect_region(WOOD, Rect2(60, 112 + lane * 5, 490 * amount, 5), Rect2(smooth.position + Vector2(0, smooth.size.y * lane / 12.0), Vector2(smooth.size.x * amount, smooth.size.y / 12.0)))
+func draw_tools(canvas: Node2D) -> void:
+	if not model: return
+	for x in [110, 530]:
+		canvas.draw_rect(Rect2(x - 22, 274, 44, 33), Color("302418"))
+		canvas.draw_line(Vector2(x - 22, 274), Vector2(x + 22, 274), BRASS, 2)
+	match model.stage:
+		State.Stage.INSPECT: _draw_inspection(canvas)
+		State.Stage.MEASURE: _draw_measuring(canvas)
+		State.Stage.SECURE: _draw_fixing(canvas)
+		State.Stage.SAW: _draw_saw(canvas)
+		State.Stage.PLANE: _draw_plane(canvas)
+		State.Stage.LOAD: _draw_load(canvas)
+		State.Stage.COMPLETE:
+			_text(canvas, Vector2(196, 120), "✓  TABLA DE SOPORTE DE LA BANCADA", 17, GREEN)
+			_text(canvas, Vector2(196, 146), "Veta continua · corte preciso · carga verificada", 13, LIGHT)
+	if model.stage == State.Stage.MEASURE:
+		for index in model.marked_lines:
+			var x := 98.0 if index == 0 else State.CUT_X
+			canvas.draw_line(Vector2(x, 185), Vector2(x, 271), INK, 2)
 
+func _draw_inspection(canvas: Node2D) -> void:
+	for defect in model.defects:
+		var p := Vector2(72 + float(defect.x), 184 + float(defect.y))
+		var radius := float(defect.radius)
+		match int(defect.kind):
+			0:
+				canvas.draw_circle(p, radius, Color("47301d"))
+				for ring in 3: canvas.draw_arc(p, radius * (0.3 + ring * 0.3), 0, TAU, 24, Color("987041"), 1)
+			1: canvas.draw_polyline(PackedVector2Array([p - Vector2(18, 4), p - Vector2(3, 1), p + Vector2(2, 7), p + Vector2(20, 3)]), Color("352017"), 2)
+			2:
+				for dot in 9: canvas.draw_circle(p + Vector2(sin(dot * 2.7) * radius, cos(dot * 3.1) * radius * 0.6), 1.5, Color("59492e"))
+	var rect := Rect2(72 + model.template_x, 180, State.TEMPLATE_WIDTH, 96)
+	var color := GREEN if model.template_safe() else RED
+	canvas.draw_rect(rect, Color(color, 0.13))
+	canvas.draw_rect(rect, color, false, 2)
+	for x in [rect.position.x + 18, rect.get_center().x, rect.end.x - 18]: canvas.draw_line(Vector2(x, 181), Vector2(x, 275), Color(color, 0.65), 1)
+	_text(canvas, rect.position + Vector2(8, -12), "PLANTILLA  /  ZONAS DE APOYO", 12, color)
+	_text(canvas, Vector2(72, 365), "Veta continua" if model.template_safe() else "Atención: defecto dentro de la pieza", 14, color)
+	if model.selected_tool == "lens":
+		canvas.draw_line(model.lens_position + Vector2(29, 29), model.lens_position + Vector2(58, 58), INK, 14)
+		canvas.draw_line(model.lens_position + Vector2(29, 29), model.lens_position + Vector2(58, 58), BRASS, 8)
 
-func _draw_fixings() -> void:
-	if stage < 1 or stage > 2:
-		return
-	for index in 2:
-		var amount: float = fix_progress[index]
-		if amount <= 0:
-			continue
-		var p: Vector2 = FIX_POINTS[index] + Vector2(-22 * (1 - amount), 0)
-		draw_colored_polygon(PackedVector2Array([p + Vector2(-20, 1), p + Vector2(15, 1), p + Vector2(10, -21)]), INK)
-		draw_colored_polygon(PackedVector2Array([p + Vector2(-15, -1), p + Vector2(12, -1), p + Vector2(8, -17)]), Color("b58142"))
-		draw_line(p + Vector2(-9, -4), p + Vector2(7, -10), Color("e0b16b"), 2)
-	var closing: float = fix_progress[2]
-	if closing > 0:
-		var x := 524.0
-		var top := 100.0 - (1 - closing) * 23
-		draw_polyline(PackedVector2Array([Vector2(x + 17, top), Vector2(x + 30, top), Vector2(x + 30, 192), Vector2(x + 9, 192)]), INK, 9)
-		draw_polyline(PackedVector2Array([Vector2(x + 17, top), Vector2(x + 30, top), Vector2(x + 30, 192), Vector2(x + 9, 192)]), Color("70695a"), 4)
-		draw_line(Vector2(x + 12, 165), Vector2(x + 12, 205), INK, 5)
-		for thread in 8:
-			draw_line(Vector2(x + 9, 168 + thread * 4), Vector2(x + 15, 166 + thread * 4), Color("a39b7e"), 1)
-		draw_line(Vector2(x + 12, 205) - Vector2(cos(closing * TAU * 2) * 15, 2), Vector2(x + 12, 205) + Vector2(cos(closing * TAU * 2) * 15, 2), Color("a0865e"), 4)
-		draw_rect(Rect2(x + 6, 162, 14, 5), Color("605b4c"))
+func _draw_measuring(canvas: Node2D) -> void:
+	canvas.draw_style_box(_plate_style(Color("b88e47"), LIGHT), Rect2(72, 139, 620, 30))
+	for tick in 101:
+		var x := 72 + tick * 6.2
+		canvas.draw_line(Vector2(x, 140), Vector2(x, 153 if tick % 10 else 160), INK, 1)
+		if tick % 10 == 0: _text(canvas, Vector2(x - 8, 166), str(tick * 2), 10, INK)
+	var stop_x := 72 + model.length_cm / 200 * 620
+	canvas.draw_rect(Rect2(stop_x - 6, 132, 12, 46), Color("403c32"))
+	canvas.draw_circle(Vector2(stop_x, 147), 6, LIGHT)
+	_text(canvas, Vector2(76, 122), "TOPE: %.1f cm  ·  OBJETIVO: 160 cm" % model.length_cm, 13, LIGHT)
+	var pivot := Vector2(568, 184)
+	var arm := Vector2(0, -80).rotated(deg_to_rad(model.square_angle - 90))
+	canvas.draw_polyline(PackedVector2Array([pivot + Vector2(-65, 0), pivot, pivot + arm]), INK, 12)
+	canvas.draw_polyline(PackedVector2Array([pivot + Vector2(-65, 0), pivot, pivot + arm]), Color("b4b5a2"), 6)
+	canvas.draw_circle(pivot + arm, 8, BRASS)
+	_text(canvas, Vector2(615, 121), "%.1f°" % model.square_angle, 14, LIGHT)
+	var mark_x := 98.0 if model.marked_lines == 0 else State.CUT_X
+	canvas.draw_line(Vector2(mark_x, 184), Vector2(mark_x, 272), Color(GREEN, 0.65), 2)
+	canvas.draw_circle(Vector2(mark_x, 184), 7, BRASS)
+	var pen := model.tool_position if model.tool_active else Vector2(mark_x, 176)
+	canvas.draw_line(pen + Vector2(13, -29), pen, Color("26160d"), 9)
+	canvas.draw_line(pen + Vector2(13, -29), pen + Vector2(3, -7), BRASS, 5)
+	canvas.draw_line(pen + Vector2(3, -7), pen, LIGHT, 2)
+	_text(canvas, Vector2(72, 365), "Incisiones: %d / 2  ·  sigue la escuadra de canto a canto" % model.marked_lines, 14, LIGHT)
 
-
-func _draw_inspection() -> void:
-	for index in 4:
-		var p: Vector2 = SECTIONS[index]
-		if index == 1:
-			draw_polyline(PackedVector2Array([p + Vector2(-17, -14), p + Vector2(2, -4), p + Vector2(-5, 4), p + Vector2(16, 16)]), INK, 2)
-		elif index == 2:
-			for ring in 3:
-				draw_arc(p, 4 + ring * 3, 0, TAU, 24, Color("432915"), 1.4)
-		elif index == 3:
-			draw_circle(p, 17, Color(0.12, 0.22, 0.15, 0.3))
-		var color := (GREEN if index == 0 else Color("e69b58")) if inspected[index] else GOLD
-		if hovered_section == index:
-			draw_rect(Rect2(p - Vector2(46, 24), Vector2(92, 48)), Color(color, 0.12))
-		_target(p + Vector2(0, -47), str(index + 1), color)
-		if not inspected[index]:
-			draw_line(p + Vector2(0, -33), p + Vector2(0, -22), Color(color, 0.65), 1)
-	_plate(Rect2(123, 259, 525, 45), Color("1b170fed"), Color("79603a"))
-	var hints := ["1  Veta recta: fibras largas y paralelas", "2  Grieta: una fractura recorre la madera", "3  Nudo: las fibras se desvían alrededor", "4  Humedad: zona oscura y fibras hinchadas"]
-	var caption: String = hints[hovered_section] if hovered_section >= 0 else "Explora las cuatro marcas sobre la madera"
-	_center_text(caption, 286, 13, GOLD)
-
-
-func _draw_saw_guide() -> void:
-	var handle := saw_position + Vector2(-94 if saw_direction == 1 else 94, 0)
-	draw_arc(handle, 19, 0, TAU, 32, Color(GOLD, 0.7 + sin(time * 4) * 0.2), 1.5)
-	var direction := "→" if saw_direction == 1 else "←"
-	_plate(Rect2(188, 263, 395, 39), Color("1b170fed"), Color("79603a"))
-	_center_text("%s    RECORRIDO %d / 5    %s" % [direction, mini(5, saw_count + 1), direction], 287, 15, GOLD)
-
-
-func _draw_plane_guide() -> void:
-	for lane in 4:
-		var color := GREEN if lane < plane_count else GOLD if lane == plane_count else Color("786d51")
-		draw_circle(Vector2(39, 116 + lane * 5), 2, color)
-	_plate(Rect2(170, 263, 432, 39), Color("1b170fed"), Color("79603a"))
-	_center_text("A FAVOR DE LA VETA    →    FRANJA %d / 4" % mini(4, plane_count + 1), 287, 13, GOLD)
-
-
-func _draw_load_test() -> void:
-	if load_count < 3 and not load_locked:
-		var target := _load_target(load_count)
-		draw_rect(target, Color(GREEN, 0.08))
-		draw_rect(target, Color(GREEN, 0.65), false, 1.5)
-		_target(Vector2(SACK_X[load_count], 80), str(load_count + 1), GREEN)
-	_plate(Rect2(163, 258, 445, 47), Color("1b1e13ed"), Color("79603a"))
-	var labels := ["CARGA LIGERA", "CARGA MEDIA", "CARGA COMPLETA"]
+func _draw_fixing(canvas: Node2D) -> void:
 	for index in 3:
-		var color := GREEN if index < verified_loads else GOLD if index < load_count else Color("8d8267")
-		draw_string(font, Vector2(181 + index * 141, 286), ("✓ " if index < verified_loads else "○ ") + labels[index], HORIZONTAL_ALIGNMENT_LEFT, -1, 10, color)
+		var p := Vector2(150 + index * 210, 286 - model.wedge_hits[index] * 5)
+		canvas.draw_rect(Rect2(p.x - 21, 270, 42, 32), INK)
+		if not model.wedge_inserted[index]:
+			canvas.draw_rect(Rect2(p.x - 20, 270, 40, 30), Color(GREEN, 0.7), false, 1)
+			p.y = 360
+			if pointer_tool == "wedge%d" % index and pointer_start.y > 330: p = pointer_last
+		canvas.draw_colored_polygon(PackedVector2Array([p + Vector2(-18, 13), p + Vector2(19, 13), p + Vector2(15, -18)]), Color("b27b3e"))
+		canvas.draw_line(p + Vector2(-12, 8), p + Vector2(12, -9), BRASS, 2)
+		_text(canvas, Vector2(127 + index * 210, 393), "Cuña %d" % (index + 1), 12, LIGHT)
+		for hit in 3: canvas.draw_circle(Vector2(138 + index * 210 + hit * 12, 405), 3, GREEN if hit < model.wedge_hits[index] else Color("67533c"))
+	var index := int(model.selected_tool.right(1)) if model.selected_tool.begins_with("wedge") else 1
+	var mallet := Vector2(150 + index * 210, 168 - (14 if model.impact_age < 0.08 else 0))
+	if pointer_tool.begins_with("wedge"): mallet.y = clampf(pointer_last.y, 130, 258)
+	canvas.draw_line(mallet, mallet + Vector2(15, 68), BRASS, 9)
+	canvas.draw_style_box(_plate_style(Color("a3713f"), LIGHT), Rect2(mallet - Vector2(27, 14), Vector2(54, 28)))
+	canvas.draw_texture_rect_region(WOOD, Rect2(mallet - Vector2(25, 12), Vector2(50, 24)), Rect2(100, 720, 400, 100))
+	var jaw_y := 178.0 - (1.0 - model.pressure) * 22
+	canvas.draw_polyline(PackedVector2Array([Vector2(665, jaw_y), Vector2(705, jaw_y), Vector2(705, 285), Vector2(675, 285)]), INK, 12)
+	canvas.draw_polyline(PackedVector2Array([Vector2(665, jaw_y), Vector2(705, jaw_y), Vector2(705, 285), Vector2(675, 285)]), Color("9c9a85"), 6)
+	for thread in 8: canvas.draw_line(Vector2(678, 265 + thread * 4), Vector2(688, 262 + thread * 4), BRASS, 2)
+	_dial(canvas, Vector2(718, 295), model.pressure, 0.60, 0.18 if model.easy else 0.07, "MORDAZA")
+	_text(canvas, Vector2(72, 108), "Asienta tres cuñas · gira la mordaza · prueba el extremo libre", 13, LIGHT)
 
+func _draw_saw(canvas: Node2D) -> void:
+	var x := model.tool_position.x if model.tool_active else (466.0 if model.cuts % 2 == 0 else 636.0)
+	var center := Vector2(x, 170 + model.cuts * 9)
+	canvas.draw_line(Vector2(State.CUT_X, 182), Vector2(State.CUT_X, 274), Color(GREEN, 0.5), 1)
+	canvas.draw_polyline(PackedVector2Array([center + Vector2(-110, 34), center + Vector2(-110, -55), center + Vector2(110, -55), center + Vector2(110, 34)]), INK, 16)
+	canvas.draw_polyline(PackedVector2Array([center + Vector2(-110, 34), center + Vector2(-110, -55), center + Vector2(110, -55), center + Vector2(110, 34)]), Color("a87a48"), 10)
+	canvas.draw_texture_rect_region(WOOD, Rect2(center + Vector2(-108, -60), Vector2(216, 10)), Rect2(37, 708, 1466, 45))
+	for side in [-1, 1]:
+		for y in [-53, 32]: canvas.draw_circle(center + Vector2(side * 110, y), 3, BRASS)
+	canvas.draw_line(center + Vector2(-110, 34), center + Vector2(110, 34), Color("ccc8ac"), 4)
+	for tooth in 42:
+		var p := center + Vector2(-108 + tooth * 5.2, 36)
+		canvas.draw_line(p, p + Vector2(2, 3), Color("e3d8ba"), 1)
+	_text(canvas, Vector2(72, 363), "%s  ·  RECORRIDOS %d / 5" % ["→ Avanza" if model.cuts % 2 == 0 else "← Regresa", model.cuts], 15, LIGHT)
+	for cut in 5: canvas.draw_circle(Vector2(588 + cut * 21, 359), 5, GREEN if cut < model.cuts else BRASS.darkened(0.55))
 
-func _draw_labels() -> void:
-	var titles := ["EXAMINAR LA MADERA", "FIJAR ANTES DE CORTAR", "CORTE GUIADO", "CEPILLADO A FAVOR DE VETA", "PRUEBA DE CARGA", "TABLA TERMINADA"]
-	_plate(Rect2(14, 12, 254, 27), Color("1a160feb"), Color("715a39"))
-	draw_circle(Vector2(27, 25), 3, GREEN if stage == 5 else GOLD)
-	draw_string(font, Vector2(38, 30), "MEDIR Y MARCAR CON ESCUADRA" if extra_mode == "measure" else titles[stage], HORIZONTAL_ALIGNMENT_LEFT, -1, 11, GOLD)
-	_plate(Rect2(592, 12, 165, 27), Color("1a160feb"), Color("715a39"))
-	draw_string(font, Vector2(606, 30), "TALLER DE BRUNO", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, GOLD)
+func _draw_plane(canvas: Node2D) -> void:
+	var y := model.lane_y()
+	canvas.draw_rect(Rect2(73, y - 8, 494, 17), Color(GREEN, 0.12))
+	canvas.draw_line(Vector2(72, y), Vector2(568, y), Color(GREEN, 0.7), 1)
+	var p := model.tool_position if model.tool_active else Vector2(72, y)
+	canvas.draw_texture_rect_region(TOOLS, Rect2(p - Vector2(37, 48), Vector2(110, 48)), Rect2(1230, 190, 920, 320))
+	_dial(canvas, Vector2(730, 206), model.blade_depth, 0.5, 0.18 if model.easy else 0.05, "CUCHILLA")
+	_text(canvas, Vector2(72, 363), "→ A favor de veta  ·  FRANJA %d / 4" % mini(model.passes + 1, 4), 15, LIGHT)
+	_text(canvas, Vector2(656, 279), "Gira la rueda", 12, LIGHT)
 
+func lever_grip(value: float) -> Vector2:
+	var angle := lerpf(-LEVER_SWING, LEVER_SWING, value)
+	return LEVER_PIVOT + Vector2(sin(angle), -cos(angle)) * 56
 
-func _target(point: Vector2, caption: String, color := GOLD) -> void:
-	draw_circle(point, 13, Color("20190fea"))
-	draw_arc(point, 13, 0, TAU, 28, color, 1.4)
-	draw_string(font, point + Vector2(-4, 5), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, color)
+func _draw_load(canvas: Node2D) -> void:
+	var count := model.verified_loads + (1 if model.load_active else 0)
+	for index in count: _sack(canvas, Vector2(320 + index * 15, 181 - index * 28 + model.deflection * 2.5), index)
+	if not model.load_active and model.verified_loads < 3:
+		_sack(canvas, pointer_last + Vector2(0, 28) if pointer_tool == "sack" else Vector2(338, 138), model.verified_loads)
+		_text(canvas, Vector2(280, 70), "Arrastra al centro", 12, LIGHT)
+	canvas.draw_rect(Rect2(266, 175, 125, 100), Color(GREEN, 0.09))
+	canvas.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	canvas.draw_texture_rect_region(LEVER_PARTS, Rect2(LEVER_PIVOT - Vector2(58, 18), Vector2(116, 48)), LEVER_BASE_REGION)
+	canvas.draw_set_transform(LEVER_PIVOT, lerpf(-LEVER_SWING, LEVER_SWING, model.counterforce))
+	canvas.draw_texture_rect_region(LEVER_PARTS, Rect2(-8, -64, 16, 68), LEVER_ARM_REGION)
+	canvas.draw_set_transform(Vector2.ZERO)
+	canvas.draw_style_box(_plate_style(Color("29271eee"), BRASS), Rect2(594, 78, 175, 100))
+	canvas.draw_rect(Rect2(602, 125 - model.load_tolerance() * 8, 159, model.load_tolerance() * 16), Color(GREEN, 0.25))
+	for line in 11: canvas.draw_line(Vector2(605, 87 + line * 8), Vector2(759, 87 + line * 8), Color("d8cda43b"), 1)
+	for line in 16: canvas.draw_line(Vector2(605 + line * 10, 86), Vector2(605 + line * 10, 168), Color("d8cda426"), 1)
+	var pointer_y := clampf(125 + model.deflection * 8, 87, 167)
+	canvas.draw_line(Vector2(611, pointer_y), Vector2(748, pointer_y), BRASS, 3)
+	_text(canvas, Vector2(608, 73), "COMPARADOR · FLECHA", 11, LIGHT)
+	_text(canvas, Vector2(72, 364), "Cargas verificadas: %d / 3  ·  aguja en verde durante 1,2 s" % model.verified_loads, 14, LIGHT)
+	if model.load_active: canvas.draw_arc(Vector2(339, 100), 23, -PI / 2, -PI / 2 + TAU * model.stable_seconds / 1.2, 36, GREEN, 3)
 
+func _sack(canvas: Node2D, point: Vector2, index: int) -> void:
+	canvas.draw_texture_rect(SACK, Rect2(point - Vector2(30, 58), Vector2(60, 58)), false)
+	canvas.draw_circle(point + Vector2(0, -23), 10, INK)
+	_text(canvas, point + Vector2(-4, -18), str(index + 1), 14, LIGHT)
 
-func _center_text(caption: String, y: float, font_size: int, color: Color) -> void:
-	var width := font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-	draw_string(font, Vector2((771 - width) / 2, y), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
+func _dial(canvas: Node2D, center: Vector2, value: float, target: float, tolerance: float, caption: String) -> void:
+	canvas.draw_circle(center, 35, INK)
+	canvas.draw_arc(center, 34, 0, TAU, 48, BRASS, 3)
+	canvas.draw_arc(center, 29, PI * (0.75 + (target - tolerance) * 1.5), PI * (0.75 + (target + tolerance) * 1.5), 30, GREEN, 5)
+	for tick in 13:
+		var direction := Vector2.from_angle(PI * (0.75 + tick / 12.0 * 1.5))
+		canvas.draw_line(center + direction * 22, center + direction * 26, LIGHT, 1)
+	var needle := Vector2.from_angle(PI * (0.75 + value * 1.5))
+	canvas.draw_line(center, center + needle * 24, BRASS, 3)
+	canvas.draw_circle(center, 5, LIGHT)
+	_text(canvas, center + Vector2(-36, -46), caption, 11, LIGHT)
 
-
-func _plate(rect: Rect2, fill: Color, border: Color) -> void:
-	var box := StyleBoxFlat.new()
-	box.bg_color = fill
-	box.border_color = border
-	box.set_border_width_all(1)
-	box.set_corner_radius_all(4)
-	draw_style_box(box, rect)
-
-
-func _draw_measuring() -> void:
-	_plate(Rect2(89, 89, 462, 19), Color("87663a"), Color("d9b374"))
-	for tick in 41:
-		var x := 96.0 + tick * 11.1
-		draw_line(Vector2(x, 103), Vector2(x, 90 if tick % 5 == 0 else 96), INK, 1)
-		if tick % 10 == 0:
-			draw_string(font, Vector2(x - 2, 86), str(tick * 4), HORIZONTAL_ALIGNMENT_LEFT, -1, 10, GOLD)
-	for index in 3:
-		_target(Vector2(90 + index * 230, 78), str(index + 1), GREEN if index < marked_lines else GOLD)
-	draw_set_transform(Vector2(550, 109) * size / Vector2(771, 323), deg_to_rad(square_angle - 90), size / Vector2(771, 323))
-	draw_polyline(PackedVector2Array([Vector2(-59, 0), Vector2(0, 0), Vector2(0, 75)]), INK, 12)
-	draw_polyline(PackedVector2Array([Vector2(-59, 0), Vector2(0, 0), Vector2(0, 75)]), Color("b99551"), 7)
-	for tick in 8:
-		draw_line(Vector2(-3, tick * 9), Vector2(3, tick * 9), INK, 1)
-	draw_set_transform(Vector2.ZERO, 0, size / Vector2(771, 323))
-	_plate(Rect2(155, 257, 461, 55), Color("241c12"), Color("a48449"))
-	_center_text("MARCA %d / 3 · %.0f cm · ESCUADRA %.0f°" % [mini(3, marked_lines + 1), measured_length, square_angle], 273, 12, GOLD)
+func _text(canvas: Node2D, point: Vector2, text: String, font_size: int, color: Color) -> void:
+	canvas.draw_string(font, point + Vector2(1, 1), text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color("120e0bee"))
+	canvas.draw_string(font, point, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)

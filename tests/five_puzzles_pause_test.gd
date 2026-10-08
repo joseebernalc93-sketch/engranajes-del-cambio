@@ -56,16 +56,16 @@ func _ready() -> void:
 	_check(not hud.pause_overlay.visible and village.get_node("World/Player").controls_enabled, "Continue must restore movement")
 	GameState.add_item("costal_harina")
 	GameState._sell_flour()
-	_check(GameState.coins == 13, "The baker must pay 13 coins")
+	_check(GameState.coins == 100, "The baker must pay 100 coins")
 	GameState._sell_flour()
-	_check(GameState.coins == 13, "Flour must not pay twice")
+	_check(GameState.coins == 100, "Flour must not pay twice")
 	GameState.interact("villager")
 	_check(dialogue.options.is_empty(), "Elena must never offer the removed puzzle")
 	hud._select_dialogue_action("close")
-	_check(GameState.book_passenger_coach("res://scenes/station.tscn") and GameState.coins == 10, "The coach fare must leave the ten coins needed for the ticket")
+	_check(GameState.book_passenger_coach("res://scenes/station.tscn") and GameState.coins == 97, "The coach fare must leave the ten coins needed for the ticket")
 	GameState.complete_passenger_coach_trip("res://scenes/station.tscn")
 	EventBus.dialogue_action_selected.emit("buy_ticket")
-	_check(GameState.flags.ticket_bought and GameState.coins == 0, "The ticket must be available without Elena's puzzle")
+	_check(GameState.flags.ticket_bought and GameState.coins == 87, "The ticket must be available without Elena's puzzle")
 	GameState.difficulty = GameState.DIFFICULTY_HARD
 	hud._open_pause()
 	await _settle()
@@ -97,7 +97,7 @@ func _ready() -> void:
 		elif FileAccess.file_exists(path):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	if failures.is_empty():
-		print("FOUR PUZZLES PAUSE OK: horse preserved, 13 coin economy, four cards, difficulty, guidance and save migration")
+		print("FOUR PUZZLES PAUSE OK: horse preserved, 100 coin economy, four cards, difficulty, guidance and save migration")
 		get_tree().quit(0)
 	else:
 		for failure in failures: push_error(failure)
@@ -109,14 +109,14 @@ func _test_legacy_migration() -> void:
 	old_flags.flour_sold = true
 	var old := {"save_version": 11, "run_started": true, "difficulty": "facil", "coins": 10, "inventory": {}, "flags": old_flags, "metrics": GameState.metrics.duplicate(true), "checkpoint": {"scene": "res://scenes/game.tscn", "position": [430, 480], "popup": {"name": "MigrationCartPopup", "state": {"stage": 2}}, "hud": {"dialogue": {"speaker": "Elena, campesina", "options": [{"action": "begin_migration_cart"}]}}}}
 	_write_old_save(old)
-	_check(GameState.load_progress() and GameState.coins == 13, "Old ten-coin sales must receive the missing fare")
+	_check(GameState.load_progress() and GameState.coins == 100, "Old ten-coin sales must receive the missing fare")
 	_check(not GameState.checkpoint.has("popup") and Vector2(float(GameState.checkpoint.position[0]), float(GameState.checkpoint.position[1])) == Vector2(430, 480), "A removed-puzzle save must resume outside it at the same position")
 	_check(GameState.difficulty == "facil" and not GameState.flags.cart_mission_completed, "Save migration must preserve difficulty and existing progress")
-	_check(GameState.load_progress() and GameState.coins == 13, "Repeated loads must never duplicate compensation")
+	_check(GameState.load_progress() and GameState.coins == 100, "Repeated loads must never duplicate compensation")
 	old.flags.coach_allowance_received = true
 	old.coins = 0
 	_write_old_save(old)
-	_check(GameState.load_progress() and GameState.coins == 0, "A reward already received and spent must not be awarded again")
+	_check(GameState.load_progress() and GameState.coins == 87, "A reward already received and spent must not be awarded again")
 
 func _write_old_save(data: Dictionary) -> void:
 	var file := FileAccess.open(GameState.SAVE_PATH, FileAccess.WRITE)

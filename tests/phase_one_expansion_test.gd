@@ -79,11 +79,11 @@ func _ready() -> void:
 
 	# La harina financia ambos pasajes; Elena conserva su papel narrativo.
 	GameState._sell_flour()
-	assert(GameState.coins == 13)
+	assert(GameState.coins == 100)
 	assert(GameState.get_objective().contains("carretas"))
 	assert(GameState.book_passenger_coach("res://scenes/station.tscn"))
 	assert(GameState.complete_passenger_coach_trip("res://scenes/station.tscn"))
-	assert(GameState.coins == 10)
+	assert(GameState.coins == 97)
 	assert(GameState.get_objective().contains("boleto"))
 
 	EventBus.dialogue_action_selected.emit("buy_ticket")
