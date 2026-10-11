@@ -1,0 +1,60 @@
+{
+  "mode": "builtin",
+  "assets": [
+    {
+      "key": "bench",
+      "file": "foundry_workbench_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/01_seis_fases_v1.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production asset for a rich handcrafted pixel-art historical industrial adventure game. Match the reference's warm amber furnace lighting, soot-dark brick, plain riveted iron and readable mechanical silhouettes. Crisp detailed pixel clusters, no smooth painting, no photorealism, no HUD, titles, labels, borders, arrows, diagrams, people or hands. Single full-frame 16:9 landscape; exact scene composition for draggable objects drawn later by the game. Opaque background. Create a new CLOSE-UP EMPTY heavy oak-and-iron workbench inside the approved mechanized foundry. Slightly elevated front view, matching panels one and five in reference, but without ANY loose puzzle objects. Thick worn dark golden oak tabletop stretches full width from x=5% to95%, and from y=36% to90%, abundant usable top surface in center. Brick factory wall, shaft and belts, restrained glowing furnace to far upper left, small factory window in upper background. Wood bench front and two stout iron-braced legs below. A few fixed tools hang on the wall only; tiny crates at extreme edges are fine. Center tabletop is EMPTY, no bars, rod, templates, file, tongs, caliper, ruler, objects or people anywhere on tabletop. No giant central fireplace. This empty bench will serve choosing billets, filing/fit and a small transmission test rig; preserve clean readable central area."
+    },
+    {
+      "key": "furnace",
+      "file": "foundry_reheating_hearth_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/01_seis_fases_v1.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production asset for a rich handcrafted pixel-art historical industrial adventure game. Match the reference's warm amber furnace lighting, soot-dark brick, plain riveted iron and readable mechanical silhouettes. Crisp detailed pixel clusters, no smooth painting, no photorealism, no HUD, titles, labels, borders, arrows, diagrams, people or hands. Single full-frame 16:9 landscape; exact scene composition for draggable objects drawn later by the game. Opaque background. Create the stage-two solid-iron REHEATING FURNACE close-up, matching reference panel two. Thick medium brick furnace occupies LEFT 60% of frame, broad horizontal glowing hearth opening centered at 35% width, 48% height, lip at 60% height. Deep red-orange coals and flame inside, but NO iron bar, tongs or people. Brick chimney above. RIGHT 35% contains plain vertical steam/air pipework and a dark brick background, with a CLEAR EMPTY space centered 82% width, 52% height where runtime will draw and rotate a round air-control handwheel. A heavy stone ledge and worktop runs along foreground at 80% height, clear central surface. Human-scale early industrial engineering, warm reflections, not a modern blast furnace. No baked-in control wheel, lever, numeric scale or gauge."
+    },
+    {
+      "key": "hammer",
+      "file": "foundry_steam_hammer_bay_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/02_martillo_detalle_v2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production asset for a rich handcrafted pixel-art historical industrial adventure game. Match the reference's warm amber furnace lighting, soot-dark brick, plain riveted iron and readable mechanical silhouettes. Crisp detailed pixel clusters, no smooth painting, no photorealism, no HUD, titles, labels, borders, arrows, diagrams, people or hands. Single full-frame 16:9 landscape; exact scene composition for draggable objects drawn later by the game. Opaque background. Create only the STEAM HAMMER machine background using the central play area of reference, removing all UI. Reframe to a full landscape machine bay for game layering. Twin iron uprights at roughly 30% and67% width, large steam cylinder at top center 50% width, piston rod descending vertically to 39% image height. REMOVE the movable square hammer HEAD completely, leaving the piston rod and empty space below. Clear working opening between uprights. A stout anvil PLATFORM with flat top at 75% height extends from x30% to72%. Remove hot connecting rod, all tongs, all loose dies, all shadows from removed objects. Keep bottom center as a wood/iron ledge for three die choices at runtime. Remove operating lever at RIGHT; instead show only its FIXED small mounting bracket at x85%,y70%, with clear empty dark brick behind where the runtime lever will rotate. Warm furnace at far left edge, lanterns and factory windows in back. Keep strong historical pixel-art mechanical character; no letters or labels at all. Runtime draws moving head, hot blank, tongs, lever and dies."
+    },
+    {
+      "key": "drill",
+      "file": "foundry_belt_drill_bay_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/01_seis_fases_v1.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production asset for a rich handcrafted pixel-art historical industrial adventure game. Match the reference's warm amber furnace lighting, soot-dark brick, plain riveted iron and readable mechanical silhouettes. Crisp detailed pixel clusters, no smooth painting, no photorealism, no HUD, titles, labels, borders, arrows, diagrams, people or hands. Single full-frame 16:9 landscape; exact scene composition for draggable objects drawn later by the game. Opaque background. Create stage-four BELT-DRIVEN upright workshop drill close-up, matching reference panel four. Polished plain riveted iron machine, leather belt from upper right flywheel, large pulley and horizontal spindle housing centered at x52%,y25%; vertical bearing above. The spindle bottom stops at y34% and has NO drill bit or chuck: runtime draws those moving objects. The machine rear vertical supporting column sits to right at x72%, leaving the workpiece visible. Broad empty steel drill table at y69%, spanning x18% to85%, with a few subtle physical groove marks and EMPTY jig supports at x26% and70%. Behind, soot brick and factory windows; foreground bench lower quarter clear for bit selection. No metal rod, connecting rod, drilled holes, movable drill bit, loose tools, hands, modern electric motor, hydraulic hoses, meters or UI. Center main working area must be clear for a horizontally sliding iron blank below the spindle."
+    },
+    {
+      "key": "materials",
+      "file": "foundry_materials_atlas_v1.png",
+      "transparent": true,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/01_seis_fases_v1.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production TRANSPARENT sprite atlas for the approved pixel-art ironworking puzzle. EXACT regular grid of FOUR columns and THREE rows: 12 isolated objects, one centered entirely INSIDE each equally sized cell, generous transparent margin between ALL cells. All sprites viewed in coherent slightly raised front workshop perspective, rich crisp pixel clusters and dark outlines, warm amber highlights. No background, cast floor shadows, text, numbers, frame, grid lines, extra objects or hands. Keep every sprite wholly within its cell. Row 1 left-to-right: (0) short thick rectangular iron billet; (1) medium-length thick wrought iron billet, clearly distinct correct size; (2) very long thin iron billet; (3) rough solid elongated connecting-rod forging blank with thick SOLID ends, no holes. Row 2 left-to-right: (4) partly forged solid connecting-rod blank, slim central neck and two thick SOLID circular ends, no holes; (5) clean fully forged connecting-rod blank with SMALL solid circular left end and LARGER solid circular right end, NO HOLES yet; (6) finished gray iron connecting rod, SMALL circular left eye and LARGER circular right eye, both with clear transparent drilled holes, horizontal and nearly symmetrical center axis; (7) wooden matching template board with the connecting-rod silhouette cut into it, two eye positions. Row 3 left-to-right: (8) long rough steel hand file with short wooden handle, horizontal; (9) a long iron pair of forging tongs with wooden handles, horizontal; (10) wood billet-length reference gauge with a recess matching billet 1; (11) brass-and-iron workshop caliper. The two eye centers on connecting rod sprites should be about 12% and88% of the tightly cropped object width, consistent across states. All metal is COLD GRAY, runtime will tint hot blanks; no glow haze. Genuinely transparent background."
+    },
+    {
+      "key": "machines",
+      "file": "foundry_machine_parts_atlas_v1.png",
+      "transparent": true,
+      "references": [
+        "reports/phase2/propuesta_puzzle_fundicion/02_martillo_detalle_v2.png",
+        "reports/phase2/propuesta_puzzle_fundicion/01_seis_fases_v1.png"
+      ],
+      "prompt": "Use case: stylized-concept. Production TRANSPARENT sprite atlas of period mechanical workshop components for the approved pixel-art forging puzzle. EXACT regular grid FOUR columns by THREE rows: 12 separate isolated objects, one centered entirely within each equal cell, generous transparent margins between EVERY sprite. Same coherent slightly raised front mechanical perspective, warm plain riveted iron, crisp detailed pixel clusters, dark outlines, subtle amber highlights. No background, ground, floor shadows, UI, labels, text, cell frames or grid lines. Row 1 left-to-right: (0) heavy square iron steam-hammer moving head with a short vertical piston rod above; (1) vertical slender operating lever with wooden hand grip at top, round pivot at its bottom, no stand; (2) fine narrow vertical steel drill bit in a compact iron chuck; (3) thicker vertical steel drill bit in matching chuck. Row 2 left-to-right: (4) a LARGE circular front-facing dark iron flywheel with warm brass center and six spokes, transparent holes BETWEEN spokes, no crank or attached base, perfect circular outline for rotation; (5) small horizontal cylindrical piston housing with open right end and short sliding rod projecting right, isolated, no biela or flywheel; (6) a long low horizontal iron BASE for tabletop transmission mechanism, two bearing feet on its far right and a flat mounting area on left, NO wheel, rod or piston on it; (7) a SMALL brass mechanical joining pin with a round visible cap, seen from front at a slight angle. Row 3 left-to-right: (8) a LARGER brass joining pin with a round visible cap, visibly wider than pin7; (9) squat iron forging DIE block with SMALL curved recess for a small connecting-rod end; (10) squat iron forging DIE block with a FLAT narrow channel for the rod neck; (11) squat iron forging DIE block with LARGE curved recess for the large connecting-rod end. Correct mechanical silhouettes, no decorative fantasy gears, no modern hydraulics or electric tools. Genuinely transparent alpha; NO solid black background or amber halo around sprites."
+    }
+  ]
+}

@@ -4,6 +4,8 @@ Implementación del 8 de octubre de 2026.
 
 Desde la plaza exterior de la estación se camina hacia abajo para llegar a una nueva parada de coches. William ofrece el viaje al distrito industrial por **10 monedas**, con el regreso incluido. Cancelar o no disponer de dinero conserva el saldo. Cada nueva salida al distrito cuesta 10; continuar una salida ya pagada no vuelve a cobrar. Los talleres de la Fase 2 siguen reservados, sin abrir los cuatro desafíos antiguos.
 
+Al conversar, William pregunta **«¿A dónde deseas ir?»**. El diálogo compartido muestra cuatro botones en una cuadrícula de dos columnas: **Ensamble del motor**, **El pozo minero**, **La forja y fundición** y **Nave Textil**, en ese orden. Los tres primeros están habilitados; Nave Textil queda visible y reservada. Elegir destino abre la confirmación de tarifa, sin descontar monedas hasta aceptar el viaje. El selector y el destino elegido se recuperan al continuar una partida. El [pozo y misión del motor](pozo_y_motor.md) conectan mina y fábrica también a pie, sin otro pasaje. La [fundición industrial](fundicion_industrial.md) añade patio e interior explorables, sin abrir todavía su puzzle.
+
 ## Economía y partidas existentes
 
 | Acción | Importe | Saldo desde una partida nueva |
@@ -33,6 +35,8 @@ Fondos creados mediante **image_gen integrado**, con la plaza existente como ref
 
 Prompts íntegros: `assets/phase2/london_coach_art_prompts_v1.json`. Se reutilizan `passenger_coach_components_v1.png`, `elena_draft_horse_walk_v4.png`, `ramon_coachman_v1.png` y el protagonista. La exploración mantiene el HUD, diálogos y aviso de proximidad de la Fase 1; objetivos y tarifa también se consultan en el cuaderno.
 
+William usa ahora `assets/phase2/william_coachman_pixel_v2.png`, creado con **image_gen integrado** tomando las proporciones del protagonista como referencia. Lleva gorra, bigote, abrigo azul y chaleco ocre; su altura visible se ajusta a los píxeles opacos del protagonista. El mismo personaje aparece conduciendo durante el trayecto. El sprite de Ramón sigue disponible para la diligencia del pueblo. Prompt íntegro: `assets/phase2/william_coachman_prompt_v2.json`.
+
 ## Verificación
 
 ```powershell
@@ -42,7 +46,7 @@ $godotExe = 'F:/Descargas/Godot_v4.7.2-stable_win64.exe/Godot_v4.7.2-stable_win6
 & $godotExe --headless --path tmp/cart_validation_project res://tests/london_coach_test.tscn -- --read-coach
 ```
 
-Ejecutar los dos procesos en orden. Pasaron **79 comprobaciones de escritura** en ambas dificultades y **13 de lectura**, sin fallos. El primero comprueba economía completa, caminata entre mapas, oferta/cancelación/saldo insuficiente, pago único, etapas animadas, caballo/ruedas, pausas, guardado, continuación, desembarque automático y regreso. El segundo comprueba continuación entre procesos y migración desde la versión 17, incluida compensación única, otros saldos y harina sin vender. Las pruebas usan exclusivamente el proyecto aislado y respaldan/restauran sus archivos de usuario.
+Ejecutar los dos procesos en orden. Pasaron **115 comprobaciones de escritura** en ambas dificultades y **13 de lectura**, sin fallos. El primero comprueba economía completa, caminata entre mapas, oferta/cancelación/saldo insuficiente, pago único, etapas animadas, caballo/ruedas, pausas, guardado, continuación, desembarque automático y regreso. También verifica las proporciones de William, los cuatro destinos y su orden, la ruta textil deshabilitada, selección mediante teclado incluida la fundición, restauración del selector, ausencia de cobro al elegir y ajuste del diálogo en una ventana de 800 × 500. El segundo comprueba continuación entre procesos y migración desde la versión 17, incluida compensación única, otros saldos y harina sin vender. Las pruebas usan exclusivamente el proyecto aislado y respaldan/restauran sus archivos de usuario.
 
 También pasaron el recorrido completo de la Fase 1, el menú con sus cuatro puzzles y migraciones anteriores, la diligencia rural y su partida real del tren, las pruebas de llegada a Londres (142 + 15), navegación entre capítulos (80 + 14) y resumen/cuaderno con continuación entre procesos. Las capturas nativas confirman los dos patios y el trayecto panorámico.
 

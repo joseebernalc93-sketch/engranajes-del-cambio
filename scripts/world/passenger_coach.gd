@@ -13,6 +13,8 @@ const FRONT_AXLE := Vector2(36, -20)
 @export var passenger_visible := false
 @export var driver_visible := true
 @export var facing_left := false
+@export var driver_portrait: Texture2D
+@export var driver_portrait_region: Rect2
 
 var speed := 0.0
 var travelled := 0.0
@@ -47,7 +49,10 @@ func _draw() -> void:
 	if passenger_visible:
 		draw_texture_rect_region(PARTS, Rect2(-51, -119, 34, 53), PASSENGER_REGION)
 	if driver_visible:
-		draw_texture_rect_region(PARTS, Rect2(34, -121, 35, 52), DRIVER_REGION)
+		if driver_portrait != null:
+			draw_texture_rect_region(driver_portrait, Rect2(31, -126, 41, 49), driver_portrait_region)
+		else:
+			draw_texture_rect_region(PARTS, Rect2(34, -121, 35, 52), DRIVER_REGION)
 	# The near side hides the seated passenger's knees below the rail.
 	var side_panel := Rect2(210, 490, 610, 235)
 	var scale_factor := BODY_RECT.size / BODY_REGION.size

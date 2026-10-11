@@ -1,0 +1,20 @@
+{
+  "mode": "built-in image_gen",
+  "specs": [
+    {
+      "key": "gallery",
+      "ref": "assets/phase2/mine_tunnel_iron_v1.png",
+      "prompt": "Use case: stylized-concept. Production pixel-art background for a Godot educational Industrial Revolution game. Reference is ONLY for exact game style, human scale and horizontal floor height. Create a NEW side-on extraction gallery that continues to the RIGHT of the reference tunnel. Full landscape 16:9. At 1152x648 equivalent coordinates, horizontal walkable floor at y414, low ceiling timber beam at y188, dark coal rock above and below. LEFT edge has an open continuation of the same walkable tunnel and drain pipe. No elevator. Two wooden supports with riveted iron, amber oil lanterns. CENTER RIGHT: a broad freshly exposed black shiny coal seam in the wall, some silver-grey slate bands, reachable with a pick by a protagonist 108 pixels tall standing at floor y414. Mining tools resting against far right post; small empty wooden cart and burlap sacks on far right, avoiding central walk route. Leave clear floor along full width, modest human scale. Detailed crisp handcrafted pixel art, black coal and ochre timber, restrained pixel dithering, warm lantern pools, no blurry painting. No people, no floating fragments, no text, no arrows, no UI. Keep foreground coal rock below the horizontal floor, like reference."
+    },
+    {
+      "key": "detail",
+      "ref": "assets/phase2/mine_tunnel_iron_v1.png",
+      "prompt": "Use case: stylized-concept. Production close-up pixel-art game background of a coal extraction work area inside an Industrial Revolution mine. Side-on/front view, 16:9. Wall dominates upper two thirds: exposed uneven dark coal seam with angular shiny black coal and layered matte GREY slate interspersed, natural tiny cracks; wooden support beam along top and posts at extreme left/right, dim warm amber lantern at far left. CENTER x260..900 y100..410 at 1152x648 equivalent: uncluttered continuous exposed coal rock area, no giant isolated lump, runtime will overlay six detachable rock fragments here. BOTTOM third y430..648: broad empty weathered wooden sorting work shelf, front plank lip, dark wood grain. Runtime draws trays, sacks and loose stones on shelf. Leave shelf EMPTY. Composition is intimate human hand work scale, crisp polished pixel art matching reference, detailed pixel clusters with readable larger silhouettes, warm ochre highlights against charcoal black, no smooth painting. No people, no pickaxe, no loose objects on shelf, no bins, no sacks baked in, no text, no UI, no arrows, no waterfall or modern equipment."
+    },
+    {
+      "key": "props",
+      "ref": "assets/phase2/iron_mission_parts_pixel_v2.png",
+      "prompt": "Use case: stylized-concept. Transparent-background pixel-art SPRITE SHEET, three columns and two rows, six isolated game objects with generous clear transparent gutters, one object centered per equal-sized cell. Industrial-era mining props, match reference's polished pixel clusters, timber, burlap, riveted iron and warm lighting. TOP LEFT: shallow wide EMPTY wooden sorting tray viewed slightly from above, dark interior floor, iron corner brackets. TOP CENTER: wide EMPTY low wooden discard crate, open top dark interior, riveted corners. TOP RIGHT: EMPTY OPEN burlap sack, broad round folded mouth visible, detailed woven fabric. BOTTOM LEFT: full CLOSED tied burlap coal sack, clear tied cord bow at neck, warm pixels. BOTTOM CENTER: short loose thick tan rope shaped like a curved U, separate for tying interaction. BOTTOM RIGHT: bare miner hand in rolled white sleeve gripping a short wooden pick handle, side-view, no pickaxe head. Consistent crisp pixel art, no lettering, no labels, no background, no contact shadow rectangle, actual alpha transparency. Objects fully inside own cell, no overlap."
+    }
+  ]
+}

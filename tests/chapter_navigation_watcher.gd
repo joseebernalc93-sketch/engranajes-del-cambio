@@ -2,6 +2,8 @@ extends Node
 ## Run the writer and reader in separate processes to verify persisted chapter hops.
 const BACKUP := "user://chapter_navigation_backup.json"
 const Journey := preload("res://scripts/world/london_journey.gd")
+const Campaign := preload("res://scripts/core/phase2_campaign.gd")
+const Iron := preload("res://scripts/core/iron_mission.gd")
 var failures: Array[String] = []
 var checks := 0
 var capture := false
@@ -26,8 +28,9 @@ func _exercise(difficulty: String) -> void:
 	GameState.phase_summary = {"tiempo_segundos": 556, "dificultad": difficulty, "puzzles_completados": 4}
 	for flag in ["villager_spoken", "wheelwright_forge_completed", "rope_puzzle_completed", "lumber_puzzle_completed", "mill_repaired", "flour_milled", "flour_sold", "coach_fare_paid", "coach_station_reached", "ticket_bought"]:
 		GameState.flags[flag] = true
-	GameState.coins = 7
+	GameState.coins = 87
 	GameState.inventory = {"boleto": 1, "recuerdo": 1}
+	GameState.ensure_phase_two_entry()
 	var snapshot := GameState.phase_summary.duplicate(true)
 	var state := Journey.ensure()
 	state.arrived = true
@@ -93,15 +96,43 @@ func _exercise(difficulty: String) -> void:
 	london._return_home()
 	menu = await _changed()
 	menu._open_chapters()
+	# Reproduce a player with five paid city trips and an advanced coal mission.
+	GameState.coins = 37
+	GameState.inventory.merge({"costal_carbon": 4, "hulla": 1, "biela": 1, "potencia_vapor": 1, "pano_industrial": 1})
+	GameState.phase_two.city_transport = {"outbound_trips": 5, "fares_paid": 50, "industrial_reached": true}
+	GameState.phase_two.spent = 7
+	GameState.phase_two.completed = ["mine", "engine"]
+	GameState.phase_two.work = {"mine": {"complete": true}}
+	GameState.phase_two.glossary = [{"id": "hulla"}]
+	GameState.phase_two.iron_mission = {"stage": 5, "started": true, "route": 3, "batch_issued": true, "stable_seconds": 90.0, "fuel": 1.2, "portion": 4, "complete": true}
+	GameState.save_progress()
+	menu.restart_two_button.pressed.emit()
+	menu.get_node("%CancelRestartButton").pressed.emit()
+	_check(GameState.coins == 37 and int(GameState.inventory.costal_carbon) == 4 and int(GameState.phase_two.iron_mission.stage) == 5, "Cancelling phase two restart preserves current money, coal and engine")
 	menu.restart_two_button.pressed.emit()
 	menu.get_node("%ConfirmRestartButton").pressed.emit()
 	var story := await _changed()
 	_check(story.scene_file_path == GameState.PHASE_TWO_INTRO and story.current_index == 0, "Confirmed restart phase two opens its first story page")
 	_check(not GameState.phase_two.has("arrival"), "Restart clears London discoveries without restoring the former scene state")
+	_check(GameState.coins == 87 and GameState.inventory == {"recuerdo": 1}, "Restart restores the original purse and backpack without coal, rewards or used ticket")
+	_check(GameState.phase_two.work.is_empty() and GameState.phase_two.completed.is_empty() and GameState.phase_two.glossary.is_empty(), "Restart clears workshops, achievements and glossary from phase two")
+	_check(not GameState.phase_two.has("iron_mission") and not GameState.phase_two.has("city_transport") and Campaign.remaining() == Campaign.total(), "Restart clears engine and fares and restores the entire difficulty budget")
+	var reset_report: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(Phase2Metrics.PATH))
+	_check(not bool(reset_report.completada) and reset_report.talleres_completados.is_empty() and int(reset_report.balance_productivo.carbon_paleadas) == 0, "Restart replaces the previous teacher report with fresh phase two statistics")
 	_preserved(snapshot, difficulty)
 	for page in 4: story._advance_story()
 	london = await _changed()
 	_check(london.area == "platform" and not Journey.ensure().guide_spoken, "Restart replays the train arrival and the guide encounter")
+	var mission := Iron.new()
+	_check(not bool(mission.data.started) and mission.stage() == 0 and not bool(mission.data.batch_issued) and float(mission.data.stable_seconds) == 0.0, "Restarted mine offers a fresh coal collection attempt")
+	GameState.coins = 77
+	GameState.phase_two.city_transport.fares_paid = 10
+	GameState.save_progress()
+	GameState.restart_phase_two()
+	story = await _changed()
+	_check(GameState.coins == 87 and not GameState.phase_two.has("city_transport"), "Repeating restart restores the same baseline instead of adding refunds")
+	for page in 4: story._advance_story()
+	london = await _changed()
 	london.set_process(false)
 	london.elapsed = 20.0
 	Journey.ensure().arrived = true
@@ -143,13 +174,39 @@ func _read() -> void:
 	file.close()
 	_check(GameState.load_progress() and GameState.chapter_checkpoints.has("2"), "Version sixteen saves migrate without losing their London checkpoint")
 	_check(GameState.chapter_checkpoints["2"].area == "hall" and GameState.phase_complete, "Legacy migration preserves chapter state and unlock")
+	# The current player save predates entry snapshots: reconstruct, but do not
+	# reset the ongoing game until Restart is explicitly chosen.
+	var old_balance: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(GameState.SAVE_PATH))
+	old_balance.save_version = 18
+	old_balance.erase("phase_two_entry")
+	old_balance.coins = 37
+	old_balance.inventory = {"recuerdo": 1, "costal_carbon": 4, "hulla": 1, "boleto": 1}
+	old_balance.phase_two.city_transport = {"outbound_trips": 5, "fares_paid": 50, "industrial_reached": true}
+	old_balance.phase_two.iron_mission = {"stage": 5, "started": true, "batch_issued": true, "complete": true}
+	FileAccess.open(GameState.SAVE_PATH, FileAccess.WRITE).store_string(JSON.stringify(old_balance))
+	_check(GameState.load_progress() and GameState.coins == 37 and GameState.has_item("costal_carbon"), "Migrating an existing save preserves its ongoing balance and coal")
+	_check(int(GameState.phase_two_entry.coins) == 87 and GameState.phase_two_entry.inventory.size() == 1 and int(GameState.phase_two_entry.inventory.get("recuerdo", 0)) == 1, "Version eighteen reconstructs original money and removes chapter two items only from the entry snapshot")
+	var migrated: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(GameState.SAVE_PATH))
+	_check(int(migrated.save_version) == GameState.SAVE_VERSION and int(migrated.phase_two_entry.coins) == 87, "Recovered entry snapshot is saved durably")
+	_check(GameState.load_progress() and GameState.coins == 37 and int(GameState.phase_two_entry.coins) == 87, "Reloading the migration neither refunds money nor changes the original balance")
+	GameState.restart_phase_two()
+	var story := await _changed()
+	_check(story.scene_file_path == GameState.PHASE_TWO_INTRO and GameState.coins == 87 and GameState.inventory.size() == 1 and int(GameState.inventory.get("recuerdo", 0)) == 1, "Restarting an old save restores its real original purse and clears collected coal")
+	_check(not GameState.phase_two.has("iron_mission") and GameState.phase_complete and Campaign.remaining() == 10, "Legacy restart resets the mine and hard budget while keeping completed phase one")
+	GameState.phase_two_entry = {}
+	GameState.coins = 31
+	GameState.phase_two.city_transport = {"fares_paid": 20}
+	GameState.ensure_phase_two_entry()
+	GameState.restart_phase_two()
+	await _changed()
+	_check(GameState.coins == 51, "Entry recovery uses the recorded balance rather than hardcoding eighty-seven")
 	_restore()
 	print("CHAPTER NAVIGATION READ: %d checks, %d failures" % [checks, failures.size()])
 	get_tree().quit(0 if failures.is_empty() else 1)
 
 func _preserved(report: Dictionary, difficulty: String) -> void:
 	_check(GameState.phase_complete and GameState.phase_summary == report, "Returning or restarting chapter two preserves completed chapter one report")
-	_check(GameState.difficulty == difficulty and GameState.coins == 7 and GameState.has_item("recuerdo"), "Difficulty, coins and inventory remain intact")
+	_check(GameState.difficulty == difficulty and GameState.coins == 87 and GameState.has_item("recuerdo"), "Difficulty, original coins and phase one inventory remain intact")
 	for puzzle in GameState.get_puzzle_progress(): _check(puzzle.completed, "Completed puzzle stays completed: " + str(puzzle.label))
 	_check(GameState.is_phase_two_unlocked(), "London remains unlocked")
 

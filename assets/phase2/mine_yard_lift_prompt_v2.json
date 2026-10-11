@@ -1,0 +1,5 @@
+{
+  "mode": "image_gen integrado",
+  "reference": "assets/phase2/mine_yard_pixel_v1.png",
+  "prompt": "Edit this existing pixel-art mine surface yard for an animated elevator. Preserve the full composition, all buildings, derrick structure, giant hoist wheel, lamps, carts, coal heaps, sky and clear walking yard EXACTLY. Change only the small suspended cage in the central opening under the derrick (slightly right of image center): remove that entire cage, its short suspension chains and the old floor underneath the cage, leaving an empty dark vertical mine-shaft entrance with fixed timber/iron guide posts and a modest dark pit mouth at floor level. The moving cage will be drawn as a separate game sprite. Keep the doorway large enough for one human-scale cage, not an enormous new hole. Preserve surrounding lamps and supports. No people, no text, no UI. Same warm amber professional pixel art. Output full opaque background."
+}

@@ -7,7 +7,13 @@ const ROAD_END: float = 32.0
 const DISEMBARK_START: float = 37.5
 const PANORAMA := preload("res://assets/phase2/london_coach_panorama_v1.png")
 const DEPOT := preload("res://assets/phase2/london_coach_depot_v1.png")
-const INDUSTRIAL := preload("res://assets/phase2/london_industrial_depot_v1.png")
+const EngineHouse := preload("res://scripts/world/engine_house_art.gd")
+const INDUSTRIAL := EngineHouse.YARD
+const DRIVER := preload("res://assets/phase2/william_coachman_pixel_v2.png")
+const MINE := preload("res://assets/phase2/mine_yard_pixel_v3.png")
+const FoundryArt := preload("res://scripts/world/foundry_art.gd")
+const Journey := preload("res://scripts/world/london_journey.gd")
+var destination_area: String = "industrial"
 var elapsed: float = 0.0
 var returning: bool = false
 var active: bool = false
@@ -29,6 +35,9 @@ func _ready() -> void:
 	add_child(coach)
 	coach.set_process(false)
 	coach.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	coach.driver_portrait = DRIVER
+	var driver_bounds: Rect2i = preload("res://scripts/world/sprite_body_bounds.gd").measure(DRIVER.get_image())
+	coach.driver_portrait_region = Rect2(driver_bounds.position, Vector2(driver_bounds.size.x, driver_bounds.size.y * 0.69))
 	coach.scale = Vector2.ONE * 0.92
 	passenger = preload("res://scenes/player/player.tscn").instantiate()
 	passenger.collision_layer = 0
@@ -56,7 +65,8 @@ func _ready() -> void:
 	skip.pressed.connect(complete)
 	hide()
 
-func begin(is_returning: bool, origin: Vector2, time: float = 0.0) -> void:
+func begin(is_returning: bool, origin: Vector2, time: float = 0.0, destination: String = "industrial") -> void:
+	destination_area = destination if destination in Journey.COACH_STOPS else "industrial"
 	returning = is_returning
 	start_position = origin
 	elapsed = clampf(time, 0.0, TOTAL_TIME)
@@ -84,7 +94,18 @@ func complete() -> void:
 func apply_timeline() -> void:
 	var berth := Vector2(470, 515) if returning else Vector2(750, 485)
 	var destination_berth := Vector2(750, 485) if returning else Vector2(470, 515)
-	background.texture = INDUSTRIAL if returning else DEPOT
+	if destination_area == "industrial":
+		if returning: berth = EngineHouse.COACH_BERTH
+		else: destination_berth = EngineHouse.COACH_BERTH
+	if destination_area == "mine_yard":
+		if returning: berth = Vector2(420, 520)
+		else: destination_berth = Vector2(420, 520)
+	elif destination_area == "forge_yard":
+		if returning: berth = FoundryArt.COACH_BERTH
+		else: destination_berth = FoundryArt.COACH_BERTH
+	var remote: Texture2D = MINE if destination_area == "mine_yard" else INDUSTRIAL
+	if destination_area == "forge_yard": remote = FoundryArt.YARD
+	background.texture = remote if returning else DEPOT
 	background.position = Vector2.ZERO
 	background.scale = Vector2(1152, 648) / background.texture.get_size()
 	coach.facing_left = returning
@@ -113,7 +134,7 @@ func apply_timeline() -> void:
 		coach.position = Vector2(560 + sin(part * PI) * (40 if returning else -40), 559)
 		coach.speed = distance / (ROAD_END - ROAD_START)
 	else:
-		background.texture = DEPOT if returning else INDUSTRIAL
+		background.texture = DEPOT if returning else remote
 		background.scale = Vector2(1152, 648) / background.texture.get_size()
 		if elapsed < DISEMBARK_START:
 			stage = "arrival"
@@ -124,7 +145,8 @@ func apply_timeline() -> void:
 			stage = "disembarking"
 			coach.position = destination_berth
 			passenger.show()
-			var landing := Vector2(650, 590) if returning else Vector2(350, 590)
+			var landing := Vector2(650, 590) if returning or destination_area == "mine_yard" else Vector2(350, 590)
+			if not returning and destination_area == "industrial": landing = EngineHouse.COACH_LANDING
 			passenger.position = (destination_berth + Vector2(-30, -10)).lerp(landing, smoothstep(DISEMBARK_START, TOTAL_TIME, elapsed))
 			passenger.facing = "down"
 			passenger._set_sprite_frame(int(elapsed * 7) % 3)
@@ -135,7 +157,7 @@ func apply_timeline() -> void:
 	skip.visible = elapsed >= 2.8
 
 func snapshot() -> Dictionary:
-	return {"active": active, "elapsed": elapsed, "returning": returning, "start": [start_position.x, start_position.y], "coach_distance": coach.travelled, "coach_time": coach.elapsed}
+	return {"active": active, "elapsed": elapsed, "returning": returning, "destination_area": destination_area, "start": [start_position.x, start_position.y], "coach_distance": coach.travelled, "coach_time": coach.elapsed}
 
 func restore(saved: Dictionary) -> void:
 	if not bool(saved.get("active", false)):
@@ -144,7 +166,7 @@ func restore(saved: Dictionary) -> void:
 		hide()
 		return
 	var start: Array = saved.get("start", [650, 560])
-	begin(bool(saved.get("returning", false)), Vector2(float(start[0]), float(start[1])), float(saved.get("elapsed", 0)))
+	begin(bool(saved.get("returning", false)), Vector2(float(start[0]), float(start[1])), float(saved.get("elapsed", 0)), str(saved.get("destination_area", "industrial")))
 	coach.travelled = maxf(0.0, float(saved.get("coach_distance", 0)))
 	coach.elapsed = maxf(0.0, float(saved.get("coach_time", 0)))
 	coach._process(0.0)

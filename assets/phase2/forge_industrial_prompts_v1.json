@@ -1,0 +1,33 @@
+{
+  "mode": "built-in image_gen",
+  "specs": [
+    {
+      "key": "yard",
+      "file": "forge_yard_pixel_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_forja/03_exterior_fundicion_industrial_v2.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production pixel-art game background. Edit the supplied APPROVED mechanized industrial foundry exterior. Remove ONLY the small straw-hatted protagonist in the lower center-left foreground and his contact shadow. Seamlessly reconstruct the cobblestones and warm floor reflections behind him. Keep every building, crane, suspended iron load, chimney, smoke, door, engine flywheel, wagon, rails, mould boxes, lighting, perspective, proportions, framing and pixel art detail unchanged. Keep exactly the existing wide 16:9 framing; no crop, zoom or redesign. Completely empty of people; runtime draws all moving characters. No text, labels, HUD or UI. Opaque background."
+    },
+    {
+      "key": "hall",
+      "file": "forge_hall_pixel_v1.png",
+      "transparent": false,
+      "references": [
+        "reports/phase2/propuesta_forja/04_interior_fundicion_industrial_v3.png"
+      ],
+      "prompt": "Use case: precise-object-edit. Production pixel-art game background. Edit this APPROVED mechanized industrial iron foundry interior. Remove ONLY BOTH foreground people: the straw-hatted hero at lower left-center and the moustached apron-wearing ironworker at lower center-right, including their contact shadows. Reconstruct the stone floor and the small bits of low railing behind them naturally. Preserve the exact room layout, exit door at far left, cupola, hot metal flowing into fixed ladle, overhead chain hoist, reheating furnace, Nasmyth-style steam hammer, rolling mill, flywheels, pulleys, belts, upper shaft, tools, window views, water trough, framing, scale, palette and pixel-art detail. Keep the lower third as the original clear walking aisle. No people anywhere; runtime draws characters. No crop, zoom, redesign, text, labels, HUD or UI. Full opaque 16:9 landscape."
+    },
+    {
+      "key": "cort",
+      "file": "cort_foundry_pixel_v1.png",
+      "transparent": true,
+      "references": [
+        "reports/phase2/propuesta_forja/04_interior_fundicion_industrial_v3.png",
+        "assets/gba/campesino_sheet_v2.png"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: SINGLE transparent-background NPC game sprite cutout, not a sheet. Create Cort, the moustached industrial foundry foreman shown in Image 1. Image 1 is the identity/outfit reference, Image 2 is ONLY the chibi body proportion and professional crisp pixel-art style reference of the game's protagonist. ONE full-body character centered, front-facing with slight three-quarter turn toward viewer left, neutral friendly standing pose, feet flat. Dark hair, thick dark moustache, warm skin, rolled cream sleeves, burgundy vest/shirt, practical dark brown leather apron, brown trousers and sturdy boots. Bare head, no helmet. Same large-head short-body chibi ratio as the straw-hatted protagonist, substantial short silhouette, not a tall thin realistic adult. Arms relaxed slightly away from torso, empty hands, no hammer, props or anvil. Match dense warm pixel art with crisp clusters and dark outlines, subtle warm furnace highlights. Entire head-to-boots visible and contained with margin. Genuinely transparent alpha background. NO background scenery, floor, shadow puddle, rectangle, text, HUD, duplicate characters, atlas grid, zoomed portrait or smooth painterly rendering."
+    }
+  ]
+}

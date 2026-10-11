@@ -1,0 +1,6 @@
+{
+  "tool": "image_gen built-in",
+  "edit_target": "assets/phase2/iron_mission_parts_pixel_v1.png",
+  "asset": "assets/phase2/iron_mission_parts_pixel_v2.png",
+  "prompt": "Edit this transparent 4x2 pixel art equipment atlas. Change ONLY the pipe in the BOTTOM-LEFT cell (row2,column1): it must be a genuine 90-degree L elbow with EXACTLY TWO open ends, one pointing UP and one pointing RIGHT. The current pipe incorrectly has a third downward-facing opening: remove that downward branch and bottom flange, close the rounded lower bend with continuous copper. Make orthographic L silhouette crisp with a clear rounded elbow, copper patina and bolted end flanges. Preserve the positions, dimensions, shapes, material style, colors and transparency of ALL SEVEN other sprites exactly. Preserve the 4x2 equal-cell layout. No words, no background, no shadows, preserve true transparency."
+}

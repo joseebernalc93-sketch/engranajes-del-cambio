@@ -1,0 +1,117 @@
+﻿{
+    "date":  "2026-10-11",
+    "initial_bytes":  848971499,
+    "final_bytes":  611865511,
+    "reviewed_deleted_files":  629,
+    "reviewed_deleted_bytes":  237774302,
+    "deleted_files_still_present":  [
+
+                                    ],
+    "preserved_file_hashes":  810,
+    "changed_preserved_files":  [
+
+                                ],
+    "groups":  [
+                   {
+                       "directory":  ".editorconfig",
+                       "files":  1,
+                       "bytes":  33
+                   },
+                   {
+                       "directory":  ".gitattributes",
+                       "files":  1,
+                       "bytes":  80
+                   },
+                   {
+                       "directory":  ".gitignore",
+                       "files":  1,
+                       "bytes":  157
+                   },
+                   {
+                       "directory":  "auditoria_limpieza.md",
+                       "files":  1,
+                       "bytes":  2866
+                   },
+                   {
+                       "directory":  "export_presets.cfg",
+                       "files":  1,
+                       "bytes":  7604
+                   },
+                   {
+                       "directory":  "icon.svg",
+                       "files":  1,
+                       "bytes":  995
+                   },
+                   {
+                       "directory":  "icon.svg.import",
+                       "files":  1,
+                       "bytes":  1013
+                   },
+                   {
+                       "directory":  "project.godot",
+                       "files":  1,
+                       "bytes":  5294
+                   },
+                   {
+                       "directory":  "README.md",
+                       "files":  1,
+                       "bytes":  44141
+                   },
+                   {
+                       "directory":  "test_verification.gd",
+                       "files":  1,
+                       "bytes":  1868
+                   },
+                   {
+                       "directory":  "test_verification.gd.uid",
+                       "files":  1,
+                       "bytes":  19
+                   },
+                   {
+                       "directory":  "tmp",
+                       "files":  1,
+                       "bytes":  0
+                   },
+                   {
+                       "directory":  "tests",
+                       "files":  196,
+                       "bytes":  430191
+                   },
+                   {
+                       "directory":  "shaders",
+                       "files":  28,
+                       "bytes":  9983
+                   },
+                   {
+                       "directory":  "scripts",
+                       "files":  198,
+                       "bytes":  864661
+                   },
+                   {
+                       "directory":  "scenes",
+                       "files":  38,
+                       "bytes":  216561
+                   },
+                   {
+                       "directory":  "reports",
+                       "files":  91,
+                       "bytes":  56224706
+                   },
+                   {
+                       "directory":  "output",
+                       "files":  39,
+                       "bytes":  39103619
+                   },
+                   {
+                       "directory":  "assets",
+                       "files":  350,
+                       "bytes":  281647776
+                   },
+                   {
+                       "directory":  ".godot",
+                       "files":  337,
+                       "bytes":  233303944
+                   }
+               ],
+    "validation_removed":  true
+}

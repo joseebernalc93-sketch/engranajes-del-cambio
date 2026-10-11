@@ -1,0 +1,24 @@
+﻿{
+    "source_files":  280,
+    "missing":  [
+
+                ],
+    "dynamic_assets":  [
+                           {
+                               "path":  "assets/phase2/mine_pixel_v1.png",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "assets/phase2/forge_pixel_v1.png",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "assets/phase2/engine_pixel_v1.png",
+                               "exists":  true
+                           },
+                           {
+                               "path":  "assets/phase2/textile_pixel_v1.png",
+                               "exists":  true
+                           }
+                       ]
+}

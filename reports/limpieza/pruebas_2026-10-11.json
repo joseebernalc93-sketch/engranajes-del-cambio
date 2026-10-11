@@ -1,0 +1,92 @@
+﻿[
+    {
+        "test":  "phase_one_smoke_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "SMOKE TEST OK: recorrido completo de la Fase 1"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "phase2_factory_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "PHASE 2 FACTORY OK: 296 checks · easy/hard · 6+6+6+4 stages · shared budget · input · review · save/load · 120-second shift · unique inventory · report · journal"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "chapter_journal_flow_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "CHAPTER JOURNAL WRITE OK: real departure, frozen report, London arrival, Escape, two chapter pages, keyboard, responsive layout and persisted checkpoint"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "chapter_journal_flow_test_read",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "CHAPTER JOURNAL READ OK: fresh-process Continue, exact page and visibility, frozen summary, title return and restart"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "engine_house_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "ENGINE HOUSE WRITE: 37 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "engine_house_test_read",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "ENGINE HOUSE READ: 11 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "iron_mission_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "IRON MISSION WRITE: 110 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "iron_mission_test_read",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "IRON MISSION READ: 7 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "chapter_navigation_test",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "CHAPTER NAVIGATION WRITE: 94 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    },
+    {
+        "test":  "chapter_navigation_test_read",
+        "passed":  true,
+        "exit_code":  0,
+        "summary":  [
+                        "CHAPTER NAVIGATION READ: 21 checks, 0 failures"
+                    ],
+        "stderr":  ""
+    }
+]

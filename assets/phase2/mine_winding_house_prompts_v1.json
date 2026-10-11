@@ -1,0 +1,20 @@
+{
+  "mode": "built-in image_gen",
+  "specs": [
+    {
+      "key": "house",
+      "reference": "reports/phase2/conceptos_mina/04_casa_del_pozo.png",
+      "prompt": "Use case: precise-object-edit. Production pixel-art game background. Edit this approved mine winding-house interior, preserve exact framing, room layout, floor level, brickwork, tools, door at left, overhead winding drum, timber and lanterns. Remove the straw-hat person entirely and reconstruct the bench/crates/floor behind them. Remove ONLY the movable elevator cage: its wooden rear wall, roof/cabin, cabin floor and open mesh doors. Keep fixed outer posts, guide rails, overhead winding drum/rope and railings left and right. In place of the removed cabin show a dark timber-lined empty elevator berth with guide rails and a dark threshold level with the room floor. No giant hole through the visible floor. The runtime game draws one moving cabin and player into this empty berth. Preserve crisp high quality pixel art and lighting. No people, text, labels, HUD or UI. Full landscape 16:9 image, same camera as reference."
+    },
+    {
+      "key": "yard",
+      "reference": "assets/phase2/mine_yard_pixel_v2.png",
+      "prompt": "Use case: precise-object-edit. Edit ONLY the dark entrance at the bottom of the mine headframe, centered roughly 66 percent from the left, 40 percent from the top of this image. Add a visible CLOSED wooden double plank door reinforced with dark iron bands and metal handles, within the existing timber doorway beneath the headframe. This is the exterior entrance into the winding-house, not an elevator cabin. Preserve doorway position, existing two lanterns, all cobblestone ground, headframe, skyline, buildings, carts, coal, lighting, composition and pixel art style exactly. No other changes. No people, no words or UI. Keep full 16:9 landscape."
+    },
+    {
+      "key": "shaft",
+      "reference": "assets/phase2/mine_tunnel_iron_v1.png",
+      "prompt": "Use case: stylized-concept. Production game environment, a dedicated vertical UNDERGROUND mine elevator shaft background seen straight-on in cross section, full landscape 16:9. Match reference's professional crisp pixel art, dark coal rock and warm lanterns, but create a new VERTICAL shaft, not horizontal tunnel. Center of frame a timber-lined narrow deep dark shaft opening, occupying the middle 24 percent of the image width. Two parallel riveted iron guide rails at x approximately 40 and 60 percent, perfectly vertical. Along both sides dense dark coal rock walls with subtle warm highlights, timber cross braces and support brackets every few meters, small amber oil lanterns attached on rock just outside rails. Rails and timber continue beyond both top and bottom image edge, no ceiling or floor so this tile can scroll vertically. Camera close enough that a cage two adult widths wide will take middle 20 percent of image width. Readable handcrafted industrial-age engineering. No cage, no cabin, no people, no rope in the central empty opening; runtime draws cage and rope. No daylight, no exterior, no street, no surface building, no horizontal tunnel floor, no UI, no text, no blurred painterly style. Opaque full background."
+    }
+  ]
+}

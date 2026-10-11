@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/puzzles/coal_extraction_view.gd" id="1"]
+
+[node name="CoalWorkface" type="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1")

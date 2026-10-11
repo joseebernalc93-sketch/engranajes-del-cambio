@@ -2,7 +2,7 @@ extends Node
 
 const SAVE_PATH := "user://engranajes_save.json"
 const REPORT_PATH := "user://registro_fase_1.json"
-const SAVE_VERSION := 18
+const SAVE_VERSION := 19
 const FORGE_OPPORTUNITIES := 10
 const EASY_FORGE_OPPORTUNITIES := 15
 const DIFFICULTY_EASY := "facil"
@@ -30,6 +30,8 @@ var phase_started_at := 0
 var phase_complete := false
 var phase_summary: Dictionary = {}
 var phase_two: Dictionary = {}
+## Immutable purse and backpack after boarding the train, before London spending.
+var phase_two_entry: Dictionary = {}
 var pending_spawn := Vector2.ZERO
 var pending_travel_scene := ""
 var pending_coach_destination := ""
@@ -135,6 +137,7 @@ func set_difficulty(value: String) -> void:
 
 func reset_progress(reload_scene := true) -> void:
 	phase_two = {}
+	phase_two_entry = {}
 	run_started = false
 	checkpoint = {}
 	chapter_checkpoints = {}
@@ -267,10 +270,29 @@ func revisit_phase_one() -> void:
 func restart_phase_two() -> void:
 	if not is_phase_two_unlocked(): return
 	save_progress()
-	# Replay the arrival while retaining completed work and the shared budget.
-	phase_two.erase("arrival")
-	if not phase_two.is_empty(): phase_two["intro_seen"] = false
+	ensure_phase_two_entry()
+	coins = int(phase_two_entry.coins)
+	inventory = phase_two_entry.inventory.duplicate(true)
+	phase_two = {}
+	preload("res://scripts/core/phase2_campaign.gd").ensure()
 	_select_chapter_checkpoint({"scene": PHASE_TWO_INTRO, "story_index": 0})
+	EventBus.coins_changed.emit(coins)
+	EventBus.inventory_changed.emit()
+	# Finish any older report write, then replace it with the reset chapter.
+	Phase2Metrics.elapsed = 0.0
+	Phase2Metrics.flush()
+
+
+func ensure_phase_two_entry() -> void:
+	if phase_two_entry.has("coins") and phase_two_entry.get("inventory") is Dictionary:
+		return
+	# Earlier saves have no entry snapshot. London only spends coins on coaches;
+	# its cumulative fare ledger reconstructs the original purse without a fixed sum.
+	var transport: Dictionary = phase_two.get("city_transport", {})
+	var belongings := inventory.duplicate(true)
+	for item in ["costal_carbon", "hulla", "biela", "potencia_vapor", "pano_industrial", "boleto"]:
+		belongings.erase(item)
+	phase_two_entry = {"coins": coins + maxi(0, int(transport.get("fares_paid", 0))), "inventory": belongings}
 
 
 func _remember_chapter_checkpoint(saved: Dictionary) -> void:
@@ -553,6 +575,7 @@ func complete_train_departure() -> void:
 		return
 	phase_complete = true
 	consume_train_ticket()
+	phase_two_entry = {"coins": coins, "inventory": inventory.duplicate(true)}
 	record_event("Abordó el tren hacia la ciudad industrial.")
 	var report := build_report()
 	phase_summary = report.duplicate(true)
@@ -1138,6 +1161,7 @@ func save_progress() -> void:
 		"phase_complete": phase_complete,
 		"phase_summary": phase_summary,
 		"phase_two": phase_two,
+		"phase_two_entry": phase_two_entry,
 	}
 	# Write the complete checkpoint before replacing the previous save.
 	var temporary := SAVE_PATH + ".tmp"
@@ -1181,6 +1205,12 @@ func load_progress() -> bool:
 	phase_complete = bool(data.get("phase_complete", false))
 	phase_summary = data.get("phase_summary", {}) if data.get("phase_summary", {}) is Dictionary else {}
 	phase_two = data.get("phase_two", {}) if data.get("phase_two", {}) is Dictionary else {}
+	phase_two_entry = data.get("phase_two_entry", {}) if data.get("phase_two_entry", {}) is Dictionary else {}
+	# Earlier mining rewards added loose coal on top of the actual delivered sacks.
+	# The delivery flag remains true even after all sacks have been consumed.
+	var coal_reward_removed := false
+	if bool(phase_two.get("iron_mission", {}).get("batch_issued", false)):
+		coal_reward_removed = inventory.erase("hulla")
 	if str(checkpoint.get("scene", "")) == "res://scenes/ui/phase_two_construction.tscn":
 		checkpoint = {"scene": PHASE_TWO_INTRO, "story_index": 0}
 	# Preserve all workshop checkpoints while routing earlier chapter-two saves
@@ -1229,6 +1259,8 @@ func load_progress() -> bool:
 			_migrate_without_rail_puzzle()
 		if save_version < 18:
 			_migrate_london_economy()
+		if is_phase_two_unlocked(): ensure_phase_two_entry()
+	if save_version < SAVE_VERSION or coal_reward_removed:
 		save_progress()
 	return true
 
@@ -1336,6 +1368,7 @@ func continue_saved_game() -> bool:
 func open_phase_two() -> void:
 	if not is_phase_two_unlocked(): return
 	if phase_summary.is_empty(): phase_summary = build_report()
+	ensure_phase_two_entry()
 	save_progress()
 	var destination: Dictionary = chapter_checkpoints.get("2", {}).duplicate(true)
 	if destination.is_empty():

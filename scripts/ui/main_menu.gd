@@ -234,7 +234,7 @@ func _request_phase_two_restart() -> void:
 func _set_restart_copy(chapter_two: bool) -> void:
 	var column: VBoxContainer = restart_overlay.get_node("Center/Panel/Margin/VBox")
 	column.get_node("Title").text = "¿Volver al inicio de la fase 2?" if chapter_two else "¿Comenzar una nueva historia?"
-	column.get_node("Message").text = "Volverás a la historia y a la llegada del tren a Londres. Conservarás la Fase 1 completada, la dificultad y tus logros. Para seguir donde estabas, elige Cancelar y Continuar fase 2." if chapter_two else "Se reiniciará el juego desde el inicio y perderás tu partida guardada. Para conservarla, elige Cancelar."
+	column.get_node("Message").text = "La Fase 2 comenzará desde la historia y la llegada a Londres. Se borrarán sus puzzles, descubrimientos y objetos, y recuperarás las monedas y pertenencias con las que terminaste la Fase 1. La Fase 1 seguirá completada y conservarás la dificultad. Para seguir donde estabas, elige Cancelar y Continuar fase 2." if chapter_two else "Se reiniciará el juego desde el inicio y perderás tu partida guardada. Para conservarla, elige Cancelar."
 	%ConfirmRestartButton.text = "Reiniciar fase 2" if chapter_two else "Comenzar de nuevo"
 
 func _confirm_restart_choice() -> void:

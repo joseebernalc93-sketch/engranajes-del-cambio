@@ -133,14 +133,29 @@ func _show_dialogue(payload: Dictionary) -> void:
 	var options: Array = payload.get("options", [])
 	if options.is_empty():
 		options = [{"label": "Continuar", "action": "close"}]
+	var options_parent: Container = dialogue_options
+	if options.size() > 2:
+		var grid := GridContainer.new()
+		grid.name = "DestinationChoices"
+		grid.columns = 2
+		grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		grid.add_theme_constant_override("h_separation", 10)
+		grid.add_theme_constant_override("v_separation", 8)
+		dialogue_options.add_child(grid)
+		options_parent = grid
 	for option in options:
 		var button := Button.new()
 		button.text = str(option.get("label", "Continuar"))
+		button.disabled = bool(option.get("disabled", false))
+		button.tooltip_text = str(option.get("tooltip", ""))
 		button.custom_minimum_size = Vector2(150, 34)
+		if options.size() > 2:
+			button.custom_minimum_size.y = 40
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.add_theme_font_size_override("font_size", 15)
 		_style_industrial_button(button)
 		button.pressed.connect(_select_dialogue_action.bind(str(option.get("action", "close"))))
-		dialogue_options.add_child(button)
+		options_parent.add_child(button)
 	dialogue_text.custom_minimum_size.y = 20.0
 	dialogue_panel.offset_top = -170.0
 	dialogue_panel.visible = true
@@ -158,7 +173,8 @@ func _fit_dialogue_panel(expected_text: String) -> void:
 	var line_count := maxi(dialogue_text.get_line_count(), 1)
 	var text_height := float(dialogue_text.get_line_height() * line_count)
 	dialogue_text.custom_minimum_size.y = text_height
-	dialogue_panel.offset_top = dialogue_panel.offset_bottom - DIALOGUE_PANEL_BASE_HEIGHT - text_height
+	var extra_options_height := maxf(0.0, dialogue_options.get_combined_minimum_size().y - 34.0)
+	dialogue_panel.offset_top = dialogue_panel.offset_bottom - DIALOGUE_PANEL_BASE_HEIGHT - text_height - extra_options_height
 
 
 func _select_dialogue_action(action: String) -> void:

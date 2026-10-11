@@ -1,0 +1,3242 @@
+﻿[
+    {
+        "path":  "assets/gba/agente_estacion_sheet.png",
+        "sha256":  "2DD78D7C10C4F9F21DDFA68B52207FE1BB14A89ECEF5F99EC36F4D4BD5A3CD46"
+    },
+    {
+        "path":  "assets/gba/agente_estacion_sheet.png.import",
+        "sha256":  "E7935575B01C70FF356FBA6208E6E08A9C78BE3EBFF4E9BEAA89E8EADFCE3671"
+    },
+    {
+        "path":  "assets/gba/bruno_lumberjack_sheet_v1.png",
+        "sha256":  "CDF80DDE6B33AE1D840A3B872F6E8B414A9CDEFE44652AAD6E767CD5B9E6B2F4"
+    },
+    {
+        "path":  "assets/gba/bruno_lumberjack_sheet_v1.png.import",
+        "sha256":  "5E63CEE65BF73D5024A59282472220FA6D8B1B6B9928974760FBC5D388A18D9E"
+    },
+    {
+        "path":  "assets/gba/campesino_sheet_v2.png",
+        "sha256":  "AB68D6EB649F8E0F7A1A76D4E4C085E33E875C61BF85971F86B8DEEAAA50DCB5"
+    },
+    {
+        "path":  "assets/gba/campesino_sheet_v2.png.import",
+        "sha256":  "08BE67CE96897E5B96C24BF9DA1D845B22345FB9DDD94B833CDD34C714CFA945"
+    },
+    {
+        "path":  "assets/gba/elena_sheet.png",
+        "sha256":  "2EF642038FB1028B8B9D08E4F4D37AE9492CDE150D4A487B4F02032CA4D10615"
+    },
+    {
+        "path":  "assets/gba/elena_sheet.png.import",
+        "sha256":  "F3B9CAFFAA8B4EA00F193779C8168374C9099A3337731838568B5F02184C9D8B"
+    },
+    {
+        "path":  "assets/gba/main_menu_campo_ciudad_clean_v3.png",
+        "sha256":  "D14D8F3A0082B286841BD25A1CEE3939DCADC0A2116CD426000C6BED97767427"
+    },
+    {
+        "path":  "assets/gba/main_menu_campo_ciudad_clean_v3.png.import",
+        "sha256":  "CEBC7CEA84D03A9C98EA071D108BE97B466B28AF9F65975BCC1543BC62455E71"
+    },
+    {
+        "path":  "assets/gba/mateo_sheet_v1.png",
+        "sha256":  "DF045D591C601A2B019E546FA3BD00C1A600EBDCAA7DD401C7B01529003A200F"
+    },
+    {
+        "path":  "assets/gba/mateo_sheet_v1.png.import",
+        "sha256":  "4551D76A30C47B3576F75DC3D46ECB416FBD61E450D0EC1418767017B8504FB5"
+    },
+    {
+        "path":  "assets/gba/ramon_coachman_v1.png",
+        "sha256":  "D90AB67AFEAB6694890FE68CF4936EE0EF40BF649D8ABBF4807845CF459A9EB1"
+    },
+    {
+        "path":  "assets/gba/ramon_coachman_v1.png.import",
+        "sha256":  "CF5FC8B62309925AE0FDF76B1FF7F60991EEC5C2B917BF35E7EEE3105F922C00"
+    },
+    {
+        "path":  "assets/gba/silas_idle_v2.png",
+        "sha256":  "B1B3F0E630704F0374AADC253114C8B7F333481C2751F8E4A9E65A8249B55D03"
+    },
+    {
+        "path":  "assets/gba/silas_idle_v2.png.import",
+        "sha256":  "9B6AE291D8837D0CDBC491B6BD12608C69803FE0E3F53E8844A03AC8124250A3"
+    },
+    {
+        "path":  "assets/gba/steam_puff_v2.png",
+        "sha256":  "1F495CCEA05716C3E8D714803E14FFC9630C400FF702E59ACED1295849349ADB"
+    },
+    {
+        "path":  "assets/gba/steam_puff_v2.png.import",
+        "sha256":  "9BD751DE94D0921F1BCF9F90369410A3C0568A75D92D30AB0E740A9AE67B37E3"
+    },
+    {
+        "path":  "assets/gba/tomas_baker_idle_v1.png",
+        "sha256":  "4DA6BB85514CBE5D90BBA4A01A91DF07C4B50CA2162CB91DF6E6EDE1190BC73F"
+    },
+    {
+        "path":  "assets/gba/tomas_baker_idle_v1.png.import",
+        "sha256":  "D2FF329B22704AF7DF5D53265CB1A995FF1A571531961BE8B8074C43E0548EF2"
+    },
+    {
+        "path":  "assets/gba/train_industrial_v2.png",
+        "sha256":  "3744D7495D67669B788E406CD3ACFD5C1F6A89A315F95A40EBE33DAAB6518139"
+    },
+    {
+        "path":  "assets/gba/train_industrial_v2.png.import",
+        "sha256":  "589934099463F3AE1D353FC7747F54534E577A11AADB66ECDDF7D5729C84D2B0"
+    },
+    {
+        "path":  "assets/gba/environment/carriage_depot_v1.png",
+        "sha256":  "6231FC18244BDA37FCA2E36B3CE72DD2CA7E167C779EE4926EAB47C94CB760B7"
+    },
+    {
+        "path":  "assets/gba/environment/carriage_depot_v1.png.import",
+        "sha256":  "35537CAFB36396D647DF19185699961FBB7E3E2A77FBC5A04B450D92827E6632"
+    },
+    {
+        "path":  "assets/gba/environment/coach_countryside_v1.png",
+        "sha256":  "05F302834C58B3B8B00F57AB5A5ABEE4FF2C559CAE5838BABB56352AEA2D5F1E"
+    },
+    {
+        "path":  "assets/gba/environment/coach_countryside_v1.png.import",
+        "sha256":  "3438891245ABAD71CC19B2223CA2AE48DDFE7B50F949CF54E67BA1AC33904A87"
+    },
+    {
+        "path":  "assets/gba/environment/elena_horse_wagon_world_v4.png",
+        "sha256":  "245BA0CBC52AA107888B9B9433C30EFA90F5162C289BE29804067988B0795D75"
+    },
+    {
+        "path":  "assets/gba/environment/elena_horse_wagon_world_v4.png.import",
+        "sha256":  "72C9F6EDA65F9A58113B11EAD764DF33A392B40FFDA59F668F00290B1C244621"
+    },
+    {
+        "path":  "assets/gba/environment/fishing_boats_v2.png",
+        "sha256":  "C1AB2F480EF00FC714E49A997FB628028591D818F006CED1373BBC8CAAD44AE7"
+    },
+    {
+        "path":  "assets/gba/environment/fishing_boats_v2.png.import",
+        "sha256":  "211F317EC7776F7C1911C2F419E460D35460E35C4D643592C299F8DA8C5EDA87"
+    },
+    {
+        "path":  "assets/gba/environment/forge_fire_sheet.png",
+        "sha256":  "40E45C4F5D3CA4E757026CA528F7420C69131CF5E3496697E2032317BA4EB5AD"
+    },
+    {
+        "path":  "assets/gba/environment/forge_fire_sheet.png.import",
+        "sha256":  "81A1806528485E26C59CB746542DB5822AEF9CCC337BAEC336736A6AF27F3E52"
+    },
+    {
+        "path":  "assets/gba/environment/lake_dock_v2.png",
+        "sha256":  "59890E8395D69795BDBF6F53B0398EEA71A9659227454F63516E650C2AE8C35E"
+    },
+    {
+        "path":  "assets/gba/environment/lake_dock_v2.png.import",
+        "sha256":  "9E5BB1B41A2377739E283C549A7DB936E38805031748817F827197E49641C99E"
+    },
+    {
+        "path":  "assets/gba/environment/lake_dock_v2_notes.md",
+        "sha256":  "887F1EF988A9042BBE5057718A06C9A3B05FBA13260FA3752C0E8F8102DC51A9"
+    },
+    {
+        "path":  "assets/gba/environment/mill_boat_dock_v1.png",
+        "sha256":  "609C33D66B472321CD856520D11CE683258605AAEB670746E9B0AD563D38E53E"
+    },
+    {
+        "path":  "assets/gba/environment/mill_boat_dock_v1.png.import",
+        "sha256":  "80089A077D59B34103D1210685CFC48A56C622547AD960E0B37575BF8E21FCDC"
+    },
+    {
+        "path":  "assets/gba/environment/mill_field_complete_v4.png",
+        "sha256":  "9F5A8EB8D4CDBE7C867C871DB3427CC07F0401F68941DAF824C0B37CF7EF26B0"
+    },
+    {
+        "path":  "assets/gba/environment/mill_field_complete_v4.png.import",
+        "sha256":  "DF16814064D1762F1E95AB325FA4871DD9093B9B8E18D408B6CF370CC72A75CE"
+    },
+    {
+        "path":  "assets/gba/environment/mill_field_repaired_v1.png",
+        "sha256":  "7CDFAFC0B8F094722BC90280C51BFAC405DE0DBDDF9525B5B4AB4BDA9104D4DD"
+    },
+    {
+        "path":  "assets/gba/environment/mill_field_repaired_v1.png.import",
+        "sha256":  "C18C4B268C1748DE3B6AFA6BAA851CDCE00B48BF25E834BFC8487409C0D0C9C5"
+    },
+    {
+        "path":  "assets/gba/environment/mill_interior_v1.png",
+        "sha256":  "FA56FE72FDB1FFB49B9427A94B9D9548F0FE743D4DDFF9797CCD20C3277958AD"
+    },
+    {
+        "path":  "assets/gba/environment/mill_interior_v1.png.import",
+        "sha256":  "C42D11666B526E230480FEF60EE956D213704DC0B00E556459A46918014D5F4F"
+    },
+    {
+        "path":  "assets/gba/environment/passenger_coach_components_v1.png",
+        "sha256":  "7CB6083B408BA2191A878D9F27FDAD9E405299E5949FADEC7A15557AF3A551CE"
+    },
+    {
+        "path":  "assets/gba/environment/passenger_coach_components_v1.png.import",
+        "sha256":  "A1F86AE57E56BE2F66BE05E6275E15CFE0EB7D1C183E689D027FA35E21612A99"
+    },
+    {
+        "path":  "assets/gba/environment/passenger_coach_route_v1_notes.md",
+        "sha256":  "692086131924ADDB5655DCE3C2E2C2DC155EC1D5272F372B5F755D28AB982369"
+    },
+    {
+        "path":  "assets/gba/environment/phase_two_construction_v1.png",
+        "sha256":  "F0F1693297DFCD09FFA28FADC67882C614E13A2E9A9EBC989B653F7072025C5A"
+    },
+    {
+        "path":  "assets/gba/environment/phase_two_construction_v1.png.import",
+        "sha256":  "BCDAFE5E8A2850C0348128871AB9AFE6D289178B8CF93CC58EC44F98CCC2F0D1"
+    },
+    {
+        "path":  "assets/gba/environment/railway_dispatch_v1_notes.md",
+        "sha256":  "A6633B5282AEC84BEB4F06640EF1BDE036DD0FD00C60F4698FF8C9DB2382DF92"
+    },
+    {
+        "path":  "assets/gba/environment/rail_alignment_v2_notes.md",
+        "sha256":  "9882121BE366DDB0212C0E4359AB15F4E8A8BF94BEE9903CB1E525F7237346C4"
+    },
+    {
+        "path":  "assets/gba/environment/rail_alignment_v3_notes.md",
+        "sha256":  "D4A510A6F8D3FB17850FA13C7B2ECEFF1C624FBFAD1EFEED8F41CC4C4CA0F0C1"
+    },
+    {
+        "path":  "assets/gba/environment/river_bank.png",
+        "sha256":  "40E81D36649B9ED1197F5D4C209D271794CD5F596AE9D32A455E9AC55EFED221"
+    },
+    {
+        "path":  "assets/gba/environment/river_bank.png.import",
+        "sha256":  "56BF132D1E4197D213287453646996BB1817FE817DE1E94C4A5526E6BD06044E"
+    },
+    {
+        "path":  "assets/gba/environment/river_travel_v1.png",
+        "sha256":  "1DCBA76A3865492931FCE55D4719480AA1CDEBF521E349AECA05F1DB2795208E"
+    },
+    {
+        "path":  "assets/gba/environment/river_travel_v1.png.import",
+        "sha256":  "23A07086F35B3A1EC18BE7F4F034A6509A8B738F9423EA898C7C1F06D6CC741F"
+    },
+    {
+        "path":  "assets/gba/environment/rowboat_travel_sheet_v1.png",
+        "sha256":  "F349FE874D578A99FC816FC3C6D2D3EE39A8A37B783B52C8844F2B258888AB01"
+    },
+    {
+        "path":  "assets/gba/environment/rowboat_travel_sheet_v1.png.import",
+        "sha256":  "133B98D8918D591DE4FFA6F3B406346823464C913122C0BB2FF92691B619B094"
+    },
+    {
+        "path":  "assets/gba/environment/sheep_estate_v5.png",
+        "sha256":  "E688AC3D8E207F387B34B0E4C8312E54B1E89315BB5A801DCF9CD69211C40EDB"
+    },
+    {
+        "path":  "assets/gba/environment/sheep_estate_v5.png.import",
+        "sha256":  "55E9CA75B306F415D7F60E3F6A7D2DF51AB1DFDD71EF9F70A813B4A950FEFCDA"
+    },
+    {
+        "path":  "assets/gba/environment/sheep_estate_v5_notes.md",
+        "sha256":  "27EBDED2ADDA6D8B1079814431C4ED5AAE60E46E230A053876091A632A9B8C73"
+    },
+    {
+        "path":  "assets/gba/environment/sheep_graze_sheet.png",
+        "sha256":  "CD0FA00AC38F695134B04B00AFD8D457E8BEA9B1D0E16A6DA5762BADB2CE63F9"
+    },
+    {
+        "path":  "assets/gba/environment/sheep_graze_sheet.png.import",
+        "sha256":  "A4F0425423B86C1E7EE4DD39AAF3D510EC1E3CE355D90A73E81C57EBE7FC51F5"
+    },
+    {
+        "path":  "assets/gba/environment/spinner_yard_v2.png",
+        "sha256":  "A8D7A06BA17DF86A985C8CDDC7DC0124960B223413BCACB142CB98BFECC11D33"
+    },
+    {
+        "path":  "assets/gba/environment/spinner_yard_v2.png.import",
+        "sha256":  "0DDA7532F4AAB309FC57932C66949EB79EEAA44C11A1ECA39FDA869390776404"
+    },
+    {
+        "path":  "assets/gba/environment/spinner_yard_west_road_v3.png",
+        "sha256":  "B098EAFBDDC5064BE9FC20A40F27EB37E046331DCACA592872BBDD864F4A2B5A"
+    },
+    {
+        "path":  "assets/gba/environment/spinner_yard_west_road_v3.png.import",
+        "sha256":  "6B3CA701593650B3DB049B8674D5856B3129780D2886E3CB370A48E9EF16EEC3"
+    },
+    {
+        "path":  "assets/gba/environment/station_front_entrance_v4.png",
+        "sha256":  "92D996DE29A8773A0E7B06D98D82EBA055895C6D947DA9BB95DFD48F92DC0CCD"
+    },
+    {
+        "path":  "assets/gba/environment/station_front_entrance_v4.png.import",
+        "sha256":  "108D487F765CA3258D2C9BC509DDCAB06B47768C1C9E63EECA70196F75229E6C"
+    },
+    {
+        "path":  "assets/gba/environment/station_industrial_single_rail_v3.png",
+        "sha256":  "191475CC8C06F6C21B46FEF79C248C6E191BC1BB7721CF09B36C81373423390D"
+    },
+    {
+        "path":  "assets/gba/environment/station_industrial_single_rail_v3.png.import",
+        "sha256":  "29BD751EF771019489FAE91BC0132AAAA44208607DE5146FEAA71CFA6D5CFA4E"
+    },
+    {
+        "path":  "assets/gba/environment/station_interior_v2.png",
+        "sha256":  "E027AEB9F0B3EAF27EA18D503B3E10C4853E823A55DE03B9BECC7228A73D589E"
+    },
+    {
+        "path":  "assets/gba/environment/station_interior_v2.png.import",
+        "sha256":  "91D6D0164DDA90663620FD73A84D8B0E9FB92F608387C0A37C1DB94C4BAE9E8F"
+    },
+    {
+        "path":  "assets/gba/environment/village_bakery_courtyard_v4.png",
+        "sha256":  "559D157484ED6CC5075DD41A808F586B748D4FDE18082CA4EB65DCE2493A69DF"
+    },
+    {
+        "path":  "assets/gba/environment/village_bakery_courtyard_v4.png.import",
+        "sha256":  "BAED90A0DDCA840E5A9EF4AEEAA3C1F7121DCD89AD416C5F285B95468C22E258"
+    },
+    {
+        "path":  "assets/gba/environment/village_carriage_station_v6.png",
+        "sha256":  "1B5A3F9EA8E017F287B21398891302A3D944B364C5A0B15B73388DFEB8DD83BA"
+    },
+    {
+        "path":  "assets/gba/environment/village_carriage_station_v6.png.import",
+        "sha256":  "2AD2C7488579B77B2033A787E27ED30DAF90091CA5EBA3484D28101BF34E2393"
+    },
+    {
+        "path":  "assets/gba/environment/village_carriage_station_v6_notes.md",
+        "sha256":  "37E0DCB5354EC149A7C7EFB56B82BB615E42FD03D7CFF54D7D36CDA8E509CFE7"
+    },
+    {
+        "path":  "assets/gba/environment/village_elena_courtyard_v5_notes.md",
+        "sha256":  "6B30702DBFC8F422848F1EE5AA721B215AE4CC3AB6E2317B113C4ED062182692"
+    },
+    {
+        "path":  "assets/gba/environment/wheat_pickups.png",
+        "sha256":  "A5F3E0A767D54491A4347704CCFAD76E6764CDDB5EAE8ACCD8B58EFE7FC2614F"
+    },
+    {
+        "path":  "assets/gba/environment/wheat_pickups.png.import",
+        "sha256":  "4562D415F3DDEB6558A9A95D76E322D5C388C2F7671CE34053C6F63F0276524E"
+    },
+    {
+        "path":  "assets/gba/environment/wheelwright_yard_v2.png",
+        "sha256":  "C867458AE85BE692FF153611A7F901760C084F6C055F9E8D18F73400D0EAA60D"
+    },
+    {
+        "path":  "assets/gba/environment/wheelwright_yard_v2.png.import",
+        "sha256":  "2A2CED52D3D66E9541EBE3EB7E8B9AB76A1BC0F86D139F0ABD4BBF64B8EB1F54"
+    },
+    {
+        "path":  "assets/gba/environment/windmill_sails_repaired_v1.png",
+        "sha256":  "141A6D70C08B2E9DFA29330F991C187059BBC682964B0B5705ABF629F29F91CA"
+    },
+    {
+        "path":  "assets/gba/environment/windmill_sails_repaired_v1.png.import",
+        "sha256":  "4FF1CA4A5DDD8465764A769760F1F1E912EE7B6457453ADC7D61F4BDC886BD20"
+    },
+    {
+        "path":  "assets/gba/environment/wood_island_v2.png",
+        "sha256":  "71D72346A0468C93D683D30DFFB8925E705CEFA186A08888BA742848D5E960D1"
+    },
+    {
+        "path":  "assets/gba/environment/wood_island_v2.png.import",
+        "sha256":  "DAB1156B2D13FC0DD349BE65F588EA543C0F9889F884E1EA3B736BB585C3CB64"
+    },
+    {
+        "path":  "assets/gba/environment/wood_sign.png",
+        "sha256":  "FEE05CC25B7174A4D6AB09AF7357ED72D8A5A80EBDDE33406E911BF7FE4C5AD6"
+    },
+    {
+        "path":  "assets/gba/environment/wood_sign.png.import",
+        "sha256":  "DC4FA10CFF704EF622489E87FDB185B5B7EC3DC09CC69AD297025BC0E96D76C8"
+    },
+    {
+        "path":  "assets/gba/environment/wool_carder_components_v1.png",
+        "sha256":  "E2C549ECEF6522302586A824337BF694913E3DB8CE085C99CFA70CACB6B6AA95"
+    },
+    {
+        "path":  "assets/gba/environment/wool_carder_components_v1.png.import",
+        "sha256":  "D86CD0A7276260EEE24485ED96CD0E8388921D3C5E8B81D028955FD79911D30E"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_01_wealth.png",
+        "sha256":  "AB5D13AAD896CA2A4EAA0317087EEC1250061B031597F175CF566775E8568DDB"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_01_wealth.png.import",
+        "sha256":  "13A4CA26D59F408E11533DB6F231C163A8107CDBE0C77E5CB96DF9AB2DCF9055"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_02_gate.png",
+        "sha256":  "AC63FB23BC9B6361667BF74AD60088BAFD3796DFD5E25C8255AA6D2F64FB575F"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_02_gate.png.import",
+        "sha256":  "1684B481F568CECA3C8AB3F4867E23ED23DB67B37200945AC037EBB3169A0931"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_03_elena.png",
+        "sha256":  "2E9A674E9900BB02AAD608D41589C4D716C93C79D23C225131149BD2D06B9DC9"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_03_elena.png.import",
+        "sha256":  "AF6CCBEE14DED5E5473ED8BC4D747C925D3ACD200F3CD3AFBD714C5D400E5663"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_04_departure.png",
+        "sha256":  "C8B07A477E1ED2CADDEF9D12FD2C28944F08BE4A39B1D0158C5DE8627F7EDC49"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_04_departure.png.import",
+        "sha256":  "6152BA9EE83C01489FBA5A55F658A918EF87701B87BE512BA2C5AEFDB963016E"
+    },
+    {
+        "path":  "assets/gba/story/wool_price_v3_notes.md",
+        "sha256":  "6B14576F96D6ADEB9EDD2B5D1538C116527E89B2E2B12903524DD3B8C35CC397"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_artesanal_v4_notes.md",
+        "sha256":  "C8097A9BC7D158F22C8C66FA11DB1EE9A3C569C50889F60764D4DDF8CBE06438"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_six_phases_v3_notes.md",
+        "sha256":  "1969328F37C9DF93CE5B06AA92CE70C4546C3D94F128F5EA3A6E90DFB210C906"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_workbench_v2_notes.md",
+        "sha256":  "7FEA16A7ED67631C23D8949619D63F7557B501F4CEC58A6246596CD9986A72C0"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_workpieces_v2.png",
+        "sha256":  "A19431ADA3B45C8C15DBE6E411398FECD2AACD9C36E95FD2DBD081F50B8FE77C"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_workpieces_v2.png.import",
+        "sha256":  "82423B53C2387C9F8365158E83DAE90A81E79B2ACABDA9DC920F2B06DEF75AF9"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_workshop_backdrop_v2.png",
+        "sha256":  "535C8F3CDC6DC1171795E9B252F8BD2D015281E10554C2AE9DE7C62CB97C797F"
+    },
+    {
+        "path":  "assets/gba/ui/bruno_workshop_backdrop_v2.png.import",
+        "sha256":  "BDEE5FDB89B39FC0CE4345F7820B058E9F5B68E369F70DAA804190FB0E2B18DF"
+    },
+    {
+        "path":  "assets/gba/ui/chapter_completion_journal_v1.png",
+        "sha256":  "AC2168FA879DABD18FFCF095069C39B254AE4985A4DAE40FED136E19C20BAD70"
+    },
+    {
+        "path":  "assets/gba/ui/chapter_completion_journal_v1.png.import",
+        "sha256":  "9415C0F16A4937C7E1627F5BF18A189FED7FBF04FACF20AA26BCDCF6FC436C82"
+    },
+    {
+        "path":  "assets/gba/ui/chapter_journal_v1_notes.md",
+        "sha256":  "6909B3DB88E696BA5BE85CA210408FC5FB5CFDE50541803E287B896346775B2D"
+    },
+    {
+        "path":  "assets/gba/ui/coin_industrial_v1.png",
+        "sha256":  "E1857D0FBDE93ADA35D033FEC3C3E9FEBE3F04E33EB057569EF24399A5393BBB"
+    },
+    {
+        "path":  "assets/gba/ui/coin_industrial_v1.png.import",
+        "sha256":  "34529F898DAC1D6060B6AD1EDDB242B94109E3121F9F75B50B9D2CF20BD8EFE4"
+    },
+    {
+        "path":  "assets/gba/ui/elena_blankets_v3.png",
+        "sha256":  "497EDEAA3A328D57AFC43231A9A6F855BBEB199F77E68676F52A741A8557B5F4"
+    },
+    {
+        "path":  "assets/gba/ui/elena_blankets_v3.png.import",
+        "sha256":  "841D810B12CE3B27A7BD2B795B06EAAEF37FB7E9F6AC5887B734C2D0F552198A"
+    },
+    {
+        "path":  "assets/gba/ui/elena_cargo_v3_notes.md",
+        "sha256":  "988B4188FF706205DE8CF2CBDBACA7143D5E7F638DF745D284E6C2DC76367AC3"
+    },
+    {
+        "path":  "assets/gba/ui/elena_cart_parts_v2.png",
+        "sha256":  "908C4BF2E7A8A792EE6198307D98F6B945179ACCDDA730C674E1BD55DD97485F"
+    },
+    {
+        "path":  "assets/gba/ui/elena_cart_parts_v2.png.import",
+        "sha256":  "C271F652F19F9749C60163B2387E545C6F37EE935CC82C10028446991CD4FC8B"
+    },
+    {
+        "path":  "assets/gba/ui/elena_cart_v2_notes.md",
+        "sha256":  "E64FB0BC4D32392295C45F5EF0E81CFC9A60D7A962FA6B38225AD1CCD54C7DF0"
+    },
+    {
+        "path":  "assets/gba/ui/elena_draft_horse_walk_v4.png",
+        "sha256":  "53BF90B8F677DBFB8F43BBE373B8B1B4458D753D1A72F2A738F9224132E40E48"
+    },
+    {
+        "path":  "assets/gba/ui/elena_draft_horse_walk_v4.png.import",
+        "sha256":  "B5D0891BE0C096A3E1E75A13787F6E3FD195D157FDD9B86E0ABF5575F7693A64"
+    },
+    {
+        "path":  "assets/gba/ui/elena_enclosure_gate_v2.png",
+        "sha256":  "3071393D72D9FFF80AD26B2E365A2EDBC1504B620BDDC456685EF565FA8F94B7"
+    },
+    {
+        "path":  "assets/gba/ui/elena_enclosure_gate_v2.png.import",
+        "sha256":  "6A504D131798BB58F82C1271C1F5BD9BB20044C5B3BD32C0D09256B807100AEC"
+    },
+    {
+        "path":  "assets/gba/ui/elena_family_portrait_v3.png",
+        "sha256":  "48E2416E756007B2EDEF31247593D8B40E9B0688D3467E2173B7587666D026EB"
+    },
+    {
+        "path":  "assets/gba/ui/elena_family_portrait_v3.png.import",
+        "sha256":  "B5E5BC6F1875200E962CABCDECD35446199261CBEDD56E818FA4AC4B68010A1B"
+    },
+    {
+        "path":  "assets/gba/ui/elena_food_bundle_v3.png",
+        "sha256":  "0EFD723DAECEFE6E329523821F316B1BFC26CB79320ED36AC9601B2B4FAE8F25"
+    },
+    {
+        "path":  "assets/gba/ui/elena_food_bundle_v3.png.import",
+        "sha256":  "F1A7E99782549BCBFF28EE1FD83935BBA5E29DC1AEDB532F61E3AA6A4FB8CCA1"
+    },
+    {
+        "path":  "assets/gba/ui/elena_iron_pot_v3.png",
+        "sha256":  "EF89C12BDDD466FB7CB09CD9C952B5F5EBDE46F1FFA0D023B99993445ADE186D"
+    },
+    {
+        "path":  "assets/gba/ui/elena_iron_pot_v3.png.import",
+        "sha256":  "EEC248D119EA04695B8FB23F2E63E5A2F62D71BF8261FC505C3EC41D311BA6B1"
+    },
+    {
+        "path":  "assets/gba/ui/elena_riverside_backdrop_v2.png",
+        "sha256":  "ED4E9961B8059492445641C0B58A54227F19D4ECFAF47A2E5735868838519BFA"
+    },
+    {
+        "path":  "assets/gba/ui/elena_riverside_backdrop_v2.png.import",
+        "sha256":  "DA41224C8751DFFB6D67EFD7A05CB87CADB76FAEBC6A9D36760A8C447AFC0692"
+    },
+    {
+        "path":  "assets/gba/ui/elena_seed_sack_v3.png",
+        "sha256":  "8723504E3354C94C903AE863503F739731020DAA5821679973C6291E2628207A"
+    },
+    {
+        "path":  "assets/gba/ui/elena_seed_sack_v3.png.import",
+        "sha256":  "A7F8302424AB80ED626076A759D63B103329556EBF22975C7CAF87C0C9892B5F"
+    },
+    {
+        "path":  "assets/gba/ui/elena_toolbox_v3.png",
+        "sha256":  "D246A7EB111805289F0F20FE8E8854FD6BD3EC52A19B05149D3579008ABC9D58"
+    },
+    {
+        "path":  "assets/gba/ui/elena_toolbox_v3.png.import",
+        "sha256":  "8C90122C20E2305916ED02A34612C2E6967C76A82D808279E1C65D0F67977C1E"
+    },
+    {
+        "path":  "assets/gba/ui/elena_wagon_body_v4.png",
+        "sha256":  "071C250D3099B3A84226396D0DFF3D20617B2D93721C6A4C97F3D3C7346EA02B"
+    },
+    {
+        "path":  "assets/gba/ui/elena_wagon_body_v4.png.import",
+        "sha256":  "892DE0BC048658D9346432E840C3979E45F3524337ECFA2C690861B2A3E45C6E"
+    },
+    {
+        "path":  "assets/gba/ui/elena_wagon_v4_notes.md",
+        "sha256":  "2345248944D02CBD036B1E0681B0854008C103574263D082C898E7C5C2BE42A1"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_book.svg",
+        "sha256":  "5D29BE7C8C53AC2EC9FCCF1721AE8CE44BAD9E18365E8DE295BB8183658E5613"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_book.svg.import",
+        "sha256":  "BFBFC659E2E163D73BCC23DE53076E48AE1EE470076F1D97B64569482C0EE7C5"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_emblem.svg",
+        "sha256":  "3AC8628AAB45237D6E62F6CA203239797EC6FD8BF1C2ED325B920CC6C7DB2CB3"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_emblem.svg.import",
+        "sha256":  "9D4CAB8B0D20BA3F2E5CFE06977E84F839E88947B2A8EDCD0381A12646627090"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_satchel.svg",
+        "sha256":  "B40EE0D202AD38C026937AECD949A3527A6FBD115B11A4C80453FD9CA41C8F31"
+    },
+    {
+        "path":  "assets/gba/ui/inventory_satchel.svg.import",
+        "sha256":  "A939B740F6E7601D443EEB74D7B7B49A743403A47D4F90148ECAAB681E321B02"
+    },
+    {
+        "path":  "assets/gba/ui/lumber_tools_sheet_v1.png",
+        "sha256":  "6ED95938206237D5703120A30324295993DFB41F86538EA7DEFBFF4F536AA95B"
+    },
+    {
+        "path":  "assets/gba/ui/lumber_tools_sheet_v1.png.import",
+        "sha256":  "FE1FAEFF97CEB29910F728E58DF421C593DA3B65772583CC3FE872FBF42C161F"
+    },
+    {
+        "path":  "assets/gba/ui/main_menu_buttons_v2_notes.md",
+        "sha256":  "B09862A392E367E8BA1BAC3E5AE06E727B6565EACE11489DE8C11B6FAC6CF566"
+    },
+    {
+        "path":  "assets/gba/ui/main_menu_button_walnut_brass_v1.png",
+        "sha256":  "150AFCB9E3C4139C60C2BF462C126A270B00A31C8CA60092672DF1FE7522A95C"
+    },
+    {
+        "path":  "assets/gba/ui/main_menu_button_walnut_brass_v1.png.import",
+        "sha256":  "A86ED409F18B985A82ACE97D56CFBA724586576DED7098A666B10B1B42AFE049"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_challenge_v3_notes.md",
+        "sha256":  "0F32B0D2DADBD07BB0CEC79740A843650C03603423007D4157CFABCB969760EA"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_challenge_v4_notes.md",
+        "sha256":  "931BD204FEA88B70A82E2A1C1A0F6995B23049DE254E27B7C50972E5133DCB6A"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_difficulty_v5_notes.md",
+        "sha256":  "19333D36B05CD77923CDD4DD8F82B8F3605F3E7F4837834A508DD2A0B8327F9E"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_forge_bellows_sheet_v1.png",
+        "sha256":  "2C845C0F47701168FA9B74D030BF6EC9D56F43C003F9A7E9B5EFA9EBDCC9893F"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_forge_bellows_sheet_v1.png.import",
+        "sha256":  "AAB6BF97324BBF713E2649A06EE35CA97058D12EC49B4146F8367E0879857809"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_pinion_v2.png",
+        "sha256":  "BAB230C836E21C75FF99A0FA0ACCFBE9F64C5866F3FE36709EB4D99B223492E2"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_pinion_v2.png.import",
+        "sha256":  "FE3F5F7ADE6DE6C05144063B9E33DD20D1037B5A0E41A886CBEFF3CA602EE569"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_workshop_backdrop_v2.png",
+        "sha256":  "EE9D99EC10E54174BF3666E24D3DE169C9259A2A1F1C6EDED1E1BD572DC25A60"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_workshop_backdrop_v2.png.import",
+        "sha256":  "EEBCFBA748E79DCE5ECB6102309C8B0B1687E1ACB653A479CBAC45570B6536FF"
+    },
+    {
+        "path":  "assets/gba/ui/mateo_workshop_v2_notes.md",
+        "sha256":  "047990BED685ABA507B08F56A0C5E1C3A4BBB1FE5E15AC087BB0ABB954D054A5"
+    },
+    {
+        "path":  "assets/gba/ui/mill_gear_piece_v1.png",
+        "sha256":  "27999FF7D3387B343780A75A637428DC5EC3CB9E4B237F525B72E145C555069F"
+    },
+    {
+        "path":  "assets/gba/ui/mill_gear_piece_v1.png.import",
+        "sha256":  "CA16D6F8595F54745906B3E0181BA0F62F412E30DC87E2A6BBEEF4E716BFB907"
+    },
+    {
+        "path":  "assets/gba/ui/mill_plank_piece_v1.png",
+        "sha256":  "A1C767CA5B09902C3048833BAAA1D43754A6C2C1228D23EA7CD201664736C672"
+    },
+    {
+        "path":  "assets/gba/ui/mill_plank_piece_v1.png.import",
+        "sha256":  "2AE32E7C060AE483F9421FB52F390C291A4DD8BEA46A1519825EEACDA7EF27C2"
+    },
+    {
+        "path":  "assets/gba/ui/mill_rope_piece_v1.png",
+        "sha256":  "E9D184DD4E90D2C726B3510C0FC1D9087B647719207090DBE077E31E6AEF72F6"
+    },
+    {
+        "path":  "assets/gba/ui/mill_rope_piece_v1.png.import",
+        "sha256":  "152CFE7B9B82138640BD0F26E8D6CC30BC8E8EA543CF1A3E573CE85C7F547857"
+    },
+    {
+        "path":  "assets/gba/ui/mill_stationary_frame_v2.png",
+        "sha256":  "77AE595DB55E0F03A8181150993D44A29E7F8C794D4453039FAAE4BE1A994409"
+    },
+    {
+        "path":  "assets/gba/ui/mill_stationary_frame_v2.png.import",
+        "sha256":  "A89959352830E00DAD75EBBA7AFED7CA38B937D82F370F6C802AC88DC1BFE23E"
+    },
+    {
+        "path":  "assets/gba/ui/mill_waterwheel_v2.png",
+        "sha256":  "BE56CCF32770B2FB81396C6A7E6E56FF8774B12A0FABBFFF2AFC9CE378DD1E9B"
+    },
+    {
+        "path":  "assets/gba/ui/mill_waterwheel_v2.png.import",
+        "sha256":  "FE5FEC6ABB0AF80DCB6A4AF218450C81760A5C42B69FDDE6403B2E52864F353E"
+    },
+    {
+        "path":  "assets/gba/ui/mill_workshop_backdrop_v2.png",
+        "sha256":  "1D22F03D3ED63D0FA877C6033F9B4C740A9D66990D6438FB6E99597C36D91F23"
+    },
+    {
+        "path":  "assets/gba/ui/mill_workshop_backdrop_v2.png.import",
+        "sha256":  "BC4AB6FBBB2154FCBB956F7879AE4F22DA1A7CDB77E7EC1409867D6112B896B7"
+    },
+    {
+        "path":  "assets/gba/ui/mill_workshop_v2_notes.md",
+        "sha256":  "43D0226CED0095755643DBDF700FA19F13592C85765494B0B6FCE49DE7E366C2"
+    },
+    {
+        "path":  "assets/gba/ui/pause_anvil.svg",
+        "sha256":  "7A58F79FF28BC87FC69D17D7F4FF6D47F5205C515D388D005DA50C82622F4B71"
+    },
+    {
+        "path":  "assets/gba/ui/pause_anvil.svg.import",
+        "sha256":  "72546796DE2F7C3B12CF7F03C1B187DD4CE6DB6890DF1D0AA0AC1DC3EFE7A183"
+    },
+    {
+        "path":  "assets/gba/ui/pause_journal_illustrations_v1.png",
+        "sha256":  "157579E901E2B6CCC4BDADC2F934477394447A31888BD585EDA60FEF5A32587B"
+    },
+    {
+        "path":  "assets/gba/ui/pause_journal_illustrations_v1.png.import",
+        "sha256":  "AFFAC5E223DD7AE7307B1285056A8BAAAE91DA399FABDA80E007347590641C27"
+    },
+    {
+        "path":  "assets/gba/ui/pause_mill.svg",
+        "sha256":  "045F37FD832037A52C576CCD8D79E43864107FBDFAB9B0784F00DBCD7E3576B9"
+    },
+    {
+        "path":  "assets/gba/ui/pause_mill.svg.import",
+        "sha256":  "E511DA3E14C40589550FF5A837F710FB27A63DD429FC4199D4FBE4F23D95DEAD"
+    },
+    {
+        "path":  "assets/gba/ui/pause_traveler_journal_v1.png",
+        "sha256":  "353163CD350C44AA1E6B100E86A0634EF5EA6417D0FB59A19AC2A97979C5AE51"
+    },
+    {
+        "path":  "assets/gba/ui/pause_traveler_journal_v1.png.import",
+        "sha256":  "D120F0B6CA651B6E0AB6ED6E520A8B9EE5912A07E8DB5BA5FB60BFFB637DA343"
+    },
+    {
+        "path":  "assets/gba/ui/pause_traveler_journal_v1_notes.md",
+        "sha256":  "0D93DCCD0835BFC59232D39AD6316D68F176745950BF704238D4A263F4667E89"
+    },
+    {
+        "path":  "assets/gba/ui/plank_item.svg",
+        "sha256":  "4927A3769E7AAAE02F0F47977E9AD79EEC66652A67EF37772D43B9DF7ABE1889"
+    },
+    {
+        "path":  "assets/gba/ui/plank_item.svg.import",
+        "sha256":  "0C016F82C5C812710DA5306AD2BCA09236E99AADA4DAABD0AF78ABBC09F270A1"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_artesanal_v4_notes.md",
+        "sha256":  "CB86BFF53B9D35CBCE9DC5E99988D3E084F3274B17748C736373169FFB5F4D69"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_backdrop_v2.png",
+        "sha256":  "651F56292DB6EC3BEF7F3C67EB2FBA173BBEBE8E0472E32A28A5FD17D0E21A18"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_backdrop_v2.png.import",
+        "sha256":  "671A3E546D1153E93EAA92021085BE6114102AE5369034AD146082897A56C6CA"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_carriage_v2.png",
+        "sha256":  "E0EB6794C0D7566A0A6DA195AB86FD12CF6A337722F74AB77C02FE17B0B590A3"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_carriage_v2.png.import",
+        "sha256":  "5E35FA9052E8305E21460EB698F3C7D714CAEDD0930D67961EAE4806B5A678C3"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_six_phases_v3_notes.md",
+        "sha256":  "29E0F4723D0463ADD48EB879F5A199CE5D03162F05CFD40902D3CC5DDA23D6EB"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_v2_notes.md",
+        "sha256":  "4BD12F87D024B6B73C9EBA825AD35CFAC8C2E7DD437A9FDDAC6D1DBE733A9A8A"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_wheel_v2.png",
+        "sha256":  "0C3F62613B607AFD7D34B68DCC8D03D4785CD740BE0B09E482A6A03ECF469FB8"
+    },
+    {
+        "path":  "assets/gba/ui/ropewalk_wheel_v2.png.import",
+        "sha256":  "97BF25E55941975FA3EA624EDA1F751F3244EB66C490F47C779D0ADF62A0DB67"
+    },
+    {
+        "path":  "assets/gba/ui/rope_item.svg",
+        "sha256":  "28E8793C15D9F33CB20D69D5C4C3F93FDCC87E6307416FB1E21653EF4DBC39C7"
+    },
+    {
+        "path":  "assets/gba/ui/rope_item.svg.import",
+        "sha256":  "EBBBD5CE6AFD464DFF50F70B90A11D46413B2324FCD47B272886EE030A883B77"
+    },
+    {
+        "path":  "assets/gba/ui/silas_binding_jig_pixel_v2.png",
+        "sha256":  "56850EF72FBB24E3E7EC8FED00B8FD33F9350BA8DB7E3812155800F0E160018F"
+    },
+    {
+        "path":  "assets/gba/ui/silas_binding_jig_pixel_v2.png.import",
+        "sha256":  "76267A74D84E40FCCAA36B6118B070AA5C6CF870F661BBFA3FD8894C7806007E"
+    },
+    {
+        "path":  "assets/gba/ui/silas_binding_thread_pixel_v2.png",
+        "sha256":  "9BED6D7936B84920FF0C21C980022E6B4028D89B5F459C8C4B1BBAFB78F004CC"
+    },
+    {
+        "path":  "assets/gba/ui/silas_binding_thread_pixel_v2.png.import",
+        "sha256":  "5D97B0A5CA1517548445A2247C83B1C5575B28461A13BEB68B02395AEF927912"
+    },
+    {
+        "path":  "assets/gba/ui/silas_brake_parts_pixel_v2.png",
+        "sha256":  "3ABA9FDE5191325FB13E81C04185DA5C9A1AFF84762BF1FC1C4BACE985B33BFF"
+    },
+    {
+        "path":  "assets/gba/ui/silas_brake_parts_pixel_v2.png.import",
+        "sha256":  "3FB382C6A870B834AC0F539E7F020F6A9B7742C5E072B82E5946ED76BA004D3D"
+    },
+    {
+        "path":  "assets/gba/ui/silas_carding_room_pixel_v2.png",
+        "sha256":  "076C0C0C7F2A86B973E544D87004987D3C0CB0C185C3347DC7CB5EA528B39236"
+    },
+    {
+        "path":  "assets/gba/ui/silas_carding_room_pixel_v2.png.import",
+        "sha256":  "129E8934A2E687FE59DCA312C4C5F76119419A225F05078B1BCA041C12F5A5D2"
+    },
+    {
+        "path":  "assets/gba/ui/silas_hatchel_pixel_v1.png",
+        "sha256":  "E3A6AED4CC17AE57D5B89DD423E745CBC2EF96125573FB67F3E1099D5B3121D6"
+    },
+    {
+        "path":  "assets/gba/ui/silas_hatchel_pixel_v1.png.import",
+        "sha256":  "B1B65B63B06F1D8F24BE6E93EA34A1768BAB157C306585ADF31ECF947FFDDE87"
+    },
+    {
+        "path":  "assets/gba/ui/silas_hemp_bundle_pixel_v2.png",
+        "sha256":  "7F32EDA294DDB6C870164134BA54329CE95C26E0C39102EE831E37DAC8CBA03F"
+    },
+    {
+        "path":  "assets/gba/ui/silas_hemp_bundle_pixel_v2.png.import",
+        "sha256":  "E5DD662E68025D2FC6DBFD144783A879E44470C220E62D349F3783C4A8961AD1"
+    },
+    {
+        "path":  "assets/gba/ui/silas_pixel_art_v1_notes.md",
+        "sha256":  "AE56EFC689C4A9CC0AF6049BD27F95A232EF5CAE757EB4FD816EB716BE83AD90"
+    },
+    {
+        "path":  "assets/gba/ui/silas_proof_room_pixel_v2.png",
+        "sha256":  "9E3062F40F763749663C9DDAFC768D41816D7C313D5474D27DBEB2BFEA8961C6"
+    },
+    {
+        "path":  "assets/gba/ui/silas_proof_room_pixel_v2.png.import",
+        "sha256":  "7BC8AE30C767D224CFE5BB7B58338F2DB563E6A2B1CE2F4B825625F148F2E7F8"
+    },
+    {
+        "path":  "assets/gba/ui/silas_rope_braid_pixel_v1.png",
+        "sha256":  "C15C88BCDA829DE6E2492D1F0FDD343ABE1E3B7D4634049A5425B6CDB5C53A7E"
+    },
+    {
+        "path":  "assets/gba/ui/silas_rope_braid_pixel_v1.png.import",
+        "sha256":  "FED037D2579F1A2F052EC3530F5D5BF0036049A66D97AC218ABBBF1699227DD1"
+    },
+    {
+        "path":  "assets/gba/ui/silas_rope_coil_pixel_v1.png",
+        "sha256":  "8DDA440BC36750A86A8EE0563247BA788E2B017C5B7DE3B491800DB56D79333A"
+    },
+    {
+        "path":  "assets/gba/ui/silas_rope_coil_pixel_v1.png.import",
+        "sha256":  "368D66AF47405B848C5B65BB48CD23609DF5595FDE8E86F7E54AAD460F92A7CA"
+    },
+    {
+        "path":  "assets/gba/ui/silas_stage_scenery_v2_notes.md",
+        "sha256":  "A6D3DC3DBFB10B826D8F8FABAC08EBDB37D24852ED3F9B1A96A4E569EB0D903A"
+    },
+    {
+        "path":  "assets/gba/ui/story_brass_emblem.svg",
+        "sha256":  "64A8427F028D081A326607879106E7B42731BC0BC267AF8EB2BFF7A751412B62"
+    },
+    {
+        "path":  "assets/gba/ui/story_brass_emblem.svg.import",
+        "sha256":  "E915A89929A38683D50D27567CECB16C182281AF7F3AF74698924C28CA177057"
+    },
+    {
+        "path":  "assets/gba/ui/story_walnut_brass_button.svg",
+        "sha256":  "0BA49362A395EB841545C077930F5E9E2D1D503B9C2EF52454B24CBB3B5D8CBF"
+    },
+    {
+        "path":  "assets/gba/ui/story_walnut_brass_button.svg.import",
+        "sha256":  "A8554098F74DAC2FD0A6F78559C719EE7E703225B6076D870122646EF9A539B1"
+    },
+    {
+        "path":  "assets/gba/ui/story_walnut_brass_panel.svg",
+        "sha256":  "6C97ED9E8048D3FC00705A7C53680975EAA5CF75CD8BE8B1585B8038A5E0E3DB"
+    },
+    {
+        "path":  "assets/gba/ui/story_walnut_brass_panel.svg.import",
+        "sha256":  "75B86002B25A9A7E22252658211DBFDD97D0AF32B0E64E323C4A40AB9E532CAC"
+    },
+    {
+        "path":  "assets/gba/ui/tools_icon_gba.png",
+        "sha256":  "BA89337F47A3797BA53514A8B638F98B485D5DF6F5D9667E64B05C529D83B157"
+    },
+    {
+        "path":  "assets/gba/ui/tools_icon_gba.png.import",
+        "sha256":  "F5F78A05C0C0D1DC2A4E3F3CD0A9DCACCA10233A22790CDDB0333041F7FBCAF0"
+    },
+    {
+        "path":  "assets/items/flour_sack_v1.png",
+        "sha256":  "0A291699AC0D88CD54BC9B814C472ACF0318DC9AEB4B37B9B4799AFC9F9D1C8E"
+    },
+    {
+        "path":  "assets/items/flour_sack_v1.png.import",
+        "sha256":  "8EB028B24FBC12ED7C093F327110CF4B6AF6232227EC56D5982337018C17DAF3"
+    },
+    {
+        "path":  "assets/items/train_ticket_v2.png",
+        "sha256":  "9C1D67E92928A859D7BA6788DCD8EBDF8287CD8DB22CB6BBA91307BDF194F56C"
+    },
+    {
+        "path":  "assets/items/train_ticket_v2.png.import",
+        "sha256":  "3A8BF0163D7874173AB0370625A3CA06558502948E6E9E0752420A7EEFA0E9BF"
+    },
+    {
+        "path":  "assets/items/wheat_v2.png",
+        "sha256":  "029D9A2F8B75CBD73A2C59033768A70FA55A35957DF7DBEFABA0FA77D98BA169"
+    },
+    {
+        "path":  "assets/items/wheat_v2.png.import",
+        "sha256":  "516D4A023330FC003DB0DFF9478625C19256D1A378AD81949E69EFDAB32554BF"
+    },
+    {
+        "path":  "assets/phase2/caleb_miner_pixel_v1.png",
+        "sha256":  "8C55B646B967FF0888601B7EC2FE3BC7DE5F8AB1476BCA7BD09624998E855503"
+    },
+    {
+        "path":  "assets/phase2/caleb_miner_pixel_v1.png.import",
+        "sha256":  "8EB83330475D61FB10BA7D95EAE4C502FA719EEF6FB1845D9658270CCF722DCF"
+    },
+    {
+        "path":  "assets/phase2/coal_extraction_prompts_v1.json",
+        "sha256":  "50845FD654649DDCC477BB9A812A6B9D0B2CD843FEB29B05440354FE375B5C22"
+    },
+    {
+        "path":  "assets/phase2/coal_extraction_props_v1.png",
+        "sha256":  "576B4341393C2714A3505DF64AF6DAF281DACC87CBE0ADBCBDA2858508EABBFA"
+    },
+    {
+        "path":  "assets/phase2/coal_extraction_props_v1.png.import",
+        "sha256":  "095A07D0C3889CEF9C3555F3049DE53E4065CE4B2EF9AF9BEEC2ED1BE2D9F7D3"
+    },
+    {
+        "path":  "assets/phase2/coal_workface_closeup_v1.png",
+        "sha256":  "DF86D418B4F12A23213B213EDA6139D5B1D14E3FDB1C3E35C29150CFA1203B58"
+    },
+    {
+        "path":  "assets/phase2/coal_workface_closeup_v1.png.import",
+        "sha256":  "970ED9187B8AD22395C395F271DB23DBE15753E8BF3C1C95CA90CC10C4011CB1"
+    },
+    {
+        "path":  "assets/phase2/cort_foundry_pixel_v1.png",
+        "sha256":  "53DCB22C181DC06BDA1C8005F00894F709713A7159309869F2F2B6CD388E633C"
+    },
+    {
+        "path":  "assets/phase2/cort_foundry_pixel_v1.png.import",
+        "sha256":  "B8AEA5D3B4E0D11BB7B06055B4BD2626D0A589404B8FA536A565C1151C6B358A"
+    },
+    {
+        "path":  "assets/phase2/engine_house_assembly_v1.png",
+        "sha256":  "A5D6254DF49FFDF4971FED7AA2D7AF6085BDCF494BA692A0A13B2887E0244314"
+    },
+    {
+        "path":  "assets/phase2/engine_house_assembly_v1.png.import",
+        "sha256":  "C6CCCD714E1797BDBFC727B1AC665DE59EED7186797CB48AFFA61A191DCB15BD"
+    },
+    {
+        "path":  "assets/phase2/engine_house_hall_v1.png",
+        "sha256":  "413327FFC7B96B3068AB0D32A91F0D72F79E3A862E08E1250905B61C2533A1AB"
+    },
+    {
+        "path":  "assets/phase2/engine_house_hall_v1.png.import",
+        "sha256":  "456F25151D7C9C091B3729DD5462EBFCCD818DBF072D0C4295E76795AB055168"
+    },
+    {
+        "path":  "assets/phase2/engine_house_prompts_v1.json",
+        "sha256":  "90E7634CDFE2DE5814DB6E17A02488D2792787E291FBF05DEC4CB7D2B349986C"
+    },
+    {
+        "path":  "assets/phase2/engine_house_yard_v1.png",
+        "sha256":  "CB1D0C262482E301DED97004771DD1FF9A72024AF867658068595FAFFE6EDDF0"
+    },
+    {
+        "path":  "assets/phase2/engine_house_yard_v1.png.import",
+        "sha256":  "1849A1A48D74636A235560A2E2780B7505079234F6D9AE572FFDE80929900F40"
+    },
+    {
+        "path":  "assets/phase2/engine_pixel_v1.png",
+        "sha256":  "D40DA62EA1ED5AB2721089CF1CD82FA1B2B8AB706BB5A61AC263413F65DFB732"
+    },
+    {
+        "path":  "assets/phase2/engine_pixel_v1.png.import",
+        "sha256":  "EA9094B515590DA9F7BE5D5D5791AF6A38A51595B49462A352C40A459C9316C1"
+    },
+    {
+        "path":  "assets/phase2/forge_hall_pixel_v1.png",
+        "sha256":  "AA45E38AA24B5509483629AD353C2A4C663F5ED166C3118550336652F7D8BDB9"
+    },
+    {
+        "path":  "assets/phase2/forge_hall_pixel_v1.png.import",
+        "sha256":  "D8CCF040418FEE31B36235A643897B2C1097A7A7B2C4EE0AA949B42701E7E17F"
+    },
+    {
+        "path":  "assets/phase2/forge_industrial_prompts_v1.json",
+        "sha256":  "33D93031598F093E71BA5124384E17B025DBD46A90A9CD75FB91100B2C81798F"
+    },
+    {
+        "path":  "assets/phase2/forge_pixel_v1.png",
+        "sha256":  "FC8483C86369DC1AF67AEC7445F6768B7DE75CC8495F14C6B41FFFF02188881E"
+    },
+    {
+        "path":  "assets/phase2/forge_pixel_v1.png.import",
+        "sha256":  "AE2848C7738D0E6D027A66B4900AE366F14B666A8B8E1BADB07A23926AFB4928"
+    },
+    {
+        "path":  "assets/phase2/forge_yard_pixel_v1.png",
+        "sha256":  "F26DF3F767A89774BF4C5EB5A5E70AEEAED9E2406B70B8BB32AC7DF784F3E690"
+    },
+    {
+        "path":  "assets/phase2/forge_yard_pixel_v1.png.import",
+        "sha256":  "F263733BE93DD308E955E0455350090920725DBE0A5C37D17B4BB7821A102EDE"
+    },
+    {
+        "path":  "assets/phase2/foundry_belt_drill_bay_v1.png",
+        "sha256":  "3902106FB6125108BEB4F53DA11F1C853357624C49B92B9C203ED49AF5BA2A7B"
+    },
+    {
+        "path":  "assets/phase2/foundry_belt_drill_bay_v1.png.import",
+        "sha256":  "484159E736C30E79AECEFE133513715085701544912B56F02576BADAB67CCA91"
+    },
+    {
+        "path":  "assets/phase2/foundry_interactive_tools_prompts_v2.json",
+        "sha256":  "C0E5421FF0ADD3268995AEBEBE1FA551D89E32AB628758CBFFCA6CB968F1C894"
+    },
+    {
+        "path":  "assets/phase2/foundry_interactive_tools_v2.png",
+        "sha256":  "1CF4A2E46964C0604D071C4729DC0B19F9C785D9A335F202BC188E77A4D02B73"
+    },
+    {
+        "path":  "assets/phase2/foundry_interactive_tools_v2.png.import",
+        "sha256":  "DA70D431E0C25E718F740B3A0CC369CC51558B8FF2B8AFC750937DAA38E72591"
+    },
+    {
+        "path":  "assets/phase2/foundry_machine_parts_atlas_v1.png",
+        "sha256":  "0FBB621EBA5497A1AB7A16BC7FE46F093ED8D22F3EB2CCDF19531A70CE466DA7"
+    },
+    {
+        "path":  "assets/phase2/foundry_machine_parts_atlas_v1.png.import",
+        "sha256":  "2445C4A6EFF76A849AD217AD657350C4ABAD6C4BD0EE38A5622E965DD007E9A4"
+    },
+    {
+        "path":  "assets/phase2/foundry_materials_atlas_v1.png",
+        "sha256":  "F9BBF6B0D92B5499512504ADA8FB8FF7769641D2FDF1EA69A4614124E7252A91"
+    },
+    {
+        "path":  "assets/phase2/foundry_materials_atlas_v1.png.import",
+        "sha256":  "634C635AD3F3B6AF3BA7430D8958ED7900779B9DAEA80A3DF6FDCD95D823BCC0"
+    },
+    {
+        "path":  "assets/phase2/foundry_reheating_hearth_v1.png",
+        "sha256":  "867571A74F0B475F0CF33DAC0E947A8EE1BEBBBB347891259006436827F67319"
+    },
+    {
+        "path":  "assets/phase2/foundry_reheating_hearth_v1.png.import",
+        "sha256":  "052221BD45BBDC5A1B6BB9A3D372C969B50FC4631EB3AAE5E09D6D3DBC672F37"
+    },
+    {
+        "path":  "assets/phase2/foundry_steam_hammer_bay_v1.png",
+        "sha256":  "B19C82F7A96CC4D45C2AA39A8374334956F8EC68FD5DDE063CE3957A508764FF"
+    },
+    {
+        "path":  "assets/phase2/foundry_steam_hammer_bay_v1.png.import",
+        "sha256":  "6218F08442FFD1CEDFD3C84B70AF4EFBAA1917499AB78B8F1047F77E5E654C8B"
+    },
+    {
+        "path":  "assets/phase2/foundry_workbench_v1.png",
+        "sha256":  "D8462E1254735F7EAC4F4630FB02A1A87CFA860748AD0C25CEFD4C7018094844"
+    },
+    {
+        "path":  "assets/phase2/foundry_workbench_v1.png.import",
+        "sha256":  "795B627DA3C097D6E45AEDA92A9950A38FA21AD797B57C938A150922124AF9DF"
+    },
+    {
+        "path":  "assets/phase2/foundry_workshop_prompts_v1.json",
+        "sha256":  "AB4BF0F6761C512CB6FA52AD5CAC7F21C77E0EEDA905305569EA54BEC8DA108B"
+    },
+    {
+        "path":  "assets/phase2/generation_prompts_v1.json",
+        "sha256":  "B6862D4ADCABF6139FF9D6C3C51CED9A988A96F4BF3CA71B291E346610FE821E"
+    },
+    {
+        "path":  "assets/phase2/hub_pixel_v1.png",
+        "sha256":  "6DCE14C3B82716DEDDDDE5340BEC3FD1D07603ADD4E8D8E971DB9825FCADA737"
+    },
+    {
+        "path":  "assets/phase2/hub_pixel_v1.png.import",
+        "sha256":  "252A91CDDB9643E182B1CCE38FC4AC6730624FF6F0022E2CC52E9A1F8DD1FB0F"
+    },
+    {
+        "path":  "assets/phase2/intro_01_pixel_v1.png",
+        "sha256":  "8027CFFADC267A14EB745E13379D11C9B9E293689BC0C1DBF3901A4FD52B80D7"
+    },
+    {
+        "path":  "assets/phase2/intro_01_pixel_v1.png.import",
+        "sha256":  "59244ACFD29A0809785188265657FCB1A12CDCA83B825989052F053484BA261B"
+    },
+    {
+        "path":  "assets/phase2/iron_mission_parts_pixel_v2.png",
+        "sha256":  "D36CE03C7BBEF65AFE950DFD3D8E501BF9AF7BE664E7F986B02B48150DC2E75E"
+    },
+    {
+        "path":  "assets/phase2/iron_mission_parts_pixel_v2.png.import",
+        "sha256":  "C9188845ABBC0400CE77DC75BFFB13D57656771E37DDEE94E2C2A35909290851"
+    },
+    {
+        "path":  "assets/phase2/iron_mission_parts_v2_prompt.json",
+        "sha256":  "BE1027244C6AC6D1C3BE47D452FD1CCEABE8AB006B18CBB4F127FEF434B94B20"
+    },
+    {
+        "path":  "assets/phase2/iron_mission_prompts_v1.json",
+        "sha256":  "F5766707E29BC0E65D7D65C8FF22C021637EC07C66A4522D4A1AD3B55B1DBF2A"
+    },
+    {
+        "path":  "assets/phase2/london_coach_art_prompts_v1.json",
+        "sha256":  "E5032CF96A120B396F5769581F14B4349A2620645CA3FF1917516A12ED8A90EC"
+    },
+    {
+        "path":  "assets/phase2/london_coach_depot_v1.png",
+        "sha256":  "B510201708A730C02052407F2FBDB84D870644005FD279BE41AD098899401E20"
+    },
+    {
+        "path":  "assets/phase2/london_coach_depot_v1.png.import",
+        "sha256":  "0AE53AA360DA4A31562FBAEEEBD59E5913A867339B2E0988D8BA56E75405E816"
+    },
+    {
+        "path":  "assets/phase2/london_coach_panorama_v1.png",
+        "sha256":  "43911F4CB16D8750D1329408F2423817EBE7952508D8FA5C1CEBF627FD49B61F"
+    },
+    {
+        "path":  "assets/phase2/london_coach_panorama_v1.png.import",
+        "sha256":  "4E60E19E9A540C8EDD717EC2357168E9FEC2482A662C2171F87A07E7AEA55F68"
+    },
+    {
+        "path":  "assets/phase2/london_generation_prompts_v1.json",
+        "sha256":  "FB51F3575B6CB693B15CAF5360BC48CE33FC523675CE7C7A5CD5631E8F090166"
+    },
+    {
+        "path":  "assets/phase2/london_news_stall_generation_v1.json",
+        "sha256":  "2BF3ED8C4E0D9E24836142E67F3784124C26F4C956AC60AAD773D89CF1695549"
+    },
+    {
+        "path":  "assets/phase2/london_news_stall_pixel_v1.png",
+        "sha256":  "0778C6EEC5C9B1654E3C67246ED4512FD11B23390404003DFFA381C93E290F43"
+    },
+    {
+        "path":  "assets/phase2/london_news_stall_pixel_v1.png.import",
+        "sha256":  "34296A62FA1A4AA239081F6F253479154A0F027EDF73093C45E515D14E4DB81F"
+    },
+    {
+        "path":  "assets/phase2/london_people_pixel_v1.png",
+        "sha256":  "2E28706E30538D639A4DB72081AF21D0AED492B7C8006ECDBC71C8572F9F1B35"
+    },
+    {
+        "path":  "assets/phase2/london_people_pixel_v1.png.import",
+        "sha256":  "2FD1FA86BE3857D05287A254B8936FEE146B523B71CE9D5A873613A20BA1DD97"
+    },
+    {
+        "path":  "assets/phase2/london_platform_pixel_v1.png",
+        "sha256":  "DFBEB7925B9EF45018BE8DA2A3D5D92166A40517BEE147BBEDF95F2314B27086"
+    },
+    {
+        "path":  "assets/phase2/london_platform_pixel_v1.png.import",
+        "sha256":  "8AF61D72580E29ADDE61E48416AEDFEB9BA7505993ED40D2F9C1F34F4BD2B3C4"
+    },
+    {
+        "path":  "assets/phase2/london_staff_generation_v2.json",
+        "sha256":  "43EB2626C0A01A0E9DE5B87C1DB8ADC76D2E715969CF5F08EB72A8C56CE21B55"
+    },
+    {
+        "path":  "assets/phase2/london_staff_pixel_v2.png",
+        "sha256":  "E3B5D09F22DCEEAA045262D1BB68EA1C8D2E6A216DEF575D8F8C4B44B2218986"
+    },
+    {
+        "path":  "assets/phase2/london_staff_pixel_v2.png.import",
+        "sha256":  "78B13D702F5A5AA0D2655879A318026B96F65E27DE2EFFB09A97B7B97287B948"
+    },
+    {
+        "path":  "assets/phase2/london_street_pixel_v1.png",
+        "sha256":  "107C9BBD29E478DD84759A783C97064112040FAA0E7FD54239B1AAF75EEC1101"
+    },
+    {
+        "path":  "assets/phase2/london_street_pixel_v1.png.import",
+        "sha256":  "C0F873145E7A3FC33EC69557DC9D2013A3DF5352550A637776C066D7B439C6F2"
+    },
+    {
+        "path":  "assets/phase2/london_ticket_hall_pixel_v1.png",
+        "sha256":  "1B21D9BD8C3B38A47539A47C0A84C7765F7F3DEF3F00675882F1F0C0CF083398"
+    },
+    {
+        "path":  "assets/phase2/london_ticket_hall_pixel_v1.png.import",
+        "sha256":  "2100BC542BD603A4D6A3DC6E38F363A2E421E0C846E830BD250A9A3FF376B808"
+    },
+    {
+        "path":  "assets/phase2/mechanisms_pixel_v1.png",
+        "sha256":  "5485F93C3B94B38818CE29FE179D257F7480DF1ACD979012C1F43157EF31395D"
+    },
+    {
+        "path":  "assets/phase2/mechanisms_pixel_v1.png.import",
+        "sha256":  "3719E26DFBEFF1B45FE1DA6BF8C6F8BA660FE63F5E77E6381D6CD60270B47FB3"
+    },
+    {
+        "path":  "assets/phase2/mine_extraction_gallery_v1.png",
+        "sha256":  "86DE3E5F2281507D2AEE1C721A1AF6EF0483277D733032754941F4C96E6F1350"
+    },
+    {
+        "path":  "assets/phase2/mine_extraction_gallery_v1.png.import",
+        "sha256":  "633380F7AA75CFA786142AB65B8EDB2F773D9044A8DEA28F108549F1DB3DBF95"
+    },
+    {
+        "path":  "assets/phase2/mine_lift_parts_v1.png",
+        "sha256":  "17F163071B15846842112F965C5B34D76D41EF63A77D859ADAA16E8A1C0A87FA"
+    },
+    {
+        "path":  "assets/phase2/mine_lift_parts_v1.png.import",
+        "sha256":  "52BD11E13FFAD2C7819ABF851E3DE1FB83058AAA1B5894DE66863578FEDDB393"
+    },
+    {
+        "path":  "assets/phase2/mine_pixel_v1.png",
+        "sha256":  "AC814E69AFDB1865136B8612D22245B7A6C3C2F226821D6607F38FD96EFA797D"
+    },
+    {
+        "path":  "assets/phase2/mine_pixel_v1.png.import",
+        "sha256":  "3C34D368D213AD4010BC5BBFCA125AA8E6C5D04D6037079138072FD8929D0013"
+    },
+    {
+        "path":  "assets/phase2/mine_tunnel_iron_v1.png",
+        "sha256":  "E8C1EC9E1092CB6FD1F4B0536B3F0AABE6187A4E640881DE3745231502A1B10D"
+    },
+    {
+        "path":  "assets/phase2/mine_tunnel_iron_v1.png.import",
+        "sha256":  "556AD67A9D05099DAF12C3EFAEC976CF252D7015EBAE4D632369BB2024C64B0F"
+    },
+    {
+        "path":  "assets/phase2/mine_tunnel_model3_prompts_v1.json",
+        "sha256":  "04C31F673815E06A52C5DC68FAC007066888E935005CE314A8996CF58F211C9E"
+    },
+    {
+        "path":  "assets/phase2/mine_vertical_shaft_v1.png",
+        "sha256":  "93F372AF5C80D5887A45BBFB7B414562A9E2A46CA6AAF65890CA0085FE47E1B1"
+    },
+    {
+        "path":  "assets/phase2/mine_vertical_shaft_v1.png.import",
+        "sha256":  "FE6413109017B2A56E0FC18A380A8332242CE94F22B95AF360E635751E2DE8C8"
+    },
+    {
+        "path":  "assets/phase2/mine_winding_house_prompts_v1.json",
+        "sha256":  "7455E110DC57B8E055EC48043BDE8FAA3B341ADB95559E4F8746662102524482"
+    },
+    {
+        "path":  "assets/phase2/mine_winding_house_v1.png",
+        "sha256":  "29391B6EFDEE926E3252AFC2DFE11648A1B34BFB3E40F8170AA451D0297FFCB0"
+    },
+    {
+        "path":  "assets/phase2/mine_winding_house_v1.png.import",
+        "sha256":  "57AF6F0D56F0218A1EF0584051D3388258C2C13A1ACD441112963A6EA61F3904"
+    },
+    {
+        "path":  "assets/phase2/mine_yard_lift_prompt_v2.json",
+        "sha256":  "B287BB323AD5EE50EB4BF156E010755F14D528D7D1EDE890D7C27BC4146C8F36"
+    },
+    {
+        "path":  "assets/phase2/mine_yard_pixel_v3.png",
+        "sha256":  "15BD526284C2B046F269B78D564D45E25D4E277CE0B1BA54C6914A008ED11104"
+    },
+    {
+        "path":  "assets/phase2/mine_yard_pixel_v3.png.import",
+        "sha256":  "9BF881DCD1928B8D0C44235FF37D64B0E9C6C26A09B9E7BFC0894249759398F2"
+    },
+    {
+        "path":  "assets/phase2/mining_cart_parts_v1.png",
+        "sha256":  "890084A8E339B97186AF76F99FA8DE5E6E0869AD971EBAE3BBAEFF17696F576D"
+    },
+    {
+        "path":  "assets/phase2/mining_cart_parts_v1.png.import",
+        "sha256":  "964B5B3E6B186F91899602E04CAFCFB01A38F07780E34CE900C7212C5B2FF334"
+    },
+    {
+        "path":  "assets/phase2/mining_cart_prompt_v1.json",
+        "sha256":  "3A5C24612E0E38C45429E363C6E8D4FE94DAFD1F0513D67DEBE4B36FBCC973B7"
+    },
+    {
+        "path":  "assets/phase2/mining_loading_bay_prompt_v1.json",
+        "sha256":  "04BD081E6DC825385A0555B98A830C81B619A1AF081C97492D8490DA7F23E82E"
+    },
+    {
+        "path":  "assets/phase2/mining_loading_bay_v1.png",
+        "sha256":  "B9CF010334E56DA8B5AAE52C098809CFE01CCA483DB65EA07E5332FDCAA02BBE"
+    },
+    {
+        "path":  "assets/phase2/mining_loading_bay_v1.png.import",
+        "sha256":  "7DD4726AE2542E083237BFCEE01FCFCEC42288B342722E25E782152F27868B5D"
+    },
+    {
+        "path":  "assets/phase2/mining_rail_parts_v1.png",
+        "sha256":  "75400F6EE895A63F328883776A85025E6728FB95BADFB36FA39384B29D6E8E11"
+    },
+    {
+        "path":  "assets/phase2/mining_rail_parts_v1.png.import",
+        "sha256":  "46B33741A98A57A008BDD9FC2DB8BC2852E77DAF77204F61B645059906FA4329"
+    },
+    {
+        "path":  "assets/phase2/mining_sack_bundle_prompt_v2.json",
+        "sha256":  "632C4132C1D735EA7E869F418B61C90C4E16EA93E1AC659FE11A84CD8A45F130"
+    },
+    {
+        "path":  "assets/phase2/mining_sack_bundle_v2.png",
+        "sha256":  "4617E670D383AE9EB5149144678B2E86CDA1AF2670A43662E270884763C37266"
+    },
+    {
+        "path":  "assets/phase2/mining_sack_bundle_v2.png.import",
+        "sha256":  "901DD98C29A30D53E2D15E7615EF37B88A27FCFD5341F5CF586E2F6E54A73361"
+    },
+    {
+        "path":  "assets/phase2/mining_sorting_bench_v1.png",
+        "sha256":  "B47C6F03C982B94F1AA6B0BECC6BE37B18ACE3992B58DD156B4EF89B1EA073CF"
+    },
+    {
+        "path":  "assets/phase2/mining_sorting_bench_v1.png.import",
+        "sha256":  "97DF3E2100DA54587AD32975261CBDFBC5BB1337FFB7997DDCD5B8ADEECE20C6"
+    },
+    {
+        "path":  "assets/phase2/mining_workshop_prompts_v1.json",
+        "sha256":  "2FB5F0F066F683B5E648239A4A5EA8019CFE44A6D7F6216E95A706A9ED8812B1"
+    },
+    {
+        "path":  "assets/phase2/mining_workshop_tools_v1.png",
+        "sha256":  "30C8CA76871272BAF07D576F397B83262EF41D6482920806E65D34521A14B74F"
+    },
+    {
+        "path":  "assets/phase2/mining_workshop_tools_v1.png.import",
+        "sha256":  "825B17121908FDB411A833AB4D40CD57A226465E14D176318F0CBBFCDEA8D56D"
+    },
+    {
+        "path":  "assets/phase2/murdoch_engineer_pixel_v1.png",
+        "sha256":  "60496B80AB256C6DD2A5069E88871B31CE599FF62D239B8C7C1BBD6994683379"
+    },
+    {
+        "path":  "assets/phase2/murdoch_engineer_pixel_v1.png.import",
+        "sha256":  "8E684DF09C22D95EB6F55AEA12509F46C280E65A0F1CDE8FC9E21223B7391E21"
+    },
+    {
+        "path":  "assets/phase2/textile_pixel_v1.png",
+        "sha256":  "7AF3EDC974AF4BFDD7A17C64D02B9A5CDE7B7F17EC4FA43BBBD0F5891E792ECC"
+    },
+    {
+        "path":  "assets/phase2/textile_pixel_v1.png.import",
+        "sha256":  "777151A569E3BA152E156EA57E8CE1EB1208CDE0FBC498BBFD4DB1710167EEB7"
+    },
+    {
+        "path":  "assets/phase2/textile_setup_pixel_v1.png",
+        "sha256":  "37A701BB4459B32ADF25DD4B2D4859DDF9DC428F75C2B2C871691B13BF52A853"
+    },
+    {
+        "path":  "assets/phase2/textile_setup_pixel_v1.png.import",
+        "sha256":  "87211708A0E188EC13645C40D1DE58AC11FAC477179765B5444617B1EC7314BF"
+    },
+    {
+        "path":  "assets/phase2/tools_pixel_v1.png",
+        "sha256":  "99ABCD992CD57E70D5FD2B38B879CCA8F752C5A440CE8979E6DF402D252BB1E0"
+    },
+    {
+        "path":  "assets/phase2/tools_pixel_v1.png.import",
+        "sha256":  "D1187234F4DBF78ADF0D8473275621C52846C65E06DE7F40FA5F76A32E00F844"
+    },
+    {
+        "path":  "assets/phase2/william_coachman_pixel_v2.png",
+        "sha256":  "23CF31EE4ED7CA89EDDA936D9539C121D28C76B2F00847853A99DF06AF5A8FF5"
+    },
+    {
+        "path":  "assets/phase2/william_coachman_pixel_v2.png.import",
+        "sha256":  "DD2AB2D5980EB636F998CA585464D9A146717A149FAF1FE3E03B0211EDF3B3F2"
+    },
+    {
+        "path":  "assets/phase2/william_coachman_prompt_v2.json",
+        "sha256":  "AD6F4AEF6F560C1D818C2F788D3D9615363AB5C0C7E45002BE9026A5CEF2E8D2"
+    },
+    {
+        "path":  "assets/shaders/boat_travel_shore.gdshader",
+        "sha256":  "70F9E747FD86F50B7E030FD2D69D903A80FB52FF255A137BC9C6CFD401FA687C"
+    },
+    {
+        "path":  "assets/shaders/boat_travel_shore.gdshader.uid",
+        "sha256":  "CC92AE5B90BECDBFE4CA631F854F5F2FA1C20A014EEFAC061F1182D63FF24E3C"
+    },
+    {
+        "path":  "assets/shaders/boat_travel_water.gdshader",
+        "sha256":  "118BA643A59A68BDE71AB49AB1A8223075E95C3B83A77AE324EBFCEE89084B5B"
+    },
+    {
+        "path":  "assets/shaders/boat_travel_water.gdshader.uid",
+        "sha256":  "565CAB33B519F1FC587029564B147EE8D7988EFAB7F31F100A7911BC1B431310"
+    },
+    {
+        "path":  "assets/shaders/lake_dock_water.gdshader",
+        "sha256":  "77020CE197A690256EE07EEEF9D4DC43B75A5D78D5BFDBEF660E5901C006EE5C"
+    },
+    {
+        "path":  "assets/shaders/lake_dock_water.gdshader.uid",
+        "sha256":  "1874B99190EBFC3DDFE6BA3E04DDE5EFD1146ECEEFAC14615F4D0AC3560AD189"
+    },
+    {
+        "path":  "assets/shaders/river_water.gdshader",
+        "sha256":  "B7FFD7E7360A5B4EBB95EF6B687B5F02551F2B56A0A3F003B3ECEE4CC5982112"
+    },
+    {
+        "path":  "assets/shaders/river_water.gdshader.uid",
+        "sha256":  "6B92034501AD6312F7160B17D3D748F0086106ED2ED8327426DF9247747CDDC8"
+    },
+    {
+        "path":  "scripts/game.gd",
+        "sha256":  "031FE9D6F06F90C392ECF86A17C8999E5635569B39AB52370407C3FFD5CF9F94"
+    },
+    {
+        "path":  "scripts/game.gd.uid",
+        "sha256":  "0C35975B5BEE71C7479EAFEB3E5384BD65D577E7A29789AAA7BCC20E0970858B"
+    },
+    {
+        "path":  "scripts/core/coal_extraction.gd",
+        "sha256":  "96D4AA972077FEEE61A71A41F8E22E2AB4E37AA7F5E974A5C38383608C3A0C76"
+    },
+    {
+        "path":  "scripts/core/coal_extraction.gd.uid",
+        "sha256":  "412F72FC406B0070AE7562C948AFBFFF15AD5A804E33D2890F6223E2CE9B3F3F"
+    },
+    {
+        "path":  "scripts/core/content_db.gd",
+        "sha256":  "A251E0C14560DFB540E1A46D439EEC9B4C5A18931186383ACF7AA497BFAE5BEC"
+    },
+    {
+        "path":  "scripts/core/content_db.gd.uid",
+        "sha256":  "F8C768D759EAC2CA0182C784B2363F1A27405D97F5B38357838DD9D80B445B39"
+    },
+    {
+        "path":  "scripts/core/event_bus.gd",
+        "sha256":  "D2CD0BDAB8634623FFCF556E2E9DAC0C21089E97336F3952F0DA1C5DC45B30D9"
+    },
+    {
+        "path":  "scripts/core/event_bus.gd.uid",
+        "sha256":  "BAF8CA6321A8CF656191401358606CDB1358C6C5A5CF6BD14E7B752375696E25"
+    },
+    {
+        "path":  "scripts/core/foundry_workshop.gd",
+        "sha256":  "050CE998F1C78F3C90C1F2551954FA4DCE6BAE629BF3C636AB8708EA593237B0"
+    },
+    {
+        "path":  "scripts/core/foundry_workshop.gd.uid",
+        "sha256":  "9DAA02D78062E04C3B463F6AE07345D987727C4C10847A98CCBA3229F5CDC4E1"
+    },
+    {
+        "path":  "scripts/core/game_state.gd",
+        "sha256":  "E37CCEC3717BDC2FD5FBA8286C0BB9F589D546DEFE47D22CF1548F2E730C1119"
+    },
+    {
+        "path":  "scripts/core/game_state.gd.uid",
+        "sha256":  "2B7948AAE219836426B3908F53119D1118F5D9D97BCCCF9C03E393B6151ADCBA"
+    },
+    {
+        "path":  "scripts/core/iron_mission.gd",
+        "sha256":  "8665450C7D6B208FBB02C0D25948FFAF617550D67B9AA0A37C4D1DA4A7C553BC"
+    },
+    {
+        "path":  "scripts/core/iron_mission.gd.uid",
+        "sha256":  "1FDBF809FAA37C431BA7D2EDC51130FF5EC2969022707F54D18B63A2C965B238"
+    },
+    {
+        "path":  "scripts/core/phase2_campaign.gd",
+        "sha256":  "8AEDB8BE813E652E3FA04BD0CE397CE82A00F59777A3B6AF44FDDD254C5F0B5B"
+    },
+    {
+        "path":  "scripts/core/phase2_campaign.gd.uid",
+        "sha256":  "85EA6369C705BE3E4B69350D49D81D4F5EDF2D9167ACBC0DFFB65E79E0E0704A"
+    },
+    {
+        "path":  "scripts/core/phase2_hub.gd",
+        "sha256":  "17B02CB1BE3D6D1DD8DEAAC2CEF040EE8EA544200257F4564A4D8703F5E9F2DD"
+    },
+    {
+        "path":  "scripts/core/phase2_hub.gd.uid",
+        "sha256":  "48AD71E0BA543EB084B30B90CC98EBC70248896C8AE56FE318AF83570DB42DFE"
+    },
+    {
+        "path":  "scripts/core/phase2_metrics_recorder.gd",
+        "sha256":  "40413BAAEBB705C15AED83D39F20720557D3BE7B78C938B1A2D0472B35B41708"
+    },
+    {
+        "path":  "scripts/core/phase2_metrics_recorder.gd.uid",
+        "sha256":  "4B0A36DFDC19C8448350D4827D59E1BDAA57015209A729557F2CBDBB589AF817"
+    },
+    {
+        "path":  "scripts/core/rail_route.gd",
+        "sha256":  "5815023EADE8167BE6FAC77B8050B983BEBE935A5AD0EDED37F86477E34CA2AF"
+    },
+    {
+        "path":  "scripts/core/rail_route.gd.uid",
+        "sha256":  "DA1AFC4C9106D315464F24EC150960B1365F81CC2446F4D72C51C00417BB9A54"
+    },
+    {
+        "path":  "scripts/core/session_memory.gd",
+        "sha256":  "46978934D29693C0534D84625FF3DB1E1CF06B4B13C5C9EBF226AFFDF8A82F1C"
+    },
+    {
+        "path":  "scripts/core/session_memory.gd.uid",
+        "sha256":  "6B9976C2F9D8CDF0195DA95BF4C59EE6DD4C374CB950475E2048F9CBA73B2316"
+    },
+    {
+        "path":  "scripts/player/player.gd",
+        "sha256":  "9233F11831AA036FE8E394B2A8A45327D6727B65C6287506A9AAAAD01553F3A1"
+    },
+    {
+        "path":  "scripts/player/player.gd.uid",
+        "sha256":  "770D9A1D3E6E92EE0EA92F88889614BD30C1D9E67836468812C6DD081187DFB5"
+    },
+    {
+        "path":  "scripts/puzzles/coal_extraction_view.gd",
+        "sha256":  "A996E69FEE5DC4B8229F3CEDF8D31521AE075AF3EFD4BB583DF77D7DA5621537"
+    },
+    {
+        "path":  "scripts/puzzles/coal_extraction_view.gd.uid",
+        "sha256":  "006516035564050725A4B410D43C162B18788119CBB9B36C5CF766F9B4495D88"
+    },
+    {
+        "path":  "scripts/puzzles/factory_puzzle_popup.gd",
+        "sha256":  "D500AC063A09694DBF4A12AECA8A352FD002982350D0E6CB50A2BE0080A17287"
+    },
+    {
+        "path":  "scripts/puzzles/factory_puzzle_popup.gd.uid",
+        "sha256":  "AC8448F28A0CB1A9557A717A48F8BF19AB9EE16C21DCCDF4F2014EE955B98D29"
+    },
+    {
+        "path":  "scripts/puzzles/factory_stage_catalog.gd",
+        "sha256":  "C8E4890FB2D142D9335FA09A57495092692BA820BAEA14F92AAB371AA79B2FA2"
+    },
+    {
+        "path":  "scripts/puzzles/factory_stage_catalog.gd.uid",
+        "sha256":  "E29984F0BAB06003E50709D04ED537CABD86A4C6CB7980A6D961389F4E55E9D0"
+    },
+    {
+        "path":  "scripts/puzzles/factory_workbench.gd",
+        "sha256":  "558CF6173836F064CBD610A723C3889679817FDA4F7008C1CD07D7B2119D543C"
+    },
+    {
+        "path":  "scripts/puzzles/factory_workbench.gd.uid",
+        "sha256":  "3F8F49C2407F420AEDF430565ABC76819E22B838B896EF5404C01564D8C08795"
+    },
+    {
+        "path":  "scripts/puzzles/factory_work_state.gd",
+        "sha256":  "14701EEF2C527808A9554447E741030BE8DD2D0494F5B3643E945C887017C312"
+    },
+    {
+        "path":  "scripts/puzzles/factory_work_state.gd.uid",
+        "sha256":  "8D8951FB0CEBB5C38603975B38714B3B60590D6CCA6DF6759C2E7582B25CAD2F"
+    },
+    {
+        "path":  "scripts/puzzles/foundry_workshop_board.gd",
+        "sha256":  "954A3A31B2A21EF6A32F750EADDDFEE67B5D5D7A184F4171D33460975BDC6D00"
+    },
+    {
+        "path":  "scripts/puzzles/foundry_workshop_board.gd.uid",
+        "sha256":  "89F3D4E4810F8CD50296801C6195485E0F54B9859A1FFB181835D99C804A85B0"
+    },
+    {
+        "path":  "scripts/puzzles/foundry_workshop_view.gd",
+        "sha256":  "0DBFA59B698811C2382F9468E1588384B916BFDB3D31B9114CC84BB1A8AB3514"
+    },
+    {
+        "path":  "scripts/puzzles/foundry_workshop_view.gd.uid",
+        "sha256":  "61EF51FDC512973F1A87BED7FB12FD969898F53233C47D1E5BF6C399120483F2"
+    },
+    {
+        "path":  "scripts/puzzles/iron_mission_board.gd",
+        "sha256":  "B238265BECBF41C0B2FD84CDC0C2E4815D7F2CF9E7765848A9E213AD9911961C"
+    },
+    {
+        "path":  "scripts/puzzles/iron_mission_board.gd.uid",
+        "sha256":  "F5F8474342335F4125AFA6144FA01D382A67A0143768A66F8870F73FC8C7D374"
+    },
+    {
+        "path":  "scripts/puzzles/iron_mission_popup.gd",
+        "sha256":  "25930DF6DBC69A9F701417A913B370F9CF79188B6F0CC76BB962A10BCBA839F9"
+    },
+    {
+        "path":  "scripts/puzzles/iron_mission_popup.gd.uid",
+        "sha256":  "419B3EA8147CDB50099ECC13F150B787DD94DB1CB96879C3696727E0E29E1801"
+    },
+    {
+        "path":  "scripts/puzzles/mine_puzzle.gd",
+        "sha256":  "81A38D954F1B6A24FE71CF2E8595AA785E05E9F081D9CAB5C6168D1BD0CDD794"
+    },
+    {
+        "path":  "scripts/puzzles/mine_puzzle.gd.uid",
+        "sha256":  "D7C4F8316AE8D4C7B9211F4AE1C7C5904A9352BF95D7AF541F8890CFDA20665D"
+    },
+    {
+        "path":  "scripts/puzzles/mining_workshop_board.gd",
+        "sha256":  "E23E3D1AAACE2F6E2EC56A0F98C5E628F5C445899D4886750E429E9532F8A9DA"
+    },
+    {
+        "path":  "scripts/puzzles/mining_workshop_board.gd.uid",
+        "sha256":  "9752BECB6E4BA01996003F2B73DEF6F36DC7242AA329F3F438AB40AF5D44448C"
+    },
+    {
+        "path":  "scripts/puzzles/puddle_forge_puzzle.gd",
+        "sha256":  "237D81EC1A71D7D92AFE9E298A747358B04650EA5CA968297BB2908661C8539E"
+    },
+    {
+        "path":  "scripts/puzzles/puddle_forge_puzzle.gd.uid",
+        "sha256":  "C9894513B135C4912EFE74E17C10C755D264FF249426B264667457470CEA6394"
+    },
+    {
+        "path":  "scripts/puzzles/steam_engine_puzzle.gd",
+        "sha256":  "E46E9F954F06011982228201BB2E303669970F6321608009D4FE795AB13D988E"
+    },
+    {
+        "path":  "scripts/puzzles/steam_engine_puzzle.gd.uid",
+        "sha256":  "C3996223913394E3ED4D9C58BC8C36EA405CEEF0C294613C47C94CA7ECE19991"
+    },
+    {
+        "path":  "scripts/puzzles/textile_mill_puzzle.gd",
+        "sha256":  "72C03AB0317FCCB19FD12C21E8FBE8CE65BBAE45480E352A3C2E6605FC74844A"
+    },
+    {
+        "path":  "scripts/puzzles/textile_mill_puzzle.gd.uid",
+        "sha256":  "15A067BEBF22075533BC08DE59BA33E7D3724F279BA56FA40E26F32B2778F5B1"
+    },
+    {
+        "path":  "scripts/story/phase2_intro.gd",
+        "sha256":  "534BC1E293BD632318BD1E73321C8A0D88E49626030C69E679A82E8141C3C227"
+    },
+    {
+        "path":  "scripts/story/phase2_intro.gd.uid",
+        "sha256":  "82344B084422512CCD65CB28B71F6E2BDE1177A78D286BE92731848442535708"
+    },
+    {
+        "path":  "scripts/ui/cart_balance_scale.gd",
+        "sha256":  "0D60337DAC5717290D0AA2093459F779CD655E48BEEE0CB978D381D45059B4D6"
+    },
+    {
+        "path":  "scripts/ui/cart_balance_scale.gd.uid",
+        "sha256":  "2AEEDA94EFB55F88FB50089DBC21C7D38CEF5A4191241BC9EFA804648324BEEA"
+    },
+    {
+        "path":  "scripts/ui/chapter_journal.gd",
+        "sha256":  "108F6F25531CCFAFCD1C0861DD8F0C4184590DAD919AA823B1BA2479F9D5B6CE"
+    },
+    {
+        "path":  "scripts/ui/chapter_journal.gd.uid",
+        "sha256":  "00896BEDCC29F8B420B4FCB3D3A95749E5BCB7C43C541A767ACA9297A7BE0345"
+    },
+    {
+        "path":  "scripts/ui/elena_cargo_art.gd",
+        "sha256":  "2A0664E66A084FED47518639365A67A17A2D5B17CA7E989B91188CDCC259BC2E"
+    },
+    {
+        "path":  "scripts/ui/elena_cargo_art.gd.uid",
+        "sha256":  "297C527FD912A1E22ECE9CF63B4954C08924688D8FAA2003F9EB39DECDDB26A8"
+    },
+    {
+        "path":  "scripts/ui/enclosure_story.gd",
+        "sha256":  "2EF0311F4D0F48080016B2F61D4C54C7C5713788ADD8121AF2F4FC5C70BB60DC"
+    },
+    {
+        "path":  "scripts/ui/enclosure_story.gd.uid",
+        "sha256":  "A71F2BA40FBB63E11715C3D95E39FF1D03B05CA527750F742406BB4D2B23340A"
+    },
+    {
+        "path":  "scripts/ui/forge_challenge_tools.gd",
+        "sha256":  "8709EA7AA70EA7E46B8385E2A570F42FE5AACF0AE8EC90E13309E4B2CEE89E49"
+    },
+    {
+        "path":  "scripts/ui/forge_challenge_tools.gd.uid",
+        "sha256":  "44D18C81A7491693D656658D84D53715BB3007F28E3B888D37D138642F864DE1"
+    },
+    {
+        "path":  "scripts/ui/forge_hammer.gd",
+        "sha256":  "211ABC46470A195B23F7C4A1A784EE15DE768393D9CB6C6855559F4E875BCA2E"
+    },
+    {
+        "path":  "scripts/ui/forge_hammer.gd.uid",
+        "sha256":  "B338B0AC9D9AA0C5CF9D7EE98D4B9F0585162C2BC6ABEF142BB7DD28323A86F7"
+    },
+    {
+        "path":  "scripts/ui/forge_workbench_display.gd",
+        "sha256":  "AEF3BA75149F042002DCB35CD7AD5CE4E32EA5D80934A03DC5A6B5B0B8B30B1D"
+    },
+    {
+        "path":  "scripts/ui/forge_workbench_display.gd.uid",
+        "sha256":  "23637F31FB712E38363BB2098F7303AA5A0C2693A4255D99788A6D9E85F6700D"
+    },
+    {
+        "path":  "scripts/ui/hud.gd",
+        "sha256":  "F482CD5A492A7B990817F87265C7F888782DC14762FFBB9689C510AFA58478F6"
+    },
+    {
+        "path":  "scripts/ui/hud.gd.uid",
+        "sha256":  "E95B7ADFBA1623D7BF1174982AA6B3C4692015A0E360351F5952CBCB1F28BF8A"
+    },
+    {
+        "path":  "scripts/ui/industrial_surface.gd",
+        "sha256":  "6144F3069C719D064F68BCB55E6A2EC8AF1FC9B1209C717A09FEEFD1C6F1F658"
+    },
+    {
+        "path":  "scripts/ui/industrial_surface.gd.uid",
+        "sha256":  "562A2CA895920A929F5E3E9E92B0AC9ED16746842AAE09A101BC9D7DF6B8D508"
+    },
+    {
+        "path":  "scripts/ui/lumber_puzzle_popup.gd",
+        "sha256":  "2D51DC70823E58D6086C2F72CF9680D407F4E4503354D02BE171469E8B92D31C"
+    },
+    {
+        "path":  "scripts/ui/lumber_puzzle_popup.gd.uid",
+        "sha256":  "62101EB196D2B9506F64217F15E542F5C8872872718377D85E2E23B1F7AA5D54"
+    },
+    {
+        "path":  "scripts/ui/lumber_tool_illustration.gd",
+        "sha256":  "671B9D9FF397044F1A7D9651EB519020B16A534FF037629F6240521B558F4E34"
+    },
+    {
+        "path":  "scripts/ui/lumber_tool_illustration.gd.uid",
+        "sha256":  "7347C381C6270EECE4CA9D6B7C043EFC30EFAACDBD391FAC638BF5133378A02E"
+    },
+    {
+        "path":  "scripts/ui/lumber_workbench_display.gd",
+        "sha256":  "D8E4A6B85C2DC6FFA046E07F32C79900B6BD53EFE99C663212347732091696C1"
+    },
+    {
+        "path":  "scripts/ui/lumber_workbench_display.gd.uid",
+        "sha256":  "A28CBD7446F87AE823FC3CF37A25AE28B8593F9511238362AA6F7DCFA955583B"
+    },
+    {
+        "path":  "scripts/ui/lumber_work_state.gd",
+        "sha256":  "93185196A81CFCC7923541D9975B9064146566FA1FFE2DABF90090CFD04B545F"
+    },
+    {
+        "path":  "scripts/ui/lumber_work_state.gd.uid",
+        "sha256":  "4ECEA2AF95DF4DE1B52C2ED40680D8739AA8670C74C3DA9382F67F00B704082A"
+    },
+    {
+        "path":  "scripts/ui/main_menu.gd",
+        "sha256":  "798652DFAAE0B2F96A5C131E5DF9DD0936790DB807338C95B4F5FAAAC4760470"
+    },
+    {
+        "path":  "scripts/ui/main_menu.gd.uid",
+        "sha256":  "AC18C5BEDC0556D7B3200B18358D01DDE119C0893729500FF61BBD50CFA06EF3"
+    },
+    {
+        "path":  "scripts/ui/migration_cart_display.gd",
+        "sha256":  "4619808E495BE3EA0B41163ECE113732E7E694CBF4D99B90FCCAE6084D629369"
+    },
+    {
+        "path":  "scripts/ui/migration_cart_display.gd.uid",
+        "sha256":  "A5FB584353359828542B43E1C7E709D960EDBB367A08C92A72B2D38EB19E37EE"
+    },
+    {
+        "path":  "scripts/ui/migration_cart_popup.gd",
+        "sha256":  "9F988D0B1828053DE8190F5DE172B2AB19A590F410572509AF689BD7150DD879"
+    },
+    {
+        "path":  "scripts/ui/migration_cart_popup.gd.uid",
+        "sha256":  "B4B2D9300E2343254371765312F27D6855768311D50FDB7613FB5DEC4D1CDBBB"
+    },
+    {
+        "path":  "scripts/ui/mill_operation_popup.gd",
+        "sha256":  "5715EF1CE9C9AA1A33545083713C5BBD2DC312FB819DCC3F694B2B16958B5C00"
+    },
+    {
+        "path":  "scripts/ui/mill_operation_popup.gd.uid",
+        "sha256":  "E862B983B5356F8867188111D0E94683F845EB013455576A0AAC3C7CB1C81A9D"
+    },
+    {
+        "path":  "scripts/ui/mill_repair_display.gd",
+        "sha256":  "755A729E8279ED2566280D5DD451E02FB244407368824A4CB9FAFB70975B0B68"
+    },
+    {
+        "path":  "scripts/ui/mill_repair_display.gd.uid",
+        "sha256":  "30D2BD55D7361B06913B50546A258124ED4E07F5896BF4C45EA3F416259D31C3"
+    },
+    {
+        "path":  "scripts/ui/mill_repair_popup.gd",
+        "sha256":  "4798F262D7C7E555E5052EC3F1436AB2685A16816D535565EF944B21CCE2CEAD"
+    },
+    {
+        "path":  "scripts/ui/mill_repair_popup.gd.uid",
+        "sha256":  "534E191E21F7B86CF15DCD8FD4466B7E389CA5F5D711DDA24A90C4815D4E03D6"
+    },
+    {
+        "path":  "scripts/ui/mill_speed_gauge.gd",
+        "sha256":  "E4678CEFDCB3AAFF667126721CCC972148E3536E097CAAFCF33784236D338B1B"
+    },
+    {
+        "path":  "scripts/ui/mill_speed_gauge.gd.uid",
+        "sha256":  "BF98920E831D3AAAABADB1D6F4F3AD5B6AE1C64A38F16F4B1B78AAA9BC450E4F"
+    },
+    {
+        "path":  "scripts/ui/mill_workbench_display.gd",
+        "sha256":  "DEC4A88BA5BF4CB8183ACD9FCBBFBE518F049DAAA3CBCD10E822ACB13D73C86D"
+    },
+    {
+        "path":  "scripts/ui/mill_workbench_display.gd.uid",
+        "sha256":  "D4FB44FE995B97B24DE22E8076A387EE6E85353B8A25ABFD4EB05FA719E18978"
+    },
+    {
+        "path":  "scripts/ui/pause_journey_board.gd",
+        "sha256":  "FD2DD9B6634224DB943D4AA86024A39F471EB67339CDCE41B0E333BCAF679A0B"
+    },
+    {
+        "path":  "scripts/ui/pause_journey_board.gd.uid",
+        "sha256":  "DCAB27C9897C18A310C6CAAFF7DFE8E81770ACD6B8C80689E4A83E6C8D407123"
+    },
+    {
+        "path":  "scripts/ui/phase_two_construction.gd",
+        "sha256":  "64A57391F1D4F1519D9B787C3A33C8238D189262E1CA7FDEB830318A17FBB146"
+    },
+    {
+        "path":  "scripts/ui/phase_two_construction.gd.uid",
+        "sha256":  "2EDC285BD20A8FAFA49D910B5AD6C17659A458B592282DDB24ED77292E0974D9"
+    },
+    {
+        "path":  "scripts/ui/ropewalk_display.gd",
+        "sha256":  "6FBE428EC147E8F064082DF496A4FF6AD111F24D18F7D2ABABCDB9D810F7F46B"
+    },
+    {
+        "path":  "scripts/ui/ropewalk_display.gd.uid",
+        "sha256":  "B863468F28F5C65005B7A7AC988CD7D07241FB887A653AFB178D8A67ADC8CDD5"
+    },
+    {
+        "path":  "scripts/ui/rope_puzzle_popup.gd",
+        "sha256":  "C84E4F5E09C9F6DBABE39D36A6E9C15B6056A83053D9942A93C139A3C6B8B861"
+    },
+    {
+        "path":  "scripts/ui/rope_puzzle_popup.gd.uid",
+        "sha256":  "82CBFE5BD0F998E6D9DD75A351BAF106E5E8789C8C30EF38C46C0BBE6E2F7EE8"
+    },
+    {
+        "path":  "scripts/ui/rope_tool_illustration.gd",
+        "sha256":  "3E4964F1B15AFC3AD89158492D1D549B5F4172E6950F43C10ABB209D172C1F0B"
+    },
+    {
+        "path":  "scripts/ui/rope_tool_illustration.gd.uid",
+        "sha256":  "C756681F7B79B73FBEE37203D4F93FE3329D6216D17533EC5D8EA8CCBE57D3BE"
+    },
+    {
+        "path":  "scripts/ui/rope_work_state.gd",
+        "sha256":  "76D82938DFC87FD2C4B4426CE81094F1CD61152E10AC56BC54353015AA96AB00"
+    },
+    {
+        "path":  "scripts/ui/rope_work_state.gd.uid",
+        "sha256":  "1C105B7B77C958354A2D536FD3CF775E0E83CFC49C141196AEA5781349DB7B59"
+    },
+    {
+        "path":  "scripts/ui/touch_controls.gd",
+        "sha256":  "6421298A8F2227ADFCA566010B945137C274BEBBC603CDA312D2D62BD6DF80F7"
+    },
+    {
+        "path":  "scripts/ui/touch_controls.gd.uid",
+        "sha256":  "6F357A753D5B356EEAB14C55235916599C2204663A2CFD5554AB0252F8274868"
+    },
+    {
+        "path":  "scripts/ui/wheelwright_forge_popup.gd",
+        "sha256":  "209B9DA6B9E3B5CFE75DD9D14ED10A330C2FF6DD56B634BD19EE98FDE9D47958"
+    },
+    {
+        "path":  "scripts/ui/wheelwright_forge_popup.gd.uid",
+        "sha256":  "D5D09D8AFBFFAE88EFFEA1D9962CFC4613CD606F27EEB88A151572D9A973558B"
+    },
+    {
+        "path":  "scripts/ui/workshop_retry_notice.gd",
+        "sha256":  "A4472E871A1153C26FD6EE92C8A0AC949CB6FC615520ABD5519344A41BF2315C"
+    },
+    {
+        "path":  "scripts/ui/workshop_retry_notice.gd.uid",
+        "sha256":  "4BAB33A140FB0F2441E13F53DA952D2B88681162FF450B440B9C895F4F2D2762"
+    },
+    {
+        "path":  "scripts/world/boat_travel.gd",
+        "sha256":  "F7DDDCB49419D48705DF143C354618A25FAB9E4D11C5B97CEFF7B009DED66F0E"
+    },
+    {
+        "path":  "scripts/world/boat_travel.gd.uid",
+        "sha256":  "C388FC41A759C3877C977BE320C4C2F78E5C01736857997B0F35A05A41CE8769"
+    },
+    {
+        "path":  "scripts/world/boat_travel_effects.gd",
+        "sha256":  "227E7F6ED903FC62B656854CA93CAD5F9B7F244D3DA4F09B87C908E705307FD5"
+    },
+    {
+        "path":  "scripts/world/boat_travel_effects.gd.uid",
+        "sha256":  "125A1A6A189F6BC80B2CAC1A722942F6E1FE18FE91466C432C7766EE0EF6DD94"
+    },
+    {
+        "path":  "scripts/world/boat_travel_shore.gd",
+        "sha256":  "AACA9002899236D94AD0C797CBE41C85A27C5EBB63073B6FFF4887AFDAECF591"
+    },
+    {
+        "path":  "scripts/world/boat_travel_shore.gd.uid",
+        "sha256":  "5E24AEF86953408BEFF74A35875776D08534DE4A00D3C3B3B7A8202F562029B1"
+    },
+    {
+        "path":  "scripts/world/carriage_depot.gd",
+        "sha256":  "AAEA4F2351C0E5F5C7E56DF2D53AC0457602577B1F5FFE070C079EBECA0CC81C"
+    },
+    {
+        "path":  "scripts/world/carriage_depot.gd.uid",
+        "sha256":  "5D34EC2876BE2A5776BE84D7590CE0383B61D50B45D9D8FBC7F9091B0835B4F0"
+    },
+    {
+        "path":  "scripts/world/coach_road.gd",
+        "sha256":  "8999AC8F5CC245F32B28ED41F627E26C71F62AECBE058495F889491BDC82B000"
+    },
+    {
+        "path":  "scripts/world/coach_road.gd.uid",
+        "sha256":  "5F9F64A449C3C69F39B02AF5649D5BFFBBE16B15D9CD07747682CB72601423CC"
+    },
+    {
+        "path":  "scripts/world/coach_travel.gd",
+        "sha256":  "C7832A6EF17D685A8FD00158E8EAAE059BBEDE7B0BDC643E5A1E5C0FAA5179A0"
+    },
+    {
+        "path":  "scripts/world/coach_travel.gd.uid",
+        "sha256":  "D94BE99A5FCF565109360A4A25B73769EEC6B9D08B0860E6D6FF795A272A2AB3"
+    },
+    {
+        "path":  "scripts/world/engine_house_art.gd",
+        "sha256":  "D2C1F90D1119160A4262BE3462E5FE1E56490D8C26DF88ACE7458E532543EE80"
+    },
+    {
+        "path":  "scripts/world/engine_house_art.gd.uid",
+        "sha256":  "508102F83FCD2BDAC81951126D8F968F8FB407857EC787063A5923225880CBDD"
+    },
+    {
+        "path":  "scripts/world/estate_steam.gd",
+        "sha256":  "6F7BABDD84A28449701550DE60FBB48E87B8B878A780A77C25E4CE0423D639DF"
+    },
+    {
+        "path":  "scripts/world/estate_steam.gd.uid",
+        "sha256":  "9EF2662346E6D21E768A99B58D778A7365B2E8161304AAF6BAE1C37088A04203"
+    },
+    {
+        "path":  "scripts/world/foundry_art.gd",
+        "sha256":  "E3F24FB8BD7E0E9473D9F43F8E20AC65B8F56180430BC41C886AE195B139DD2C"
+    },
+    {
+        "path":  "scripts/world/foundry_art.gd.uid",
+        "sha256":  "A079A1AB45627931108FD699BF6074F7638E545C8D8472646A16A59CC1503994"
+    },
+    {
+        "path":  "scripts/world/foundry_workshop_art.gd",
+        "sha256":  "E468677C91D91A6AEFB3B44AACD858199B301FDD75448D627C8B89E407CA9CE2"
+    },
+    {
+        "path":  "scripts/world/foundry_workshop_art.gd.uid",
+        "sha256":  "33516C7337D0B277C24C1E9B14EB42B274F20B016F22B6F9FC25FD64A3D33D3B"
+    },
+    {
+        "path":  "scripts/world/interactable.gd",
+        "sha256":  "EAA22D3833D3E92C4ADE20C9B3ECAA4483487C98CE9009EEC0173F6637E3EFF0"
+    },
+    {
+        "path":  "scripts/world/interactable.gd.uid",
+        "sha256":  "63B32E39316A30C9510D1358762F4121842A6856F9CEB6AF8B5156B2DC77DAFB"
+    },
+    {
+        "path":  "scripts/world/lake_dock.gd",
+        "sha256":  "FA9AC9D39915424B51EAD7323EEF642D6E14053F83E3A13081FA13A39ABA55F1"
+    },
+    {
+        "path":  "scripts/world/lake_dock.gd.uid",
+        "sha256":  "2B162A61E0E6649E2FD787D2F8FAE2DAD1D2D181A6F7C0CEB9DB3A3F12AD646E"
+    },
+    {
+        "path":  "scripts/world/london_arrival.gd",
+        "sha256":  "AA7E9446539EFC9A135119AE5783364F869F4130D5FD2D0AC381807DABD8DADD"
+    },
+    {
+        "path":  "scripts/world/london_arrival.gd.uid",
+        "sha256":  "2B73E1326C984223BFBD22AD028B6FF03A092B67B282E5B41F7102D889C3ED76"
+    },
+    {
+        "path":  "scripts/world/london_coach_ride.gd",
+        "sha256":  "C1459F637E6346A9D465E05F274E383777B584F3FB84F9D76BFFF21EEE2B9DF5"
+    },
+    {
+        "path":  "scripts/world/london_coach_ride.gd.uid",
+        "sha256":  "69589D00F9A5D4EED37ED36726ED1165210078F9A3C4A2DB8EEDA455800AAD3D"
+    },
+    {
+        "path":  "scripts/world/london_journey.gd",
+        "sha256":  "715E630A05BF678B99B5B107EB60F6A5119A860D105FBD48C906F069904B87B1"
+    },
+    {
+        "path":  "scripts/world/london_journey.gd.uid",
+        "sha256":  "3793F934C6AE83D274A2FE8EB36D1DF5A8DD036E3594352DDF828BDC3EA06621"
+    },
+    {
+        "path":  "scripts/world/map_exit.gd",
+        "sha256":  "3E190E4AF8BF12B76490D809E28A2792DF2360D15F920873EED9ED704A23309D"
+    },
+    {
+        "path":  "scripts/world/map_exit.gd.uid",
+        "sha256":  "3AAFB3A2FFC9FB5F96AE7E272311402CD8418E79244BFF2736C73C8364E54BF1"
+    },
+    {
+        "path":  "scripts/world/mill_field.gd",
+        "sha256":  "4594DE4D9657B703CAF0C633CEAD770377ADD8A1D7AAF25A5622339801C9C1B8"
+    },
+    {
+        "path":  "scripts/world/mill_field.gd.uid",
+        "sha256":  "1C5FEB1D0000BDE59EE904F9144347B7FD9318F0EAEAA3732E82F18B2B191C3C"
+    },
+    {
+        "path":  "scripts/world/mill_interior.gd",
+        "sha256":  "E90D117D94DC86882709C24B583DFA4818EDB43181B183EB5DB0277ED54A3CF7"
+    },
+    {
+        "path":  "scripts/world/mill_interior.gd.uid",
+        "sha256":  "6545C836FCB4BA9AF837BC9AA0B67AFA60889C0739861D77BF5F706179C1242B"
+    },
+    {
+        "path":  "scripts/world/mine_art.gd",
+        "sha256":  "3F8502B5D87275E876E77028D6E0B01F70160D1B7D52BAC7CB677B4D25CEEC8A"
+    },
+    {
+        "path":  "scripts/world/mine_art.gd.uid",
+        "sha256":  "588E4CFB01C110C510CDEED9F9B9F05177F64FE4B7608F9897A35772B845D46F"
+    },
+    {
+        "path":  "scripts/world/mine_hazards.gd",
+        "sha256":  "FA40505469642898EA0A0B7B93C522BBD93432E9CF0686616EC85E5B9E350EEB"
+    },
+    {
+        "path":  "scripts/world/mine_hazards.gd.uid",
+        "sha256":  "EB372B8740D083FEC5577411AAFA215E944098C9EDC39F47CCA52D82E90B22DA"
+    },
+    {
+        "path":  "scripts/world/mine_lift_rig.gd",
+        "sha256":  "06DD846D2F05FD530EAB4D77120BA036D2BF363C92EBD06ECFAB5B6ADDF4EFBD"
+    },
+    {
+        "path":  "scripts/world/mine_lift_rig.gd.uid",
+        "sha256":  "B6ECE3BAD906A8EC903F0D1BA5F49B3CEE20494E2C56489297EF1DAFA7424A84"
+    },
+    {
+        "path":  "scripts/world/mine_lift_sequence.gd",
+        "sha256":  "93B3BEF7412E332A93DEF8EF52D92BEAD432A8BF561616C8B7AA0EFE8805019D"
+    },
+    {
+        "path":  "scripts/world/mine_lift_sequence.gd.uid",
+        "sha256":  "6ACF66CBE8BC7A2C68D8195F103EBFE587D668A87CC7D2D15A5668C0B0E40568"
+    },
+    {
+        "path":  "scripts/world/mine_wagon.gd",
+        "sha256":  "82F7D31093455F6BC4F827C12F87598023A41615137DA85F4316E615D8324465"
+    },
+    {
+        "path":  "scripts/world/mine_wagon.gd.uid",
+        "sha256":  "A88D1824A25B489BAA15FD95BC9B3308028D016195316F17C2BB87AE601CFC1D"
+    },
+    {
+        "path":  "scripts/world/mining_cart_art.gd",
+        "sha256":  "895B5D3448D1F62D2E00820D1CA2771454FD50BF57AAD4B7D3A0A236CFA6901E"
+    },
+    {
+        "path":  "scripts/world/mining_cart_art.gd.uid",
+        "sha256":  "97796DAA6B6B2FB3EDA37CB7477790F759637A653244CB52D61A661B2B4243FC"
+    },
+    {
+        "path":  "scripts/world/mining_transport_art.gd",
+        "sha256":  "C27360A6E79193BC00033179BBBFD9CD7C1D1D262093A411E9A437E616676083"
+    },
+    {
+        "path":  "scripts/world/mining_transport_art.gd.uid",
+        "sha256":  "175085992921315652006DDE3E8A483902F0527140F7BD48AA56A0AE35AD9304"
+    },
+    {
+        "path":  "scripts/world/mining_workshop_art.gd",
+        "sha256":  "B807D8AB601EAC69FF59C7861EC49CED67341F9734FF95290DFB8608853D43D2"
+    },
+    {
+        "path":  "scripts/world/mining_workshop_art.gd.uid",
+        "sha256":  "0769A58D998BB081E0DCAFD0BF70DF1C97D7AD166A69D0764A695FC72FA8C352"
+    },
+    {
+        "path":  "scripts/world/passenger_coach.gd",
+        "sha256":  "41C837B86A1E0170A733C09A0A3A8B8A2FEB086D881FAE24DE21BEF074B0B544"
+    },
+    {
+        "path":  "scripts/world/passenger_coach.gd.uid",
+        "sha256":  "4FDAB0B6DDE778F4C8BA1FD4809AF45576A0E1CC88B261DECFE64F83840E46D9"
+    },
+    {
+        "path":  "scripts/world/railway_audio.gd",
+        "sha256":  "DACC58287065D02B0209BA3D662909A01C941B835870D72B26ADC6EDACF962B6"
+    },
+    {
+        "path":  "scripts/world/railway_audio.gd.uid",
+        "sha256":  "7750F821F63DA8CE9DD6342DFDA11F3B800C1F5E28F8F48B4F2F1B8FA8185E2A"
+    },
+    {
+        "path":  "scripts/world/sheep_farm.gd",
+        "sha256":  "A7B1CE10511855996B06FD86D43AC514F458ED66FE7E6646D02DA58D1D6AF742"
+    },
+    {
+        "path":  "scripts/world/sheep_farm.gd.uid",
+        "sha256":  "1CFDE6CF39C1935D085FF6013C8C3FAECF92114508EBB3F82A528B9265412CAA"
+    },
+    {
+        "path":  "scripts/world/spinner_yard.gd",
+        "sha256":  "042FDF22DD87EECAFBFC766AF43300678769F0F686495EB1F3AEFF18FDCE2692"
+    },
+    {
+        "path":  "scripts/world/spinner_yard.gd.uid",
+        "sha256":  "F4D044AB5BC5114BFDE61594EE17D21EFE604606E770D2AD421BC7152AAEB9F8"
+    },
+    {
+        "path":  "scripts/world/sprite_body_bounds.gd",
+        "sha256":  "B1FE49646EE124E07113752478542DA4DEBA26C9747DD9A42E5595591515ADFE"
+    },
+    {
+        "path":  "scripts/world/sprite_body_bounds.gd.uid",
+        "sha256":  "385A7CD67E021890FC6518A782D6272CB74452E00EF071EFECD01850367B8302"
+    },
+    {
+        "path":  "scripts/world/station.gd",
+        "sha256":  "D79849B487A63465684F31E28BE0EF9C4B5CD9CCBC27350B7F0A4FDB3E251163"
+    },
+    {
+        "path":  "scripts/world/station.gd.uid",
+        "sha256":  "ECA6F6EBFFC7BE947E217BB64E759F445106C3604B5A7164F1636335FAE7C211"
+    },
+    {
+        "path":  "scripts/world/station_interior.gd",
+        "sha256":  "B1DC5D4B8495369189A6AB15DC1FE79333B00BE5F871F79AD2C5BADCCD9567EE"
+    },
+    {
+        "path":  "scripts/world/station_interior.gd.uid",
+        "sha256":  "181813AC9834DE8B76E3FF8E25725B07CDFBCAD0BC27ACDD2352EA55881524A0"
+    },
+    {
+        "path":  "scripts/world/station_platform.gd",
+        "sha256":  "6B2FB625E30CCF073E5058B56658CE5546694A32F5679546AFE85C413DB53770"
+    },
+    {
+        "path":  "scripts/world/station_platform.gd.uid",
+        "sha256":  "23533AEBDAE643753F3CD8A2F0474D7F709B320DE3BB8F2CFCC018CD3F91008F"
+    },
+    {
+        "path":  "scripts/world/steam_train.gd",
+        "sha256":  "31BF30D34CC7D60EE4B9AFD769AF376AE18F6224432BDD344652ADCD59438A5A"
+    },
+    {
+        "path":  "scripts/world/steam_train.gd.uid",
+        "sha256":  "422060C8D6977EC84A29F198A72A101E169DFA880FEF7CA3859AB1FCD1521F15"
+    },
+    {
+        "path":  "scripts/world/textile_production.gd",
+        "sha256":  "80CB7965E77524D93C3032B2EE4EAA11BA1D8F8182D32AF47ADB6CD85DEBDDF6"
+    },
+    {
+        "path":  "scripts/world/textile_production.gd.uid",
+        "sha256":  "B108DABC6A04DD0F3C35C5BA1D18E755BB4D88B6C6C702A5FAA1EB64B5A796F9"
+    },
+    {
+        "path":  "scripts/world/train_departure.gd",
+        "sha256":  "73B04C7ACFC9695BA3DFEF0B03926CEF327620B63BBE7BA8EA736AD568BF8C81"
+    },
+    {
+        "path":  "scripts/world/train_departure.gd.uid",
+        "sha256":  "152EA814B10E51F7FCA9FA2418176909BF45BB9CCE640E0D848CA50F694B01B9"
+    },
+    {
+        "path":  "scripts/world/village.gd",
+        "sha256":  "8D363478304A065340EC127C93254A5335CBF4810B56A2C70B10C2CBAEF3D759"
+    },
+    {
+        "path":  "scripts/world/village.gd.uid",
+        "sha256":  "6AFD3355B90E86D79A3EFEB782B757F7AEA51D9F42F132AE3EE8F306A0846519"
+    },
+    {
+        "path":  "scripts/world/wheelwright_yard.gd",
+        "sha256":  "AC07C058F359802CE3C2AAC9EB25EF78EF6A7010A72FCE427DD79324A982F033"
+    },
+    {
+        "path":  "scripts/world/wheelwright_yard.gd.uid",
+        "sha256":  "552110F0402B9ECCD97D6E9900002C26F844C7D388F70A32BB05D4713BACBD0D"
+    },
+    {
+        "path":  "scripts/world/wood_island.gd",
+        "sha256":  "16FE133CE5A3ACF8C5DF24C3A421C72E679453FC99B209D40DAC43C526CC3C9A"
+    },
+    {
+        "path":  "scripts/world/wood_island.gd.uid",
+        "sha256":  "CB49C1EF4E1B847827EF9739AF9E7D434F4DA4D3CEDE5499C229C19437BFABA3"
+    },
+    {
+        "path":  "scripts/world/wool_carder.gd",
+        "sha256":  "3F250093FEEF4E5DE7CCD07D0EA2012D60A907EE69C7C3FEBA7F8DA0C282E104"
+    },
+    {
+        "path":  "scripts/world/wool_carder.gd.uid",
+        "sha256":  "9A24E06F979FF581407538CB7873F2B9B108D685C9FD0160976C8D499AF48165"
+    },
+    {
+        "path":  "scenes/boat_travel.tscn",
+        "sha256":  "8837784BA07F14235367020CA8AD7ECB9CFEEF0A9B552FC67B0C71E1EC7AD481"
+    },
+    {
+        "path":  "scenes/carriage_depot.tscn",
+        "sha256":  "D5079173FA3E32F625A131B9588FF2D3A6EF35CDD339D8063A33EFA4DEA6388C"
+    },
+    {
+        "path":  "scenes/coach_travel.tscn",
+        "sha256":  "EDDC3F2E0402F6E5A64A908465D584AAF04FE302297D95176BB952A948CC4AEA"
+    },
+    {
+        "path":  "scenes/coal_extraction_workface.tscn",
+        "sha256":  "2627FE2D542F556DCA009726E83E62631669866F19BF2F7DADDAB52FE556AC1E"
+    },
+    {
+        "path":  "scenes/foundry_workshop.tscn",
+        "sha256":  "594C42973699580DF1ECF1920BE6844AF983FC3C9F1DA309D7F1264F3391A9E1"
+    },
+    {
+        "path":  "scenes/game.tscn",
+        "sha256":  "C08D228DA09C99747021B98F0DBEE61CF9F38CC0F26D75FA403ED7CEAAF1E110"
+    },
+    {
+        "path":  "scenes/iron_mission_puzzle.tscn",
+        "sha256":  "F384C9044CC9B2ED31B2B72F38535CE1079FF94B6F7AD2E4600CC32B10972C83"
+    },
+    {
+        "path":  "scenes/lake_dock.tscn",
+        "sha256":  "8EFD2F7C811824160EDED97B3F5679E639C13022D367826366A02B1D3489E416"
+    },
+    {
+        "path":  "scenes/london_arrival.tscn",
+        "sha256":  "130B520212A6E3950A359A6E98D00CDE89E044C49B8D8A753C7EF62D5D5D3E57"
+    },
+    {
+        "path":  "scenes/mill_field.tscn",
+        "sha256":  "EA404122BCA94DBCA8327E6342B800260960EE3238CC9B7BC40315BDC20009B0"
+    },
+    {
+        "path":  "scenes/mill_interior.tscn",
+        "sha256":  "75FE0A3C1F5EEC6B5D7F56C3F89D488E863EF4E730108DD9AEF04948269225A7"
+    },
+    {
+        "path":  "scenes/mine_puzzle.tscn",
+        "sha256":  "9E44A67CB7A30A845E8D834D36345D04726AF0BE94B7ED90E35422382C83A2BF"
+    },
+    {
+        "path":  "scenes/phase2_hub.tscn",
+        "sha256":  "F2245AB1FB30A6ACE5A24EE7ECCA56A2EEEA21785812BF14AA3CE832B5C8ADE1"
+    },
+    {
+        "path":  "scenes/puddle_forge_puzzle.tscn",
+        "sha256":  "D3718BB5F694D59D2E9E0AF9FA6F87A92C81F3CBFDB8347AA48800A40DE90552"
+    },
+    {
+        "path":  "scenes/sheep_farm.tscn",
+        "sha256":  "211CDC382FEB32269A1B3F4CB1D75D07A253A6FF66B69CBB364373B0EBA88C8D"
+    },
+    {
+        "path":  "scenes/spinner_yard.tscn",
+        "sha256":  "C5D0CFE4136C4C2E67D13BB532272E0E97C763BA69D3F3B89C47B26B716B8574"
+    },
+    {
+        "path":  "scenes/station.tscn",
+        "sha256":  "EA5CA1EB58B3DF1CCED17C9024446DE9888ED67257D2DEE734D847C621B0BFE8"
+    },
+    {
+        "path":  "scenes/station_interior.tscn",
+        "sha256":  "EB6666CC0F6171479E8A983A29AA54F0308A2B7334FF97724FE745F88F6B24F1"
+    },
+    {
+        "path":  "scenes/station_platform.tscn",
+        "sha256":  "BA123643563E90030915C74A4A93ACA86E7BC11779A9011BB120F0D89971ED8E"
+    },
+    {
+        "path":  "scenes/steam_engine_puzzle.tscn",
+        "sha256":  "5CC242A16C825497F6092ED23F4A5CBF458DEA384EDFC9B04D5BCEB59BF11DD6"
+    },
+    {
+        "path":  "scenes/textile_mill_puzzle.tscn",
+        "sha256":  "0B00F58CB03011078562BF46D05B8BB468672F9AA47CD6CD0C443010FAE3E70D"
+    },
+    {
+        "path":  "scenes/wheelwright_yard.tscn",
+        "sha256":  "F9C058E7452F6CDAF1ADB249AF7CDED26C2F94E8485E20F2B2ED02FF4EFB1EA4"
+    },
+    {
+        "path":  "scenes/wood_island.tscn",
+        "sha256":  "6CA845475BE3872A9C01F64488EB617C154CA77B050F0C674BEA0FBE42A2E11E"
+    },
+    {
+        "path":  "scenes/player/player.tscn",
+        "sha256":  "8867A8E1BCD0CE6905D83085182F1C9C640FD3A53E27759BA38D5AC41BEB57DD"
+    },
+    {
+        "path":  "scenes/story/phase2_intro.tscn",
+        "sha256":  "6EF02EDB36450B1B65636D79351092E364A67A7B0DEA797B1B67742D27A3E33A"
+    },
+    {
+        "path":  "scenes/ui/enclosure_story.tscn",
+        "sha256":  "3A232C38CC1E310048FE1E2E47878BB5C2E2DE8A02CF65540655A67C64E1F0B4"
+    },
+    {
+        "path":  "scenes/ui/hud.tscn",
+        "sha256":  "0247246336DEC18815A92927E2506C9AA025785AB91153405DD59F78411AC53E"
+    },
+    {
+        "path":  "scenes/ui/lumber_puzzle_popup.tscn",
+        "sha256":  "64E1D1C2ECFD6B9CD7EAC233E7A8137637FA2B2921F1110E71333AEB9094F8C6"
+    },
+    {
+        "path":  "scenes/ui/main_menu.tscn",
+        "sha256":  "7D9E2671EB2F35030E2FB7C8CB165E28F3B1C1C01EFCBDC09E4B9FF10591EEBD"
+    },
+    {
+        "path":  "scenes/ui/migration_cart_popup.tscn",
+        "sha256":  "9CB3735BD002D11ED9E9B078724371F5D17F0E35B2844F0EC57AAA0192945034"
+    },
+    {
+        "path":  "scenes/ui/mill_operation_popup.tscn",
+        "sha256":  "57ED483EECB758B325DAC219EBB97E6DC3DAC725AAF1DEA36BE3C631B9FA150D"
+    },
+    {
+        "path":  "scenes/ui/mill_repair_popup.tscn",
+        "sha256":  "9EC0E7DEC118FD164C681E1D4182A4BC6394D2B9C5CE7336C426E0BA1011A805"
+    },
+    {
+        "path":  "scenes/ui/phase_two_construction.tscn",
+        "sha256":  "D49CFDC8A9BB9BC51AE935756D4C6850B82710516247F07B311E0098770039AD"
+    },
+    {
+        "path":  "scenes/ui/rope_puzzle_popup.tscn",
+        "sha256":  "29094465D661EA41608185C3D11FB7F1C92B27E341EB4F79FA6E110BE54E141D"
+    },
+    {
+        "path":  "scenes/ui/touch_controls.tscn",
+        "sha256":  "6F556D7AC80F4B234B3E98235B770AF07E5AE9E12A3A97ED644C96AE1684FB17"
+    },
+    {
+        "path":  "scenes/ui/wheelwright_forge_popup.tscn",
+        "sha256":  "93D79ACC18EF5654FE94BAEA9AAE36168C3B522F3429B5E2B672900053A20086"
+    },
+    {
+        "path":  "scenes/world/interactable.tscn",
+        "sha256":  "9531F56319989326782865CE8B30960B59E8835ADE99EDBCB96A255358E114B9"
+    },
+    {
+        "path":  "scenes/world/passenger_coach.tscn",
+        "sha256":  "CF98FFE29E94F1FA61BCD556DFE26C29A664728E22CAEFBF149C69BA9876E0DA"
+    },
+    {
+        "path":  "tests/boat_travel_test.gd",
+        "sha256":  "679DB05CC7246088533E8154ACCC3FD71F411BC71AF436BEAF24B194D5EEC9EA"
+    },
+    {
+        "path":  "tests/boat_travel_test.gd.uid",
+        "sha256":  "C643DA2BA1ED6771983A672D9B84BD58F88348853E08769F9D2AF94432DE5A0E"
+    },
+    {
+        "path":  "tests/boat_travel_test.tscn",
+        "sha256":  "C7D4C503E26BFCB384F67D4CA2808CF40E2D0DE7432BE2C3BD20602210A983F4"
+    },
+    {
+        "path":  "tests/chapter_journal_flow_test.gd",
+        "sha256":  "A78D45D2387FF4D6FB7E517FDEC46979520D908D68786118674167CB1411093D"
+    },
+    {
+        "path":  "tests/chapter_journal_flow_test.gd.uid",
+        "sha256":  "DC6ECFD0F3EC5983204D48CA06F444E5AB6AA8E075A8DAFFCCC577553F897AE6"
+    },
+    {
+        "path":  "tests/chapter_journal_flow_test.tscn",
+        "sha256":  "FC3C4B35C83E5B4C185CA58D8E661AE67FB00EC4F27EE6BD7F2924D6F57E92C8"
+    },
+    {
+        "path":  "tests/chapter_journal_flow_watcher.gd",
+        "sha256":  "2706EED16F02A38B635D3EF571B3D5ECCC81DD523ED69B602D45A00F1F24F957"
+    },
+    {
+        "path":  "tests/chapter_journal_flow_watcher.gd.uid",
+        "sha256":  "D879F0EEF0108C6BA558FBF77DD4CE559C1F54787812512BD2A470389A3D73ED"
+    },
+    {
+        "path":  "tests/chapter_navigation_test.gd",
+        "sha256":  "9CDEF467BC0EA654AC5DA93A34A0A79B6B25DD23C55614D061E4910560A19AD1"
+    },
+    {
+        "path":  "tests/chapter_navigation_test.gd.uid",
+        "sha256":  "47B708C4E1785A96E6CA2E9A149D163DEE8D79D2213B19502DD126B8F58F68B1"
+    },
+    {
+        "path":  "tests/chapter_navigation_test.tscn",
+        "sha256":  "A2C146EA0F38ADEDEB53F4EFF0C981C6ED2B1CE4A1ADD4B9AA9FD592B0503B1E"
+    },
+    {
+        "path":  "tests/chapter_navigation_watcher.gd",
+        "sha256":  "FEAF4C077AD2D311636B4D701D75A389D1E25C24DC6426FC39A9DD44EC918FD9"
+    },
+    {
+        "path":  "tests/chapter_navigation_watcher.gd.uid",
+        "sha256":  "F8137A1C358E729B0EEE05689841534D9FE25F64B02476BA7E3359516D16FA97"
+    },
+    {
+        "path":  "tests/coal_extraction_driver.gd",
+        "sha256":  "63A9A2AEDFF6BAE12642C340046D522C1F557A7B31F1C232AAA192216D53DFA3"
+    },
+    {
+        "path":  "tests/coal_extraction_driver.gd.uid",
+        "sha256":  "79437123303784F666EE0E30EB334A4F0BE9D779A81E55A3E0384EE23E5B2866"
+    },
+    {
+        "path":  "tests/coal_extraction_test.gd",
+        "sha256":  "0481DD6139567F11B61C6791B956E54C4F1EBB8D1FB2A9FAA831F2A749C4F8D7"
+    },
+    {
+        "path":  "tests/coal_extraction_test.gd.uid",
+        "sha256":  "D79288B16903CB0A9FD9BBD14CBE226060482FFB59DB8DB5D1F35468D1F71F4C"
+    },
+    {
+        "path":  "tests/coal_extraction_test.tscn",
+        "sha256":  "C2E96130E96D6F2F67BFA12FBA8ED4667C2C0E4B0D87F322448AFFE714C1D688"
+    },
+    {
+        "path":  "tests/coal_extraction_watcher.gd",
+        "sha256":  "5CD9285D2259FE791CC8B886213E3F11FA9AF4EC698B2A69F572D9E3717306BA"
+    },
+    {
+        "path":  "tests/coal_extraction_watcher.gd.uid",
+        "sha256":  "D11F919F75359359C8655110626ED6DD29C9CF1EF3C6DC5F102D82D7A7B1D939"
+    },
+    {
+        "path":  "tests/completed_chapter_return_test.gd",
+        "sha256":  "F1D5D2A25BB42A8DDCBA8C504CA69B3715EB25CA271D9DA4A7552205B039256A"
+    },
+    {
+        "path":  "tests/completed_chapter_return_test.gd.uid",
+        "sha256":  "2152D89FEF6A3D8ACA036C2C16F80D48D6A5DE592BBFB75883BA9CA27290DEFF"
+    },
+    {
+        "path":  "tests/completed_chapter_return_test.tscn",
+        "sha256":  "BB1241BE95519573454922A448B0AB01F592B6467997BEE066CE2DF8835CAAB5"
+    },
+    {
+        "path":  "tests/completed_chapter_return_watcher.gd",
+        "sha256":  "7557D84CBF379AC1831F2915E7498DE7E8B9A8CB74B59D24A05F4CDADBFBEEC1"
+    },
+    {
+        "path":  "tests/completed_chapter_return_watcher.gd.uid",
+        "sha256":  "035A8E74BBFDA4DF9884A246203AE631D0D325D930921A3BBFC7BAA0F54B812C"
+    },
+    {
+        "path":  "tests/economy_flow_test.gd",
+        "sha256":  "97FCEC06ADC678BE764C6D97836DB06CD7805F0DDE5F54450A7764CFF4B40861"
+    },
+    {
+        "path":  "tests/economy_flow_test.gd.uid",
+        "sha256":  "28F57F5F98534C912A81183286F1A3699181D1ED26C21F97518032C60AD1AD73"
+    },
+    {
+        "path":  "tests/economy_flow_test.tscn",
+        "sha256":  "B162848D3B49E2FA3F79853FB1B60CCB42C90D1CDF5B09FB1D409AB886ED7A54"
+    },
+    {
+        "path":  "tests/engine_house_test.gd",
+        "sha256":  "65B8F3C47FC06071B1A8164CB5C98A33ABD925BF5B06D3B3DF08736E1723F1A2"
+    },
+    {
+        "path":  "tests/engine_house_test.gd.uid",
+        "sha256":  "9FC1D6F692FFAADCE9B7A53EF5C62FA4A490E7163DCE1CFAC568F69228ECC90A"
+    },
+    {
+        "path":  "tests/engine_house_test.tscn",
+        "sha256":  "6320EE2C6403B6701C4CD76B0831DF00F2B8E62ADDE151B5B9F6DA6B8C279ED8"
+    },
+    {
+        "path":  "tests/engine_house_watcher.gd",
+        "sha256":  "3C16F4EAD9BE6C1A5CF7F64472487C9AD04AD8746B39FB9D5470EFAF6D834538"
+    },
+    {
+        "path":  "tests/engine_house_watcher.gd.uid",
+        "sha256":  "667766DB9E9834E8B3810FBB3E3C736E486400C94CFED3790E68E10ABCEEED83"
+    },
+    {
+        "path":  "tests/field_layout_test.gd",
+        "sha256":  "5BC050524C02F7D81367829A8D3F19A65E6098567DCFB085A35DFB9E77E57951"
+    },
+    {
+        "path":  "tests/field_layout_test.gd.uid",
+        "sha256":  "CBB870F28EB0BE681D4DBC13B8696716B4021E364A57EC81EA5DA453F99DCFB6"
+    },
+    {
+        "path":  "tests/field_layout_test.tscn",
+        "sha256":  "C29566FCFD1571774EE6EFCEDF503F82CE88CE980AEF3C7D5AF4081474205F62"
+    },
+    {
+        "path":  "tests/five_puzzles_pause_test.gd",
+        "sha256":  "0E802618E287AB573B0EF324510F0223BC2675D754E762F96BFD6AB25F9B7C34"
+    },
+    {
+        "path":  "tests/five_puzzles_pause_test.gd.uid",
+        "sha256":  "CC88B4661663C2A0FA1801009125886BEF01213BA5E5D2FE20DB98B04580183C"
+    },
+    {
+        "path":  "tests/five_puzzles_pause_test.tscn",
+        "sha256":  "CB17474ABD90ABD70200DC9AA312BF868817C673BD03388ECE574D54C9640137"
+    },
+    {
+        "path":  "tests/foundry_scene_test.gd",
+        "sha256":  "947FC15C0381E1C3718D8F6CD91BD3FD54C1A6B0E66F43FEDD06664A40AC6B98"
+    },
+    {
+        "path":  "tests/foundry_scene_test.gd.uid",
+        "sha256":  "061E648FAA8A7415341A0B06A53BFB0CD09AAB599BE81000EB90C6A3603C6871"
+    },
+    {
+        "path":  "tests/foundry_scene_test.tscn",
+        "sha256":  "CBA58E8F9A1F3ED83F34F6A925774BAE9F51A55B0072B7C904DC77DE9098CE97"
+    },
+    {
+        "path":  "tests/foundry_scene_watcher.gd",
+        "sha256":  "9CC463933F22D5FBD2B4BCF5A341251DB6AE6119FA334543F7CFBB37B0072166"
+    },
+    {
+        "path":  "tests/foundry_scene_watcher.gd.uid",
+        "sha256":  "8E298D191F04E1019CB257C4C0F777052318415B924D72C2CE2F64942B931D9B"
+    },
+    {
+        "path":  "tests/foundry_workshop_driver.gd",
+        "sha256":  "293D36BAE56ED290A60CFDC1FE3F819E7283ABCE853E378E95F84E58C5391ACB"
+    },
+    {
+        "path":  "tests/foundry_workshop_driver.gd.uid",
+        "sha256":  "3960B5DF251B70953F0EDE1452A33B6D2E397C1716ECD8886F52046F5CD85583"
+    },
+    {
+        "path":  "tests/foundry_workshop_test.gd",
+        "sha256":  "229059AFA55F5692388AD8459BC5B6AEDFD8CE4D6625FF9E6F7907F2B5D75583"
+    },
+    {
+        "path":  "tests/foundry_workshop_test.gd.uid",
+        "sha256":  "0E88183149332B599C4D9CDCB561E94E9182520BE26D9AFA82A2D6644D456C51"
+    },
+    {
+        "path":  "tests/foundry_workshop_test.tscn",
+        "sha256":  "10E641A13DD10E003115769EA2D4F4CE0298E5C55329F777041E30BDCC742930"
+    },
+    {
+        "path":  "tests/foundry_workshop_watcher.gd",
+        "sha256":  "020E72BDBD646B24C32F45B3AF15B6182F01BF7EC0FEAF777D6D1C63803C9F1C"
+    },
+    {
+        "path":  "tests/foundry_workshop_watcher.gd.uid",
+        "sha256":  "ACE609EE8895FE2AA2179883798ECBE9E97FD05ED4FF0A4E3D994FE3FB310B3C"
+    },
+    {
+        "path":  "tests/inventory_ui_test.gd",
+        "sha256":  "6AA2E4C76C6F26E1DCC6BB268C133DFAF77FE191F4C22F2D8AC14F1196C303DE"
+    },
+    {
+        "path":  "tests/inventory_ui_test.gd.uid",
+        "sha256":  "2C06CAB1A8582153EAE990A6A3E5610F7E332570E338E9C7500DC34119B999EF"
+    },
+    {
+        "path":  "tests/inventory_ui_test.tscn",
+        "sha256":  "24F4EA2E3A5B26C8536D3F4BB3E4AA2A9EA21912AB0A59DE218626F33D91A7E3"
+    },
+    {
+        "path":  "tests/iron_mission_test.gd",
+        "sha256":  "1774435E158D38486D2FF6A2C6CB8D2B2D901922DCB520D4E5A838D3F5BA77E9"
+    },
+    {
+        "path":  "tests/iron_mission_test.gd.uid",
+        "sha256":  "3EF5EEC1711CF52B6B313E15DEE671A195AFFE4D9F57D67962F1891F8D01993C"
+    },
+    {
+        "path":  "tests/iron_mission_test.tscn",
+        "sha256":  "A4936E93AE24DCF39C2EB76EBCF1872384C4518A29E40D258AEE79482378319D"
+    },
+    {
+        "path":  "tests/iron_mission_watcher.gd",
+        "sha256":  "F0AFC49EA9351AFF3E48302EC4F5E9223C1177D5A1E5D0DD7853F8776088F570"
+    },
+    {
+        "path":  "tests/iron_mission_watcher.gd.uid",
+        "sha256":  "9F1CDEFE0E7A1A6CF57CA4F214A0D6AB977B972E3FB0A6102512CE3F96DDE644"
+    },
+    {
+        "path":  "tests/lake_dock_test.gd",
+        "sha256":  "2DEF13A5BF9400CCB3152C429B44B63F7275FBFD8B268924C0C230931032E998"
+    },
+    {
+        "path":  "tests/lake_dock_test.gd.uid",
+        "sha256":  "68C53D9CD5058B94C5769DE8FC3E975B248A61B7D1E4F0713592EADE1A012763"
+    },
+    {
+        "path":  "tests/lake_dock_test.tscn",
+        "sha256":  "5ED85B89FA699FDDBA41C680DC1C9698EE45CC8EA619F6D7AC54FB7D03C98F0D"
+    },
+    {
+        "path":  "tests/london_arrival_test.gd",
+        "sha256":  "0B6DF41F99D667FEBBEF0CC1ED7E11BA70E54A663E82F0071EEEA97AA9146577"
+    },
+    {
+        "path":  "tests/london_arrival_test.gd.uid",
+        "sha256":  "698E7429754B9A2D77BD1F2167030735321EF5E17C3354EB4CE68DA4A744AEBE"
+    },
+    {
+        "path":  "tests/london_arrival_test.tscn",
+        "sha256":  "527CEC1338B065AFC8AD2A0957357A2E7FC0EFE4CC3CA5AC4A801219A2EBB38F"
+    },
+    {
+        "path":  "tests/london_arrival_watcher.gd",
+        "sha256":  "0F9060262F6535D529E016C2430660DFD75CD388023A5A80B4F6E7B0A26E2584"
+    },
+    {
+        "path":  "tests/london_arrival_watcher.gd.uid",
+        "sha256":  "DEABA032CBE9E5A669F3D40173824ED626825ABEFE34AF0B79167FB29F6C981E"
+    },
+    {
+        "path":  "tests/london_coach_test.gd",
+        "sha256":  "770941058C89AF09A3FF5272838D288471DA0B6FB101E76E6EA1293C7DFCA8C7"
+    },
+    {
+        "path":  "tests/london_coach_test.gd.uid",
+        "sha256":  "2BD08787ED97465135CF9C3A379515D5DE7DEE9410968761E7D73491CD615994"
+    },
+    {
+        "path":  "tests/london_coach_test.tscn",
+        "sha256":  "1AB86EB7B60DAB0DA05F31FA961A0C52F70937C236BE43FE0C1037105FD152AA"
+    },
+    {
+        "path":  "tests/london_coach_watcher.gd",
+        "sha256":  "A841517927B5770E2BF3C278E4CA2D8860FF59D526BD61760989E9068AA6530F"
+    },
+    {
+        "path":  "tests/london_coach_watcher.gd.uid",
+        "sha256":  "29141E605BEE0696FCE3E56CD7759E78B8E69E8AE5A53A15371F808F702FC397"
+    },
+    {
+        "path":  "tests/lumber_puzzle_test.gd",
+        "sha256":  "803F150C92F56FA87F088176930FDC3B7535A98A526164A358A7F182D99E4525"
+    },
+    {
+        "path":  "tests/lumber_puzzle_test.gd.uid",
+        "sha256":  "F328B3E284B76ABC7EF26106A76409A88D43308A9D3B5EA49208AF92621E885D"
+    },
+    {
+        "path":  "tests/lumber_puzzle_test.tscn",
+        "sha256":  "F7349F5D8E3CEF19851A27B97C3D30823D9401D095BF21FE903D107BD3F62F8F"
+    },
+    {
+        "path":  "tests/migration_cart_test.gd",
+        "sha256":  "CC40920A9A5475AC2C3897EACC91CDB89183488135645F9FEF53AED132DFB84D"
+    },
+    {
+        "path":  "tests/migration_cart_test.gd.uid",
+        "sha256":  "20AF4E7482A38157C10BF83620C52C54842459D923B51B15CED75402076E9C94"
+    },
+    {
+        "path":  "tests/migration_cart_test.tscn",
+        "sha256":  "23E50EF65D7AD586EAE9F21DBB48C633C2E3A14DD99ECBD0EA6D5E1BBCD028CD"
+    },
+    {
+        "path":  "tests/mill_operation_controls_test.gd",
+        "sha256":  "BF3D94481B0A292FE4AF841C3C2D9FA75D9032A60E1FC295A1A8C7EE4F6E0129"
+    },
+    {
+        "path":  "tests/mill_operation_controls_test.gd.uid",
+        "sha256":  "78F97CAAB565A57DCF46B99A5E329687ACF4DEDF515FB1FC7BFEC3C15839D6A1"
+    },
+    {
+        "path":  "tests/mill_operation_controls_test.tscn",
+        "sha256":  "8C660BCD0AA3381B7CF74DA1DF83C2FA81A5D90B7B777FD593481BC0545FA2FA"
+    },
+    {
+        "path":  "tests/mill_repair_test.gd",
+        "sha256":  "C1593844BFFA2CA5B59C84B39F8A2DBE5275420E550200FB33EAB4C4DB60C06E"
+    },
+    {
+        "path":  "tests/mill_repair_test.gd.uid",
+        "sha256":  "C1A3BDB156E8892823019CD20B59AF5624581CF9AF8FA10F695AA968A3EC2327"
+    },
+    {
+        "path":  "tests/mill_repair_test.tscn",
+        "sha256":  "6DA6E983D6C190851C59694DC75FDA8F32073857778A3AFF49FAD84520DA762E"
+    },
+    {
+        "path":  "tests/mine_tunnel_test.gd",
+        "sha256":  "F9A66B7E0610FB34F12A9D4B03622B516C76B911622E7631DD6695F630CFD541"
+    },
+    {
+        "path":  "tests/mine_tunnel_test.gd.uid",
+        "sha256":  "E10537C51D7D8F6B332885BCA02B41697488FC102516F3FFF583EB6DA53E79E8"
+    },
+    {
+        "path":  "tests/mine_tunnel_test.tscn",
+        "sha256":  "97AB7EC49196C8329C9F484654660883DB8158CD5B64A1851CBC25D4D7916851"
+    },
+    {
+        "path":  "tests/mine_tunnel_watcher.gd",
+        "sha256":  "2417F1535187CA2287CEDC3365D93EB256976F3C17E6ED2A36D4A34791E6A888"
+    },
+    {
+        "path":  "tests/mine_tunnel_watcher.gd.uid",
+        "sha256":  "A5987C3519888D97659133B7DE83599B27EC993D872741F89C1C08877FC9F9B5"
+    },
+    {
+        "path":  "tests/passenger_coach_test.gd",
+        "sha256":  "E4F15692C1B243DEE31335C2BE43A6ED35F5FCD27F16D5ABF5128235A112A58D"
+    },
+    {
+        "path":  "tests/passenger_coach_test.gd.uid",
+        "sha256":  "A8797172F3116FDD06FE7CB729B9822863587F3183196D4F9C3C26F353D27CC8"
+    },
+    {
+        "path":  "tests/passenger_coach_test.tscn",
+        "sha256":  "63D3D376BFF6E4D882AFD69D6C5A8247FFF511E8F0B74DF7FCCF1896098B5C49"
+    },
+    {
+        "path":  "tests/phase2_factory_test.gd",
+        "sha256":  "7F065AEEE4106AD44B31BDF7061F78C5929A1B1304D0D9CD1E31386BB8927E99"
+    },
+    {
+        "path":  "tests/phase2_factory_test.gd.uid",
+        "sha256":  "C6CD33BF2FE981BB5E642152F6455623D0DBEAAF8E1FEE738722BCABD09AEB2F"
+    },
+    {
+        "path":  "tests/phase2_factory_test.tscn",
+        "sha256":  "C814529FBB2EBDC2128E4A25FBDF37E587590A21FD54560944A7D8AD4FCAD4CC"
+    },
+    {
+        "path":  "tests/phase2_session_test.gd",
+        "sha256":  "4F26A0514AA94E7C2D44476060957B2C87DD3C956BD7CB7E9F7D48E7110B3AED"
+    },
+    {
+        "path":  "tests/phase2_session_test.gd.uid",
+        "sha256":  "DA23D2B4FD30F81BB4ED6C3B381A766DBFE6425B24F4ADAB8D5B1ED3EA598838"
+    },
+    {
+        "path":  "tests/phase2_session_test.tscn",
+        "sha256":  "DD248A176FE0478E2179C99D5052D0DC75D4D3617C51A1D898B0BA0B8E044B49"
+    },
+    {
+        "path":  "tests/phase2_session_watcher.gd",
+        "sha256":  "CE2CB7A06BA884738251567C95C907CB719CDC48727C9B6F67B28CDFAB5B0713"
+    },
+    {
+        "path":  "tests/phase2_session_watcher.gd.uid",
+        "sha256":  "7C8D938320E69263C183AFB9B0E1C9AEF07A814FEA830E1098906E82E2AF7128"
+    },
+    {
+        "path":  "tests/phase_one_expansion_test.gd",
+        "sha256":  "FBF0EDA179B1F31C1E8AA48353BFA4953FB7EE1E4D15E6696D7EEAB8EE03606D"
+    },
+    {
+        "path":  "tests/phase_one_expansion_test.gd.uid",
+        "sha256":  "A37910E8D7BD2DA3E9C569004F7BEB2CB18F9B70FC458576179EA9D4367D760A"
+    },
+    {
+        "path":  "tests/phase_one_expansion_test.tscn",
+        "sha256":  "7CE17F4457C5F9862EDCC4B39E1466A500185D7E86BE171C806D07A4F3B8A214"
+    },
+    {
+        "path":  "tests/phase_one_smoke_test.gd",
+        "sha256":  "1C2A0FCE8C844F4A5BF77365B33529E0ADF1CBB64B039EA054FB0BE53D854420"
+    },
+    {
+        "path":  "tests/phase_one_smoke_test.gd.uid",
+        "sha256":  "39F228654F059A1F167BE471236693A8AE28D59C36C536C8604E7AE8776A908F"
+    },
+    {
+        "path":  "tests/phase_one_smoke_test.tscn",
+        "sha256":  "B2C70E8600CEA2AF645AD19D86054B3748417DA4CCD8C77F364C058C90D1B1FE"
+    },
+    {
+        "path":  "tests/prepare_validation.ps1",
+        "sha256":  "8184A2E11BFFA6F104E4831A02944FFB3680E2BA4125428CDA1AB59B1628D173"
+    },
+    {
+        "path":  "tests/rail_dispatch_test.gd",
+        "sha256":  "F49EB10FF51B05C8E1DF090E6AB311EE2EA09416C0EBAAFEB0391D2BA60FCF29"
+    },
+    {
+        "path":  "tests/rail_dispatch_test.gd.uid",
+        "sha256":  "53EE9E7E08CCC61906514144C4AD5D273A65C5AFF24125FC57AE4D3E69DC6EBC"
+    },
+    {
+        "path":  "tests/rail_dispatch_test.tscn",
+        "sha256":  "881E0242F18109D770F3DF27BD956B8949C203FA78344D7DB2E3CCF897078A83"
+    },
+    {
+        "path":  "tests/rail_puzzle_removal_test.gd",
+        "sha256":  "E3B4368BE14193769EBCDE8E21FE7CBB9CCA4650EE4D0A97EC1407EF3DCC53D9"
+    },
+    {
+        "path":  "tests/rail_puzzle_removal_test.gd.uid",
+        "sha256":  "3560A1F880342B7002AED9ACF13724F2A0F7E7CEA8EAD39DE4C65C5E9EA2A824"
+    },
+    {
+        "path":  "tests/rail_puzzle_removal_test.tscn",
+        "sha256":  "F035B133D40E36C220FE38EB2B540C0E32E1EDBA421E77FA04AD66B490BC2EA2"
+    },
+    {
+        "path":  "tests/rail_puzzle_removal_watcher.gd",
+        "sha256":  "22E80F53EC287F53503905D1045BADA845DF7274F5C681088A0162F936EF21DC"
+    },
+    {
+        "path":  "tests/rail_puzzle_removal_watcher.gd.uid",
+        "sha256":  "61A123E2052CBA9BC189563F6D7673F6B7455396142E718FEE1DE23223F67870"
+    },
+    {
+        "path":  "tests/restart_phase_flow_test.gd",
+        "sha256":  "D56CCD5FD3AFF2620670ECFCB959B9C5FD7EABD6C347BC9D50D080A6DB5A6073"
+    },
+    {
+        "path":  "tests/restart_phase_flow_test.gd.uid",
+        "sha256":  "97802FB88DEBE94ADDFFAD996C576CBA6A9263CE208CC9B6776DC447EBAFCDA0"
+    },
+    {
+        "path":  "tests/restart_phase_flow_test.tscn",
+        "sha256":  "7FD2F3A7EF63C703EAC0378B0F337BF50882600D50AC1BDD4C3099E83C617151"
+    },
+    {
+        "path":  "tests/restart_phase_flow_watcher.gd",
+        "sha256":  "4B347AE6B731C68D13A9E3EA1555C86962462847D14300A8395B178DCDC6FC63"
+    },
+    {
+        "path":  "tests/restart_phase_flow_watcher.gd.uid",
+        "sha256":  "BF3BF188288387D5B092D4EAB42D540E95AD10A22CC2636185B9256179AD1B73"
+    },
+    {
+        "path":  "tests/rope_artisan_test.gd",
+        "sha256":  "2700213BF91FBF641ADE979423915C4E7CBE5621313DAB75267E91C82F99FBC3"
+    },
+    {
+        "path":  "tests/rope_artisan_test.gd.uid",
+        "sha256":  "947093853FCB33A7C8A565B37D6F0AAB8649D575C39D4168874693FD30122917"
+    },
+    {
+        "path":  "tests/rope_puzzle_test.gd",
+        "sha256":  "8E5F54F44F0A542B84E035C97CE592461DE5AD36F78229B23EB3936101F995DE"
+    },
+    {
+        "path":  "tests/rope_puzzle_test.gd.uid",
+        "sha256":  "4528259EF0B06AA0ABE76BEB04BFF4974743DCC7A78DB8D5647EBD6D41058315"
+    },
+    {
+        "path":  "tests/rope_puzzle_test.tscn",
+        "sha256":  "8E19C1A137A1C65FD269D4974281593AF51E4775D1CAF0B93E01A34F587B6DCF"
+    },
+    {
+        "path":  "tests/session_flow_test.gd",
+        "sha256":  "3F5FAA5ACDCE6438642FE37DBF7E58D53185FEE49737763D5C7EECF58FE5F460"
+    },
+    {
+        "path":  "tests/session_flow_test.gd.uid",
+        "sha256":  "5C2AAE34B9AF6970AE9751EBE2079106137FAA34346C6311EDCE0F9F780848F0"
+    },
+    {
+        "path":  "tests/session_flow_test.tscn",
+        "sha256":  "F0E33834A1186ECA1C5C8C22305F4B0E46BC752A8CBC0E389A4380E5CE82C079"
+    },
+    {
+        "path":  "tests/session_flow_watcher.gd",
+        "sha256":  "EAC5022BE887E49F7992AD8876A87E6A19D23AA3E0664BBCC17FCF7C50BD3966"
+    },
+    {
+        "path":  "tests/session_flow_watcher.gd.uid",
+        "sha256":  "CC0326DA20E24A3FAB431AD9F36148C5F1FFC2B10B74B921266A33D5A1DE39CF"
+    },
+    {
+        "path":  "tests/sheep_estate_test.gd",
+        "sha256":  "E79C64A3F2DD0B9D11900E25A6FFACE4917B5241FEF690F332850795FC382D6E"
+    },
+    {
+        "path":  "tests/sheep_estate_test.gd.uid",
+        "sha256":  "7D2A5E2129687C38AC6922B80AAB8768691C412AC6509177F5331464805BE532"
+    },
+    {
+        "path":  "tests/sheep_estate_test.tscn",
+        "sha256":  "C5BD40539A841580421994762E79E19C8ACC2A94D540F730397E225F8F069474"
+    },
+    {
+        "path":  "tests/wheelwright_forge_test.gd",
+        "sha256":  "391C22CB865FEB6193A01B3E3800963A27321F15F5F77D20ACE4C50D3AF24973"
+    },
+    {
+        "path":  "tests/wheelwright_forge_test.gd.uid",
+        "sha256":  "31653F3054C43C9096AD83CF4EAD70EA63F42FAD7A44BD1B3E7FC14E1EFBCFB0"
+    },
+    {
+        "path":  "tests/wheelwright_forge_test.tscn",
+        "sha256":  "B11E0E03729BA9DE40AF7ADB2375ABD783F572A80CD79A137800EAB9710C4B33"
+    },
+    {
+        "path":  "tests/_capture_boat_voyage.gd",
+        "sha256":  "9A4AF42D0DD93329D47510899EA36165C711B55FFDAD6C206383B6B099A4E70E"
+    },
+    {
+        "path":  "tests/_capture_boat_voyage.gd.uid",
+        "sha256":  "787140B8292490B874F7C30C98EEB0C88292C475D93756C07995A0421BE39D14"
+    },
+    {
+        "path":  "tests/_capture_boat_voyage.tscn",
+        "sha256":  "FEF4E5A317746CDE36C77B13E753A717A3469F381046186BF644471B2F91109D"
+    },
+    {
+        "path":  "tests/_capture_coach_voyage.gd",
+        "sha256":  "0C2DB0FDB2B932FA02D380BA472BA82496D4EE20DE673ABAF00DA09DD30B1C76"
+    },
+    {
+        "path":  "tests/_capture_coach_voyage.gd.uid",
+        "sha256":  "643618C719BC6EEA1C237B57086B6A6C9842DD3B5A0D2C3BC678578772BA79B0"
+    },
+    {
+        "path":  "tests/_capture_coach_voyage.tscn",
+        "sha256":  "322C3BCA8A333DA1105CBC0E66BF0125C4227B9843DE9DFF567501F7E364E64A"
+    },
+    {
+        "path":  "tests/_capture_elena_cargo.gd",
+        "sha256":  "7AB6FE2EC63AA2B890344F0BEF7435521DA731925B91FAF0633211428E93133F"
+    },
+    {
+        "path":  "tests/_capture_elena_cargo.gd.uid",
+        "sha256":  "8B5860C74ED0BDC0FD78EABCABA5E2237DA6699ADD9A1D0E66C1CD47439FC8FA"
+    },
+    {
+        "path":  "tests/_capture_elena_cargo.tscn",
+        "sha256":  "6F308E346FF28DD100F940EDB531C4E317E78735D062E50469AA4FC5E2016D8A"
+    },
+    {
+        "path":  "tests/_capture_elena_motion.gd",
+        "sha256":  "5953E52388D0AD16305EB0E4878B4236065F7FDB32FCDD0B398DA612245E2BB8"
+    },
+    {
+        "path":  "tests/_capture_elena_motion.gd.uid",
+        "sha256":  "22271BB930DBE06C19DF93C759EB41B2891E9A6F27EEEDDB46DAE35E2BC6EFB3"
+    },
+    {
+        "path":  "tests/_capture_elena_motion.tscn",
+        "sha256":  "E1697BEBD6F2462138358FC517149A9BC47562E5D304BD4A279DC74589C5FAEB"
+    },
+    {
+        "path":  "tests/_capture_elena_puzzle.gd",
+        "sha256":  "7E49187CB4C761FB810DB8D78B00003E1FFC14985250BD06D533DB6DFB7A9C56"
+    },
+    {
+        "path":  "tests/_capture_elena_puzzle.gd.uid",
+        "sha256":  "1157A382C4C6765CE6FED617458D9BE803D52351E780F6B60AA6DF6425339F91"
+    },
+    {
+        "path":  "tests/_capture_elena_puzzle.tscn",
+        "sha256":  "393C5C81342BE5CE3B5B18469279935959F7476DB96E2DBC95B5DC9225E12F4E"
+    },
+    {
+        "path":  "tests/_capture_elena_wagon_v4.gd",
+        "sha256":  "02C5C4306F974C9B6EAB29538001630BEAFCD6319672ACF2064E44F16F513302"
+    },
+    {
+        "path":  "tests/_capture_elena_wagon_v4.gd.uid",
+        "sha256":  "13FE46B69E57BB7D6B654572A142C43D8C71245B345ACD89B4502F58104BC277"
+    },
+    {
+        "path":  "tests/_capture_elena_wagon_v4.tscn",
+        "sha256":  "D7A56588DC5DF40F6C333664340D70BE757C4AAB51C6AD6FF64F8DA1500859D7"
+    },
+    {
+        "path":  "tests/_capture_forge_motion.gd",
+        "sha256":  "7392D6093A6E273FCACE4BBB0CEC4994A5C315D4D4B44FA1407AE6135BA6759E"
+    },
+    {
+        "path":  "tests/_capture_forge_motion.gd.uid",
+        "sha256":  "DCB592B478439C31C698504601C397C365985481A998875C0B4DAD817515705E"
+    },
+    {
+        "path":  "tests/_capture_forge_motion.tscn",
+        "sha256":  "B1E03B8EEF341A65A01106D035F64778126DCD76021C0FD88B9E34B7DB17E27B"
+    },
+    {
+        "path":  "tests/_capture_forge_puzzle.gd",
+        "sha256":  "EC8273A3A2930AA26D2D3A4EDAA52A00E32B6BAAE83728018BD7919184B5AC22"
+    },
+    {
+        "path":  "tests/_capture_forge_puzzle.gd.uid",
+        "sha256":  "74A10BB584DBFC817B6FF6D708A6E50C9A56C91FFBE9CEB968D87B431179C17C"
+    },
+    {
+        "path":  "tests/_capture_forge_puzzle.tscn",
+        "sha256":  "6C46E5555D44156363E6DA73544067DF060C08770A01E30C8B554112AE103E17"
+    },
+    {
+        "path":  "tests/_capture_lumber_motion.gd",
+        "sha256":  "855AF31A95EFCC1265C3FE3BA53E75C7FC403E0B31C014F6138C8C6725CEB1CA"
+    },
+    {
+        "path":  "tests/_capture_lumber_motion.gd.uid",
+        "sha256":  "DBF31F9140AB95DE597370C767D9CCE9D6CE5CCA207F31DBA7E1C217A4836E52"
+    },
+    {
+        "path":  "tests/_capture_lumber_motion.tscn",
+        "sha256":  "4E94F4A0A05D1EED5EAB016203F354450593853E49EFFEE2BB81F095A1354895"
+    },
+    {
+        "path":  "tests/_capture_lumber_puzzle_pro.gd",
+        "sha256":  "7B7E8253BF6503A408395049E5D70C235A37CA40EE601A603F85F89B7FA08124"
+    },
+    {
+        "path":  "tests/_capture_lumber_puzzle_pro.gd.uid",
+        "sha256":  "C282B693EB9EFBC45E93B7D5E6F54394A4FD970ACC18CB7355EE400A4ECCC0AF"
+    },
+    {
+        "path":  "tests/_capture_lumber_puzzle_pro.tscn",
+        "sha256":  "811D93764C75F60AFE6BA158A1E4336E1CD31EC9CCD5CBFC6AA754D307640CE4"
+    },
+    {
+        "path":  "tests/_capture_mill_controls.gd",
+        "sha256":  "5A83C53C064D97097C08C8583E9C0F4FBD25A1D3C5CA2F86B345CD40A02B4457"
+    },
+    {
+        "path":  "tests/_capture_mill_controls.gd.uid",
+        "sha256":  "EF42C3F27825E5753E1379CD525A637F08B6A311112964AB26C5D5186C63E291"
+    },
+    {
+        "path":  "tests/_capture_mill_controls.tscn",
+        "sha256":  "9FE479F4E6EEED9B5926B03A8662581B2271C7077D9DA231835667DCABC42A4E"
+    },
+    {
+        "path":  "tests/_capture_mill_pro.gd",
+        "sha256":  "F0CF82B6E631A169F29304897CB80C8F38B3EA12BFB75E657C462B7F52CF325D"
+    },
+    {
+        "path":  "tests/_capture_mill_pro.gd.uid",
+        "sha256":  "4D35F8FDB7E92C626BA90EF3C9F5A016CB9363F3461496960ECF0AC7954B0E3A"
+    },
+    {
+        "path":  "tests/_capture_mill_pro.tscn",
+        "sha256":  "9BA6F483CF8715E234D38F1C5C396E7A98F69E4A5890C9E58B88600DC3B4807C"
+    },
+    {
+        "path":  "tests/_capture_phase_one_expansion.gd",
+        "sha256":  "7623FE229D79EADA4FB1DE2473922C69C69578744E4D3F8493A17FF830B19E83"
+    },
+    {
+        "path":  "tests/_capture_phase_one_expansion.gd.uid",
+        "sha256":  "96068639EAFDED97BFED762E0F47FB9D82A44C63184E8901E0E9B56423A75D46"
+    },
+    {
+        "path":  "tests/_capture_phase_one_expansion.tscn",
+        "sha256":  "A930732952657083668A6523B4638E333C4437246E618C2A77B0A276193E2BD7"
+    },
+    {
+        "path":  "tests/_capture_rail_dispatch.gd",
+        "sha256":  "E30B98084661A9FB16269BBCE302079C2075DEA4D47B32C057228CFA736A1415"
+    },
+    {
+        "path":  "tests/_capture_rail_dispatch.gd.uid",
+        "sha256":  "C81F434C746CF0D8B834924B0E3DBE4842653BCD331AE1CFFF5ED411BCCAA796"
+    },
+    {
+        "path":  "tests/_capture_rail_dispatch.tscn",
+        "sha256":  "88ADE676187AF868162A15C7FF460ADADAF4CDB7A3D7089552C58E31C8E81AEB"
+    },
+    {
+        "path":  "tests/_capture_repair_pro.gd",
+        "sha256":  "343F8CDDE69D183249FC9755860A3ED6A2ADA5364F8D45261A6A8BFDA2F1B738"
+    },
+    {
+        "path":  "tests/_capture_repair_pro.gd.uid",
+        "sha256":  "00B8F659CFEA3270843A0F5BCBB8BB5BE786D6588149ECDB743C22EBBB6FA785"
+    },
+    {
+        "path":  "tests/_capture_repair_pro.tscn",
+        "sha256":  "D56EE6C70E7C117A3BA8F9E87BBF44C7E0997D5B3F3BEC8D8C767F8F177269AD"
+    },
+    {
+        "path":  "tests/_capture_repair_small.gd",
+        "sha256":  "24958EB8BB19EE11F4C8D91946AF41B7DEA4A7F8074819D937BC5E9B428EF849"
+    },
+    {
+        "path":  "tests/_capture_repair_small.gd.uid",
+        "sha256":  "9F0CFBA210B61B05F09FCD7F2BB0F79E9233A27CB6038D8C86F3ACB87813DCBE"
+    },
+    {
+        "path":  "tests/_capture_repair_small.tscn",
+        "sha256":  "4116CE9474BC403110A70903A3090B11DB3AAB8482BBCE52D4FFADD860247261"
+    },
+    {
+        "path":  "tests/_capture_rope_motion.gd",
+        "sha256":  "A1C66E147B886F5E296F17551F055B252E00BCCC2CBD64264773979C0AEFC34E"
+    },
+    {
+        "path":  "tests/_capture_rope_motion.gd.uid",
+        "sha256":  "D2E006761DBDE1BF668632610F0484E0C9E3A6E624A8C8BE1C716853296FEEC1"
+    },
+    {
+        "path":  "tests/_capture_rope_motion.tscn",
+        "sha256":  "22BD82B21815F5AA37AEEB5259E387CE282CD3828DF31784EE7D0CC06CAD5B55"
+    },
+    {
+        "path":  "tests/_capture_rope_puzzle.gd",
+        "sha256":  "A1C66E147B886F5E296F17551F055B252E00BCCC2CBD64264773979C0AEFC34E"
+    },
+    {
+        "path":  "tests/_capture_rope_puzzle.gd.uid",
+        "sha256":  "7D50E0B28BA96D9E0FBD1B41D837D00371A3894476105F85E754FAA66D351348"
+    },
+    {
+        "path":  "tests/_capture_rope_puzzle.tscn",
+        "sha256":  "1ED9C3E211FB61552F7C114787EB6315B00383D31DAE2A3CA1387CC007803D86"
+    },
+    {
+        "path":  "tests/_capture_spinner_yard.gd",
+        "sha256":  "166CA9A8C0FC0A3E614C2F8511736859632A1939A7881388FA81D16619EE7D5A"
+    },
+    {
+        "path":  "tests/_capture_spinner_yard.gd.uid",
+        "sha256":  "A829F4CA770045CF5FB2658C26B22991151C40600CC7E07E329E45A68FDCFF34"
+    },
+    {
+        "path":  "tests/_capture_spinner_yard.tscn",
+        "sha256":  "21B706F50762CE320C8CEE1CAFE768C77DAABA0608E4E1D4CA0EAF3EC71902A9"
+    },
+    {
+        "path":  "tests/_capture_village_cart.gd",
+        "sha256":  "617275FC2E6CAF1C4C55BB66456B5DB27F2B0BD376B97AD3B7E36269EE8D74EF"
+    },
+    {
+        "path":  "tests/_capture_village_cart.gd.uid",
+        "sha256":  "10AD3DC9FEFF7D8AF58FDFDFBDBCE70F3942E3863BCE8AD48ADBF0622D63145F"
+    },
+    {
+        "path":  "tests/_capture_village_cart.tscn",
+        "sha256":  "80299251DDC9368475A5EBAAD4A14ABB5141191036BD2B1CBE0F5313C5B7454C"
+    },
+    {
+        "path":  "shaders/coal_fire.gdshader",
+        "sha256":  "19260F9865A0D75F69EC01B9E3738F895A2295E4D823ECE7BFF9F2F31BD054AA"
+    },
+    {
+        "path":  "shaders/coal_fire.gdshader.uid",
+        "sha256":  "DF3E30D8B29EEC3F5DEBE825369C4792BBA0DEF2B9442AB6C804857F850AA93C"
+    },
+    {
+        "path":  "shaders/coal_inspector.gdshader",
+        "sha256":  "E7FC421CE65BC9C3C952675B86A0ADE111B17219CFC24F6C069AC92007BF16DE"
+    },
+    {
+        "path":  "shaders/coal_inspector.gdshader.uid",
+        "sha256":  "1CCFF7258D9805E2604C716528252AE694FA96B3EE2BB0F35CB92AACBBD5F3B9"
+    },
+    {
+        "path":  "shaders/davy_lamp_glow.gdshader",
+        "sha256":  "4EE3FA106D8D5502319CE82144DF3DA9E46ADFCF87C01FCDB8CC6500C67AB0F7"
+    },
+    {
+        "path":  "shaders/davy_lamp_glow.gdshader.uid",
+        "sha256":  "B93A0142C073052A3B871D57474A36507B258C05E0D073937B69559339F3DAFE"
+    },
+    {
+        "path":  "shaders/hemp_fiber_carding.gdshader",
+        "sha256":  "2EC20577922B27FD89312160F6C229868758C4647308D360ECC89EE62DEEC5EF"
+    },
+    {
+        "path":  "shaders/hemp_fiber_carding.gdshader.uid",
+        "sha256":  "7DF28726DDA1ED60568833B9718F79B8E65A90704A2F0F75400AFAD284F4EB83"
+    },
+    {
+        "path":  "shaders/hot_iron_glow.gdshader",
+        "sha256":  "188DFDADC7AC9A23F05A7C0892376D4859E2C528ECF734F2D98B2C2AFB6C7EFE"
+    },
+    {
+        "path":  "shaders/hot_iron_glow.gdshader.uid",
+        "sha256":  "82D9F88A9E8AB965DB3917E12A5BA720B1945B95E0989F19EB5B7347543C9C4A"
+    },
+    {
+        "path":  "shaders/lupa_inspector.gdshader",
+        "sha256":  "C75399D6A039F673470D787029A58A5F9C869816C265918CA19ACFE2B0C10D8B"
+    },
+    {
+        "path":  "shaders/lupa_inspector.gdshader.uid",
+        "sha256":  "862828F2C2BE866FD6B6531039BFBFE7903DFED4B8ACAC54D1A0F426155B36BA"
+    },
+    {
+        "path":  "shaders/ropewalk_cart_wheels.gdshader",
+        "sha256":  "BB7C7C7D6D8AA2DDAED478931A9E245B45B7EAC3C312C714E2650B7BA134966E"
+    },
+    {
+        "path":  "shaders/ropewalk_cart_wheels.gdshader.uid",
+        "sha256":  "3554359EC7A0191C4DC105915527DE28F9D0BC2B18689D059E275E27E0B08A84"
+    },
+    {
+        "path":  "shaders/rope_spiral_twist.gdshader",
+        "sha256":  "EE8DC0E8BCA9DAE2920FAE1E60503A8FDBD9381AAA6A4BC40AEDC023BC5E4D80"
+    },
+    {
+        "path":  "shaders/rope_spiral_twist.gdshader.uid",
+        "sha256":  "016C4562EF92DD88D6FCE6B25C3C7A3A9C9EFC36F0B80FDA7C4F59FABAEAA44B"
+    },
+    {
+        "path":  "shaders/rope_tension_vibrate.gdshader",
+        "sha256":  "268E0203643AA996ACD3792204D9E77CBB2CFCE40930D2936CBDF65AD53E0BA2"
+    },
+    {
+        "path":  "shaders/rope_tension_vibrate.gdshader.uid",
+        "sha256":  "1FE09C6CDE1DF480AB5B957FC5D0F179A7F8EBCAD8BECC9D845FDEDF0A5DF746"
+    },
+    {
+        "path":  "shaders/steam_pressure_leak.gdshader",
+        "sha256":  "59ADA3C0E1886F76A3EF801A10A38CC49B96863451A3DF222D29A2F490A76630"
+    },
+    {
+        "path":  "shaders/steam_pressure_leak.gdshader.uid",
+        "sha256":  "0E69767839A5909812552567BDEDE56289AD6FC66C46145D048CF655FF2F915D"
+    },
+    {
+        "path":  "shaders/train_wheels.gdshader",
+        "sha256":  "6C804CC343B246ADE8B3F76DFA2E2DF4F79A520B9153FA7A289FBB8E0D3B879C"
+    },
+    {
+        "path":  "shaders/train_wheels.gdshader.uid",
+        "sha256":  "5855B0FA176CB612029642BD372BCED8EA625F4744AACC7B72874266E6D8A2C7"
+    },
+    {
+        "path":  "shaders/wood_curving.gdshader",
+        "sha256":  "870381DE14AA941D0E964C6596ED0AF5FA1C30836E3028D6E3A9030EB27C3FD7"
+    },
+    {
+        "path":  "shaders/wood_curving.gdshader.uid",
+        "sha256":  "AE217EAF94F05B5DE877DAC0E1EA1AAECD3D6BBCC9AC1573E3FFE873E6CDA2E4"
+    },
+    {
+        "path":  "shaders/wood_surface_common.gdshaderinc",
+        "sha256":  "8453E5EE7103C614D1C222DBB8573AD9912F7544BC387433A5BBCE5ED27F2178"
+    },
+    {
+        "path":  "shaders/wood_surface_common.gdshaderinc.uid",
+        "sha256":  "34D59F03F05A40CCBE4112BE10CE8032202468814D97FB2A1D7373F5A40AB173"
+    },
+    {
+        "path":  "shaders/wood_surface_smooth.gdshader",
+        "sha256":  "D29066E146FAC5036A5AD28288A19C89CDC85E778513B5D603DEFAF2B58BDBD6"
+    },
+    {
+        "path":  "shaders/wood_surface_smooth.gdshader.uid",
+        "sha256":  "DE2952CD4DDC493A7A5A9ABB57B471D612F3540E9E5028B631215A651BEC6D89"
+    }
+]

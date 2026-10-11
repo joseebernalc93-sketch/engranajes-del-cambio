@@ -45,6 +45,11 @@ var journey_difficulty: Label
 var journey_balance: Label
 var journey_statuses: Array[Label] = []
 var journey_continue: Button
+var journey_title: Label
+var journey_heading: Label
+var arrival_cards: Control
+var mission_cards: Control
+var mission_statuses: Array[Label] = []
 
 func build(existing_continue: Button = null, existing_restart: Button = null) -> void:
 	name = "ChapterJournal"
@@ -131,21 +136,24 @@ func _build_journey() -> void:
 	journey_page.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	future.add_child(journey_page)
 	_label(journey_page, "FASE 2 · EL CORAZÓN DE HIERRO", Rect2(83, 194, 388, 25), 15)
-	_label(journey_page, "Llegada a Londres", Rect2(83, 224, 388, 40), 29)
+	journey_title = _label(journey_page, "Llegada a Londres", Rect2(83, 224, 388, 40), 29)
 	journey_difficulty = _label(journey_page, "", Rect2(112, 270, 330, 28), 16, GREEN)
 	_label(journey_page, "────  OBJETIVO ACTUAL  ────", Rect2(91, 309, 377, 26), 18)
 	journey_objective = _label(journey_page, "", Rect2(105, 345, 346, 89), 19)
 	journey_objective.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.96)))
 	journey_balance = _label(journey_page, "", Rect2(109, 449, 340, 80), 15)
 	journey_balance.add_theme_stylebox_override("normal", _plate(Color(0.94, 0.85, 0.67, 0.96)))
-	_label(journey_page, "────  TU LLEGADA A LA CIUDAD  ────", Rect2(522, 170, 390, 28), 15)
+	journey_heading = _label(journey_page, "────  TU LLEGADA A LA CIUDAD  ────", Rect2(522, 170, 390, 28), 15)
+	arrival_cards = Control.new()
+	arrival_cards.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	journey_page.add_child(arrival_cards)
 	var textures: Array[Texture2D] = [preload("res://assets/phase2/london_platform_pixel_v1.png"), preload("res://assets/phase2/london_staff_pixel_v2.png"), preload("res://assets/phase2/london_ticket_hall_pixel_v1.png"), preload("res://assets/phase2/london_street_pixel_v1.png")]
 	for index in 4:
 		var card := Panel.new()
 		card.position = Vector2(532 + (index % 2) * 191, 211 + (index / 2) * 133)
 		card.size = Vector2(181, 125)
 		card.add_theme_stylebox_override("panel", _plate(Color(0.94, 0.85, 0.67, 0.85)))
-		journey_page.add_child(card)
+		arrival_cards.add_child(card)
 		_label(card, ["Llegar en tren", "Conocer al guía", "La boletería", "Salir a Londres"][index], Rect2(2, 3, 177, 23), 16)
 		var illustration: Texture2D = textures[index]
 		if index == 1:
@@ -155,6 +163,31 @@ func _build_journey() -> void:
 			illustration = atlas
 		_image(card, illustration, Rect2(11, 29, 159, 65))
 		journey_statuses.append(_label(card, "Por descubrir", Rect2(5, 98, 171, 22), 14))
+	mission_cards = Control.new()
+	mission_cards.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	journey_page.add_child(mission_cards)
+	var parts := preload("res://assets/phase2/iron_mission_parts_pixel_v2.png")
+	var cell := parts.get_size() / Vector2(4, 2)
+	var names := ["La galería", "El carbón", "Engranajes", "Agua", "Encendido", "Presión · 2 min"]
+	for index in 6:
+		var card := Panel.new()
+		card.position = Vector2(532 + (index % 2) * 191, 207 + (index / 2) * 94)
+		card.size = Vector2(181, 88)
+		card.add_theme_stylebox_override("panel", _plate(Color(0.94, 0.85, 0.67, 0.85)))
+		mission_cards.add_child(card)
+		_label(card, names[index], Rect2(3, 2, 175, 22), 16)
+		var illustration: Texture2D
+		if index == 0: illustration = preload("res://assets/phase2/mine_pixel_v1.png")
+		elif index == 4: illustration = preload("res://assets/phase2/engine_pixel_v1.png")
+		else:
+			var atlas := AtlasTexture.new()
+			atlas.atlas = parts
+			var frame: int = {1: 5, 2: 1, 3: 4, 5: 7}[index]
+			atlas.region = Rect2(Vector2(frame % 4, frame / 4) * cell, cell)
+			illustration = atlas
+		_image(card, illustration, Rect2(10, 25, 59, 55))
+		mission_statuses.append(_label(card, "Pendiente", Rect2(72, 28, 103, 47), 13))
+	mission_cards.hide()
 	var resume := Button.new()
 	journey_continue = resume
 	_place_button(resume, journey_page, "Continuar la aventura", Rect2(546, 498, 347, 43), true)
@@ -191,6 +224,18 @@ func refresh(report: Dictionary) -> void:
 		journey_objective.text = Journey.objective()
 		var state := Journey.ensure()
 		journey_balance.text = "Saldo: %d monedas · Coche: 10 monedas\nConversaciones: %d · Exploración libre" % [GameState.coins, state.talked.size()]
+		var iron_data: Dictionary = GameState.phase_two.get("iron_mission", {})
+		var mission_active := bool(iron_data.get("started", false))
+		arrival_cards.visible = not mission_active
+		mission_cards.visible = mission_active
+		journey_title.text = "Carbón, hierro y vapor" if mission_active else "Llegada a Londres"
+		journey_heading.text = "────  TU MISIÓN · SEIS ETAPAS  ────" if mission_active else "────  TU LLEGADA A LA CIUDAD  ────"
+		if mission_active:
+			journey_balance.text = "Etapa %d / 6 · %d / %d oportunidades\nCarbón: %d costales + %d paladas\nEnsayo: %d / 120 s" % [mini(6, int(iron_data.get("stage", 0)) + 1), Factory.remaining(), Factory.total(), int(GameState.inventory.get("costal_carbon", 0)), int(iron_data.get("portion", 0)), int(float(iron_data.get("stable_seconds", 0)))]
+			for index in 6:
+				var passed := index < int(iron_data.get("stage", 0)) or bool(iron_data.get("complete", false))
+				mission_statuses[index].text = "✓ Completado" if passed else ("En curso" if index == int(iron_data.get("stage", 0)) else "Pendiente")
+				mission_statuses[index].add_theme_color_override("font_color", GREEN if passed else INK)
 		var steps := Journey.steps()
 		for index in 4:
 			journey_statuses[index].text = "✓ Descubierto" if steps[index] else "○ Por descubrir"

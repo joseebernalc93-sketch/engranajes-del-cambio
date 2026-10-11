@@ -51,7 +51,7 @@ func _write() -> void:
 		scene.set_physics_process(false)
 		scene.application_focused = true
 		_check(scene.scene_file_path == GameState.PHASE_TWO_SCENE, "Story opens London arrival")
-		_check(scene.find_children("*", "CanvasLayer", true, false).size() == 1 and scene.hud.inventory_only, "Arrival reuses the phase-one HUD without workshop popups")
+		_check(scene.find_children("*", "CanvasLayer", true, false).size() == 2 and scene.hud.inventory_only and not scene.iron_popup.is_open(), "Arrival reuses the phase-one HUD and keeps the mission tools closed")
 		_check(scene.actors.keys() == ["guide"], "Platform contains only the protagonist and the train attendant")
 		_check_character_size("guide")
 		var attendant_texture: AtlasTexture = scene.actors.guide.get_child(0).texture

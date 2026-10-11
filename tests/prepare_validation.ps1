@@ -4,6 +4,12 @@ $projectRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $validationRoot = [IO.Path]::GetFullPath((Join-Path $projectRoot 'tmp/cart_validation_project'))
 if (-not $validationRoot.StartsWith($projectRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase)) { throw 'Validation must stay inside this workspace.' }
 [IO.Directory]::CreateDirectory($validationRoot) | Out-Null
+$validationCache = Join-Path $validationRoot '.godot'
+if (Test-Path -LiteralPath $validationCache) {
+    if ((Get-Item -LiteralPath $validationCache -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+        throw 'Validation must use its own .godot cache, not a directory link to the active project.'
+    }
+}
 $encoding = New-Object Text.UTF8Encoding($false)
 [IO.File]::WriteAllText((Join-Path $projectRoot 'tmp/.gdignore'), '', $encoding)
 [IO.File]::WriteAllText((Join-Path $validationRoot '.gdignore'), '', $encoding)

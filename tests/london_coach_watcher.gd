@@ -1,4 +1,5 @@
 extends Node
+const EngineHouse := preload("res://scripts/world/engine_house_art.gd")
 const Journey := preload("res://scripts/world/london_journey.gd")
 const BACKUP := "user://london_coach_test_backup.json"
 var failures: Array[String] = []
@@ -43,7 +44,18 @@ func _write() -> void:
 		await _walk("move_down")
 		_check(scene.area == "coach_depot", "Walking down leaves railway plaza for coach station")
 		_check(scene.actors.has("coachman") and scene.scenery.has_node("LondonParkedCoach"), "New station has a coachman, coach and horse")
+		var hero: Sprite2D = scene.player.get_node("Sprite2D")
+		var william: Sprite2D = scene.actors.coachman.get_child(0)
+		var hero_size := _solid_size(hero) * hero.scale.abs()
+		var william_size := _solid_size(william) * william.scale.abs()
+		_check(absf(hero_size.y - william_size.y) < 0.5, "William's actual opaque height matches the protagonist")
+		_check(william_size.x >= hero_size.x * 0.8, "Coachman has substantial chibi proportions rather than a thin adult silhouette")
+		_check(william.texture.resource_path.ends_with("william_coachman_pixel_v2.png"), "London uses its new coachman without replacing Ramon in the village")
 		_check(not scene.hud.slot_buttons.has("boleto"), "Consumed train ticket does not appear in inventory")
+		scene.player.position = Vector2(605, 560)
+		scene.player.facing = "down"
+		scene.player._set_sprite_frame(1)
+		scene._update_nearest()
 		await _shot(difficulty + "_01_parada")
 		scene.player.position = Vector2(576, 442)
 		await _walk("move_up")
@@ -53,10 +65,39 @@ func _write() -> void:
 		_check(scene.hud.prompt_label.text.contains("William"), "Coachman has shared proximity prompt")
 		scene._interact("coachman")
 		_check(scene.dialogue.visible and scene.dialogue_text.text.contains("10 monedas"), "Fare is disclosed before purchase")
+		_check(scene.dialogue_text.text.begins_with("¿A dónde deseas ir?"), "Coachman asks the player for a destination")
+		var destination_buttons := _destination_buttons()
+		var labels: Array[String] = []
+		for button in destination_buttons: labels.append(button.text)
+		_check(labels == ["Ensamble del motor", "El pozo minero", "La forja y fundición", "Nave Textil"], "Exactly four destination options appear in the requested order")
+		_check(not destination_buttons[0].disabled and not destination_buttons[1].disabled and not destination_buttons[2].disabled and destination_buttons[3].disabled, "Engine assembly, mine and foundry offer trips; textile remains reserved")
+		_check(destination_buttons[0].get_parent() is GridContainer and destination_buttons[0].get_parent().columns == 2, "Four routes use a two-by-two grid")
+		scene._cycle_focus(false)
+		_check(get_viewport().gui_get_focus_owner() == destination_buttons[1], "Tab reaches the new mine destination")
+		scene._cycle_focus(false)
+		_check(get_viewport().gui_get_focus_owner() == destination_buttons[2], "Tab reaches the foundry destination")
+		scene._cycle_focus(false)
+		_check(get_viewport().gui_get_focus_owner() == destination_buttons[0], "Tab skips reserved routes and stays inside the selector")
+		await _shot(difficulty + "_03_cuatro_destinos")
+		var viewport := get_viewport() as Window
+		viewport.size = Vector2i(800, 500)
+		await _settle()
+		_check(scene.dialogue.get_global_rect().size.x <= viewport.get_visible_rect().size.x, "Destination panel fits a smaller game window")
+		for button in destination_buttons:
+			_check(scene.dialogue.get_global_rect().encloses(button.get_global_rect()), "Each route button stays inside the dialogue panel")
+		await _shot(difficulty + "_04_destinos_ventana_pequena")
+		viewport.size = Vector2i(1152, 648)
+		await _settle()
+		GameState.save_progress()
+		var choices_save: Dictionary = scene.get_session_state()
+		scene._cancel_dialogue()
+		scene.restore_session_state(choices_save)
+		_check(scene.dialogue_kind == "coach_destinations" and _destination_buttons().size() == 4 and GameState.coins == 87, "Saved route selection restores all four options without charging")
 		scene._cancel_dialogue()
 		_check(GameState.coins == 87 and not scene.ride.active, "Cancelling does not charge or depart")
 		GameState.coins = 9
 		scene._interact("coachman")
+		_destination_buttons()[0].pressed.emit()
 		_check(scene.dialogue_kind == "coach_unaffordable" and scene.hud.dialogue_options.get_child_count() == 1, "Insufficient funds do not offer a paid ride")
 		scene._close_dialogue()
 		_check(not scene._book_city_coach() and GameState.coins == 9, "Insufficient funds cannot start travel")
@@ -64,8 +105,14 @@ func _write() -> void:
 		GameState.coins = 87
 		EventBus.coins_changed.emit(87)
 		scene._interact("coachman")
+		_destination_buttons()[0].pressed.emit()
+		_check(scene.dialogue_kind == "coach_trip" and scene.dialogue_text.text.contains("Ensamble del motor") and GameState.coins == 87, "Choosing engine assembly opens a separate fare confirmation without charging")
+		scene._cancel_dialogue()
+		scene._interact("coachman")
+		_destination_buttons()[0].pressed.emit()
 		(scene.hud.dialogue_options.get_child(0) as Button).pressed.emit()
 		_check(scene.ride.active and GameState.coins == 77 and scene.hud.get_node("%CoinsLabel").text == "77", "Real purchase starts journey and leaves 77")
+		_check(scene.ride.coach.driver_portrait == scene.COACHMAN, "The travelling driver uses William's new pixel-art portrait too")
 		_check(not scene._book_city_coach() and GameState.coins == 77, "Duplicate purchase cannot charge again")
 		_check(scene._blocked() and not scene.hud.prompt_panel.visible, "Travel blocks walking and proximity prompts")
 		_check(scene.ride.TOTAL_TIME >= 40, "Journey is a long cinematic")
@@ -107,13 +154,14 @@ func _write() -> void:
 		_check(scene.ride.active and absf(scene.ride.elapsed - 19.75) < 0.25 and GameState.coins == 77, "Continue resumes transit without rebilling")
 		scene._process(scene.ride.TOTAL_TIME - scene.ride.elapsed + 0.01)
 		_check(scene.area == "industrial" and GameState.phase_two.city_transport.industrial_reached, "Arrival opens industrial district")
-		_check(not scene._blocked() and scene.player.controls_enabled and scene.player.position == Vector2(350, 590), "Natural cinematic completion restores walking at a safe landing")
+		_check(not scene._blocked() and scene.player.controls_enabled and scene.player.position == EngineHouse.COACH_LANDING, "Natural cinematic completion restores walking at a safe landing")
 		await get_tree().physics_frame
 		_check(not scene.player.test_move(scene.player.global_transform, Vector2(0, -1)), "Landing is clear of the carriage and actor footprint")
 		_check(int(GameState.phase_two.city_transport.fares_paid) == 10, "Only one ten-coin fare recorded")
 		await _shot(difficulty + "_02_distrito_industrial")
-		scene.player.position = Vector2(330, 580)
+		scene.player.position = EngineHouse.COACHMAN_POSITION + Vector2(-45, 20)
 		scene._interact("coachman")
+		_destination_buttons()[0].pressed.emit()
 		_check(scene.dialogue_text.text.contains("incluye el regreso"), "Industrial coach offers included return")
 		(scene.hud.dialogue_options.get_child(0) as Button).pressed.emit()
 		_check(scene.ride.active and scene.ride.returning and GameState.coins == 77, "Return journey is free and faces opposite direction")
@@ -221,3 +269,25 @@ func _check(condition: bool, message: String) -> void:
 	if condition: return
 	failures.append(message)
 	push_error("LONDON COACH: " + message)
+
+func _destination_buttons() -> Array[Button]:
+	var buttons: Array[Button] = []
+	for child in scene.hud.dialogue_options.find_children("*", "Button", true, false):
+		buttons.append(child as Button)
+	return buttons
+
+func _solid_size(sprite: Sprite2D) -> Vector2:
+	# Independent body measurement catches transparent-padding and proportion regressions.
+	var image: Image = sprite.texture.get_image().get_region(Rect2i(sprite.region_rect))
+	var left := image.get_width()
+	var right: int = -1
+	var top := image.get_height()
+	var bottom: int = -1
+	for y in image.get_height():
+		for x in image.get_width():
+			if image.get_pixel(x, y).a < 0.5: continue
+			left = mini(left, x)
+			right = maxi(right, x)
+			top = mini(top, y)
+			bottom = maxi(bottom, y)
+	return Vector2(right - left + 1, bottom - top + 1)

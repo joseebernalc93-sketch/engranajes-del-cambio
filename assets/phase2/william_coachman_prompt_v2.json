@@ -1,0 +1,7 @@
+{
+  "tool": "image_gen built-in",
+  "date": "2026-10-08",
+  "asset": "assets/phase2/william_coachman_pixel_v2.png",
+  "reference": "assets/gba/campesino_sheet_v2.png",
+  "prompt": "Use case: historical-scene. Asset type: ONE transparent full-body game sprite of William, a London horse-coach driver circa 1850, for Engranajes del Cambio. The attached farmer sprite sheet is STYLE and EXACT BODY PROPORTIONS reference only. Draw ONE new distinct front-facing idle coachman, centered, entire cap to boots visible. Match the farmer's stocky compact chibi proportions: approximately TWO heads tall, large friendly face, short broad torso, short thick limbs, equally substantial body rather than a thin realistic adult. Dark navy short coachman's coat with brass buttons over ochre waistcoat, ivory shirt, russet neck scarf, charcoal trousers, sturdy brown boots, rounded charcoal/brown flat driving cap, friendly older face with brown moustache and sideburns. Hands relaxed at sides, no long whip. Very crisp professional pixel art, readable at 55 pixels tall, intentional large pixel clusters, strong dark outline, warm lit highlights. Match the same compact silhouette and visual scale as one farmer frame. TRUE RGBA transparent background with generous clear padding, NO background, NO floor, NO ground shadow, no haze, no labels or text, no watermark, no additional people or farmer, no sprite sheet, no perspective scenery. Only one character."
+}

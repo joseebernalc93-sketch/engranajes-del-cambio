@@ -281,6 +281,9 @@ func _ready() -> void:
 	assert(GameState.get_puzzle_progress().size() == 4)
 	GameState.complete_train_departure()
 	assert(GameState.phase_complete)
+	assert(int(GameState.phase_two_entry.coins) == 87)
+	assert(GameState.phase_two_entry.inventory == GameState.inventory)
+	assert(not GameState.phase_two_entry.inventory.has("boleto"))
 	assert(FileAccess.file_exists(GameState.REPORT_PATH))
 	print("SMOKE TEST OK: recorrido completo de la Fase 1")
 

@@ -44,13 +44,13 @@ static func new_round() -> void:
 	GameState.phase_two.spent = 0
 	GameState.phase_two.round = int(GameState.phase_two.round) + 1
 
-static func reward(id: String) -> bool:
+static func reward(id: String, grant_item: bool = true) -> bool:
 	if done(id): return false
 	var index := IDS.find(id)
 	if index < 0: return false
 	GameState.phase_two.completed.append(id)
 	GameState.phase_two.glossary.append({"id": REWARDS[index], "title": ContentDB.get_item(REWARDS[index]).get("name", id), "fact": FACTS[index]})
-	if not GameState.has_item(REWARDS[index]): GameState.add_item(REWARDS[index])
+	if grant_item and not GameState.has_item(REWARDS[index]): GameState.add_item(REWARDS[index])
 	GameState.phase_two.metrics.events.append({"workshop": id, "event": "completed"})
 	GameState.save_progress()
 	return true
@@ -58,5 +58,5 @@ static func reward(id: String) -> bool:
 static func objective() -> String:
 	for index in IDS.size():
 		if not done(IDS[index]):
-			return ["Visita a Caleb junto al canal y extrae hulla para la caldera.", "Lleva la hulla a la fundición. Fabrica la biela con Maese Cort.", "Entrega la biela a Murdoch y devuelve el movimiento a la fábrica.", "Conecta los cuatro telares y produce diez fardos durante el turno."][index]
+			return ["Visita a Caleb junto al canal y extrae hulla para la caldera.", "Fabrica la biela con Cort en la fundición; conserva los costales para la caldera de Murdoch.", "Entrega la biela a Murdoch y devuelve el movimiento a la fábrica.", "Conecta los cuatro telares y produce diez fardos durante el turno."][index]
 	return "La fábrica vuelve a trabajar. Consulta tu balance y tus fichas en el cuaderno."
